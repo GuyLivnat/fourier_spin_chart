@@ -1,27 +1,60 @@
-import StarChart from './d3/StarChart'
+import StarChart from './starchart/StarChart'
 import './App.css'
-import PlayPauseButton from './PlayPauseBtn';
-import timestep from './d3/timestep';
-import { coeff } from './../public/mockups/coeff';
+import Button from './Button';
+import timestep from './starchart/timestep';
+import { mockCoeff } from './../public/mockups/coeff';
 import { useState } from 'react';
+// import mushuPoints from '../public/mockups/mushuPoints2';
+import { mushuPoints2 } from '../public/mockups/mushPoints2';
+import mushuPoints3 from '../public/mockups/mushPoints3';
+import FFT from 'fft.js';
+import transformRadix2 from './starchart/fft';
 
 
 
 function App() {
-  let  [frame, useFrame] = useState(timestep(coeff, 0));
-  let [edge, useEdge] = useState([]);
-  let [intervalId, setintervalId] = useState(null);
-  let [time, setTime] = useState(0)
+  let [coeff, setCoeff] = useState(mockCoeff);
+  let [frame, setFrame] = useState(timestep(coeff, 0));
+  let [edge, setEdge] = useState([]);
+  let [intervalId, setIntervalId] = useState(null);
+  let [time, setTime] = useState(0);
 
 
-  const handelClick = () => {
-    if (!intervalId) {
-       intervalId = setInterval(() => update(time), 15);
-       setintervalId(intervalId)
-    } else {
+  const updateCoeff = () => {
+    // if (intervalId) {
+    //   clearInterval(intervalId);
+    //   setIntervalId (null)}; //pause!
+    // setEdge([]); //empty edge points
+
+
+    // const fft = new FFT(256);
+    // const out = fft.createComplexArray();
+    // const data = fft.toComplexArray(mushuPoints2)
+    // const test = fft.transform(out, data)
+
+  let real = [];
+  let img = [];
+   for (let i = 0; i < mushuPoints3.length; i++) {
+    if (i%2) real.push(mushuPoints3[i])
+    else img.push(mushuPoints3[i]);
+   }
+
+    // transformRadix2(img, real);
+
+    console.log(real)
+    // setCoeff(out);
+  }
+
+
+  const pausePlay = () => {
+    if (intervalId) {
       clearInterval(intervalId);
-      intervalId = null;
-    }};
+      setIntervalId (null)
+    } else {
+      setIntervalId(setInterval(() => update(time), 15));
+    }
+    return
+  };
 
   const update = () => {
     const step = 1/512;
@@ -32,18 +65,18 @@ function App() {
     }
     setTime(time);
     frame = timestep(coeff, time);
-    useFrame(frame);
+    setFrame(frame);
     edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
-    if (edge.length > 400) edge.shift();
-    useEdge(edge)
+    if (edge.length > 200) edge.shift();
+    setEdge(edge)
     return
   };
 
 
-
   return (<>
     <StarChart data = {frame} edge = {edge}/>
-    <PlayPauseButton playChart = {handelClick}/>
+    <Button handelClick = {pausePlay} text = {intervalId? "pause" : "play"}/>
+    <Button handelClick = {updateCoeff} text = "mushu" />
   </>)
 };
 
