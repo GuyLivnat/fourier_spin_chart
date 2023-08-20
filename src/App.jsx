@@ -4,11 +4,11 @@ import Button from './Button';
 import timestep from './starchart/timestep';
 import { mockCoeff } from './../public/mockups/coeff';
 import { useState } from 'react';
-// import mushuPoints from '../public/mockups/mushuPoints2';
 import { mushuPoints2 } from '../public/mockups/mushPoints2';
 import mushuPoints3 from '../public/mockups/mushPoints3';
 import FFT from 'fft.js';
 import transformRadix2 from './starchart/fft';
+import StarChartInit from './starchart/StarChartInit';
 
 
 
@@ -32,14 +32,14 @@ function App() {
     // const data = fft.toComplexArray(mushuPoints2)
     // const test = fft.transform(out, data)
 
-  let real = [];
-  let img = [];
-   for (let i = 0; i < mushuPoints3.length; i++) {
-    if (i%2) real.push(mushuPoints3[i])
-    else img.push(mushuPoints3[i]);
-   }
+    let real = [];
+    let img = [];
+    for (let i = 0; i < mushuPoints3.length;) {
+      real.push(mushuPoints3[i++]);
+      img.push(mushuPoints3[i++]);
+    }
 
-    // transformRadix2(img, real);
+    transformRadix2(img, real);
 
     console.log(real)
     // setCoeff(out);
@@ -52,9 +52,7 @@ function App() {
       setIntervalId (null)
     } else {
       setIntervalId(setInterval(() => update(time), 15));
-    }
-    return
-  };
+    }};
 
   const update = () => {
     const step = 1/512;
@@ -69,14 +67,14 @@ function App() {
     edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
     if (edge.length > 200) edge.shift();
     setEdge(edge)
-    return
   };
 
 
   return (<>
+    <StarChartInit/>
     <StarChart data = {frame} edge = {edge}/>
-    <Button handelClick = {pausePlay} text = {intervalId? "pause" : "play"}/>
-    <Button handelClick = {updateCoeff} text = "mushu" />
+    <Button handleClick = {pausePlay} text = {intervalId? "pause" : "play"}/>
+    <Button handleClick = {updateCoeff} text = "mushu" />
   </>)
 };
 
