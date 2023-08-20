@@ -26,9 +26,7 @@ const StarChart = ({data, edge}) => {
 
 
     const edgeStoke = d3.select("#edge")
-    
-        .attr("path", () => ("d", line(edge)))
-        // .attr("d", line(edge));
+            .attr("d", line(edge));
 };
 
 export default StarChart;

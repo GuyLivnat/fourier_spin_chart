@@ -27,13 +27,13 @@ const StarChartInit = () => {
             stroke="white">
             </g>
 
-            <g
+            <path
             id="edge"
             stroke="white"
             style={{fill: "none", strokeWidth: "2"}}
             markerEnd="url(#star)"
             >
-            </g>
+            </path>
     </svg>)
 }
 

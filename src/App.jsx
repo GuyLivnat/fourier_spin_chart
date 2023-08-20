@@ -39,7 +39,7 @@ function App() {
       img.push(mushuPoints3[i++]);
     }
 
-    transformRadix2(img, real);
+    transformRadix2(real, img);
 
     console.log(real)
     // setCoeff(out);
