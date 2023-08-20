@@ -4,11 +4,10 @@ import Button from './Button';
 import timestep from './starchart/timestep';
 import { mockCoeff } from './../public/mockups/coeff';
 import { useState } from 'react';
-import { mushuPoints2 } from '../public/mockups/mushPoints2';
 import mushuPoints3 from '../public/mockups/mushPoints3';
-import FFT from 'fft.js';
 import transformRadix2 from './starchart/fft';
 import StarChartInit from './starchart/StarChartInit';
+// import mushuoutline from ''
 
 
 
@@ -23,33 +22,12 @@ function App() {
   const updateCoeff = () => {
     if (intervalId) {
       clearInterval(intervalId);
-      setIntervalId (null)}; //pause!
+      setIntervalId (null);  //pause!
+      }
     setEdge([]); //empty edge points
-
-
-    // const fft = new FFT(256);
-    // const out = fft.createComplexArray();
-    // const data = fft.toComplexArray(mushuPoints2)
-    // const test = fft.transform(out, data)
 
     let real = [];
     let img = [];
-    // for (let i=0; i<64; i++) {
-    //   real.push(0);
-    //   img.push(i*4);
-    // }
-    // for (let i=0; i<64; i++) {
-    //   real.push(i*4);
-    //   img.push(256);
-    // }
-    // for (let i=0; i<64; i++) {
-    //   real.push(256);
-    //   img.push(256-i*4);
-    // }
-    // for (let i=0; i<64; i++) {
-    //   real.push(256-i*4);
-    //   img.push(0);
-    // }
     for (let i = 0; i < mushuPoints3.length;) {
       real.push(mushuPoints3[i++]);
       img.push(mushuPoints3[i++]);
@@ -63,7 +41,7 @@ function App() {
       coef[j++] = Math.sqrt(real[i]* real[i] + img[i]*img[i])/n;
       coef[j++] = Math.atan2(img[i], real[i]);
     }
-    // console.log(real)
+
     setCoeff(coef);
   }
 
@@ -73,7 +51,7 @@ function App() {
       clearInterval(intervalId);
       setIntervalId (null)
     } else {
-      setIntervalId(setInterval(() => update(time), 15));
+      setIntervalId(setInterval(() => update(time), 45));
     }};
 
   const update = () => {
@@ -97,6 +75,7 @@ function App() {
     <StarChart data = {frame} edge = {edge}/>
     <Button handleClick = {pausePlay} text = {intervalId? "pause" : "play"}/>
     <Button handleClick = {updateCoeff} text = "mushu" />
+    <Button handleClick={generatePoints} text = "generate" />
   </>)
 };
 

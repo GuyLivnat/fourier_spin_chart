@@ -20,7 +20,10 @@ const StarChart = ({data, edge}) => {
             .attr("d", orbit)
             .attr("marker-start", "url(#star)")
             .attr("transform", d => `translate(${d.x}, ${d.y})`)
-            // .attr("opacity", (d, i) => 1/data.orbits.length * i);
+            .attr("opacity", (d, i) => {
+                if (d.r < 5) return 0
+                 return 1/data.orbits.length*i/10 + 0.3
+            });
 
 
     d3.select("#edge")
