@@ -3,11 +3,12 @@ const StarChartInit = () => {
     const width = 400;
     const height = 400;
     const starSize = 3;
+    const translateCenter = "translate("+height/2+","+width/2+")"
     return (<svg
             id="chart"
             width={width}
             height={height}
-            viewBox="-200 -200 400 400"
+            // viewBox="0 0 400 400"  //zooms the original image
             style={{backgroundColor : 'black'}}>
 
             <defs>
@@ -24,7 +25,8 @@ const StarChartInit = () => {
 
             <g
             id="orbits"
-            stroke="white">
+            stroke="white"
+            transform={translateCenter}>
             </g>
 
             <path
@@ -32,6 +34,7 @@ const StarChartInit = () => {
             stroke="white"
             style={{fill: "none", strokeWidth: "2"}}
             markerEnd="url(#star)"
+            transform={translateCenter}
             >
             </path>
     </svg>)

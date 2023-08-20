@@ -34,32 +34,32 @@ function App() {
 
     let real = [];
     let img = [];
-    for (let i=0; i<64; i++) {
-      real.push(0);
-      img.push(i*4);
-    }
-    for (let i=0; i<64; i++) {
-      real.push(i*4);
-      img.push(256);
-    }
-    for (let i=0; i<64; i++) {
-      real.push(256);
-      img.push(256-i*4);
-    }
-    for (let i=0; i<64; i++) {
-      real.push(256-i*4);
-      img.push(0);
-    }
-    // for (let i = 0; i < mushuPoints3.length;) {
-    //   real.push(mushuPoints3[i++]);
-    //   img.push(mushuPoints3[i++]);
+    // for (let i=0; i<64; i++) {
+    //   real.push(0);
+    //   img.push(i*4);
     // }
+    // for (let i=0; i<64; i++) {
+    //   real.push(i*4);
+    //   img.push(256);
+    // }
+    // for (let i=0; i<64; i++) {
+    //   real.push(256);
+    //   img.push(256-i*4);
+    // }
+    // for (let i=0; i<64; i++) {
+    //   real.push(256-i*4);
+    //   img.push(0);
+    // }
+    for (let i = 0; i < mushuPoints3.length;) {
+      real.push(mushuPoints3[i++]);
+      img.push(mushuPoints3[i++]);
+    }
 
     transformRadix2(real, img);
 
     let coef = [];
     let n = 200;
-    for (let i=0, j=0; i<6; i++)  {
+    for (let i=0, j=0; i<256; i++)  {
       coef[j++] = Math.sqrt(real[i]* real[i] + img[i]*img[i])/n;
       coef[j++] = Math.atan2(img[i], real[i]);
     }
