@@ -36,7 +36,7 @@ const StarChartInit = () => {
             markerEnd="url(#star)"
             transform={translateCenter}
             >
-            </path>
+            </path>         
     </svg>)
 }
 
