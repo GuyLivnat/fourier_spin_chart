@@ -4,21 +4,28 @@ import Button from './Button';
 import timestep from './starchart/timestep';
 import { mockCoeff } from './../public/mockups/coeff';
 import { useState } from 'react';
-import transformRadix2 from './starchart/fft';
 import StarChartInit from './starchart/StarChartInit';
-import PointGenerator from './starchart/PointGenerator';
-import UploadParseSVG from './UploadParseSVG';
+import UploadButton from './UploadButton';
+import createCoeff from './starchart/createCoeff';
+
 
 
 
 function App() {
+  const units = 256;
+  const updateSpeed = 45;
   let [coeff, setCoeff] = useState(mockCoeff);
   let [frame, setFrame] = useState(timestep(coeff, 0));
   let [edge, setEdge] = useState([]);
-  let [intervalId, setIntervalId] = useState(null);
   let [time, setTime] = useState(0);
-  let [points, setPoints] = useState(null);
+  let [intervalId, setIntervalId] = useState(null);
+  // let [points, setPoints] = useState(null);
   let [image, setImage] = useState(null);
+
+  const handleCoeff = async() => {
+    let coef = await createCoeff(image, units)
+    setCoeff(coef)
+  }
 
   const handleFile = (event) => {
       let file = event.target.files[0];
@@ -34,48 +41,48 @@ function App() {
       reader.readAsText(file)
     }
 
-  const generatePoints = () => {
-    const segment = image.getTotalLength()/256;
-    const tempPoints = [];
-    for (let i = 0; i < 256; i++) {
-      let point = image.getPointAtLength(i*segment);
-      tempPoints.push(point.x);
-      tempPoints.push(point.y);
-    }
-    setPoints(tempPoints);
-    console.log("points generated")
-  }
+  // const generatePoints = () => {
+  //   const segment = image.getTotalLength()/units;
+  //   const tempPoints = [];
+  //   for (let i = 0; i < units; i++) {
+  //     let point = image.getPointAtLength(i*segment);
+  //     tempPoints.push(point.x);
+  //     tempPoints.push(point.y);
+  //   }
+  //   setPoints(tempPoints);
+  //   console.log("points generated")
+  // }
 
-  const updateCoeff = () => {
-    if (!points) {
-      console.log("generate points first")
-      return
-    }
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId (null);  //pause!
-      }
-    setEdge([]); //empty edge points
+  // const updateCoeff = () => {
+  //   if (!points) {
+  //     console.log("generate points first")
+  //     return
+  //   }
+  //   if (intervalId) {
+  //     clearInterval(intervalId);
+  //     setIntervalId (null);  //pause!
+  //     }
+  //   setEdge([]); //empty edge points
 
-    let real = [];
-    let img = [];
-    for (let i = 0; i < points.length;) {
-      real.push(points[i++]);
-      img.push(points[i++]);
-    }
+  //   let real = [];
+  //   let img = [];
+  //   for (let i = 0; i < points.length;) {
+  //     real.push(points[i++]);
+  //     img.push(points[i++]);
+  //   }
 
-    transformRadix2(real, img);
+  //   transformRadix2(real, img);
 
-    let coef = [];
-    let n = 200;
-    for (let i=0, j=0; i<256; i++)  {
-      coef[j++] = Math.sqrt(real[i]* real[i] + img[i]*img[i])/n;
-      coef[j++] = Math.atan2(img[i], real[i]);
-    }
+  //   let coef = [];
+  //   let n = 200;
+  //   for (let i=0, j=0; i<units; i++)  {
+  //     coef[j++] = Math.sqrt(real[i]* real[i] + img[i]*img[i])/n;
+  //     coef[j++] = Math.atan2(img[i], real[i]);
+  //   }
 
-    setCoeff(coef);
-    console.log("points transformed via fft")
-  }
+  //   setCoeff(coef);
+  //   console.log("points transformed via fft")
+  // }
 
 
   const pausePlay = () => {
@@ -83,22 +90,22 @@ function App() {
       clearInterval(intervalId);
       setIntervalId (null)
     } else {
-      setIntervalId(setInterval(() => update(time), 45));
+      setIntervalId(setInterval(() => update(time), updateSpeed));
     }};
 
   const update = () => {
-    const step = 1/512;
+    const step = 1/(units*2);
     if (time === 1) {
       time = 0
     } else {
       time += step
     }
-    setTime(time);
     frame = timestep(coeff, time);
-    setFrame(frame);
     edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
-    if (edge.length > 200) edge.shift();
-    setEdge(edge)
+    if (edge.length > units - (units/10)) edge.shift();
+    setFrame(frame);
+    setTime(time);
+    setEdge(edge);
   };
 
 
@@ -106,10 +113,9 @@ function App() {
     <StarChartInit/>
     <StarChart data = {frame} edge = {edge}/>
     <Button handleClick={pausePlay} text = {intervalId? "pause" : "play"}/>
-    <Button handleClick={updateCoeff} text = "update" />
-    <Button handleClick={generatePoints} text = "generate" />
-    <UploadParseSVG handleFile={handleFile}/>
-    <PointGenerator />
+    {/* <Button handleClick={updateCoeff} text = "update" /> */}
+    <Button handleClick={handleCoeff} text = "generate" />
+    <UploadButton handleFile={handleFile}/>
   </>)
 };
 
