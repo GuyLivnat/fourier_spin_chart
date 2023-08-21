@@ -1,49 +1,77 @@
-import StarChart from './d3/StarChart'
+import StarChart from './starchart/StarChart'
 import './App.css'
-import PlayPauseButton from './PlayPauseBtn';
-import timestep from './d3/timestep';
-import { coeff } from './../public/mockups/coeff';
+import Button from './Button';
+import timestep from './starchart/timestep';
 import { useState } from 'react';
-
+import StarChartInit from './starchart/StarChartInit';
+import UploadButton from './UploadButton';
+import createCoeff from './starchart/createCoeff';
 
 
 function App() {
-  let  [frame, useFrame] = useState(timestep(coeff, 0));
-  let [edge, useEdge] = useState([]);
-  let [intervalId, setintervalId] = useState(null);
-  let [time, setTime] = useState(0)
+  const units = 256;  // must be a power of 2! 256 suggested, 512 smothes the edges
+  const updateSpeed = 33;  //in miliseconds. 33 is 30 fps
+  let [coeff, setCoeff] = useState([]);
+  let [frame, setFrame] = useState(timestep(coeff, 0));
+  let [edge, setEdge] = useState([]);
+  let [time, setTime] = useState(0);
+  let [intervalId, setIntervalId] = useState(null);
+  let [image, setImage] = useState(null);
 
+  const handleFile = (event) => {   // converts an uploaded SVG to something readable
+      let file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+          let string = e.target.result;
+          const parser = new DOMParser();
+          let parsedFile = parser.parseFromString(string, "image/svg+xml");
+          let path = parsedFile.querySelector("path")
+          console.log("file uploaded")
+          setImage(path)
+      }
+      reader.readAsText(file)
+    }
+    
+  const handleCoeff = async() => {  // converts the uploaded file to an array of circles
+    let coef = await createCoeff(image, units)
+    setCoeff(coef)
+    setImage(null)
+  }
 
-  const handelClick = () => {
-    if (!intervalId) {
-       intervalId = setInterval(() => update(time), 15);
-       setintervalId(intervalId)
-    } else {
+  const pausePlay = () => { // yes
+    if (intervalId) {
       clearInterval(intervalId);
-      intervalId = null;
+      setIntervalId (null)
+    } else {
+      setIntervalId(setInterval(() => update(time), updateSpeed));
     }};
 
-  const update = () => {
-    const step = 1/512;
+  const update = () => {  // computes the next frame 
+    const step = 1/(units*2);
     if (time === 1) {
       time = 0
     } else {
       time += step
     }
-    setTime(time);
     frame = timestep(coeff, time);
-    useFrame(frame);
     edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
-    if (edge.length > 400) edge.shift();
-    useEdge(edge)
-    return
+    if (edge.length > 0.95 * units) edge.shift();
+    setFrame(frame);
+    setTime(time);
+    setEdge(edge);
   };
 
 
-
   return (<>
-    <StarChart data = {frame} edge = {edge}/>
-    <PlayPauseButton playChart = {handelClick}/>
+    <div>
+      <StarChartInit/>
+      <StarChart data = {frame} edge = {edge}/>
+    </div>
+    <div>
+      <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
+      <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
+      <UploadButton handleFile={handleFile}/>
+    </div>
   </>)
 };
 
