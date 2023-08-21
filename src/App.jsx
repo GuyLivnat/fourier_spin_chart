@@ -2,32 +2,23 @@ import StarChart from './starchart/StarChart'
 import './App.css'
 import Button from './Button';
 import timestep from './starchart/timestep';
-import { mockCoeff } from './../public/mockups/coeff';
 import { useState } from 'react';
 import StarChartInit from './starchart/StarChartInit';
 import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
 
 
-
-
 function App() {
-  const units = 256;
-  const updateSpeed = 45;
-  let [coeff, setCoeff] = useState(mockCoeff);
+  const units = 256;  // must be a power of 2! 256 suggested, 512 smothes the edges
+  const updateSpeed = 33;  //in miliseconds. 33 is 30 fps
+  let [coeff, setCoeff] = useState([]);
   let [frame, setFrame] = useState(timestep(coeff, 0));
   let [edge, setEdge] = useState([]);
   let [time, setTime] = useState(0);
   let [intervalId, setIntervalId] = useState(null);
-  // let [points, setPoints] = useState(null);
   let [image, setImage] = useState(null);
 
-  const handleCoeff = async() => {
-    let coef = await createCoeff(image, units)
-    setCoeff(coef)
-  }
-
-  const handleFile = (event) => {
+  const handleFile = (event) => {   // converts an uploaded SVG to something readable
       let file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -40,52 +31,14 @@ function App() {
       }
       reader.readAsText(file)
     }
+    
+  const handleCoeff = async() => {  // converts the uploaded file to an array of circles
+    let coef = await createCoeff(image, units)
+    setCoeff(coef)
+    setImage(null)
+  }
 
-  // const generatePoints = () => {
-  //   const segment = image.getTotalLength()/units;
-  //   const tempPoints = [];
-  //   for (let i = 0; i < units; i++) {
-  //     let point = image.getPointAtLength(i*segment);
-  //     tempPoints.push(point.x);
-  //     tempPoints.push(point.y);
-  //   }
-  //   setPoints(tempPoints);
-  //   console.log("points generated")
-  // }
-
-  // const updateCoeff = () => {
-  //   if (!points) {
-  //     console.log("generate points first")
-  //     return
-  //   }
-  //   if (intervalId) {
-  //     clearInterval(intervalId);
-  //     setIntervalId (null);  //pause!
-  //     }
-  //   setEdge([]); //empty edge points
-
-  //   let real = [];
-  //   let img = [];
-  //   for (let i = 0; i < points.length;) {
-  //     real.push(points[i++]);
-  //     img.push(points[i++]);
-  //   }
-
-  //   transformRadix2(real, img);
-
-  //   let coef = [];
-  //   let n = 200;
-  //   for (let i=0, j=0; i<units; i++)  {
-  //     coef[j++] = Math.sqrt(real[i]* real[i] + img[i]*img[i])/n;
-  //     coef[j++] = Math.atan2(img[i], real[i]);
-  //   }
-
-  //   setCoeff(coef);
-  //   console.log("points transformed via fft")
-  // }
-
-
-  const pausePlay = () => {
+  const pausePlay = () => { // yes
     if (intervalId) {
       clearInterval(intervalId);
       setIntervalId (null)
@@ -93,7 +46,7 @@ function App() {
       setIntervalId(setInterval(() => update(time), updateSpeed));
     }};
 
-  const update = () => {
+  const update = () => {  // computes the next frame 
     const step = 1/(units*2);
     if (time === 1) {
       time = 0
@@ -102,7 +55,7 @@ function App() {
     }
     frame = timestep(coeff, time);
     edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
-    if (edge.length > units - (units/10)) edge.shift();
+    if (edge.length > 0.95 * units) edge.shift();
     setFrame(frame);
     setTime(time);
     setEdge(edge);
@@ -110,12 +63,15 @@ function App() {
 
 
   return (<>
-    <StarChartInit/>
-    <StarChart data = {frame} edge = {edge}/>
-    <Button handleClick={pausePlay} text = {intervalId? "pause" : "play"}/>
-    {/* <Button handleClick={updateCoeff} text = "update" /> */}
-    <Button handleClick={handleCoeff} text = "generate" />
-    <UploadButton handleFile={handleFile}/>
+    <div>
+      <StarChartInit/>
+      <StarChart data = {frame} edge = {edge}/>
+    </div>
+    <div>
+      <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
+      <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
+      <UploadButton handleFile={handleFile}/>
+    </div>
   </>)
 };
 
