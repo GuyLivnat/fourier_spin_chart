@@ -19,7 +19,8 @@ function App() {
   let [time, setTime] = useState(0);
   let [intervalId, setIntervalId] = useState(null);
   let [image, setImage] = useState(null);
-  let [saved, setSaved] = useState(false)
+  let [saved, setSaved] = useState(false);
+  let [activeName, setActiveName] = useState(null)
 
   const handleFile = (event) => {   // converts an uploaded SVG to something readable // needs validation that the upload was not cancelled
       const reader = new FileReader();
@@ -29,7 +30,6 @@ function App() {
           const parsedFile = parser.parseFromString(string, "image/svg+xml");
           const path = parsedFile.querySelector("path");
           setImage(path);
-          setSaved(false);
       }
       const file = event.target.files[0];
       reader.readAsText(file);
@@ -40,9 +40,11 @@ function App() {
     setCoeff(coef);
     setTime(0);
     setImage(null);
+    setSaved(false);
+    setActiveName("last generated")
   }
 
-  const pausePlay = () => { // yes
+  const pausePlay = () => {
     if (coeff.length) {
       if (intervalId) {
         clearInterval(intervalId);
@@ -50,6 +52,15 @@ function App() {
       } else {
         setIntervalId(setInterval(() => update(time), updateSpeed));
   }}};
+
+  const stop = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId (null)
+    }
+    setTime(0);
+    setEdge([])
+  }
 
   const update = () => {  // computes the next frame 
     const step = 1/(units*2);
@@ -72,12 +83,14 @@ function App() {
       <StarChart data = {frame} edge = {edge}/>
     </div>
     <div>
+      {(activeName)?<div>Now playing {activeName}</div>: null}
+      <Button handleClick={stop} text="stop" isDisabled={!coeff.length}/>
       <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
       <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
       <UploadButton handleFile={handleFile}/>
     </div>
     <div>
-      <CoeffList setCoeff={setCoeff} coeff={coeff} saved={saved} setSaved={setSaved} setEdge={setEdge} setTime={setTime}/>
+      <CoeffList setCoeff={setCoeff} coeff={coeff} saved={saved} setSaved={setSaved} setEdge={setEdge} setTime={setTime} setActiveName={setActiveName}/>
     </div>
   </>)
 };
