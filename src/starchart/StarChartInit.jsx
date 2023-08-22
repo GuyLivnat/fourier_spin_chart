@@ -1,5 +1,5 @@
 
-const StarChartInit = () => {
+const StarChartInit = ({handleClick}) => {
     const width = 500;
     const height = 500;
     const starSize = 3;
@@ -9,7 +9,8 @@ const StarChartInit = () => {
             width={width}
             height={height}
             // viewBox="0 0 500 500"  //zooms the original image
-            style={{backgroundColor : 'black'}}>
+            style={{backgroundColor : 'black'}}
+            onClick={handleClick}>
 
             <defs>
                 <marker
