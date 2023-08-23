@@ -21,7 +21,7 @@ const StarChart = ({data, edge}) => {
             .attr("marker-start", "url(#star)")
             .attr("transform", d => `translate(${d.x}, ${d.y})`)
             .attr("opacity", (d, i) => {
-                if (d.r < 5) return 0
+                if (d.r < 4) return 0
                  return 1/data.orbits.length*i/10 + 0.3
             });
 

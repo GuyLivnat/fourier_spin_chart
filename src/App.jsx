@@ -7,6 +7,7 @@ import StarChartInit from './starchart/StarChartInit';
 import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
 import CoeffList from './CoeffList';
+import Slider from './slider';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   let [image, setImage] = useState(null);
   let [saved, setSaved] = useState(false);
   let [activeName, setActiveName] = useState(null)
+  let [zoom, setZoom] = useState(500)
 
   const handleFile = (event) => {   // converts an uploaded SVG to something readable // needs validation that the upload was not cancelled
       const reader = new FileReader();
@@ -38,7 +40,7 @@ function App() {
   const handleCoeff = async() => {  // converts the uploaded file to an array of circles
     let coef = await createCoeff(image, units)
     setCoeff(coef);
-    setTime(0);
+    stop();
     setImage(null);
     setSaved(false);
     setActiveName("last generated")
@@ -57,6 +59,7 @@ function App() {
     if (intervalId) {
       clearInterval(intervalId);
       setIntervalId (null)
+      setFrame(timestep([],0))
     }
     setTime(0);
     setEdge([])
@@ -77,20 +80,22 @@ function App() {
     setEdge(edge);
   };
 
+
   return (<>
     <div>
-      <StarChartInit handleClick={pausePlay}/>
+      <StarChartInit handleClick={pausePlay} zoom={zoom}/>
       <StarChart data = {frame} edge = {edge}/>
+      <Slider startValue={zoom} setValue={setZoom}/>
     </div>
     <div>
-      {(activeName)?<div>Now playing {activeName}</div>: null}
+      {(activeName)?<div>{activeName} is loaded</div>: null}
       <Button handleClick={stop} text="stop" isDisabled={!coeff.length}/>
       <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
       <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
       <UploadButton handleFile={handleFile}/>
     </div>
     <div>
-      <CoeffList setCoeff={setCoeff} coeff={coeff} saved={saved} setSaved={setSaved} setEdge={setEdge} setTime={setTime} setActiveName={setActiveName}/>
+      <CoeffList setCoeff={setCoeff} coeff={coeff} saved={saved} setSaved={setSaved} stop={stop} setActiveName={setActiveName}/>
     </div>
   </>)
 };

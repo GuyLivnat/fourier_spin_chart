@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import TextInput from "./TextInput";
 
-const List = ({setCoeff, coeff, setSaved, saved, setEdge, setTime, setActiveName}) => {
+const List = ({setCoeff, coeff, setSaved, saved, stop, setActiveName}) => {
 
     let [name, setName] = useState("")
     let [coeffList, setCoeffList] = useState(() => {
@@ -30,10 +30,9 @@ const List = ({setCoeff, coeff, setSaved, saved, setEdge, setTime, setActiveName
   const loadCoeff = (e) => {
     const id = e.target.parentElement.id
     const obj = JSON.parse(localStorage.getItem(id));
-    setCoeff(obj.coeff)
-    setEdge([])
-    setTime(0)
-    setActiveName(obj.name)
+    setCoeff(obj.coeff);
+    stop();
+    setActiveName(obj.name);
   }
 
   const deleteCoeff = (e) => {

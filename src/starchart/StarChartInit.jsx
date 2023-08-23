@@ -1,14 +1,14 @@
 
-const StarChartInit = ({handleClick}) => {
+const StarChartInit = ({handleClick, zoom}) => {
     const width = 500;
     const height = 500;
     const starSize = 3;
-    const translateCenter = "translate("+height/2+","+width/2+")"
+    const translateCenter = "translate("+zoom/2+","+zoom/2+")"
     return (<svg
         id="chart"
         width={width}
         height={height}
-        // viewBox="0 0 500 500"  //zooms the original image
+        viewBox={"0 0 " + zoom +" "+ zoom}  //zooms the original image
         style={{backgroundColor : 'black'}}
         onClick={handleClick}>
 
