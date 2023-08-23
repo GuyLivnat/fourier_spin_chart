@@ -2,27 +2,38 @@ import StarChart from './starchart/StarChart'
 import './App.css'
 import Button from './Button';
 import timestep from './starchart/timestep';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StarChartInit from './starchart/StarChartInit';
 import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
-import CoeffList from './CoeffList';
+import List from './List';
 import Slider from './slider';
 
 
 function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
-  const updateSpeed = 33;  //in miliseconds. 33 is 30 fps
+  const updateSpeed = 45;  //in miliseconds. 33 is 30 fps
 
   let [coeff, setCoeff] = useState([]);
   let [frame, setFrame] = useState(timestep(coeff, 0));
   let [edge, setEdge] = useState([]);
   let [time, setTime] = useState(0);
   let [intervalId, setIntervalId] = useState(null);
-  let [image, setImage] = useState(null);
-  let [saved, setSaved] = useState(false);
-  let [activeName, setActiveName] = useState(null)
+  let [activeId, setActiveId] = useState(null)
   let [zoom, setZoom] = useState(500)
+  let [radiiActive, setRadiiActive] = useState("flex")
+  let [orbitsActive, setOrbitsActive] = useState("flex")
+  let [outlineActive, setOutlineActive] = useState("flex")
+  let [coeffList, setCoeffList] = useState(() => {
+    const keys = Object.keys(localStorage);
+    let localCoeff = [];
+    for(let i=0; i < keys.length; i++) {
+      let key = keys[i];
+      let obj = JSON.parse(localStorage.getItem(key));
+      localCoeff.push({id:key, name:obj.name});
+    }
+    return localCoeff;
+  })
 
   const handleFile = (event) => {   // converts an uploaded SVG to something readable // needs validation that the upload was not cancelled
       const reader = new FileReader();
@@ -31,19 +42,21 @@ function App() {
           const parser = new DOMParser();
           const parsedFile = parser.parseFromString(string, "image/svg+xml");
           const path = parsedFile.querySelector("path");
-          setImage(path);
+          handleCoeff(path, name)
       }
       const file = event.target.files[0];
+      const name = nameParser(file.name)
       reader.readAsText(file);
     }
+
+  const nameParser = (name) => {
+    return (name.replace('.svg', '') + ` with ${units} points`)
+  }
     
-  const handleCoeff = async() => {  // converts the uploaded file to an array of circles
-    let coef = await createCoeff(image, units)
+  const handleCoeff = (path, name) => {  // converts the uploaded file to an array of circles
+    let coef = createCoeff(path, units)
+    saveCoeff(coef, name)
     setCoeff(coef);
-    stop();
-    setImage(null);
-    setSaved(false);
-    setActiveName("last generated")
   }
 
   const pausePlay = () => {
@@ -80,22 +93,67 @@ function App() {
     setEdge(edge);
   };
 
+  const saveCoeff = (coeff, name) => {
+    if(coeff.length) {
+      const obj = JSON.stringify({name: name, coeff: coeff});
+      const id = crypto.randomUUID();
+      localStorage.setItem(id, obj);
+      setCoeffList([...coeffList, {name:name, id:id}])
+      setActiveId(id)
+    }
+  }
+  
+  const loadCoeff = (e) => {
+    const id = e.target.parentElement.id
+    const obj = JSON.parse(localStorage.getItem(id));
+    setCoeff(obj.coeff);
+    stop();
+    setActiveId(id);
+  }
+
+  const deleteCoeff = (e) => {
+    const id = e.target.parentElement.id
+    localStorage.removeItem(id)
+    setCoeffList(coeffList.filter(item => item.id != id))
+  }
+
+  const deleteAllCoeff = () => {
+    setCoeffList([])
+    localStorage.clear()
+  }
+
+  const showHideOrbits = () => {
+    setOrbitsActive((orbitsActive === "none")? "flex" : "none")
+  };
+
+  const showHideRadii = () => {
+    setRadiiActive((radiiActive === "none")? "flex" : "none")
+  }
+
+  const showOutline = () => {
+    setOutlineActive((outlineActive === "none")? "flex" : "none")
+  }
 
   return (<>
     <div>
-      <StarChartInit handleClick={pausePlay} zoom={zoom}/>
+      <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
       <StarChart data = {frame} edge = {edge}/>
-      <Slider startValue={zoom} setValue={setZoom}/>
     </div>
     <div>
-      {(activeName)?<div>{activeName} is loaded</div>: null}
-      <Button handleClick={stop} text="stop" isDisabled={!coeff.length}/>
-      <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
-      <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
+      <Button handleClick={stop} text={'\u23F9'} isDisabled={!coeff.length}/>
+      <Button handleClick={pausePlay} text={intervalId? '\u23F8' : "\u23F5"} isDisabled={!coeff.length}/>
+    </div>
+    <div>
+      <Slider startValue={zoom} setValue={setZoom}/>
+      <Button handleClick={showHideOrbits} text={"circles"} />
+      <Button handleClick={showHideRadii} text={"radii"} />
+      <Button handleClick={showOutline} text={"outline"} />
+    </div>
+    <div>
       <UploadButton handleFile={handleFile}/>
     </div>
     <div>
-      <CoeffList setCoeff={setCoeff} coeff={coeff} saved={saved} setSaved={setSaved} stop={stop} setActiveName={setActiveName}/>
+      <List lst={coeffList} load={loadCoeff} del={deleteCoeff} delAll={deleteAllCoeff} focus={activeId}/>
     </div>
   </>)
 };

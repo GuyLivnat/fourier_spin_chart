@@ -26,6 +26,13 @@ const StarChart = ({data, edge}) => {
             });
 
 
+    d3.select("#radii")
+        .selectAll("path")
+        .data(data.orbits)
+        .join("path")
+            .attr("d", line(data.orbits))
+            .style("fill", "none")
+
     d3.select("#edge")
         .attr("d", line(edge));
 };

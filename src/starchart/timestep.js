@@ -19,12 +19,12 @@ export default function timestep(coeff, time) {
       x += r * Math.cos(theta);
       y += r * Math.sin(theta);
     }
-    // frame.orbits.push ({
-    //     x: x,
-    //     y: y,
-    //     angle: 0,
-    //     r: 0,
-    // })
+    frame.orbits.push ({
+        x: x,
+        y: y,
+        angle: 0,
+        r: 0,
+    })
     frame.edge = {
       x: x,
       y: y,
