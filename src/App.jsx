@@ -80,6 +80,7 @@ function App() {
       setIntervalId (null)
       setFrame(timestep([],0))
     }
+    setFrame(timestep([], 0))
     setTime(0);
     setEdge([])
   }
@@ -109,14 +110,19 @@ function App() {
 
   const deleteCoeff = (e) => {
     const id = e.target.parentElement.id
-    if (activeId === id) stop();
+    if (activeId === id) {
+      stop();
+      setCoeff([])
+    };
     localStorage.removeItem(id)
     setCoeffList(coeffList.filter(item => item.id != id))
   }
 
   const deleteAllCoeff = () => {
-    setCoeffList([])
-    localStorage.clear()
+    stop();
+    setCoeff([]);
+    setCoeffList([]);
+    localStorage.clear();
   }
 
   const renameCoeff = (id, newName) => {
