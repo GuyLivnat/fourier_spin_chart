@@ -59,7 +59,7 @@ function App() {
     const id = crypto.randomUUID();
     localStorage.setItem(id, obj);
     setCoeffList([...coeffList, {name:name, id:id}])
-    if (!coeffList.length) { // will auto select if the list is empty
+    if (!coeff.length) { // will auto select if nothing is loaded
       setActiveId(id);
       setCoeff(tempCoeff);
     }

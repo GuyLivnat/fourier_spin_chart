@@ -25,10 +25,18 @@ return (<>
         key={item.id} id={item.id}
         className={focus === item.id? "list-group-item active" : "list-group-item"}
         aria-current={focus === item.id? true : null}> 
-          {item.id == renameId? <TextInput text={newName} setText={setNewName} id="setNewName" focus={true} accept={saveRename}/> : item.name} 
-          <Button text="load" handleClick={load} className={"btn btn-primary"} isDisabled={focus === item.id}/>
-          <Button text="delete" handleClick={del} className={"btn btn-danger"}/>
-          <Button  text={item.id == renameId? "save" : "rename"} handleClick={item.id == renameId? saveRename : handleRename} className={"btn btn-secondary"}/>
+          {item.id == renameId?
+            <TextInput text={newName} setText={setNewName} id="setNewName" focus={true} accept={saveRename}/>
+            : item.name} 
+          <Button text={focus === item.id? "loaded" : "load"}
+            handleClick={load} className={"btn btn-primary"}
+            isDisabled={focus === item.id}/>
+          <Button  text={item.id == renameId? "save" : "rename"}
+            handleClick={item.id == renameId? saveRename : handleRename}
+            className={"btn btn-secondary"}/>
+          <Button text="delete"
+            handleClick={del}
+            className={"btn btn-danger"}/>
           </li>)}
     </ul>
     <Button text="delete all" handleClick={delAll} className={"btn btn-danger"}/>
