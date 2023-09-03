@@ -20,17 +20,18 @@ const List = ({lst, load, del, delAll, focus, rename}) => {
   }
   
 return (<>
-    <ul>
+    <ul className="list-group">
       {lst.toReversed().map(item => <li
-        style={focus === item.id?{backgroundColor: "blue"}:{backgroundColor: "black"}}
-        key={item.id} id={item.id}> 
-        {item.id == renameId? <TextInput text={newName} setText={setNewName} id="setNewName" focus={true} accept={saveRename}/> : item.name} 
-        <Button text="load" handleClick={load}/>
-        <Button text="delete" handleClick={del}/>
-        <Button  text={item.id == renameId? "save" : "rename"} handleClick={item.id == renameId? saveRename : handleRename}/>
-        </li>)}
+        key={item.id} id={item.id}
+        className={focus === item.id? "list-group-item active" : "list-group-item"}
+        aria-current={focus === item.id? true : null}> 
+          {item.id == renameId? <TextInput text={newName} setText={setNewName} id="setNewName" focus={true} accept={saveRename}/> : item.name} 
+          <Button text="load" handleClick={load} className={"btn btn-primary"} isDisabled={focus === item.id}/>
+          <Button text="delete" handleClick={del} className={"btn btn-danger"}/>
+          <Button  text={item.id == renameId? "save" : "rename"} handleClick={item.id == renameId? saveRename : handleRename} className={"btn btn-secondary"}/>
+          </li>)}
     </ul>
-    <Button text="delete all" handleClick={delAll}/>
+    <Button text="delete all" handleClick={delAll} className={"btn btn-danger"}/>
   </>)
 
 

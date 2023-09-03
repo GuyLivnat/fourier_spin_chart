@@ -1,13 +1,13 @@
 
 const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
-    const width = 500;
-    const height = 500;
+    const width = 5000;
+    const height = 5000;
     const starSize = 3;
     const translateCenter = "translate("+zoom/2+","+zoom/2+")"
     return (<svg
         id="chart"
-        width={width}
-        height={height}
+        width="100%"
+        height="100%"
         viewBox={"0 0 " + zoom +" "+ zoom}  //zooms the original image
         style={{backgroundColor : 'black'}}
         >

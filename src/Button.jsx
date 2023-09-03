@@ -1,6 +1,6 @@
 
-const Button = ({handleClick, text, isDisabled=false}) => {
-    return (<button onClick={handleClick} disabled={isDisabled} >
+const Button = ({handleClick, text, isDisabled=false, className}) => {
+    return (<button className={className} onClick={handleClick} disabled={isDisabled} >
        {text}
     </button>)
 }
