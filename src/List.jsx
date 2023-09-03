@@ -10,7 +10,6 @@ const List = ({lst, load, del, delAll, focus, rename}) => {
   const handleRename = (e) => {
     const element = e.target.parentElement.parentElement;
     const text = element.childNodes[0].childNodes[0].wholeText;
-    console.log(text)
     setRenameId(element.id);
     setNewName(text);
   }
@@ -26,25 +25,36 @@ return (<>
         key={item.id} id={item.id}
         className={focus === item.id? "list-group-item active" : "list-group-item"}
         aria-current={focus === item.id? true : null}> 
-          <div>
+          <div className="d-flex justify-content-between">
             {item.id == renameId?
-                <TextInput text={newName} setText={setNewName} id="setNewName" focus={true} accept={saveRename}/>
-                : item.name} 
-          </div>
-          <div>
-            <Button text={focus === item.id? "loaded" : "load"}
-              handleClick={load} className={"btn btn-primary"}
-              isDisabled={focus === item.id}/>
+              <TextInput text={newName}
+                setText={setNewName}
+                id="setNewName"
+                focus={true}
+                accept={saveRename}
+                size={30}/>
+              : item.name.length>30? item.name.slice(0,30)+"...": item.name} 
             <Button  text={item.id == renameId? "save" : "rename"}
               handleClick={item.id == renameId? saveRename : handleRename}
-              className={"btn btn-secondary"}/>
+              className={item.id == renameId? "btn btn-success" : "btn btn-secondary"}/>
+          </div>
+          <div className="d-flex justify-content-between">
+            <Button text={focus === item.id? "loaded" : "load"}
+              handleClick={load}
+              className={focus === item.id?"btn btn-secondary" : "btn btn-primary"}
+              isDisabled={focus === item.id}/>
             <Button text="delete"
               handleClick={del}
               className={"btn btn-danger"}/>
           </div>
-          </li>)}
+        </li>)}
     </ul>
-    <Button text="delete all" handleClick={delAll} className={"btn btn-danger"}/>
+    <div>
+      <Button text="delete all"
+        handleClick={delAll}
+        className={"btn btn-danger float-end"}/>
+    </div>
+    
   </>)
 
 

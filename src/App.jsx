@@ -151,33 +151,44 @@ function App() {
 
   return (<section className="container-fluid">
     <div className="row">
-      <div className="col-lg-2"></div>
-      <div className="col-lg-6 col-md-8" >
+      <div className="col-lg-8" >
         <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
         <StarChart data = {frame} edge = {edge}/>
         <div className="row">
           <div className="col">
+            <Button handleClick={pausePlay}
+              text={intervalId? '\u23F8' : "\u23F5"}
+              isDisabled={!coeff.length}
+              className={"btn btn-primary"}/>
+            </div>
+          <div className="col">
+            <Button handleClick={stop}
+              text={'\u23F9'}
+              isDisabled={!coeff.length}
+              className={"btn btn-primary"}/>
+          </div>
+          <div className="col">
+            <Button handleClick={showHideOrbits}
+              text={"circles"}
+              className={orbitsActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
+          </div>
+          <div className="col">
+            <Button handleClick={showHideRadii}
+              text={"radii"}
+              className={radiiActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
+          </div>
+          <div className="col">
+            <Button handleClick={showOutline}
+              text={"outline"}
+              className={outlineActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
+            </div>
+          <div className="col">
             <Slider startValue={zoom} setValue={setZoom}/>
-          </div>
-          <div className="col">
-            <Button handleClick={stop} text={'\u23F9'} isDisabled={!coeff.length} className={"btn btn-primary"}/>
-          </div>
-          <div className="col">
-            <Button handleClick={pausePlay} text={intervalId? '\u23F8' : "\u23F5"} isDisabled={!coeff.length} className={"btn btn-primary"}/>
-          </div>
-          <div className="col">
-            <Button handleClick={showHideOrbits} text={"circles"} className={"btn btn-primary"}/>
-          </div>
-          <div className="col">
-            <Button handleClick={showHideRadii} text={"radii"} className={"btn btn-primary"}/>
-          </div>
-          <div className="col">
-            <Button handleClick={showOutline} text={"outline"} className={"btn btn-primary"}/>
           </div>
         </div>
       </div>
-      <div className="col">
-        <UploadButton handleFile={handleFile} />
+      <div className="col-lg-4">
+        <div><UploadButton handleFile={handleFile} /></div>
         <List lst={coeffList} load={loadCoeff} del={deleteCoeff} delAll={deleteAllCoeff} rename={renameCoeff} focus={activeId}/>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const TextInput = ({defaultText="", setText, text, focus, accept}) => {
+const TextInput = ({defaultText="", setText, text, focus, accept, size}) => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
@@ -13,6 +13,7 @@ return (<input type="text"
     value={text} 
     autoFocus={focus}
     onKeyDown={handleKeyDown}
+    size={size}
      />)
 }
 
