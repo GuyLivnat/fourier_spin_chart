@@ -122,6 +122,15 @@ function App() {
     localStorage.clear()
   }
 
+  const renameCoeff = (id, newName) => {
+    const obj = JSON.parse(localStorage.getItem(id));
+    obj.name = newName;
+    const stringObj = JSON.stringify(obj);
+    localStorage.setItem(id, stringObj);
+    const newList = coeffList.filter(item => item.id != id);
+    setCoeffList([...newList,{name:newName, id:id}])
+  }
+
   const showHideOrbits = () => {
     setOrbitsActive((orbitsActive === "none")? "flex" : "none")
   };
@@ -153,7 +162,7 @@ function App() {
       <UploadButton handleFile={handleFile}/>
     </div>
     <div>
-      <List lst={coeffList} load={loadCoeff} del={deleteCoeff} delAll={deleteAllCoeff} focus={activeId}/>
+      <List lst={coeffList} load={loadCoeff} del={deleteCoeff} delAll={deleteAllCoeff} rename={renameCoeff} focus={activeId}/>
     </div>
   </>)
 };
