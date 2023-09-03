@@ -21,9 +21,9 @@ function App() {
   let [intervalId, setIntervalId] = useState(null);
   let [activeId, setActiveId] = useState(null)
   let [zoom, setZoom] = useState(500)
-  let [radiiActive, setRadiiActive] = useState("flex")
-  let [orbitsActive, setOrbitsActive] = useState("flex")
-  let [outlineActive, setOutlineActive] = useState("flex")
+  let [radiiActive, setRadiiActive] = useState("true")
+  let [orbitsActive, setOrbitsActive] = useState("true")
+  let [outlineActive, setOutlineActive] = useState("true")
   let [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
     let localCoeff = [];
@@ -34,6 +34,9 @@ function App() {
     }
     return localCoeff;
   })
+
+
+      // localStorage.clear();  // use this if you mess up a save file and need to reset
 
   const handleFile = (event) => {   // converts an uploaded SVG to something readable // needs validation that the upload was not cancelled
     const reader = new FileReader();
@@ -54,7 +57,7 @@ function App() {
   }
   
   const saveCoeff = (path, name) => {
-    const tempCoeff = createCoeff(path, units)
+    const tempCoeff = createCoeff(path, units);
     const obj = JSON.stringify({name: name, coeff: tempCoeff});
     const id = crypto.randomUUID();
     localStorage.setItem(id, obj);
@@ -101,7 +104,7 @@ function App() {
   };
   
   const loadCoeff = (e) => {
-    const id = e.target.parentElement.id
+    const id = e.target.parentElement.parentElement.id
     const obj = JSON.parse(localStorage.getItem(id));
     setCoeff(obj.coeff);
     stop();
@@ -109,7 +112,7 @@ function App() {
   }
 
   const deleteCoeff = (e) => {
-    const id = e.target.parentElement.id
+    const id = e.target.parentElement.parentElement.id
     if (activeId === id) {
       stop();
       setCoeff([])
@@ -135,15 +138,15 @@ function App() {
   }
 
   const showHideOrbits = () => {
-    setOrbitsActive((orbitsActive === "none")? "flex" : "none")
+    setOrbitsActive((orbitsActive === "none")? "true" : "none")
   };
 
   const showHideRadii = () => {
-    setRadiiActive((radiiActive === "none")? "flex" : "none")
+    setRadiiActive((radiiActive === "none")? "true" : "none")
   }
 
   const showOutline = () => {
-    setOutlineActive((outlineActive === "none")? "flex" : "none")
+    setOutlineActive((outlineActive === "none")? "true" : "none")
   }
 
   return (<section className="container-fluid">

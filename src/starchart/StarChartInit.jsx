@@ -1,7 +1,5 @@
 
 const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
-    const width = 5000;
-    const height = 5000;
     const starSize = 3;
     const translateCenter = "translate("+zoom/2+","+zoom/2+")"
     return (<svg
