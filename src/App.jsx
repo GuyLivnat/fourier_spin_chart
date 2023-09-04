@@ -7,6 +7,7 @@ import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
 import List from './List';
 import Slider from './slider';
+import ToggleSwitch from './ToggleSwitch';
 
 
 
@@ -148,27 +149,27 @@ function App() {
     setRadiiActive((radiiActive === "none")? "true" : "none")
   }
 
-  const showOutline = () => {
+  const showHideOutline = () => {
     setOutlineActive((outlineActive === "none")? "true" : "none")
   }
 
-  return (<section className="container-fluid bg-dark">
+  return (<section className="container-fluid text-bg-dark">
     <div className="row">
       <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
         <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
         <StarChart data = {frame} edge = {edge}/>
         <div className="row align-items-center justify-content-start">
-          <div className="col-1" id="pausePlay">
+          <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}
               text={intervalId? '\u23F8' : "\u23F5"}
               isDisabled={!coeff.length}
-              className={"btn btn-outline-primary btn-lg m-2"}/>
+              className={"btn btn-primary btn-lg"}/>
             </div>
-          <div className="col-1">
+          <div className="col-1 m-2">
             <Button handleClick={stop}
               text={'\u23F9'}
               isDisabled={!coeff.length}
-              className={"btn btn-outline-primary m-3"}/>
+              className={"btn btn-outline-primary"}/>
           </div>
         </div>
       </div>
@@ -182,21 +183,24 @@ function App() {
           focus={activeId}/>
       </div>
       <div className="col-md-1 order-5 order-lg-6 mt-5" id="filters">
-        <h1>filters</h1>
+        <h1>Tools</h1>
         <div className="col">
-            <Button handleClick={showHideOrbits}
-              text={"circles"}
-              className={orbitsActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
+        <ToggleSwitch
+          label={"Orbits"}
+          handleClick={showHideOrbits}
+          isDisabled={!coeff.length}/>
+          </div>
+          <div>
+          <ToggleSwitch
+          label={"Radii"}
+          handleClick={showHideRadii}
+          isDisabled={!coeff.length}/>
           </div>
           <div className="col">
-            <Button handleClick={showHideRadii}
-              text={"radii"}
-              className={radiiActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
-          </div>
-          <div className="col">
-            <Button handleClick={showOutline}
-              text={"outline"}
-              className={outlineActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
+          <ToggleSwitch
+          label={"Outline"}
+          handleClick={showHideOutline}
+          isDisabled={!coeff.length}/>
             </div>
           <div className="col">
             <Slider startValue={zoom} setValue={setZoom}/>

@@ -33,16 +33,18 @@ const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
 
         <g
             id="radii"
-            stroke="blue"
+            stroke="rgb(191, 194, 240)"
             transform={translateCenter}
             display={radiiActive}
+            vectorEffect={"non-scaling-stroke"}
+            style={{ strokeWidth: "0.1"}}
             >
         </g>
 
         <path
             vectorEffect={"non-scaling-stroke"}
             id="edge"
-            stroke="white"
+            stroke="rgb(172, 106, 106)"
             style={{fill: "none", strokeWidth: "2"}}
             markerEnd="url(#star)"
             transform={translateCenter}
