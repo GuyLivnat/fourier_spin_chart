@@ -7,6 +7,7 @@ import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
 import List from './List';
 import Slider from './slider';
+import "/App.css"
 
 
 
@@ -133,8 +134,11 @@ function App() {
     obj.name = newName;
     const stringObj = JSON.stringify(obj);
     localStorage.setItem(id, stringObj);
-    const newList = coeffList.filter(item => item.id != id);
-    setCoeffList([...newList,{name:newName, id:id}])
+    const newList = coeffList.map((item) => {
+      if (item.id === id) return {name:newName, id:id}
+      else return item;
+    });
+    setCoeffList(newList)
   }
 
   const showHideOrbits = () => {
@@ -151,11 +155,11 @@ function App() {
 
   return (<section className="container-fluid">
     <div className="row">
-      <div className="col-lg-8" >
+      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
         <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
         <StarChart data = {frame} edge = {edge}/>
         <div className="row">
-          <div className="col">
+          <div className="col" id="pausePlay">
             <Button handleClick={pausePlay}
               text={intervalId? '\u23F8' : "\u23F5"}
               isDisabled={!coeff.length}
@@ -167,7 +171,20 @@ function App() {
               isDisabled={!coeff.length}
               className={"btn btn-primary"}/>
           </div>
-          <div className="col">
+        </div>
+      </div>
+      <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList">
+        <div><UploadButton handleFile={handleFile} /></div>
+        <List lst={coeffList}
+          load={loadCoeff}
+          del={deleteCoeff}
+          delAll={deleteAllCoeff}
+          rename={renameCoeff}
+          focus={activeId}/>
+      </div>
+      <div className="col-md-1 order-5 order-lg-6 mt-5" id="filters">
+        <h1>filters</h1>
+        <div className="col">
             <Button handleClick={showHideOrbits}
               text={"circles"}
               className={orbitsActive === "true"? "btn btn-primary" : "btn btn-secondary"}/>
@@ -185,11 +202,6 @@ function App() {
           <div className="col">
             <Slider startValue={zoom} setValue={setZoom}/>
           </div>
-        </div>
-      </div>
-      <div className="col-lg-4">
-        <div><UploadButton handleFile={handleFile} /></div>
-        <List lst={coeffList} load={loadCoeff} del={deleteCoeff} delAll={deleteAllCoeff} rename={renameCoeff} focus={activeId}/>
       </div>
     </div>
   </section>)

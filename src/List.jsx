@@ -33,19 +33,19 @@ return (<>
                 focus={true}
                 accept={saveRename}
                 size={30}/>
-              : item.name.length>30? item.name.slice(0,30)+"...": item.name} 
+            : item.name} 
+          </div>
+          <div>
             <Button  text={item.id == renameId? "save" : "rename"}
               handleClick={item.id == renameId? saveRename : handleRename}
               className={item.id == renameId? "btn btn-success" : "btn btn-secondary"}/>
-          </div>
-          <div className="d-flex justify-content-between">
-            <Button text={focus === item.id? "loaded" : "load"}
-              handleClick={load}
-              className={focus === item.id?"btn btn-secondary" : "btn btn-primary"}
-              isDisabled={focus === item.id}/>
+            {focus != item.id && 
+              <Button text={focus === item.id? "loaded" : "load"}
+                handleClick={load}
+                className={"btn btn-primary"}/>}
             <Button text="delete"
               handleClick={del}
-              className={"btn btn-danger"}/>
+              className={"btn btn-danger float-end"}/>
           </div>
         </li>)}
     </ul>

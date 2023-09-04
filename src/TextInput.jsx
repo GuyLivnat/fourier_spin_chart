@@ -1,3 +1,5 @@
+
+
 const TextInput = ({defaultText="", setText, text, focus, accept, size}) => {
     const handleChange = (e) => {
         setText(e.target.value)
