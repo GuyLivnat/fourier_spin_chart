@@ -7,7 +7,6 @@ import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
 import List from './List';
 import Slider from './slider';
-import "/App.css"
 
 
 
@@ -153,23 +152,23 @@ function App() {
     setOutlineActive((outlineActive === "none")? "true" : "none")
   }
 
-  return (<section className="container-fluid">
+  return (<section className="container-fluid bg-dark">
     <div className="row">
       <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
         <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
         <StarChart data = {frame} edge = {edge}/>
-        <div className="row">
-          <div className="col" id="pausePlay">
+        <div className="row align-items-center justify-content-start">
+          <div className="col-1" id="pausePlay">
             <Button handleClick={pausePlay}
               text={intervalId? '\u23F8' : "\u23F5"}
               isDisabled={!coeff.length}
-              className={"btn btn-primary"}/>
+              className={"btn btn-outline-primary btn-lg m-2"}/>
             </div>
-          <div className="col">
+          <div className="col-1">
             <Button handleClick={stop}
               text={'\u23F9'}
               isDisabled={!coeff.length}
-              className={"btn btn-primary"}/>
+              className={"btn btn-outline-primary m-3"}/>
           </div>
         </div>
       </div>

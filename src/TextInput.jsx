@@ -1,6 +1,6 @@
 
 
-const TextInput = ({defaultText="", setText, text, focus, accept, size}) => {
+const TextInput = ({defaultText="", setText, text, focus, accept}) => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
@@ -9,14 +9,16 @@ const TextInput = ({defaultText="", setText, text, focus, accept, size}) => {
         if (e.key === 'Enter') accept();
     }
 
-return (<input type="text"
-    placeholder={defaultText} 
-    onChange={handleChange} 
-    value={text} 
-    autoFocus={focus}
-    onKeyDown={handleKeyDown}
-    size={size}
-     />)
+return (
+    <input type="text"
+        className="form-control"
+        placeholder={defaultText} 
+        onChange={handleChange} 
+        value={text} 
+        autoFocus={focus}
+        onKeyDown={handleKeyDown}
+    />
+)
 }
 
 export default TextInput
