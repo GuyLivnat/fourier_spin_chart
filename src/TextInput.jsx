@@ -11,12 +11,12 @@ const TextInput = ({defaultText="", setText, text, focus, accept}) => {
 
 return (
     <input type="text"
-        className="form-control"
-        placeholder={defaultText} 
-        onChange={handleChange} 
-        value={text} 
-        autoFocus={focus}
-        onKeyDown={handleKeyDown}
+    className="form-control"
+    placeholder={defaultText} 
+    onChange={handleChange} 
+    value={text} 
+    autoFocus={focus}
+    onKeyDown={handleKeyDown}
     />
 )
 }

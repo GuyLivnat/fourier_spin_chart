@@ -8,6 +8,7 @@ import createCoeff from './starchart/createCoeff';
 import List from './List';
 import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
+import CoeffEditor from './CoeffEditor';
 
 
 
@@ -155,8 +156,11 @@ function App() {
 
   return (<section className="container-fluid text-bg-dark">
     <div className="row">
-      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
-        <StarChartInit zoom={zoom} orbitsActive={orbitsActive} radiiActive={radiiActive} outlineActive={outlineActive}/>
+      <div className="col-lg-5 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
+        <StarChartInit zoom={zoom}
+          orbitsActive={orbitsActive}
+          radiiActive={radiiActive}
+          outlineActive={outlineActive}/>
         <StarChart data = {frame} edge = {edge}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
@@ -175,36 +179,40 @@ function App() {
       </div>
       <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList">
         <div><UploadButton handleFile={handleFile} /></div>
-        <List lst={coeffList}
-          load={loadCoeff}
-          del={deleteCoeff}
-          delAll={deleteAllCoeff}
-          rename={renameCoeff}
-          focus={activeId}/>
+          <List lst={coeffList}
+            load={loadCoeff}
+            del={deleteCoeff}
+            delAll={deleteAllCoeff}
+            rename={renameCoeff}
+            focus={activeId}/>
       </div>
       <div className="col-md-1 order-5 order-lg-6 mt-5" id="filters">
         <h1>Tools</h1>
-        <div className="col">
-        <ToggleSwitch
-          label={"Orbits"}
-          handleClick={showHideOrbits}
-          isDisabled={!coeff.length}/>
+          <div className="col">
+            <ToggleSwitch
+              label={"Orbits"}
+              handleClick={showHideOrbits}
+              isDisabled={!coeff.length}
+              checked={(orbitsActive === "none")? false : true}/>
           </div>
           <div>
-          <ToggleSwitch
-          label={"Radii"}
-          handleClick={showHideRadii}
-          isDisabled={!coeff.length}/>
+            <ToggleSwitch
+              label={"Radii"}
+              handleClick={showHideRadii}
+              isDisabled={!coeff.length}
+              checked={(radiiActive === "none")? false : true}/>
           </div>
           <div className="col">
-          <ToggleSwitch
-          label={"Outline"}
-          handleClick={showHideOutline}
-          isDisabled={!coeff.length}/>
-            </div>
+            <ToggleSwitch
+              label={"Outline"}
+              handleClick={showHideOutline}
+              isDisabled={!coeff.length}
+              checked={(outlineActive === "none")? false : true}/>
+          </div>
           <div className="col">
             <Slider startValue={zoom} setValue={setZoom}/>
           </div>
+          <CoeffEditor/>
       </div>
     </div>
   </section>)
