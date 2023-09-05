@@ -1,6 +1,6 @@
 
 
-const TextInput = ({defaultText="", setText, text, focus, accept}) => {
+const TextInput = ({placeholder="", setText, text, focus, accept}) => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
@@ -12,7 +12,7 @@ const TextInput = ({defaultText="", setText, text, focus, accept}) => {
 return (
     <input type="text"
     className="form-control"
-    placeholder={defaultText} 
+    placeholder={placeholder} 
     onChange={handleChange} 
     value={text} 
     autoFocus={focus}

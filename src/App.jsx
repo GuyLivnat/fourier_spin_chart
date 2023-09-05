@@ -8,7 +8,7 @@ import createCoeff from './starchart/createCoeff';
 import List from './List';
 import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
-import CoeffEditor from './CoeffEditor';
+import CoeffEditor from './editor/CoeffEditor';
 
 
 
@@ -178,6 +178,7 @@ function App() {
         </div>
       </div>
       <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList">
+        <h1 className="mb-3">Images</h1>
         <div><UploadButton handleFile={handleFile} /></div>
           <List lst={coeffList}
             load={loadCoeff}
@@ -186,7 +187,7 @@ function App() {
             rename={renameCoeff}
             focus={activeId}/>
       </div>
-      <div className="col-md-1 order-5 order-lg-6 mt-5" id="filters">
+      <div className="col-md-2 order-5 order-lg-6 mt-5" id="filters">
         <h1>Tools</h1>
           <div className="col">
             <ToggleSwitch
@@ -212,7 +213,9 @@ function App() {
           <div className="col">
             <Slider startValue={zoom} setValue={setZoom}/>
           </div>
-          <CoeffEditor/>
+          <CoeffEditor
+            coeff={coeff}
+            setCoeff={setCoeff}/>
       </div>
     </div>
   </section>)
