@@ -108,7 +108,7 @@ function App() {
   };
   
   const loadCoeff = (e) => {
-    const id = e.target.parentElement.parentElement.id
+    const id = e.target.parentElement.parentElement.id;
     const obj = JSON.parse(localStorage.getItem(id));
     coeff.current = obj.coeff;
     stop();
@@ -116,7 +116,7 @@ function App() {
   }
 
   const deleteCoeff = (e) => {
-    const id = e.target.parentElement.parentElement.id
+    const id = e.target.parentElement.parentElement.id;
     if (activeId === id) {
       stop();
       coeff.current = [];
