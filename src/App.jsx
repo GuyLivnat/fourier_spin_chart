@@ -154,7 +154,8 @@ function App() {
     setOutlineActive((outlineActive === "none")? "true" : "none")
   }
 
-  return (<section className="container-fluid text-bg-dark">
+  return (
+  <section className="container-fluid text-bg-dark">
     <div className="row">
       <div className="col-lg-5 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
         <StarChartInit zoom={zoom}

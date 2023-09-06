@@ -37,7 +37,7 @@ const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
             transform={translateCenter}
             display={radiiActive}
             vectorEffect={"non-scaling-stroke"}
-            style={{ strokeWidth: "0.1"}}
+            style={{ strokeWidth: "1"}}
             >
         </g>
 
