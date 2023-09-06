@@ -2,25 +2,38 @@ import { useState } from "react";
 import NumberInput from "../NumberInput";
 import Button from "../Button";
 
-const CoeffAdder = ({setRadius, setAngle, angle, radius}) => {
+const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff}) => {
 
     return (<>
-        <div className="input-group">
-            <span className="input-group-text">radius</span>
-            <NumberInput
-            number={radius}
-            setNumber={setRadius}
-            min={0.1}
+        <div>
+            <Button
+            handleClick={resetCoeff}
+            text="reset"
+            className="btn btn-outline-primary"
             />
         </div>
         <div className="input-group">
-            <span className="input-group-text">angle</span>
+            <span className="input-group-text text-bg-secondary">radian</span>
             <NumberInput
             number={angle}
             setNumber={setAngle}
-            min={-2*Math.PI}
-            max={2*Math.PI}
             step={0.1}
+            placeholder={"i"}
+            className={"text-bg-info"}
+            />
+        </div>
+        <div className="input-group">
+            <span className="input-group-text text-bg-secondary">radius</span>
+            <NumberInput
+            number={radius}
+            setNumber={setRadius}
+            min={0}
+            className={"text-bg-info"}
+            />
+            <Button
+            handleClick={pushCoeff}
+            text="add"
+            className="btn btn-outline-primary"
             />
         </div>
     </>)
@@ -28,3 +41,4 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius}) => {
 }
 
 export default CoeffAdder;
+

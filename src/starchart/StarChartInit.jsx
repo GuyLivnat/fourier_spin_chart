@@ -28,6 +28,7 @@ const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive}) => {
             transform={translateCenter}
             vectorEffect={"non-scaling-stroke"}
             display={circlesActive}
+            style={{strokeWidth: "0.5"}}
             >
         </g>
 
@@ -37,7 +38,7 @@ const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive}) => {
             transform={translateCenter}
             display={radiiActive}
             vectorEffect={"non-scaling-stroke"}
-            style={{ strokeWidth: "1"}}
+            style={{ fill:"none", strokeWidth: ".5", opacity:"50%"}}
             >
         </g>
 

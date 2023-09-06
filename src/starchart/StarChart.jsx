@@ -22,7 +22,7 @@ const StarChart = ({data, edge}) => {
             .attr("transform", d => `translate(${d.x}, ${d.y})`)
             .attr("opacity", (d, i) => {
                 if (d.r < 4) return 0
-                 return 1/data.circles.length*i/10 + 0.3
+                return 0.3
             });
 
 
@@ -31,7 +31,6 @@ const StarChart = ({data, edge}) => {
         .data(data.circles)
         .join("path")
             .attr("d", line(data.circles))
-            .style("fill", "none")
 
     d3.select("#edgeFirst")
         .attr("d", line(edge.first));

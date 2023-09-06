@@ -1,4 +1,3 @@
-import Button from "../Button";
 import CloseButton from "../CloseButton";
 
 const CoeffTable = ({lst, del}) => {
@@ -14,7 +13,7 @@ const CoeffTable = ({lst, del}) => {
     }
 
     return (<>
-            <table className="table" style={{display:"block", overflowY:"scroll", overflowX:"clip", textAlign:"center"}}>
+            <table className="table table-sm table-dark table-hover" >
                 <thead >
                     <tr>
                         <th scope="col">Radius</th>
