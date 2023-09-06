@@ -1,6 +1,6 @@
 
 
-const NumberInput = ({placeholder, setNumber, number, focus, min, max, step, className}) => {
+const NumberInput = ({placeholder, setNumber, number, focus, min, max, step, className, id}) => {
     const handleChange = (e) => {
         setNumber(e.target.value)
     }
@@ -16,6 +16,7 @@ return (
     min={min}
     max={max}
     step={step}
+    id={id}
     />
 )
 }

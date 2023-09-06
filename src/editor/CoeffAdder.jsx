@@ -20,6 +20,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff})
             step={0.1}
             placeholder={"i"}
             className={"text-bg-info"}
+            id={"radians"}
             />
         </div>
         <div className="input-group">
@@ -29,6 +30,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff})
             setNumber={setRadius}
             min={0}
             className={"text-bg-info"}
+            id={"radius"}
             />
             <Button
             handleClick={pushCoeff}
