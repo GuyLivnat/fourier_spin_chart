@@ -48,7 +48,7 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId}) => {
                 save={saveWorkingCoeff}
                 />
             </div>
-            <div style={{boxSizing:"content-box", width:"200px", height:"270px", overflowY:"scroll", overflowX:"clip", textAlign:"center"}}>
+            <div style={{boxSizing:"content-box", width:"200px", height:"270px", overflowY:"auto", overflowX:"clip", textAlign:"center"}}>
                 <CoeffTable lst={coeff.current} del={deleteCoeff}/>
             </div>
         </div>

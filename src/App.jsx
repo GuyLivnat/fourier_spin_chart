@@ -53,7 +53,8 @@ function App() {
         const parser = new DOMParser();
         const parsedFile = parser.parseFromString(string, "image/svg+xml");
         const path = parsedFile.querySelector("path");
-        saveCoeff(path, name) // this function ends here and chains to a new function!
+        const coeff = createCoeff(path, units);
+        saveCoeff(coeff, name) // this function ends here and chains to a new function!
     }
     const file = event.target.files[0];
     const name = nameParser(file.name)
@@ -64,15 +65,14 @@ function App() {
     return (name.replace('.svg', '') + ` with ${units} points`)
   }
   
-  const saveCoeff = (path, name) => {
-    const tempCoeff = createCoeff(path, units);
-    const obj = JSON.stringify({name: name, coeff: tempCoeff});
+  const saveCoeff = (coeffs, name) => {
+    const obj = JSON.stringify({name: name, coeff: coeffs});
     const id = crypto.randomUUID();
     localStorage.setItem(id, obj);
     setCoeffList([...coeffList, {name:name, id:id}])
     if (!coeff.length) { // will auto select if nothing is loaded
       setActiveId(id);
-      coeff.current = tempCoeff;
+      coeff.current = coeffs;
     }
   }
 
@@ -253,7 +253,9 @@ function App() {
           <CoeffEditor
             coeff={coeff}
             tick={tick}
-            setTick={setTick}/>
+            setTick={setTick}
+            saveCoeff={saveCoeff}
+            setActiveId={setActiveId}/>
       </div>
     </div>
   </section>)
