@@ -1,5 +1,5 @@
 
-const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
+const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive}) => {
     const starSize = 3;
     const translateCenter = "translate("+zoom/2+","+zoom/2+")"
     return (<svg
@@ -23,11 +23,11 @@ const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
         </defs>
 
         <g
-            id="orbits"
+            id="circles"
             stroke="white"
             transform={translateCenter}
             vectorEffect={"non-scaling-stroke"}
-            display={orbitsActive}
+            display={circlesActive}
             >
         </g>
 
@@ -43,10 +43,50 @@ const StarChartInit = ({zoom, orbitsActive, radiiActive, outlineActive}) => {
 
         <path
             vectorEffect={"non-scaling-stroke"}
-            id="edge"
+            id="edgeFirst"
+            stroke="rgb(172, 106, 106)"
+            style={{fill: "none", strokeWidth: "2.6"}}
+            markerEnd="url(#star)"
+            transform={translateCenter}
+            display={outlineActive}
+        >
+        </path>   
+
+        <path
+            vectorEffect={"non-scaling-stroke"}
+            id="edgeSecond"
+            stroke="rgb(172, 106, 106)"
+            style={{fill: "none", strokeWidth: "2.3"}}
+            transform={translateCenter}
+            display={outlineActive}
+        >
+        </path> 
+
+        <path
+            vectorEffect={"non-scaling-stroke"}
+            id="edgeThird"
             stroke="rgb(172, 106, 106)"
             style={{fill: "none", strokeWidth: "2"}}
-            markerEnd="url(#star)"
+            transform={translateCenter}
+            display={outlineActive}
+        >
+        </path> 
+
+        <path
+            vectorEffect={"non-scaling-stroke"}
+            id="edgeFourth"
+            stroke="rgb(172, 106, 106)"
+            style={{fill: "none", strokeWidth: "1.7"}}
+            transform={translateCenter}
+            display={outlineActive}
+        >
+        </path>   
+
+        <path
+            vectorEffect={"non-scaling-stroke"}
+            id="edgeFifth"
+            stroke="rgb(172, 106, 106)"
+            style={{fill: "none", strokeWidth: "1.4"}}
             transform={translateCenter}
             display={outlineActive}
         >

@@ -15,17 +15,19 @@ import CoeffEditor from './editor/CoeffEditor';
 function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
   const updateSpeed = 45;  //in miliseconds. 33 is 30 fps
+  
+  const emptyEdge = {first:[], second:[], third:[], fourth:[], fifth:[]};
 
   const coeff = useRef([]);
   const frame = useRef(timestep(coeff, 0));
-  const edge = useRef([]);
+  const edge = useRef(emptyEdge);
   const time = useRef(0);
   const [tick, setTick] = useState(0);
   const [intervalId, setIntervalId] = useState(null);
   const [activeId, setActiveId] = useState(null)
   const [zoom, setZoom] = useState(500)
   const [radiiActive, setRadiiActive] = useState("true")
-  const [orbitsActive, setOrbitsActive] = useState("true")
+  const [circlesActive, setCirclesActive] = useState("true")
   const [outlineActive, setOutlineActive] = useState("true")
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
@@ -91,7 +93,7 @@ function App() {
     }
     frame.current = timestep([], 0);
     time.current = 0;
-    edge.current = [];
+    edge.current = emptyEdge;
   }
 
   const update = () => {  // computes the next frame 
@@ -102,9 +104,41 @@ function App() {
       time.current += step
     }
     frame.current = timestep(coeff.current, time.current);
-    edge.current = [...edge.current, { x: frame.current.edge.x, y: frame.current.edge.y }];
-    if (edge.current.length > 0.95 * units) edge.current.shift();
+    updateEdge();
     timeTick();
+  };
+
+  const updateEdge = () => {
+    const segment = 0.2 * units;
+    edge.current.first.push({ x: frame.current.edge.x, y: frame.current.edge.y });
+
+    if (edge.current.first.length > segment-1) {
+      if (edge.current.first.length > segment) edge.current.first.shift();
+      let movingPoint = edge.current.first[0];
+      edge.current.second.push(movingPoint);
+
+      if (edge.current.second.length > segment-1) {
+        if (edge.current.second.length > segment) edge.current.second.shift();
+        movingPoint = edge.current.second[0];
+        edge.current.third.push(movingPoint);
+
+        if (edge.current.third.length > segment-1) {
+          if (edge.current.third.length > segment) edge.current.third.shift();
+          movingPoint = edge.current.third[0];
+          edge.current.fourth.push(movingPoint);
+
+          if (edge.current.fourth.length > segment-1) {
+            if (edge.current.fourth.length > segment) edge.current.fourth.shift();
+            movingPoint = edge.current.fourth[0];
+            edge.current.fifth.push(movingPoint);
+          
+            if (edge.current.fifth.length > 0.22*units) {
+              edge.current.fifth.shift();
+            }
+          }
+        }
+      }
+    }
   };
   
   const loadCoeff = (e) => {
@@ -144,8 +178,8 @@ function App() {
     setCoeffList(newList)
   }
 
-  const showHideOrbits = () => {
-    setOrbitsActive((orbitsActive === "none")? "true" : "none")
+  const showHideCircles = () => {
+    setCirclesActive((circlesActive === "none")? "true" : "none")
   };
 
   const showHideRadii = () => {
@@ -161,7 +195,7 @@ function App() {
     <div className="row">
       <div className="col-lg-5 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
         <StarChartInit zoom={zoom}
-          orbitsActive={orbitsActive}
+          circlesActive={circlesActive}
           radiiActive={radiiActive}
           outlineActive={outlineActive}/>
         <StarChart data = {frame.current} edge = {edge.current}/>
@@ -194,10 +228,10 @@ function App() {
         <h1>Tools</h1>
           <div className="col">
             <ToggleSwitch
-              label={"Orbits"}
-              handleClick={showHideOrbits}
+              label={"Circles"}
+              handleClick={showHideCircles}
               isDisabled={!coeff.current.length}
-              checked={(orbitsActive === "none")? false : true}/>
+              checked={(circlesActive === "none")? false : true}/>
           </div>
           <div>
             <ToggleSwitch
