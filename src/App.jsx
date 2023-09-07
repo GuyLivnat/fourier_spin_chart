@@ -17,8 +17,10 @@ function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
 
   
-  const emptyEdge = {first:[], second:[], third:[], fourth:[], fifth:[]};
+  // const emptyEdge = {first:[], second:[], third:[], fourth:[], fifth:[]};
+  const emptyEdge = [];
 
+  const lineSegments = 40;
   const maxSpeed = 66;
   const updateSpeed = useRef(45);  //in miliseconds. 33 is 30 fps
   const coeff = useRef([]);
@@ -89,7 +91,6 @@ function App() {
     timeTick();
   }
 
-
   const pausePlay = () => {
     if (isPlaying) {
       setIsPlaying(false)
@@ -106,41 +107,10 @@ function App() {
       time.current += step
     }
     frame.current = timestep(coeff.current, time.current);
-    updateEdge();
+    // updateEdge();
+    edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
+    if (edge.current.length > units) edge.current.pop();
     timeTick();
-  };
-
-  const updateEdge = () => {
-    const segment = 0.2 * units;
-    edge.current.first.push({ x: frame.current.edge.x, y: frame.current.edge.y });
-
-    if (edge.current.first.length > segment-1) {
-      if (edge.current.first.length > segment) edge.current.first.shift();
-      let movingPoint = edge.current.first[0];
-      edge.current.second.push(movingPoint);
-
-      if (edge.current.second.length > segment-1) {
-        if (edge.current.second.length > segment) edge.current.second.shift();
-        movingPoint = edge.current.second[0];
-        edge.current.third.push(movingPoint);
-
-        if (edge.current.third.length > segment-1) {
-          if (edge.current.third.length > segment) edge.current.third.shift();
-          movingPoint = edge.current.third[0];
-          edge.current.fourth.push(movingPoint);
-
-          if (edge.current.fourth.length > segment-1) {
-            if (edge.current.fourth.length > segment) edge.current.fourth.shift();
-            movingPoint = edge.current.fourth[0];
-            edge.current.fifth.push(movingPoint);
-          
-            if (edge.current.fifth.length > 0.22*units) {
-              edge.current.fifth.shift();
-            }
-          }
-        }
-      }
-    }
   };
   
   const loadCoeff = (e) => {
@@ -201,8 +171,10 @@ function App() {
         <StarChartInit zoom={zoom}
           circlesActive={circlesActive}
           radiiActive={radiiActive}
-          outlineActive={outlineActive}/>
-        <StarChart data = {frame.current} edge = {edge.current}/>
+          outlineActive={outlineActive}
+          lineSegments={lineSegments}
+          units={units}/>
+        <StarChart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}

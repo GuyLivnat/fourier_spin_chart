@@ -1,7 +1,8 @@
 import * as d3 from "d3";
 
 
-const StarChart = ({data, edge}) => {
+const StarChart = ({data, edge, lineSegments, units}) => {
+    const segment = units/lineSegments;
 
     const line = d3.line()
         .x(d => d.x)
@@ -25,27 +26,16 @@ const StarChart = ({data, edge}) => {
                 return 0.3
             });
 
-
     d3.select("#radii")
         .selectAll("path")
         .data(data.circles)
         .join("path")
             .attr("d", line(data.circles))
 
-    d3.select("#edgeFirst")
-        .attr("d", line(edge.first));
-        
-    d3.select("#edgeSecond")
-        .attr("d", line(edge.second));
-
-    d3.select("#edgeThird")
-        .attr("d", line(edge.third));
-
-    d3.select("#edgeFourth")
-        .attr("d", line(edge.fourth));
-
-    d3.select("#edgeFifth")
-        .attr("d", line(edge.fifth));
+    for (let i=0; i<lineSegments; i++) {
+        d3.select(`#edge_${i}`)
+        .attr("d", line(edge.slice(segment*(i-1)-1,segment*(i+1))));
+    }
 };
 
 export default StarChart;
