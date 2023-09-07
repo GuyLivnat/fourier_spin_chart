@@ -1,10 +1,10 @@
-import StarChart from './starchart/StarChart'
+import Chart from './chart/Chart'
 import Button from './Button';
-import timestep from './starchart/timestep';
+import timestep from './chart/timestep';
 import { useRef, useState } from 'react';
-import StarChartInit from './starchart/StarChartInit';
+import ChartInit from './chart/ChartInit';
 import UploadButton from './UploadButton';
-import createCoeff from './starchart/createCoeff';
+import createCoeff from './chart/createCoeff';
 import List from './List';
 import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
@@ -160,13 +160,13 @@ function App() {
   return (
   <section className="container-fluid text-bg-dark">
     <div className="row">
-      <div className="col-lg-5 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
-        <StarChartInit zoom={zoom}
+      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
+        <ChartInit zoom={zoom}
           circlesActive={circlesActive}
           radiiActive={radiiActive}
           outlineActive={outlineActive}
           lineSegments={lineSegments}/>
-        <StarChart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
+        <Chart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}
@@ -188,7 +188,8 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList">
+      <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList"
+        style={{minWidth:"310px"}}>
         <h1 className="mb-3">Images</h1>
         <div><UploadButton handleFile={handleFile} /></div>
           <List lst={coeffList}

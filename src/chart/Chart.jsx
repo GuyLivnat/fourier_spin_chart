@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 
-const StarChart = ({data, edge, lineSegments, units}) => {
+const Chart = ({data, edge, lineSegments, units}) => {
     const segment = units/lineSegments;
 
     const line = d3.line()
@@ -41,4 +41,4 @@ const StarChart = ({data, edge, lineSegments, units}) => {
     }
 };
 
-export default StarChart;
+export default Chart;

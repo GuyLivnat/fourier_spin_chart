@@ -52,13 +52,13 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
                 />
             </div>
             <div style={{
-                boxSizing:"content-box",
-                width:"200px",
-                height:"270px",
-                overflowY:"auto",
-                overflowX:"clip",
-                textAlign:"center",
-                borderRadius: "6px"}}>
+                    boxSizing:"content-box",
+                    width:"200px",
+                    maxHeight:"270px",
+                    overflowY:"auto",
+                    overflowX:"clip",
+                    textAlign:"center"}}
+                className="border rounded">
                 <CoeffTable
                     lst={coeff.current}
                     del={deleteCoeff}/>
