@@ -30,11 +30,14 @@ const StarChart = ({data, edge, lineSegments, units}) => {
         .selectAll("path")
         .data(data.circles)
         .join("path")
-            .attr("d", line(data.circles))
+            .attr("d", line(data.circles));
 
     for (let i=0; i<lineSegments; i++) {
+        let start = (segment*(i-1))-1;
+        let end = segment*(i+1);
+        if ((i === 0 || (i === 1))) start = 0;
         d3.select(`#edge_${i}`)
-        .attr("d", line(edge.slice(segment*(i-1)-1,segment*(i+1))));
+        .attr("d", line(edge.slice(start, end)));
     }
 };
 

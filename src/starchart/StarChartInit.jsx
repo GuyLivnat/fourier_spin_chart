@@ -1,5 +1,5 @@
 
-const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, units}) => {
+const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments}) => {
     const starSize = 3;
     const translateCenter = "translate("+zoom/2+","+zoom/2+")"
 
@@ -7,6 +7,7 @@ const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSeg
     for (let i=0; i<lineSegments; i++) {
         let width = (2*(lineSegments-i)/lineSegments)
         edgeSegments.push(<path
+            markerStart={i===0? "#star": null}
             key={i}
             vectorEffect={"non-scaling-stroke"}
             id={"edge_" + i}
@@ -58,7 +59,8 @@ const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSeg
             >
         </g>
 
-        {edgeSegments}        
+        {edgeSegments} 
+
     </svg>)
 }
 

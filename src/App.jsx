@@ -92,13 +92,9 @@ function App() {
   }
 
   const pausePlay = () => {
-    if (isPlaying) {
-      setIsPlaying(false)
-    } else {
-      setIsPlaying(true)
-    }
+    setIsPlaying(!isPlaying)
   }
-
+  
   const update = () => {  // computes the next frame 
     const step = 1/(units*2);
     if (time.current === 1) {
