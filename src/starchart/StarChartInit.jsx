@@ -5,17 +5,17 @@ const StarChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSeg
 
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
-        let width = (2*(lineSegments-i)/lineSegments)
+        let strength = (2*(lineSegments-i)/lineSegments)
         edgeSegments.push(<path
-            markerStart={i===0? "#star": null}
+            markerStart={i===0? "url(#star)": null}
             key={i}
             vectorEffect={"non-scaling-stroke"}
             id={"edge_" + i}
             stroke="rgb(172, 106, 106)"
-            style={{fill: "none", strokeWidth: "1"}}
+            style={{fill: "none", strokeWidth: {strength}}}
             transform={translateCenter}
             display={outlineActive}
-            opacity={width}>
+            opacity={strength}>
         </path> )
     }
 
