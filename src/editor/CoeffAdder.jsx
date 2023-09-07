@@ -1,9 +1,7 @@
-import { useState } from "react";
 import NumberInput from "../NumberInput";
 import Button from "../Button";
 
-const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save}) => {
-
+const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
     return (<>
         <div className="input-group mb-1">
             <span className="input-group-text text-bg-secondary">radian</span>
@@ -36,6 +34,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
             handleClick={save}
             text="save"
             className="btn btn-outline-primary"
+            isDisabled={playable}
             />
             <Button
             handleClick={resetCoeff}

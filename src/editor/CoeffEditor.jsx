@@ -1,13 +1,12 @@
 import { useState } from "react"
-import Button from "../Button";
 import CoeffTable from "./CoeffTable";
 import CoeffAdder from "./CoeffAdder";
 
 
-const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId}) => {
+const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, stop}) => {
 
     const [radius, setRadius] = useState(20);
-    const [angle, setAngle] = useState(0);
+    const [angle, setAngle] = useState(1.57079632679);
 
     const pushCoeff = () => {
         if(!coeff.current.length) coeff.current = [0, 0, parseFloat(radius), parseFloat(angle)];
@@ -25,7 +24,7 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId}) => {
 
     const resetCoeff = () => {
         coeff.current = [0,0];
-        setTick(tick+1);
+        stop();
         setActiveId(null);
     }
 
@@ -35,27 +34,34 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId}) => {
     }
 
     return (<>
-        <div style={{boxSizing:"content-box", width:"200px", height:"400px"}}>
+        <div style={{
+            boxSizing:"content-box",
+            width:"200px",
+            height:"400px"}}>
             <h2>Editor</h2>
             <div >
                 <CoeffAdder
-                setAngle={setAngle}
-                setRadius={setRadius}
-                radius={radius}
-                angle={angle}
-                resetCoeff={resetCoeff}
-                pushCoeff={pushCoeff}
-                save={saveWorkingCoeff}
+                    setAngle={setAngle}
+                    setRadius={setRadius}
+                    radius={radius}
+                    angle={angle}
+                    resetCoeff={resetCoeff}
+                    pushCoeff={pushCoeff}
+                    save={saveWorkingCoeff}
+                    playable={playable}
                 />
             </div>
-            <div style={{boxSizing:"content-box",
+            <div style={{
+                boxSizing:"content-box",
                 width:"200px",
                 height:"270px",
                 overflowY:"auto",
                 overflowX:"clip",
                 textAlign:"center",
                 borderRadius: "6px"}}>
-                <CoeffTable lst={coeff.current} del={deleteCoeff}/>
+                <CoeffTable
+                    lst={coeff.current}
+                    del={deleteCoeff}/>
             </div>
         </div>
 

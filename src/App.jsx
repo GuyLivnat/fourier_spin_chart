@@ -1,7 +1,7 @@
 import StarChart from './starchart/StarChart'
 import Button from './Button';
 import timestep from './starchart/timestep';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import StarChartInit from './starchart/StarChartInit';
 import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
@@ -9,23 +9,20 @@ import List from './List';
 import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
 import CoeffEditor from './editor/CoeffEditor';
-import useInterval from './useInterval';
+import useInterval from './utilities/useInterval';
 
 
 
 function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
 
-  
-  // const emptyEdge = {first:[], second:[], third:[], fourth:[], fifth:[]};
-  const emptyEdge = [];
-
   const lineSegments = 40;
   const maxSpeed = 66;
   const updateSpeed = useRef(45);  //in miliseconds. 33 is 30 fps
   const coeff = useRef([]);
+  let playable = coeff.current.length < 3;
   const frame = useRef(timestep(coeff, 0));
-  const edge = useRef(emptyEdge);
+  const edge = useRef([]);
   const time = useRef(0);
   const [tick, setTick] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -88,7 +85,7 @@ function App() {
     }
     frame.current = timestep([], 0);
     time.current = 0;
-    edge.current = emptyEdge;
+    edge.current = [];
     timeTick();
   }
 
@@ -104,7 +101,6 @@ function App() {
       time.current += step
     }
     frame.current = timestep(coeff.current, time.current);
-    // updateEdge();
     edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
     if (edge.current.length > units) edge.current.pop();
     timeTick();
@@ -175,13 +171,13 @@ function App() {
           <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}
               text={isPlaying? '\u23F8' : "\u23F5"}
-              isDisabled={!coeff.current.length}
+              isDisabled={playable}
               className={"btn btn-primary btn-lg"}/>
             </div>
           <div className="col-1 m-2">
             <Button handleClick={stop}
               text={'\u23F9'}
-              isDisabled={!coeff.current.length}
+              isDisabled={playable}
               className={"btn btn-outline-primary"}/>
           </div>
           <div className="col-1 m-2">
@@ -208,21 +204,21 @@ function App() {
             <ToggleSwitch
               label={"Circles"}
               handleClick={showHideCircles}
-              isDisabled={!coeff.current.length}
+              isDisabled={playable}
               checked={(circlesActive === "none")? false : true}/>
           </div>
           <div>
             <ToggleSwitch
               label={"Radii"}
               handleClick={showHideRadii}
-              isDisabled={!coeff.current.length}
+              isDisabled={playable}
               checked={(radiiActive === "none")? false : true}/>
           </div>
           <div className="col">
             <ToggleSwitch
               label={"Outline"}
               handleClick={showHideOutline}
-              isDisabled={!coeff.current.length}
+              isDisabled={playable}
               checked={(outlineActive === "none")? false : true}/>
           </div>
           <div className="col">
@@ -233,11 +229,13 @@ function App() {
               text={"zoom"}/>
           </div>
           <CoeffEditor
+            playable={playable}
             coeff={coeff}
             tick={tick}
             setTick={setTick}
             saveCoeff={saveCoeff}
-            setActiveId={setActiveId}/>
+            setActiveId={setActiveId}
+            stop={stop}/>
       </div>
     </div>
   </section>)
