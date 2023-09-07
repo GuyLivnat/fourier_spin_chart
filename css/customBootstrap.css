@@ -1,20 +1,16 @@
 @charset "UTF-8";
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: rgb(66, 66, 66);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(191, 194, 240);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

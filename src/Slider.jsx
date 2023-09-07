@@ -1,10 +1,17 @@
-const Slider = ({startValue, setValue}) => {
+const Slider = ({startValue, setValue, min, max, text}) => {
     const handleChange = (e) => {
-        setValue(e.target.value)
+        if (setValue)setValue(e.target.value)
+        else startValue.current = e.target.value
+        
     }
     return (<>
-        <label htmlFor="zoom">zoom</label>
-        <input type="range" id="zoom" min={100} max={1000} onChange={handleChange} defaultValue={startValue}/>
+        <label htmlFor={text}>{text}</label>
+        <input type="range"
+            id={text}
+            min={min}
+            max={max}
+            onChange={handleChange}
+            defaultValue={setValue? startValue: startValue.current}/>
     </>)
 }
 

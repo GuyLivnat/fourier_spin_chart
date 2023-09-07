@@ -1,7 +1,7 @@
 import StarChart from './starchart/StarChart'
 import Button from './Button';
 import timestep from './starchart/timestep';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import StarChartInit from './starchart/StarChartInit';
 import UploadButton from './UploadButton';
 import createCoeff from './starchart/createCoeff';
@@ -9,26 +9,29 @@ import List from './List';
 import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
 import CoeffEditor from './editor/CoeffEditor';
+import useInterval from './useInterval';
 
 
 
 function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
-  const updateSpeed = 45;  //in miliseconds. 33 is 30 fps
+
   
   const emptyEdge = {first:[], second:[], third:[], fourth:[], fifth:[]};
 
+  const maxSpeed = 66;
+  const updateSpeed = useRef(45);  //in miliseconds. 33 is 30 fps
   const coeff = useRef([]);
   const frame = useRef(timestep(coeff, 0));
   const edge = useRef(emptyEdge);
   const time = useRef(0);
   const [tick, setTick] = useState(0);
-  const [intervalId, setIntervalId] = useState(null);
-  const [activeId, setActiveId] = useState(null)
-  const [zoom, setZoom] = useState(500)
-  const [radiiActive, setRadiiActive] = useState("true")
-  const [circlesActive, setCirclesActive] = useState("true")
-  const [outlineActive, setOutlineActive] = useState("true")
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [activeId, setActiveId] = useState(null);
+  const [zoom, setZoom] = useState(500);
+  const [radiiActive, setRadiiActive] = useState("true");
+  const [circlesActive, setCirclesActive] = useState("true");
+  const [outlineActive, setOutlineActive] = useState("true");
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
     let localCoeff = [];
@@ -76,24 +79,23 @@ function App() {
     }
   }
 
-  const pausePlay = () => {
-    if (coeff.current.length) {
-      if (intervalId) {
-        clearInterval(intervalId);
-        setIntervalId (null)
-      } else {
-        setIntervalId(setInterval(() => update(), updateSpeed));
-  }}};
-
   const stop = () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId (null);
-      frame.current = timestep([],0);
+    if (isPlaying) {
+      setIsPlaying(false)
     }
     frame.current = timestep([], 0);
     time.current = 0;
     edge.current = emptyEdge;
+    timeTick();
+  }
+
+
+  const pausePlay = () => {
+    if (isPlaying) {
+      setIsPlaying(false)
+    } else {
+      setIsPlaying(true)
+    }
   }
 
   const update = () => {  // computes the next frame 
@@ -190,6 +192,8 @@ function App() {
     setOutlineActive((outlineActive === "none")? "true" : "none")
   }
 
+  useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //runs the chart
+
   return (
   <section className="container-fluid text-bg-dark">
     <div className="row">
@@ -202,7 +206,7 @@ function App() {
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}
-              text={intervalId? '\u23F8' : "\u23F5"}
+              text={isPlaying? '\u23F8' : "\u23F5"}
               isDisabled={!coeff.current.length}
               className={"btn btn-primary btn-lg"}/>
             </div>
@@ -211,6 +215,12 @@ function App() {
               text={'\u23F9'}
               isDisabled={!coeff.current.length}
               className={"btn btn-outline-primary"}/>
+          </div>
+          <div className="col-1 m-2">
+            <Slider startValue={updateSpeed}
+              min={1}
+              max={maxSpeed}
+              text={"speed"}/>
           </div>
         </div>
       </div>
@@ -248,7 +258,11 @@ function App() {
               checked={(outlineActive === "none")? false : true}/>
           </div>
           <div className="col">
-            <Slider startValue={zoom} setValue={setZoom}/>
+            <Slider startValue={zoom}
+              setValue={setZoom}
+              min={100}
+              max={1000}
+              text={"zoom"}/>
           </div>
           <CoeffEditor
             coeff={coeff}

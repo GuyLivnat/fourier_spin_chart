@@ -11,25 +11,21 @@ $success: rgb(104, 250, 104);
 $info: #6d6d6d;
 $danger: rgb(172, 106, 106);
 
-/* width */
+
 ::-webkit-scrollbar {
     width: 10px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
     background: rgb(66, 66, 66);
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: rgb(191, 194, 240);
 }
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
 
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)

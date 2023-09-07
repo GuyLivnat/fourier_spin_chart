@@ -13,7 +13,7 @@ const CoeffTable = ({lst, del}) => {
     }
 
     return (<>
-            <table className="table table-sm table-dark table-hover" >
+            <table className="table table-sm table-secondary table-striped table-hover" >
                 <thead >
                     <tr>
                         <th scope="col">Radius</th>
