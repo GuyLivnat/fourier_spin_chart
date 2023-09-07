@@ -172,8 +172,7 @@ function App() {
           circlesActive={circlesActive}
           radiiActive={radiiActive}
           outlineActive={outlineActive}
-          lineSegments={lineSegments}
-          units={units}/>
+          lineSegments={lineSegments}/>
         <StarChart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
