@@ -51,7 +51,7 @@ function App() {
   }
       // localStorage.clear();  // use this if you mess up a save file and need to reset
 
-  const handleFile = (event) => {   // converts an uploaded SVG to something readable // needs validation that the upload was not cancelled
+  const handleFile = (event) => {   // converts an uploaded SVG to something readable 
     const reader = new FileReader();
     reader.onload = (e) => {
         const string = e.target.result;
@@ -62,6 +62,7 @@ function App() {
         saveCoeff(coeff, name) // this function ends here and chains to a new function!
     }
     const file = event.target.files[0];
+    if (!file) return; // will only fire if upload was cancelled in the (file explorer / finder)
     const name = nameParser(file.name)
     reader.readAsText(file);
   }
@@ -185,7 +186,7 @@ function App() {
           </div>
           <div className="col-1 m-2">
             <Slider startValue={updateSpeed}
-              min={1}
+              min={0}
               max={maxSpeed}
               text={"speed"}/>
           </div>
