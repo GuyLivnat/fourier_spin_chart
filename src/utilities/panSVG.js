@@ -2,7 +2,7 @@ import {useRef} from 'react'
 
 const panSVG = (element, panX, panY, setPanX, setPanY, zoom) => {
     const isMoving = useRef(false);
-    const start = useRef({x:0, y:0, viewX:panX, viewY: panY});
+    const start = useRef({x:0, y:0, viewX:0, viewY: 0});
 
 if (element) {
     element.onmousedown = (e) => {
@@ -22,11 +22,12 @@ if (element) {
         isMoving.current = false;
     }
     element.onmousemove = (e) => {
-        const widthMod = zoom/element.clientWidth;
-        const heightMod = zoom/element.clientHeight;
-        if (!isMoving.current) return;
-        setPanX(start.current.viewX - ((e.offsetX - start.current.x) * widthMod));
-        setPanY(start.current.viewY - ((e.offsetY - start.current.y) * heightMod));
+        const widthScale = zoom/element.clientWidth; 
+        const heightScale = zoom/element.clientHeight;
+        if (isMoving.current) {
+            setPanX(start.current.viewX + ((start.current.x - e.offsetX) * widthScale));
+            setPanY(start.current.viewY + ((start.current.y - e.offsetY) * heightScale));
+        }
     }
 }
 }
