@@ -190,7 +190,8 @@ function App() {
               className={"btn btn-outline-primary"}/>
           </div>
           <div className="col-1 m-2">
-            <Slider startValue={updateSpeed}
+            <Slider
+              value={updateSpeed}
               min={0}
               max={maxSpeed}
               text={"speed"}/>
@@ -201,7 +202,8 @@ function App() {
         style={{minWidth:"310px"}}>
         <h1 className="mb-3">Images</h1>
         <div><UploadButton handleFile={handleFile} /></div>
-          <List lst={coeffList}
+          <List
+            lst={coeffList}
             load={loadCoeff}
             del={deleteCoeff}
             delAll={deleteAllCoeff}
@@ -232,7 +234,8 @@ function App() {
               checked={(outlineActive === "none")? false : true}/>
           </div>
           <div className="col">
-            <Slider startValue={zoom}
+            <Slider
+              value={zoom}
               setValue={setZoom}
               min={100}
               max={1000}

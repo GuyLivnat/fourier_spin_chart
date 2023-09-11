@@ -1,7 +1,7 @@
-const Slider = ({startValue, setValue, min, max, text}) => {
+const Slider = ({value, setValue, min, max, text}) => {
     const handleChange = (e) => {
-        if (setValue)setValue(e.target.value)
-        else startValue.current = e.target.value
+        if (setValue)setValue(parseFloat(e.target.value))
+        else value.current = parseFloat(e.target.value)
         
     }
     return (<>
@@ -11,7 +11,7 @@ const Slider = ({startValue, setValue, min, max, text}) => {
             min={min}
             max={max}
             onChange={handleChange}
-            defaultValue={setValue? startValue: startValue.current}/>
+            value={setValue? value: value.current}/>
     </>)
 }
 
