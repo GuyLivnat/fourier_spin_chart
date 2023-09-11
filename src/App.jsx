@@ -10,6 +10,8 @@ import Slider from './slider';
 import ToggleSwitch from './ToggleSwitch';
 import CoeffEditor from './editor/CoeffEditor';
 import useInterval from './utilities/useInterval';
+import zoomSVG from './utilities/zoomSVG';
+import panSVG from './utilities/panSVG';
 
 
 
@@ -28,6 +30,8 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [zoom, setZoom] = useState(500);
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
   const [radiiActive, setRadiiActive] = useState("true");
   const [circlesActive, setCirclesActive] = useState("true");
   const [outlineActive, setOutlineActive] = useState("true");
@@ -156,12 +160,17 @@ function App() {
   }
 
   useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //runs the chart
+  zoomSVG(document.getElementById("chart"), zoom, setZoom)
+  panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom)
 
   return (
   <section className="container-fluid text-bg-dark">
     <div className="row">
-      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="starchart" >
-        <ChartInit zoom={zoom}
+      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="chart_div" >
+        <ChartInit
+          panX={panX}
+          panY={panY}
+          zoom={zoom}
           circlesActive={circlesActive}
           radiiActive={radiiActive}
           outlineActive={outlineActive}

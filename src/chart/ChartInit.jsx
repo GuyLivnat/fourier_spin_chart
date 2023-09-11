@@ -1,13 +1,13 @@
 
-const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments}) => {
+const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY}) => {
     const starSize = 3;
     const translateCenter = "translate("+zoom/2+","+zoom/2+")"
 
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
-        let strength = (1*(lineSegments-i)/lineSegments)
+        let strength = ((lineSegments-i)/lineSegments)
         edgeSegments.push(<path
-            markerStart={i===0? "url(#star)": null}
+            markerStart={(i===0) || (i===1)? "url(#star)": null}
             key={i}
             // vectorEffect={"non-scaling-stroke"}
             id={"edge_" + i}
@@ -22,7 +22,8 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
     return (<svg
         id="chart"
         width="100%"
-        viewBox={"0 0 " + zoom +" "+ zoom}  //zooms the original image
+        height="56.25%"  // 16 : 9 ratio
+        viewBox={panX + " " + panY + " " + zoom +" "+ zoom}  //zooms the original image
         style={{backgroundColor : 'black'}}
         >
 
