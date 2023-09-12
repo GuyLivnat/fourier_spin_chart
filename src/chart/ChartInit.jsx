@@ -1,9 +1,7 @@
 
 const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY}) => {
     const starSize = 3;
-    const translateCenter = "translate("+zoom/2+","+zoom/2+")";
-    const zoomX = zoom*1.6;
-    const zoomY = zoom*0.9;
+    const translateCenter = `translate(${zoom/2}, ${zoom/2})`;
 
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
@@ -23,7 +21,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
 
     return (<svg
         id="chart"
-        viewBox={panX + " " + panY + " " + zoom +" "+ zoom * 0.5625}  //0.5625 is for 16:9 aspect ratio
+        viewBox={`${panX} ${panY} ${zoom} ${zoom* 0.5625}`} //0.5625 is for 16:9 aspect ratio 
         style={{backgroundColor : 'black'}}
         >
 

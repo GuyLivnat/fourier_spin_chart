@@ -34,11 +34,6 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
     }
 
     return (<>
-        <div style={{
-            boxSizing:"content-box",
-            width:"200px",
-            height:"400px"}}>
-            <h2>Editor</h2>
             <div >
                 <CoeffAdder
                     setAngle={setAngle}
@@ -53,8 +48,8 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
             </div>
             <div style={{
                     boxSizing:"content-box",
-                    width:"200px",
-                    maxHeight:"270px",
+                    minWidth:"200px",
+                    maxHeight:"200px",
                     overflowY:"auto",
                     overflowX:"clip",
                     textAlign:"center"}}
@@ -63,8 +58,6 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
                     lst={coeff.current}
                     del={deleteCoeff}/>
             </div>
-        </div>
-
     </>)
 }
 

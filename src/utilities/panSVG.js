@@ -22,9 +22,10 @@ if (element) {
         isMoving.current = false;
     }
     element.onmousemove = (e) => {
-        const widthScale = zoom/element.clientWidth; 
-        const heightScale = zoom/element.clientHeight * 0.5625; // 0.5625 is for 16:9 aspect ratio
         if (isMoving.current) {
+            const widthScale = zoom/element.clientWidth; 
+            const heightScale = zoom/element.clientHeight * 0.5625; // 0.5625 is for 16:9 aspect ratio
+            
             setPanX(start.current.viewX + ((start.current.x - e.offsetX) * widthScale));
             setPanY(start.current.viewY + ((start.current.y - e.offsetY) * heightScale)); 
         }

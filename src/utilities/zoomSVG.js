@@ -21,7 +21,6 @@ const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom) => {
             const y = panY - ((centeredY * scale) - centeredY) * heightScale;
 
             setPanX(x)
-            console.log(panY)
             setPanY(y)
             setZoom(zoom*scale);
         }

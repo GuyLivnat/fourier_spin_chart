@@ -29,9 +29,9 @@ function App() {
   const [tick, setTick] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeId, setActiveId] = useState(null);
-  const [zoom, setZoom] = useState(500);
+  const [zoom, setZoom] = useState(1000);
   const [panX, setPanX] = useState(0);
-  const [panY, setPanY] = useState(0);
+  const [panY, setPanY] = useState(230);
   const [radiiActive, setRadiiActive] = useState("true");
   const [circlesActive, setCirclesActive] = useState("true");
   const [outlineActive, setOutlineActive] = useState("true");
@@ -166,8 +166,7 @@ function App() {
   return (
   <section className="container-fluid text-bg-dark">
     <div className="row">
-      <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="chart_div">
-        {/* <div style={{overflow:"clip", height:"56.25%"}}> */}
+      <div className="col order-1 mt-5" id="chart_div">
           <ChartInit
             panX={panX}
             panY={panY}
@@ -176,7 +175,6 @@ function App() {
             radiiActive={radiiActive}
             outlineActive={outlineActive}
             lineSegments={lineSegments}/>
-        {/* </div> */}
         <Chart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
@@ -191,51 +189,35 @@ function App() {
               isDisabled={playable}
               className={"btn btn-outline-primary"}/>
           </div>
-          <div className="col-1 m-2">
+          <div className="col-2 m-2">
             <Slider
               value={updateSpeed}
               min={0}
               max={maxSpeed}
               text={"speed"}/>
           </div>
-        </div>
-      </div>
-      <div className="col-lg-3 order-6 order-lg-4 mt-5" id="uploadList"
-        style={{minWidth:"310px"}}>
-        <h1 className="mb-3">Images</h1>
-        <div><UploadButton handleFile={handleFile} /></div>
-          <List
-            lst={coeffList}
-            load={loadCoeff}
-            del={deleteCoeff}
-            delAll={deleteAllCoeff}
-            rename={renameCoeff}
-            focus={activeId}/>
-      </div>
-      <div className="col-md-2 order-5 order-lg-6 mt-5" id="filters">
-        <h1>Tools</h1>
-          <div className="col">
+          <div className="col-1 m-2">
             <ToggleSwitch
               label={"Circles"}
               handleClick={showHideCircles}
               isDisabled={playable}
               checked={(circlesActive === "none")? false : true}/>
           </div>
-          <div>
+          <div className="col-1 m-2">
             <ToggleSwitch
               label={"Radii"}
               handleClick={showHideRadii}
               isDisabled={playable}
               checked={(radiiActive === "none")? false : true}/>
           </div>
-          <div className="col">
+          <div className="col-1 m-2">
             <ToggleSwitch
               label={"Outline"}
               handleClick={showHideOutline}
               isDisabled={playable}
               checked={(outlineActive === "none")? false : true}/>
           </div>
-          <div className="col">
+          <div className="col-2 mt-2">
             <Slider
               value={zoom}
               setValue={setZoom}
@@ -243,6 +225,42 @@ function App() {
               max={1000}
               text={"zoom"}/>
           </div>
+        </div>
+      </div>
+      <div
+        className="col-lg-2 order-2 mt-5"
+        style={{minWidth:"310px"}}>
+          <div className='row'>
+            <h2 className='col'>Images</h2>
+            <div className='col align-items-start justify-content-middle'>
+              <button
+                className='btn btn-outline-primary btn-sm'
+                data-bs-toggle='collapse'
+                type='button'
+                data-bs-target='#uploads'
+                aria-expanded='false'
+                aria-controls='$uploads'
+                >{"\u25bc"}
+              </button>
+            </div>
+          </div>
+          <div className='collapse' id='uploads'>
+            <UploadButton
+              handleFile={handleFile}/>
+            <List
+              lst={coeffList}
+              load={loadCoeff}
+              del={deleteCoeff}
+              delAll={deleteAllCoeff}
+              rename={renameCoeff}
+              focus={activeId}/>
+          </div>
+        <div
+          className=""
+          style={{
+          boxSizing:"content-box",
+          maxHeight:"400px"}}>
+          <h2>Editor</h2>
           <CoeffEditor
             playable={playable}
             coeff={coeff}
@@ -251,6 +269,7 @@ function App() {
             saveCoeff={saveCoeff}
             setActiveId={setActiveId}
             stop={stop}/>
+        </div>
       </div>
     </div>
   </section>)
