@@ -23,9 +23,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
 
     return (<svg
         id="chart"
-        width="100%"
-        // height="56.25%"  // 16 : 9 ratio
-        viewBox={panX + " " + panY + " " + zoom +" "+ zoom}  //zooms and pans the original image
+        viewBox={panX + " " + panY + " " + zoom +" "+ zoom * 0.5625}  //0.5625 is for 16:9 aspect ratio
         style={{backgroundColor : 'black'}}
         >
 
