@@ -167,7 +167,6 @@ function App() {
   <section className="container-fluid text-bg-dark">
     <div className="row">
       <div className="col-lg-6 col-md-10 col-sm-12 order-4 order-lg-5 mt-5" id="chart_div" >
-        <div style={{width:"100%", height:"56.25%", overflow:"clip"}}>
           <ChartInit
             panX={panX}
             panY={panY}
@@ -176,7 +175,6 @@ function App() {
             radiiActive={radiiActive}
             outlineActive={outlineActive}
             lineSegments={lineSegments}/>
-        </div>
         <Chart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">

@@ -4,23 +4,25 @@ const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom) => {
     if (element && (zoom > 50)) {
         element.onwheel = (e) => {
             e.preventDefault();
-            const delta = Math.sign(e.deltaY)
-            let newZoom = 0
-            if (delta < 0) newZoom = zoom / 1.2;
-            else newZoom = zoom * 1.2
+
+            const delta = Math.sign(e.deltaY)  // different browsers use e.deltaY (mouse scroll) with different values, so here is it normalized to 1 or -1
+            const scale = (delta < 0) ? 1 / 1.2 : 1 * 1.2;
             
             const width = element.clientWidth;
-            const scale = zoom/width
-            const normalX = e.offsetX; 
-            console.log(panX)
-            // console.log(normalX/zoom*newZoom*scale)
-            const x = (e.offsetX - (normalX)/zoom*newZoom)*scale;
-            const height = element.clientHeight / 2;
-            const normalY = e.offsetY * scale - height/2; 
-            const y = normalY - (normalY - panY)/zoom*newZoom;
+            const height = element.clientHeight;
+            
+            const widthScale = zoom / width
+            const heightScale = zoom / height
+
+            const centeredX = (e.offsetX - width/2); // using the center of the SVG instead of the top left corner as 0,0
+            const centeredY = (e.offsetY - height/2);  
+
+            const x = panX - ((centeredX * scale) - centeredX) * widthScale;
+            const y = panY - ((centeredY * scale) - centeredY) * heightScale;
+
             setPanX(x)
-            // setPanY(y)
-            setZoom(newZoom);
+            setPanY(y)
+            setZoom(zoom*scale);
         }
     }
 
