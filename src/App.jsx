@@ -52,7 +52,7 @@ function App() {
   }
       // localStorage.clear();  // use this if you mess up a save file and need to reset
 
-  const handleFile = (event) => {   // converts an uploaded SVG to something readable 
+  const uploadSVG = (event) => {   // converts an uploaded SVG to something readable 
     const reader = new FileReader();
     reader.onload = (e) => {
         const string = e.target.result;
@@ -245,15 +245,15 @@ function App() {
             </div>
           </div>
           <div className='collapse' id='uploads'>
-            <UploadButton
-              handleFile={handleFile}/>
             <List
               lst={coeffList}
               load={loadCoeff}
               del={deleteCoeff}
               delAll={deleteAllCoeff}
               rename={renameCoeff}
-              focus={activeId}/>
+              focus={activeId}
+              upload={uploadSVG}
+              uploadText={"upload svg"}/>
           </div>
         <div
           className=""
