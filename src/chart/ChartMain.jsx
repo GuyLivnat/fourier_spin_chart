@@ -82,69 +82,68 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     return(
 
     <div className="col order-1 mt-5" id="chart_div">
-    <ChartInit
-      panX={panX}
-      panY={panY}
-      zoom={zoom}
-      circlesActive={circlesActive}
-      radiiActive={radiiActive}
-      outlineActive={outlineActive}
-      lineSegments={lineSegments}/>
-
-  <div className="row align-items-center justify-content-start">
-    <div className="col-1 m-3" id="pausePlay">
-      <Button
-        handleClick={pausePlay}
-        text={isPlaying? '\u23F8' : "\u23F5"}
-        isDisabled={playable}
-        className={"btn btn-primary btn-lg"}/>
-      </div>
-    <div className="col-1 m-2">
-      <Button
-        handleClick={stop}
-        text={'\u23F9'}
-        isDisabled={playable}
-        className={"btn btn-outline-primary"}
-        id="stopButton"/>
+        <ChartInit
+            panX={panX}
+            panY={panY}
+            zoom={zoom}
+            circlesActive={circlesActive}
+            radiiActive={radiiActive}
+            outlineActive={outlineActive}
+            lineSegments={lineSegments}/>
+        <div className="row align-items-center justify-content-start">
+            <div className="col-1 m-3" id="pausePlay">
+                <Button
+                    handleClick={pausePlay}
+                    text={isPlaying? '\u23F8' : "\u23F5"}
+                    isDisabled={playable}
+                    className={"btn btn-primary btn-lg"}/>
+            </div>
+            <div className="col-1 m-2">
+                <Button
+                    handleClick={stop}
+                    text={'\u23F9'}
+                    isDisabled={playable}
+                    className={"btn btn-outline-primary"}
+                    id="stopButton"/>
+            </div>
+            <div className="col-2 m-2">
+                <Slider
+                    value={updateSpeed}
+                    min={0}
+                    max={maxSpeed}
+                    text={"speed"}/>
+            </div>
+            <div className="col-1 m-2">
+                <ToggleSwitch
+                    label={"Circles"}
+                    handleClick={showHideCircles}
+                    isDisabled={playable}
+                    checked={(circlesActive === "none")? false : true}/>
+            </div>
+            <div className="col-1 m-2">
+                <ToggleSwitch
+                    label={"Radii"}
+                    handleClick={showHideRadii}
+                    isDisabled={playable}
+                    checked={(radiiActive === "none")? false : true}/>
+            </div>
+            <div className="col-1 m-2">
+                <ToggleSwitch
+                    label={"Outline"}
+                    handleClick={showHideOutline}
+                    isDisabled={playable}
+                    checked={(outlineActive === "none")? false : true}/>
+                </div>
+            <div className="col-2 mt-2">
+                <Slider
+                    value={zoom}
+                    setValue={setZoom}
+                    min={100}
+                    max={1000}
+                    text={"zoom"}/>
+            </div>
+        </div>
     </div>
-    <div className="col-2 m-2">
-      <Slider
-        value={updateSpeed}
-        min={0}
-        max={maxSpeed}
-        text={"speed"}/>
-    </div>
-    <div className="col-1 m-2">
-      <ToggleSwitch
-        label={"Circles"}
-        handleClick={showHideCircles}
-        isDisabled={playable}
-        checked={(circlesActive === "none")? false : true}/>
-    </div>
-    <div className="col-1 m-2">
-      <ToggleSwitch
-        label={"Radii"}
-        handleClick={showHideRadii}
-        isDisabled={playable}
-        checked={(radiiActive === "none")? false : true}/>
-    </div>
-    <div className="col-1 m-2">
-      <ToggleSwitch
-        label={"Outline"}
-        handleClick={showHideOutline}
-        isDisabled={playable}
-        checked={(outlineActive === "none")? false : true}/>
-    </div>
-    <div className="col-2 mt-2">
-      <Slider
-        value={zoom}
-        setValue={setZoom}
-        min={100}
-        max={1000}
-        text={"zoom"}/>
-    </div>
-  </div>
-</div>
       )
 };
 

@@ -1,17 +1,14 @@
 import { useRef, useState } from 'react';
-import CoeffToolBar from './CoeffToolBar';
+import CoeffToolBar from './tools/CoeffToolBar';
 import ChartMain from './chart/ChartMain';
 
 
 
 function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
-
   const coeff = useRef([]);
-  let playable = coeff.current.length < 3;
   const [tick, setTick] = useState(0);
-
-
+  let playable = coeff.current.length < 3;
 
   const stop = () => {
     document.getElementById("stopButton").click()

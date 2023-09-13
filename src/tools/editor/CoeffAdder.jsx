@@ -1,5 +1,5 @@
-import NumberInput from "../NumberInput";
-import Button from "../Button";
+import NumberInput from "../../NumberInput";
+import Button from "../../Button";
 
 const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
     return (<>
