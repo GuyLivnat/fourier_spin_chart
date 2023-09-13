@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import createCoeff from './utilities/createCoeff';
+import createCoeff from './chart/createCoeff';
 import List from './List';
 import CoeffEditor from './editor/CoeffEditor';
 
