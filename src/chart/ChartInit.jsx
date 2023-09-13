@@ -14,7 +14,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             stroke="rgb(172, 106, 106)"
             style={{fill: "none", strokeWidth: {strength}}}
             transform={translateCenter}
-            display={outlineActive}
+            display={outlineActive? "true" : "none"}
             opacity={strength}>
         </path> )
     }
@@ -43,7 +43,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             stroke="white"
             transform={translateCenter}
             // vectorEffect={"non-scaling-stroke"}
-            display={circlesActive}
+            display={circlesActive? "true" : "none"}
             style={{strokeWidth: "0.5"}}
             >
         </g>
@@ -52,7 +52,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             id="radii"
             stroke="rgb(191, 194, 240)"
             transform={translateCenter}
-            display={radiiActive}
+            display={radiiActive? "true" : "none"}
             // vectorEffect={"non-scaling-stroke"}
             style={{ fill:"none", strokeWidth: ".5", opacity:"50%"}}
             >
