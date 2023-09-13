@@ -59,7 +59,6 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
         </g>
 
         {edgeSegments} 
-
     </svg>)
 }
 

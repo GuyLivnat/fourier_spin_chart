@@ -7,16 +7,17 @@ const NumberInput = ({placeholder, setNumber, number, focus, min, max, step, cla
 
 
 return (
-    <input type="number"
-    className={"form-control " + className}
-    placeholder={placeholder} 
-    onChange={handleChange} 
-    value={number} 
-    autoFocus={focus}
-    min={min}
-    max={max}
-    step={step}
-    id={id}
+    <input
+        type="number"
+        className={"form-control " + className}
+        placeholder={placeholder} 
+        onChange={handleChange} 
+        value={number} 
+        autoFocus={focus}
+        min={min}
+        max={max}
+        step={step}
+        id={id}
     />
 )
 }

@@ -12,13 +12,13 @@ const TextInput = ({placeholder="", setText, text, focus, accept, cancel}) => {
 
 return (
     <input type="text"
-    className="form-control text-bg-dark"
-    placeholder={placeholder} 
-    onChange={handleChange} 
-    value={text} 
-    autoFocus={focus}
-    onKeyDown={handleKeyDown}
-    onBlur={cancel}
+        className="form-control text-bg-dark"
+        placeholder={placeholder} 
+        onChange={handleChange} 
+        value={text} 
+        autoFocus={focus}
+        onKeyDown={handleKeyDown}
+        onBlur={cancel}
     />
 )
 }

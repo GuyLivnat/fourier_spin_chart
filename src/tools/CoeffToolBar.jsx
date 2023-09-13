@@ -36,7 +36,8 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
         <CollapseTitle
             title="Images"
             forBody="uploads"/>
-        <div className='collapse' id='uploads'>
+        <div
+            className='collapse' id='uploads'>
             <CoeffList
                 activeId={activeId}
                 setActiveId={setActiveId}
@@ -49,10 +50,12 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
                 coeff={coeff}
                 stop={stop}/>
         </div>
-        <CollapseTitle
-            title="Editor"
-            forBody="editor"/>
-        <div className='collapse' id='editor'>
+            <CollapseTitle
+                title="Editor"
+                forBody="editor"/>
+        <div
+            className='collapse'
+            id='editor'>
             <CoeffEditor
                 playable={playable}
                 coeff={coeff}

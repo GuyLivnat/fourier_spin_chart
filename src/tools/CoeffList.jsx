@@ -67,15 +67,17 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
         return (name.replace('.svg', '') + ` with ${units} points`)
     }
 
-    return (<List
-        lst={coeffList}
-        load={loadCoeff}
-        del={deleteCoeff}
-        delAll={deleteAllCoeff}
-        rename={renameCoeff}
-        focus={activeId}
-        upload={uploadSVG}
-        uploadText={"upload svg"}/>)
+    return (
+        <List
+            lst={coeffList}
+            load={loadCoeff}
+            del={deleteCoeff}
+            delAll={deleteAllCoeff}
+            rename={renameCoeff}
+            focus={activeId}
+            upload={uploadSVG}
+            uploadText={"upload svg"}/>
+    )
 };
 
 export default CoeffList;

@@ -33,18 +33,20 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
             text={uploadText}/>
         </div>
         <div className="col mx-2">
-          <Button text="delete all"
+          <Button
+            text="delete all"
             handleClick={delAll}
             className={"btn btn-outline-danger my-2 float-end"}/>
         </div>
       </div>
-      <div className=""
+      <div
         style={{
           boxSizing:"content-box",
           maxHeight: "20rem",
           overflowY:"auto",
           overflowX:"clip"}}>
-        <ul className="list-group list-group-flush">
+        <ul
+          className="list-group list-group-flush">
           {lst.toReversed().map((item, i) =>
           <li
           key={item.id}
@@ -53,7 +55,8 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
           aria-current={focus === item.id? true : null}> 
             <div className="d-flex justify-content-between mb-2">
               {item.id == renameId?
-                <TextInput text={newName}
+                <TextInput
+                  text={newName}
                   setText={setNewName}
                   id="setNewName"
                   focus={true}
@@ -65,14 +68,17 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
                 </div>} 
             </div>
             <div>
-              <Button  text={item.id == renameId? "save" : "rename"}
+              <Button
+                text={item.id == renameId? "save" : "rename"}
                 handleClick={item.id == renameId? saveRename : handleRename}
                 className={"btn btn-outline-primary mb-1 me-2 float-start"}/>
               {focus !== item.id && 
-                <Button text={"load"}
+                <Button
+                  text={"load"}
                   handleClick={load}
                   className={"btn btn-outline-primary mb-1 me-2 float-start"}/>}
-              <Button text="delete"
+              <Button
+                text="delete"
                 handleClick={del}
                 className={"btn btn-outline-danger float-end mb-1"}/>
             </div>

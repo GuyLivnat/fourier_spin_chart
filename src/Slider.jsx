@@ -5,8 +5,12 @@ const Slider = ({value, setValue, min, max, text}) => {
         
     }
     return (<>
-        <label htmlFor={text}>{text}</label>
-        <input type="range"
+        <label
+            htmlFor={text}>
+            {text}
+        </label>
+        <input
+            type="range"
             id={text}
             min={min}
             max={max}
