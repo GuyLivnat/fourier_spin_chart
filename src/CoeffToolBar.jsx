@@ -1,10 +1,10 @@
 import {useState} from 'react'
-import createCoeff from './chart/createCoeff';
+import createCoeff from './utilities/createCoeff';
 import List from './List';
 import CoeffEditor from './editor/CoeffEditor';
 
 
-const CoeffToolBar = ({coeff, playable, tick, setTick, stop}) => {
+const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
     const [activeId, setActiveId] = useState(null);
     const [coeffList, setCoeffList] = useState(() => {
         const keys = Object.keys(localStorage);
@@ -83,9 +83,10 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop}) => {
         const id = crypto.randomUUID();
         localStorage.setItem(id, obj);
         setCoeffList([...coeffList, {name:name, id:id}])
-        if (!coeff.length) { // will auto select if nothing is loaded
+        if (!coeff.current.length) { // will auto select if nothing is loaded
             setActiveId(id);
             coeff.current = coeffs;
+            setTick(tick+1)
         }
       }
     return (

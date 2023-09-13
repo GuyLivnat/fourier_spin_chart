@@ -151,7 +151,8 @@ function App() {
         coeff={coeff}
         tick={tick}
         setTick={setTick}
-        stop={stop}/>
+        stop={stop}
+        units={units}/>
     </div>
   </section>)
 };

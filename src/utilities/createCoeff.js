@@ -1,5 +1,5 @@
 
-import transformRadix2 from './fft';
+import transformRadix2 from '../chart/fft';
 
 
 const createCoeff = (path, units) => {
