@@ -1,6 +1,6 @@
 
 
-const TextInput = ({placeholder="", setText, text, focus, accept, cancel}) => {
+const TextInput = ({placeholder="", setText, text, focus, accept, cancel, id}) => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
@@ -11,14 +11,16 @@ const TextInput = ({placeholder="", setText, text, focus, accept, cancel}) => {
     }
 
 return (
-    <input type="text"
+    <input
+        type="text"
+        name={text}
         className="form-control text-bg-dark"
         placeholder={placeholder} 
         onChange={handleChange} 
         value={text} 
         autoFocus={focus}
         onKeyDown={handleKeyDown}
-        onBlur={cancel}
+        id={id}
     />
 )
 }

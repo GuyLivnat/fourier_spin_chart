@@ -51,10 +51,13 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
           <li
           key={item.id}
           id={item.id}
-          className={item.id===focus? "list-group-item text-bg-secondary" : "list-group-item text-bg-dark"}
-          aria-current={focus === item.id? true : null}> 
+          className={item.id === focus? "list-group-item text-bg-secondary" : "list-group-item text-bg-dark"}
+          aria-current={focus === item.id? true : null}
+          onBlur={e => { //cancel if unfocused
+            (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "saveButton" && e.relatedTarget.id !== "setNewName"))) && cancelRename()
+          }}> 
             <div className="d-flex justify-content-between mb-2">
-              {item.id == renameId?
+              {item.id === renameId?
                 <TextInput
                   text={newName}
                   setText={setNewName}
@@ -69,8 +72,9 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
             </div>
             <div>
               <Button
-                text={item.id == renameId? "save" : "rename"}
-                handleClick={item.id == renameId? saveRename : handleRename}
+                id={item.id === renameId? "saveButton" : null}
+                text={item.id === renameId? "save" : "rename"}
+                handleClick={item.id === renameId? saveRename : handleRename}
                 className={"btn btn-outline-primary mb-1 me-2 float-start"}/>
               {focus !== item.id && 
                 <Button
