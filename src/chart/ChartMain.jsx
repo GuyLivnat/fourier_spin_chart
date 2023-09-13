@@ -120,7 +120,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         isDisabled={playable}
                         checked={outlineActive}/>
                     </div>
-                <div className="col-2 mt-2">
+                <div className="col-2 m-2">
                     <Slider
                         value={zoom}
                         setValue={setZoom}
