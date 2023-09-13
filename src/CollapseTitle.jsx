@@ -1,18 +1,24 @@
+import {useState} from 'react'
 
 const CollapseTitle = ({title, forBody}) => {
+    const [collapse, setCollapse] = useState(false)
+
     return (
-        <div
-            className ='col align-items-start justify-content-middle'>
-            <h2>{title}</h2>
-            <button
-                className='btn btn-outline-primary btn-sm'
-                data-bs-toggle='collapse'
-                type='button'
-                data-bs-target={`#${forBody}`}
-                aria-expanded='false'
-                aria-controls={`$${forBody}`}
-                >{"\u25bc"}
-            </button>
+        <div>
+            <h2>
+                {title}
+                <button
+                    className='btn btn-sm'
+                    style={{color:"grey"}}
+                    data-bs-toggle='collapse'
+                    type='button'
+                    data-bs-target={`#${forBody}`}
+                    aria-expanded='false'
+                    aria-controls={`$${forBody}`}
+                    onClick={() => setCollapse(!collapse)}
+                    >{collapse? "\u25bc" : "\u25c0"}
+                </button>
+            </h2>
         </div>
     )
 }

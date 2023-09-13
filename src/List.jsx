@@ -34,7 +34,7 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
   return (<>
     <div className="rounded border overflow-hidden">
       <div className="row text-bg-info border-bottom">
-        <div className="col mx-2 mt-2">
+        <div className="col mx-2 mt-2 ">
           <UploadButton
             handleFile={upload}
             text={uploadText}/>
