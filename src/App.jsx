@@ -1,4 +1,4 @@
-import Chart from './chart/Chart'
+import runChart from './chart/runChart'
 import Button from './Button';
 import timestep from './chart/timestep';
 import { useRef, useState } from 'react';
@@ -80,6 +80,7 @@ function App() {
   useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //runs the chart
   zoomSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom)
   panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom)
+  runChart(frame.current, edge.current, lineSegments, units)
 
   return (
   <section className="container-fluid text-bg-dark">
@@ -93,7 +94,7 @@ function App() {
             radiiActive={radiiActive}
             outlineActive={outlineActive}
             lineSegments={lineSegments}/>
-        <Chart data = {frame.current} edge = {edge.current} lineSegments={lineSegments} units={units}/>
+
         <div className="row align-items-center justify-content-start">
           <div className="col-1 m-3" id="pausePlay">
             <Button handleClick={pausePlay}
