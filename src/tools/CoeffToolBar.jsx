@@ -2,6 +2,7 @@ import {useState} from 'react'
 
 import CoeffEditor from './editor/CoeffEditor';
 import CoeffList from './CoeffList';
+import CollapseTitle from '../CollapseTitle';
 
 
 const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
@@ -32,20 +33,9 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
 <div
     className="col-lg-2 order-2 mt-5"
     style={{minWidth:"310px"}}>
-        <div className='row'>
-            <h2 className='col'>Images</h2>
-            <div className='col align-items-start justify-content-middle'>
-                <button
-                className='btn btn-outline-primary btn-sm'
-                data-bs-toggle='collapse'
-                type='button'
-                data-bs-target='#uploads'
-                aria-expanded='false'
-                aria-controls='$uploads'
-                >{"\u25bc"}
-                </button>
-            </div>
-        </div>
+        <CollapseTitle
+            title="Images"
+            forBody="uploads"/>
         <div className='collapse' id='uploads'>
             <CoeffList
                 activeId={activeId}
@@ -59,12 +49,10 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
                 coeff={coeff}
                 stop={stop}/>
         </div>
-        <div
-            className=""
-            style={{
-            boxSizing:"content-box",
-            maxHeight:"400px"}}>
-            <h2>Editor</h2>
+        <CollapseTitle
+            title="Editor"
+            forBody="editor"/>
+        <div className='collapse' id='editor'>
             <CoeffEditor
                 playable={playable}
                 coeff={coeff}
