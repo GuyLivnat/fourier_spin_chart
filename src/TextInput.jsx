@@ -1,22 +1,24 @@
 
 
-const TextInput = ({placeholder="", setText, text, focus, accept}) => {
+const TextInput = ({placeholder="", setText, text, focus, accept, cancel}) => {
     const handleChange = (e) => {
         setText(e.target.value)
     }
     
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') accept();
+        if (e.keyCode === 13) accept();
+        else if (e.keyCode === 27) cancel();
     }
 
 return (
     <input type="text"
-    className="form-control"
+    className="form-control text-bg-dark"
     placeholder={placeholder} 
     onChange={handleChange} 
     value={text} 
     autoFocus={focus}
     onKeyDown={handleKeyDown}
+    onBlur={cancel}
     />
 )
 }
