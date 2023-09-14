@@ -1,5 +1,6 @@
 import createCoeff from '../chart/createCoeff';
 import List from '../List';
+import mushu from '.../public/defaults/mushu.json'
 
 
 
@@ -7,6 +8,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
 
     
     // localStorage.clear();  // use this if you mess up a save file and need to reset
+    console.log(mushu)
 
     const loadCoeff = (e) => {
         const id = e.target.parentElement.parentElement.id;
