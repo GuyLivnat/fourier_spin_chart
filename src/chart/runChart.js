@@ -7,7 +7,7 @@ const runChart = (data, edge, lineSegments, units, zoom, coeffLength) => {
     const chart = document.getElementById("chart");
     const scalingMin = chart ? zoom/chart.clientWidth*15 : 2;
     const minircle = (zoom/150 > scalingMin)? zoom/150 : scalingMin; 
-    const filteredData = data.circles.filter((circle, i) => {if(circle.r > minircle || i === (coeffLength/2-1)) return circle})
+    const filteredData = data.circles.filter((circle, i) => {if(circle.r > minircle || (i === (coeffLength/2-1) && coeffLength > 2)) return circle})
 
     const line = d3.line()
         .x(d => d.x)
