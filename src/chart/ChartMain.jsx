@@ -15,7 +15,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     const lineSegments = 40; // used for the gradient effect on the outline
     const maxSpeed = 66;
 
-    const updateSpeed = useRef(45);  //in miliseconds. 33 is 30 fps
+    const updateSpeed = useRef(20);  //in miliseconds. 33 is 30 fps
     const frame = useRef(timestep(coeff, 0));
     const edge = useRef([]);
     const time = useRef(0);
@@ -62,9 +62,9 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
-    zoomSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom)
-    panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom)
-    runChart(frame.current, edge.current, lineSegments, units)
+    zoomSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
+    panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setTick)
+    runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
     return(
         <div className="col order-1 mt-5" id="chart_div">
@@ -75,7 +75,8 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 circlesActive={circlesActive}
                 radiiActive={radiiActive}
                 outlineActive={outlineActive}
-                lineSegments={lineSegments}/>
+                lineSegments={lineSegments}
+                coeffLength={coeff.current.length}/>
             <div className="row align-items-center justify-content-start">
                 <div className="col-1 m-3" id="pausePlay">
                     <Button
@@ -120,14 +121,14 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         isDisabled={playable}
                         checked={outlineActive}/>
                     </div>
-                <div className="col-2 m-2">
+                {/* <div className="col-2 m-2">
                     <Slider
                         value={zoom}
                         setValue={setZoom}
                         min={100}
                         max={1000}
                         text={"zoom"}/>
-                </div>
+                </div> */}
             </div>
         </div>)
 };

@@ -1,5 +1,5 @@
 
-const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom) => {
+const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) => {
 
     if (element && (zoom > 50)) {
         element.onwheel = (e) => {
@@ -20,9 +20,10 @@ const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom) => {
             const x = panX - ((centeredX * scale) - centeredX) * widthScale;
             const y = panY - ((centeredY * scale) - centeredY) * heightScale;
 
-            setPanX(x)
-            setPanY(y)
+            setPanX(x);
+            setPanY(y);
             setZoom(zoom*scale);
+            setTick(Math.random());
         }
     }
 

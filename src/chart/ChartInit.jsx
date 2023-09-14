@@ -1,7 +1,20 @@
 
-const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY}) => {
+const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY, coeffLength}) => {
     const starSize = 3;
     const translateCenter = `translate(${zoom/2}, ${zoom/2})`;
+
+    const chart = document.getElementById("chart");
+    const minStroke = chart ? zoom/chart.clientWidth : 0.1;
+
+    const circles = []
+    for (let i=0; i < coeffLength; i++) {
+        circles.push( <circle
+            key={i}
+            id={"circle_" + i}
+            cx={0}
+            cy={0}
+            r={0}></circle>)
+    }
 
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
@@ -12,7 +25,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             // vectorEffect={"non-scaling-stroke"}
             id={"edge_" + i}
             stroke="rgb(172, 106, 106)"
-            style={{fill: "none", strokeWidth: {strength}}}
+            style={{fill: "none", strokeWidth: minStroke*2.5}}
             transform={translateCenter}
             display={outlineActive? "true" : "none"}
             opacity={strength}>
@@ -40,23 +53,26 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
 
         <g
             id="circles"
-            stroke="white"
             transform={translateCenter}
-            // vectorEffect={"non-scaling-stroke"}
+            stroke="white"
             display={circlesActive? "true" : "none"}
-            style={{strokeWidth: "0.5"}}
+            style={{fill: "none", strokeWidth: minStroke}}
+            opacity="40%"
             >
+                            {circles}
         </g>
 
-        <g
+        <path
             id="radii"
             stroke="rgb(191, 194, 240)"
             transform={translateCenter}
             display={radiiActive? "true" : "none"}
+            markerStart={"url(#star)"}
             // vectorEffect={"non-scaling-stroke"}
-            style={{ fill:"none", strokeWidth: ".5", opacity:"50%"}}
+            style={{ fill:"none", strokeWidth: minStroke*2}}
+            opacity="50%"
             >
-        </g>
+        </path>
 
         {edgeSegments} 
     </svg>)

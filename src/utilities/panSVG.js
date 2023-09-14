@@ -1,6 +1,6 @@
 import {useRef} from 'react'
 
-const panSVG = (element, panX, panY, setPanX, setPanY, zoom) => {
+const panSVG = (element, panX, panY, setPanX, setPanY, zoom, setTick) => {
     const isMoving = useRef(false);
     const start = useRef({x:0, y:0, viewX:0, viewY: 0});
 
@@ -28,6 +28,7 @@ if (element) {
             
             setPanX(start.current.viewX + ((start.current.x - e.offsetX) * widthScale));
             setPanY(start.current.viewY + ((start.current.y - e.offsetY) * heightScale)); 
+            setTick(Math.random());
         }
     }
 }
