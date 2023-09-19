@@ -1,5 +1,5 @@
 
-const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) => {
+const zoomWheelSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) => {
 
     if (element && (zoom > 50)) {
         element.onwheel = (e) => {
@@ -15,7 +15,7 @@ const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) 
             const heightScale = zoom / height 
 
             const centeredX = (e.offsetX - width/2); // using the center of the SVG instead of the top left corner as 0,0
-            const centeredY = (e.offsetY* 0.5625 - height/2);  // 0.5625 is for 16:9 aspect ratio
+            const centeredY = (e.offsetY * 0.5625 - height/2);  // 0.5625 is for 16:9 aspect ratio
 
             const x = panX - ((centeredX * scale) - centeredX) * widthScale;
             const y = panY - ((centeredY * scale) - centeredY) * heightScale;
@@ -31,4 +31,4 @@ const zoomSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) 
 
 }
 
-export default zoomSVG;
+export default zoomWheelSVG;

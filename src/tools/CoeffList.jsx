@@ -1,14 +1,15 @@
 import createCoeff from '../chart/createCoeff';
 import List from '../List';
-import mushu from '.../public/defaults/mushu.json'
+import cat from '/public/defaults/cat.json'
+import dog from '/public/defaults/dog.json'
+import mushu from '/public/defaults/mushu.json'
 
 
 
 const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
 
-    
+
     // localStorage.clear();  // use this if you mess up a save file and need to reset
-    console.log(mushu)
 
     const loadCoeff = (e) => {
         const id = e.target.parentElement.parentElement.id;
@@ -34,6 +35,27 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
         coeff.current = [];
         setCoeffList([]);
         localStorage.clear();
+    }
+
+    const saveDefault = (coeffs, name, id) => {
+        const obj = JSON.stringify({name: name, coeff: coeffs});
+        localStorage.setItem(id, obj);
+    }
+
+    const resetDefaultCoeff = () => {
+        stop();
+        coeff.current = [];
+        localStorage.clear();
+
+        saveDefault(cat.coeff, cat.name, cat.id)
+        saveDefault(dog.coeff, dog.name, dog.id)
+        saveDefault(mushu.coeff, mushu.name, mushu.id)
+
+        setCoeffList([
+            {name:dog.name, id:dog.id},
+            {name:mushu.name, id:mushu.id},
+            {name:cat.name, id:cat.id},
+        ])
     }
 
     const renameCoeff = (id, newName) => {
@@ -75,6 +97,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             load={loadCoeff}
             del={deleteCoeff}
             delAll={deleteAllCoeff}
+            resetDefaults={resetDefaultCoeff}
             rename={renameCoeff}
             focus={activeId}
             upload={uploadSVG}

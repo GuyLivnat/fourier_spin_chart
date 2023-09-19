@@ -4,7 +4,7 @@ import TextInput from "./TextInput";
 import UploadButton from "./UploadButton";
 
 
-const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
+const List = ({lst, load, del, delAll, focus, rename, upload, uploadText, resetDefaults}) => {
   const [renameId, setRenameId] = useState(null)
   const [newName, setNewName] = useState("")
 
@@ -27,16 +27,22 @@ const List = ({lst, load, del, delAll, focus, rename, upload, uploadText}) => {
   return (<>
     <div className="rounded border overflow-hidden">
       <div className="row text-bg-info border-bottom">
-        <div className="col mx-2 mt-2 ">
+        <div className="col mx-2 mt-2">
           <UploadButton
             handleFile={upload}
             text={uploadText}/>
         </div>
         <div className="col mx-2">
           <Button
+            text="defaults"
+            handleClick={resetDefaults}
+            className={"btn btn-outline-danger my-2"}/>
+        </div>
+        <div className="col mx-2">
+          <Button
             text="delete all"
             handleClick={delAll}
-            className={"btn btn-outline-danger my-2 float-end"}/>
+            className={"btn btn-outline-danger my-2"}/>
         </div>
       </div>
       <div

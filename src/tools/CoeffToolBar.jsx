@@ -23,7 +23,6 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
         const id = crypto.randomUUID();
         localStorage.setItem(id, obj);
         setCoeffList([...coeffList, {name:name, id:id}])
-        console.log(coeff, name)
         if (!coeff.current.length) { // will auto select if nothing is loaded
             setActiveId(id);
             coeff.current = coeffs;

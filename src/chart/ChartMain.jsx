@@ -6,7 +6,8 @@ import runChart from './runChart'
 import timestep from './timestep';
 import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
-import zoomSVG from '../utilities/zoomSVG';
+import zoomWheelSVG from '../utilities/zoomWheelSVG';
+import zoomCenterSVG from '../utilities/zoomCenterSVG';
 import panSVG from '../utilities/panSVG';
 
 const ChartMain = ({units, coeff, playable, setTick}) => {
@@ -59,10 +60,15 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         edge.current = [];
         timeTick();
     }
+
+    const handleZoom = (inOut) => {
+        zoomCenterSVG(document.getElementById("chart"), panY, setPanY, zoom, setZoom, setTick, inOut)
+    }
     
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
-    zoomSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
+    zoomWheelSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
+
     panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setTick)
     runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
@@ -120,7 +126,19 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         handleClick={() => setOutlineActive(!outlineActive)}
                         isDisabled={playable}
                         checked={outlineActive}/>
-                    </div>
+                </div>
+                <div className="col-1 m-2">
+                    <Button 
+                    className={'btn btn-outline-primary'}
+                    text={'🔍+'}
+                    handleClick={() => handleZoom(true)}/>
+                </div>
+                <div className="col-1 m-2">
+                    <Button 
+                    className={'btn btn-outline-primary'}
+                    text={'🔍-'}
+                    handleClick={() => handleZoom(false)}/>
+                </div >
                 {/* <div className="col-2 m-2">
                     <Slider
                         value={zoom}
