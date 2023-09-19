@@ -8,9 +8,6 @@ import mushu from '/public/defaults/mushu.json'
 
 const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
 
-
-    // localStorage.clear();  // use this if you mess up a save file and need to reset
-
     const loadCoeff = (e) => {
         const id = e.target.parentElement.parentElement.id;
         const obj = JSON.parse(localStorage.getItem(id));
@@ -43,19 +40,33 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
     }
 
     const resetDefaultCoeff = () => {
-        stop();
-        coeff.current = [];
-        localStorage.clear();
+        const missingDefaults = [];
+        let catFlag = false;
+        let dogFlag = false;
+        let mushuFlag = false;
 
-        saveDefault(cat.coeff, cat.name, cat.id)
-        saveDefault(dog.coeff, dog.name, dog.id)
-        saveDefault(mushu.coeff, mushu.name, mushu.id)
+        coeffList.filter((item) => {
+            if (item.id === cat.id) catFlag = true;
+            if (item.id === dog.id) dogFlag = true;
+            if (item.id === mushu.id) mushuFlag = true;
+        })
 
-        setCoeffList([
-            {name:dog.name, id:dog.id},
-            {name:mushu.name, id:mushu.id},
-            {name:cat.name, id:cat.id},
-        ])
+        if (!catFlag) {
+            missingDefaults.push({name:cat.name, id:cat.id});
+            saveDefault(cat.coeff, cat.name, cat.id);
+        }
+
+        if (!dogFlag) {
+            missingDefaults.push({name:dog.name, id:dog.id});
+            saveDefault(dog.coeff, dog.name, dog.id);
+        }
+
+        if (!mushuFlag) {
+            missingDefaults.push({name:mushu.name, id:mushu.id});
+            saveDefault(mushu.coeff, mushu.name, mushu.id);
+        }
+
+        setCoeffList([ ...coeffList, ...missingDefaults])
     }
 
     const renameCoeff = (id, newName) => {
@@ -100,8 +111,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             resetDefaults={resetDefaultCoeff}
             rename={renameCoeff}
             focus={activeId}
-            upload={uploadSVG}
-            uploadText={"upload svg"}/>
+            upload={uploadSVG}/>
     )
 };
 

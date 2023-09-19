@@ -6,8 +6,8 @@ const CoeffTable = ({lst, del}) => {
 
     for (let i=2; i<lst.length;) {
         tableItems.push(<tr key={i} id={i}>
-            <td>{Math.floor(lst[i++])}</td>
-            <td>{Math.floor(lst[i++])}</td>
+            <td>{(lst[i++]).toFixed(1)}</td>
+            <td>{(lst[i++]).toFixed(2)}</td>
             <td><CloseButton handleClick={del}/></td>
         </tr>)
     }

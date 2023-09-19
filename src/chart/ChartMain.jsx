@@ -83,13 +83,13 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 outlineActive={outlineActive}
                 lineSegments={lineSegments}
                 coeffLength={coeff.current.length}/>
-            <div className="row align-items-center justify-content-start">
+            <div className="row align-items-center">
                 <div className="col-1 m-3" id="pausePlay">
                     <Button
                         handleClick={pausePlay}
                         text={isPlaying? '\u23F8' : "\u23F5"}
                         isDisabled={playable}
-                        className={"btn btn-primary btn-lg"}/>
+                        className="btn btn-primary btn-lg"/>
                 </div>
                 <div className="col-1 m-2">
                     <Button
@@ -104,7 +104,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         value={updateSpeed}
                         min={0}
                         max={maxSpeed}
-                        text={"speed"}/>
+                        text="speed"/>
                 </div>
                 <div className="col-1 m-2">
                     <ToggleSwitch
@@ -115,38 +115,34 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 </div>
                 <div className="col-1 m-2">
                     <ToggleSwitch
-                        label={"Radii"}
+                        label="Radii"
                         handleClick={() => setRadiiActive(!radiiActive)}
                         isDisabled={playable}
                         checked={radiiActive}/>
                 </div>
                 <div className="col-1 m-2">
                     <ToggleSwitch
-                        label={"Outline"}
+                        label="Outline"
                         handleClick={() => setOutlineActive(!outlineActive)}
                         isDisabled={playable}
                         checked={outlineActive}/>
                 </div>
-                <div className="col-1 m-2">
-                    <Button 
-                    className={'btn btn-outline-primary'}
-                    text={'🔍+'}
-                    handleClick={() => handleZoom(true)}/>
+                <div className="col-2 col">
+                    <span className='row-6'>🔍</span>
+                    <div className="row-6 btn-group btn-group-sm" role="group">
+                        <Button 
+                            className='btn btn-outline-primary'
+                            isDisabled={playable}
+                            text={'+'}
+                            handleClick={() => handleZoom(true)}/>
+                        <Button 
+                            className='btn btn-outline-primary'
+                            isDisabled={playable}
+                            text={'-'}
+                            handleClick={() => handleZoom(false)}/>
+                    </div>
                 </div>
-                <div className="col-1 m-2">
-                    <Button 
-                    className={'btn btn-outline-primary'}
-                    text={'🔍-'}
-                    handleClick={() => handleZoom(false)}/>
-                </div >
-                {/* <div className="col-2 m-2">
-                    <Slider
-                        value={zoom}
-                        setValue={setZoom}
-                        min={100}
-                        max={1000}
-                        text={"zoom"}/>
-                </div> */}
+
             </div>
         </div>)
 };

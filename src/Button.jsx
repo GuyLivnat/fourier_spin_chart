@@ -5,7 +5,8 @@ const Button = ({handleClick, text, isDisabled=false, className, id}) => {
             className={className}
             onClick={handleClick}
             disabled={isDisabled}
-            id={id} >
+            id={id} 
+            type="button">
             {text}
         </button>
     )
