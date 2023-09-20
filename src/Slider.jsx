@@ -1,4 +1,4 @@
-const Slider = ({value, setValue, min, max, text, setTick, disabled}) => {
+const Slider = ({value, setValue, min, max, text, setTick, disabled, className}) => {
     const handleChange = (e) => {
         if (setValue)setValue(parseFloat(e.target.value));
         else value.current = parseFloat(e.target.value);
@@ -8,7 +8,8 @@ const Slider = ({value, setValue, min, max, text, setTick, disabled}) => {
     }
     return (<>
         <label
-            htmlFor={text}>
+            htmlFor={text}
+            className="form-label">
             {text}
         </label>
         <input
@@ -18,7 +19,8 @@ const Slider = ({value, setValue, min, max, text, setTick, disabled}) => {
             max={max}
             onChange={handleChange}
             value={setValue? value: value.current}
-            disabled={disabled}/>
+            disabled={disabled}
+            className="form-range"/>
     </>)
 }
 
