@@ -1,8 +1,8 @@
 import createCoeff from '../chart/createCoeff';
 import List from '../List';
-import cat from '/public/defaults/cat.json'
-import dog from '/public/defaults/dog.json'
-import mushu from '/public/defaults/mushu.json'
+import cat from '../assets/defaults/cat.json'
+import dog from '../assets/defaults/dog.json'
+import mushu from '../assets/defaults/mushu.json'
 
 
 

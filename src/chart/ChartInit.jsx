@@ -1,6 +1,6 @@
 
 const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY, coeffLength}) => {
-    const starSize = 3;
+    const starSize = 1.5;
     const translateCenter = `translate(${zoom/2}, ${zoom/2})`;
 
     const chart = document.getElementById("chart");
@@ -22,7 +22,6 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
         edgeSegments.push(<path
             markerStart={(i===0) || (i===1)? "url(#star)": null}
             key={i}
-            // vectorEffect={"non-scaling-stroke"}
             id={"edge_" + i}
             stroke="rgb(172, 106, 106)"
             style={{fill: "none", strokeWidth: minStroke*2.5}}
@@ -68,7 +67,6 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             transform={translateCenter}
             display={radiiActive? "true" : "none"}
             markerStart={"url(#star)"}
-            // vectorEffect={"non-scaling-stroke"}
             style={{ fill:"none", strokeWidth: minStroke*2}}
             opacity="50%"
             >

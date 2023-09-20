@@ -15,6 +15,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
 
     const lineSegments = 40; // used for the gradient effect on the outline
     const maxSpeed = 66;
+    const chart = document.getElementById("chart");
 
     const updateSpeed = useRef(20);  //in miliseconds. 33 is 30 fps
     const frame = useRef(timestep(coeff, 0));
@@ -32,24 +33,24 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
 
     const pausePlay = () => {
         setIsPlaying(!isPlaying)
-      }
+    };
       
-      const update = () => {  // computes the next frame 
-        const step = 1/(units*2);
-        if (time.current === 1) {
-          time.current = 0
-        } else {
-          time.current += step
-        }
-        frame.current = timestep(coeff.current, time.current);
-        edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
-        if (edge.current.length > units) edge.current.pop();
-        timeTick();
-      };
+    const update = () => {  // computes the next frame 
+    const step = 1/(units*2);
+    if (time.current === 1) {
+        time.current = 0
+    } else {
+        time.current += step
+    }
+    frame.current = timestep(coeff.current, time.current);
+    edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
+    if (edge.current.length > units) edge.current.pop();
+    timeTick();
+    };
 
     const timeTick = () => {
         setTick(time.current);
-    }
+    };
 
     const stop = () => {
         if (isPlaying) {
@@ -59,17 +60,16 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         time.current = 0;
         edge.current = [];
         timeTick();
-    }
+    };
 
     const handleZoom = (inOut) => {
-        zoomCenterSVG(document.getElementById("chart"), panY, setPanY, zoom, setZoom, setTick, inOut)
-    }
+        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
+    };
     
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
-    zoomWheelSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
-
-    panSVG(document.getElementById("chart"), panX, panY, setPanX, setPanY, zoom, setTick)
+    zoomWheelSVG(chart, panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
+    panSVG(chart, panX, panY, setPanX, setPanY, zoom, setTick)
     runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
     return(
@@ -87,7 +87,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 <div className="col-1 m-3" id="pausePlay">
                     <Button
                         handleClick={pausePlay}
-                        text={isPlaying? '\u23F8' : "\u23F5"}
+                        text={isPlaying? '\u23F8' : '\u23F5'}
                         isDisabled={playable}
                         className="btn btn-primary btn-lg"/>
                 </div>
@@ -99,12 +99,29 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         className={"btn btn-outline-primary"}
                         id="stopButton"/>
                 </div>
+                <div className="col-1 m-2">
+                    <span>🔍</span>
+                    <div className="btn-group btn-group-sm" role="group">
+                        <Button 
+                            className='btn btn-outline-primary'
+                            isDisabled={playable}
+                            text={'+'}
+                            handleClick={() => handleZoom(true)}/>
+                        <Button 
+                            className='btn btn-outline-primary'
+                            isDisabled={playable}
+                            text={'-'}
+                            handleClick={() => handleZoom(false)}/>
+                    </div>
+                </div>
                 <div className="col-2 m-2">
                     <Slider
                         value={updateSpeed}
                         min={0}
                         max={maxSpeed}
-                        text="speed"/>
+                        text="speed"
+                        setTick={setTick}
+                        disabled={playable}/>
                 </div>
                 <div className="col-1 m-2">
                     <ToggleSwitch
@@ -127,22 +144,6 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         isDisabled={playable}
                         checked={outlineActive}/>
                 </div>
-                <div className="col-2 col">
-                    <span className='row-6'>🔍</span>
-                    <div className="row-6 btn-group btn-group-sm" role="group">
-                        <Button 
-                            className='btn btn-outline-primary'
-                            isDisabled={playable}
-                            text={'+'}
-                            handleClick={() => handleZoom(true)}/>
-                        <Button 
-                            className='btn btn-outline-primary'
-                            isDisabled={playable}
-                            text={'-'}
-                            handleClick={() => handleZoom(false)}/>
-                    </div>
-                </div>
-
             </div>
         </div>)
 };
