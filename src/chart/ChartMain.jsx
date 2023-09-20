@@ -100,13 +100,16 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         id="stopButton"/>
                 </div>
                 <div className="col-1 m-2">
-                    <span>🔍</span>
-                    <div className="btn-group btn-group-sm" role="group">
+                    <div className="input-group btn-group-sm flex-nowrap" role="group">
                         <Button 
                             className='btn btn-outline-primary'
                             isDisabled={playable}
                             text={'+'}
                             handleClick={() => handleZoom(true)}/>
+                        <span
+                            className='input-group-text text-bg-dark'
+                            >🔍
+                        </span>
                         <Button 
                             className='btn btn-outline-primary'
                             isDisabled={playable}

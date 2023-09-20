@@ -12,14 +12,17 @@ if (element) {
         start.current.viewX = panX;
         start.current.y = e.offsetY;
         start.current.viewY = panY;
+        element.style.cursor = "grabbing";
     }
     element.onmouseup = (e) => {
         e.preventDefault;
         isMoving.current = false;
+        element.style.cursor = "grab";
     }
     element.onmouseleave = (e) => {
         e.preventDefault;
         isMoving.current = false;
+        element.style.cursor = "grab";
     }
     element.onmousemove = (e) => {
         if (isMoving.current) {
