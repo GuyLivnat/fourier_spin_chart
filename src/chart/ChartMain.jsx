@@ -1,14 +1,14 @@
 import ChartInit from './ChartInit';
-import Button from '../Button';
-import Slider from '../Slider';
-import ToggleSwitch from '../ToggleSwitch';
+import Button from '../components/Button';
+import Slider from '../components/Slider';
+import ToggleSwitch from '../components/ToggleSwitch';
 import runChart from './runChart'
-import timestep from './timestep';
+import timestep from './math/timestep';
 import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
-import zoomWheelSVG from '../utilities/zoomWheelSVG';
-import zoomCenterSVG from '../utilities/zoomCenterSVG';
-import panSVG from '../utilities/panSVG';
+import zoomWheelSVG from '../behaviors/zoomWheelSVG';
+import zoomCenterSVG from '../behaviors/zoomCenterSVG';
+import panSVG from '../behaviors/panSVG';
 
 const ChartMain = ({units, coeff, playable, setTick}) => {
 
@@ -36,16 +36,16 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     };
       
     const update = () => {  // computes the next frame 
-    const step = 1/(units*2);
-    if (time.current === 1) {
-        time.current = 0
-    } else {
-        time.current += step
-    }
-    frame.current = timestep(coeff.current, time.current);
-    edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
-    if (edge.current.length > units) edge.current.pop();
-    timeTick();
+        const step = 1/(units*2);
+        if (time.current === 1) {
+            time.current = 0
+        } else {
+            time.current += step
+        }
+        frame.current = timestep(coeff.current, time.current);
+        edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
+        if (edge.current.length > units) edge.current.pop();
+        timeTick();
     };
 
     const timeTick = () => {

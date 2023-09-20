@@ -2,14 +2,14 @@
 
 export default function timestep(coeff, time) {
     const frame = {circles : []}
-    let step = 2 * Math.PI * time;
+    const omega = 2 * Math.PI * time;
     
     let x = 0;
     let y = 0;
   
     for (let i=2; i<coeff.length; i+=2) {
       let r = coeff[i];
-      let theta = coeff[i+1] + (step * i);
+      let theta = coeff[i+1] + (omega * i);
       frame.circles.push ({
         x: x,
         y: y,

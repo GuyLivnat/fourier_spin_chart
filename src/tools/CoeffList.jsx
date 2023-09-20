@@ -1,5 +1,5 @@
-import createCoeff from '../chart/createCoeff';
-import List from '../List';
+import createCoeff from '../chart/math/createCoeff';
+import List from '../components/List';
 import cat from '../assets/defaults/cat.json'
 import dog from '../assets/defaults/dog.json'
 import mushu from '../assets/defaults/mushu.json'
