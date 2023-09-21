@@ -5,6 +5,9 @@ import dog from '../assets/defaults/dog.json'
 import mushu from '../assets/defaults/mushu.json'
 
 
+const defaults = [mushu, cat, dog]
+
+
 
 const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
 
@@ -41,31 +44,19 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
 
     const resetDefaultCoeff = () => {
         const missingDefaults = [];
-        let catFlag = false;
-        let dogFlag = false;
-        let mushuFlag = false;
 
-        coeffList.filter((item) => {
-            if (item.id === cat.id) catFlag = true;
-            if (item.id === dog.id) dogFlag = true;
-            if (item.id === mushu.id) mushuFlag = true;
-        })
+        for (const object of defaults) {
+            let flag = false;
+            
+            for (const item of coeffList) {
+                if (item.id === object.id) flag = true;
+            }
 
-        if (!catFlag) {
-            missingDefaults.push({name:cat.name, id:cat.id});
-            saveDefault(cat.coeff, cat.name, cat.id);
+            if (!flag) { // object not found
+                missingDefaults.push({name: object.name, id: object.id})
+                saveDefault(object.coeff, object.name, object.id);
+            }
         }
-
-        if (!dogFlag) {
-            missingDefaults.push({name:dog.name, id:dog.id});
-            saveDefault(dog.coeff, dog.name, dog.id);
-        }
-
-        if (!mushuFlag) {
-            missingDefaults.push({name:mushu.name, id:mushu.id});
-            saveDefault(mushu.coeff, mushu.name, mushu.id);
-        }
-
         setCoeffList([ ...coeffList, ...missingDefaults])
     }
 

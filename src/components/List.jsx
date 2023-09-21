@@ -26,7 +26,7 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
   
   return (<>
     <div className="rounded border overflow-hidden">
-      <div className="row text-bg-info border-bottom-">
+      <div className="row text-bg-info border-bottom">
         <div className="col-4 text-center">
           <UploadButton
             text='upload'

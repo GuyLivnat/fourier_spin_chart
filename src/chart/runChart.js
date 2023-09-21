@@ -12,12 +12,6 @@ const runChart = (data, edge, lineSegments, units, zoom, coeffLength) => {
     const line = d3.line()
         .x(d => d.x)
         .y(d => d.y);
-
-    const orbit = d3.arc()
-        .innerRadius(d => d.r)
-        .outerRadius(d => d.r)
-        .startAngle(d => d.angle - 1.5*Math.PI)
-        .endAngle(d => d.angle - 4*Math.PI);
     
     for (let i = 0; i < units; i++) {
         let thisCircle = filteredData[i];
