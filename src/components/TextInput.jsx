@@ -14,12 +14,13 @@ return (
     <input
         type="text"
         name={text}
-        className="form-control text-bg-dark"
+        className="text-bg-dark"
         placeholder={placeholder} 
         onChange={handleChange} 
         value={text} 
         autoFocus={focus}
         onKeyDown={handleKeyDown}
+        style={{padding:0, paddingLeft:"1px",border:0}}
         id={id}
     />
 )

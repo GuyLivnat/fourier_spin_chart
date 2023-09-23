@@ -61,7 +61,7 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
           className={item.id === focus? "list-group-item text-bg-secondary" : "list-group-item text-bg-dark"}
           aria-current={focus === item.id? true : null}
           onBlur={e => { //cancel if unfocused
-            (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "saveButton" && e.relatedTarget.id !== "setNewName"))) && cancelRename()
+            (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "saveButton" && e.relatedTarget.id !== "setNewName"))) && saveRename()
           }}> 
             <div className="d-flex justify-content-between mb-2">
               {item.id === renameId?
@@ -73,16 +73,13 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
                   accept={saveRename}
                   cancel={cancelRename}/>
                 : 
-                <div onDoubleClick={handleRename}>
+                <div
+                  style={{paddingLeft:"1px", fontStyle: item.default? "italic":"normal"}}
+                  onDoubleClick={handleRename}>
                   {item.name}
                 </div>} 
             </div>
             <div>
-              <Button
-                id={item.id === renameId? "saveButton" : null}
-                text={item.id === renameId? "save" : "rename"}
-                handleClick={item.id === renameId? saveRename : handleRename}
-                className={"btn btn-outline-primary mb-1 me-2 float-start"}/>
               {focus !== item.id && 
                 <Button
                   text={"load"}
