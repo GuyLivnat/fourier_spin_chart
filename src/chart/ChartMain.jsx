@@ -71,41 +71,45 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     panSVG(chart, panX, panY, setPanX, setPanY, zoom, setTick)
     runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
-    return(
+    return(<div className="col order-1 mt-5">
         <div
-            className="col order-1 mt-5 position-relative"
-            id="chart_div"
-            onMouseEnter={() => setHideBar(false)}
-            onMouseLeave={() => isPlaying && setHideBar(true)}>
-            <ChartInit
-                panX={panX}
-                panY={panY}
-                zoom={zoom}
-                circlesActive={circlesActive}
-                radiiActive={radiiActive}
-                outlineActive={outlineActive}
-                lineSegments={lineSegments}
-                coeffLength={coeff.current.length}
-            />
-            <div className='position-absolute bottom-0'
-            hidden={hideBar}>
+        className="position-relative"
+        id="chart_div"
+        onMouseEnter={() => setHideBar(false)}
+        onMouseLeave={() => isPlaying && setHideBar(true)}>
+            <div
+            className='position-absolute'
+            hidden={hideBar}
+            style={{bottom:"0px"}}>
                 <ChartBar
-                    pausePlay={pausePlay}
-                    isPlaying={isPlaying}
-                    playable={playable}
-                    stop={stop}
-                    updateSpeed={updateSpeed}
-                    maxSpeed={maxSpeed}
-                    setTick={setTick}
-                    circlesActive={circlesActive}
-                    setCirclesActive={setCirclesActive}
-                    radiiActive={radiiActive}
-                    setRadiiActive={setRadiiActive}
-                    outlineActive={outlineActive}
-                    setOutlineActive={setOutlineActive}
-                    handleZoom={handleZoom}
+                pausePlay={pausePlay}
+                isPlaying={isPlaying}
+                playable={playable}
+                stop={stop}
+                updateSpeed={updateSpeed}
+                maxSpeed={maxSpeed}
+                setTick={setTick}
+                circlesActive={circlesActive}
+                setCirclesActive={setCirclesActive}
+                radiiActive={radiiActive}
+                setRadiiActive={setRadiiActive}
+                outlineActive={outlineActive}
+                setOutlineActive={setOutlineActive}
+                handleZoom={handleZoom}
                 />
             </div>
+            <ChartInit
+            panX={panX}
+            panY={panY}
+            zoom={zoom}
+            circlesActive={circlesActive}
+            radiiActive={radiiActive}
+            outlineActive={outlineActive}
+            lineSegments={lineSegments}
+            coeffLength={coeff.current.length}
+            />
+    </div>
+
         </div>)
 };
 
