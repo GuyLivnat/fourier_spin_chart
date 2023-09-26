@@ -1,7 +1,7 @@
 import ChartInit from './ChartInit';
 import runChart from './runChart'
 import timestep from './math/timestep';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
 import zoomWheelSVG from '../behaviors/zoomWheelSVG';
 import zoomCenterSVG from '../behaviors/zoomCenterSVG';
@@ -27,6 +27,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     const [circlesActive, setCirclesActive] = useState(true);
     const [outlineActive, setOutlineActive] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [hideBar, setHideBar] = useState(false)
     
 
     const pausePlay = () => {
@@ -64,42 +65,46 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
     };
 
+
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
     zoomWheelSVG(chart, panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
     panSVG(chart, panX, panY, setPanX, setPanY, zoom, setTick)
     runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
     return(
-        <div className="col order-1 mt-5 " id="chart_div">
-            <div className='position-relative'>
-                <ChartInit
-                    panX={panX}
-                    panY={panY}
-                    zoom={zoom}
+        <div
+            className="col order-1 mt-5 position-relative"
+            id="chart_div"
+            onMouseEnter={() => setHideBar(false)}
+            onMouseLeave={() => isPlaying && setHideBar(true)}>
+            <ChartInit
+                panX={panX}
+                panY={panY}
+                zoom={zoom}
+                circlesActive={circlesActive}
+                radiiActive={radiiActive}
+                outlineActive={outlineActive}
+                lineSegments={lineSegments}
+                coeffLength={coeff.current.length}
+            />
+            <div className='position-absolute bottom-0'
+            hidden={hideBar}>
+                <ChartBar
+                    pausePlay={pausePlay}
+                    isPlaying={isPlaying}
+                    playable={playable}
+                    stop={stop}
+                    updateSpeed={updateSpeed}
+                    maxSpeed={maxSpeed}
+                    setTick={setTick}
                     circlesActive={circlesActive}
+                    setCirclesActive={setCirclesActive}
                     radiiActive={radiiActive}
+                    setRadiiActive={setRadiiActive}
                     outlineActive={outlineActive}
-                    lineSegments={lineSegments}
-                    coeffLength={coeff.current.length}
+                    setOutlineActive={setOutlineActive}
+                    handleZoom={handleZoom}
                 />
-                <div className='position-absolute bottom-0'>
-                    <ChartBar
-                        pausePlay={pausePlay}
-                        isPlaying={isPlaying}
-                        playable={playable}
-                        stop={stop}
-                        updateSpeed={updateSpeed}
-                        maxSpeed={maxSpeed}
-                        setTick={setTick}
-                        circlesActive={circlesActive}
-                        setCirclesActive={setCirclesActive}
-                        radiiActive={radiiActive}
-                        setRadiiActive={setRadiiActive}
-                        outlineActive={outlineActive}
-                        setOutlineActive={setOutlineActive}
-                        handleZoom={handleZoom}
-                    />
-                </div>
             </div>
         </div>)
 };
