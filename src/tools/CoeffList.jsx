@@ -12,12 +12,14 @@ const defaults = [mushu, cat, dog]
 const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
 
     const loadCoeff = (e) => {
-        const id = e.target.parentElement.parentElement.id;
-        const obj = JSON.parse(localStorage.getItem(id));
-        coeff.current = obj.coeff;
-        stop();
-        setActiveId(id);
-        setTick(tick+1)
+        const id = e.target.parentElement.id;
+        if (id) {
+            const obj = JSON.parse(localStorage.getItem(id));
+            coeff.current = obj.coeff;
+            stop();
+            setActiveId(id);
+            setTick(tick+1);
+        }
     }
 
     const deleteCoeff = (e) => {

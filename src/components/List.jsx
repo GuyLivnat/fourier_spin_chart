@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import TextInput from "./TextInput";
 import UploadButton from "./UploadButton";
+import CloseButton from "./CloseButton";
 
 
 const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) => {
@@ -61,9 +62,11 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
           className={item.id === focus? "list-group-item text-bg-secondary" : "list-group-item text-bg-dark"}
           aria-current={focus === item.id? true : null}
           onBlur={e => { //cancel if unfocused
-            (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "saveButton" && e.relatedTarget.id !== "setNewName"))) && saveRename()
+            (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "setNewName"))) && saveRename()
           }}> 
-            <div className="d-flex justify-content-between mb-2">
+            <div
+              className="d-flex justify-content-between"
+              onClick={load}>
               {item.id === renameId?
                 <TextInput
                   text={newName}
@@ -74,21 +77,12 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
                   cancel={cancelRename}/>
                 : 
                 <div
-                  style={{paddingLeft:"1px", fontStyle: item.default? "italic":"normal"}}
+                  style={{paddingLeft:"1px", fontStyle: item.default? "italic":"normal", overflow:"clip", marginTop:"3px"}}
                   onDoubleClick={handleRename}>
                   {item.name}
                 </div>} 
-            </div>
-            <div>
-              {focus !== item.id && 
-                <Button
-                  text={"load"}
-                  handleClick={load}
-                  className={"btn btn-outline-primary mb-1 me-2 float-start"}/>}
-              <Button
-                text="delete"
-                handleClick={del}
-                className={"btn btn-outline-danger float-end mb-1"}/>
+                <CloseButton
+                handleClick={del}/>
             </div>
           </li>)}
         </ul>
