@@ -1,5 +1,5 @@
 
-const Button = ({handleClick, text, isDisabled=false, className, id}) => {
+const Button = ({handleClick, text, isDisabled=false, className, id, img, imgAlt}) => {
     return (
         <button
             className={className}
@@ -7,6 +7,7 @@ const Button = ({handleClick, text, isDisabled=false, className, id}) => {
             disabled={isDisabled}
             id={id} 
             type="button">
+            {img && <img src={img} alt={imgAlt}/>}
             {text}
         </button>
     )

@@ -24,28 +24,22 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
   const cancelRename = () => {
     setRenameId(null)
   }
-  
+
   return (<>
-    <div className="rounded border overflow-hidden">
-      <div className="row text-bg-info border-bottom">
-        <div className="col-4 text-center">
+    <div className="rounded border overdflow-hidden">
+      <div className=" row text-bg-info border-bottom justify-content-between mx-0">
           <UploadButton
-            text='upload'
             handleFile={upload}
-            className='btn btn-outline-primary m-1'/>
-        </div>
-        <div className="col-4 text-center">
+            text={"upload"}
+            className='btn btn-outline-primary m-1 col'/>
           <Button
             text="defaults"
             handleClick={resetDefaults}
-            className="btn btn-outline-primary m-1"/>
-        </div>
-        <div className="col-4 text-center">
+            className="btn btn-outline-primary m-1 col"/>
           <Button
             text="del all"
             handleClick={delAll}
-            className="btn btn-outline-danger m-1"/>
-        </div>
+            className="btn btn-outline-danger m-1 col"/>
       </div>
       <div
         style={{

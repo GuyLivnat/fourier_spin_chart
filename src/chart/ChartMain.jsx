@@ -9,6 +9,8 @@ import useInterval from '../utilities/useInterval';
 import zoomWheelSVG from '../behaviors/zoomWheelSVG';
 import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
+import ZoomInIcon from '../assets/icons/ZoomInIcon';
+import ZoomOutIcon from '../assets/icons/ZoomOutIcon';
 
 const ChartMain = ({units, coeff, playable, setTick}) => {
 
@@ -104,16 +106,12 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                         <Button 
                             className='btn btn-outline-primary'
                             isDisabled={playable}
-                            text={'+'}
+                            text={<ZoomInIcon/>}
                             handleClick={() => handleZoom(true)}/>
-                        <span
-                            className='input-group-text text-bg-dark'
-                            >🔍
-                        </span>
                         <Button 
                             className='btn btn-outline-primary'
                             isDisabled={playable}
-                            text={'-'}
+                            text={<ZoomOutIcon/>}
                             handleClick={() => handleZoom(false)}/>
                     </div>
                 </div>
