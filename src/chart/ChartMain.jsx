@@ -1,16 +1,11 @@
 import ChartInit from './ChartInit';
-import Button from '../components/Button';
-import Slider from '../components/Slider';
-import ToggleSwitch from '../components/ToggleSwitch';
 import runChart from './runChart'
 import timestep from './math/timestep';
 import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
 import zoomWheelSVG from '../behaviors/zoomWheelSVG';
-import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
-import ZoomInIcon from '../assets/icons/ZoomInIcon';
-import ZoomOutIcon from '../assets/icons/ZoomOutIcon';
+import ChartBar from './ChartBar';
 
 const ChartMain = ({units, coeff, playable, setTick}) => {
 
@@ -64,9 +59,7 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         timeTick();
     };
 
-    const handleZoom = (inOut) => {
-        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
-    };
+
     
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
@@ -84,68 +77,23 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 radiiActive={radiiActive}
                 outlineActive={outlineActive}
                 lineSegments={lineSegments}
-                coeffLength={coeff.current.length}/>
-            <div className="row align-items-center">
-                <div className="col-1 m-3" id="pausePlay">
-                    <Button
-                        handleClick={pausePlay}
-                        text={isPlaying? '\u23F8' : '\u23F5'}
-                        isDisabled={playable}
-                        className="btn btn-primary btn-lg"/>
-                </div>
-                <div className="col-1 m-2">
-                    <Button
-                        handleClick={stop}
-                        text={'\u23F9'}
-                        isDisabled={playable}
-                        className={"btn btn-outline-primary"}
-                        id="stopButton"/>
-                </div>
-                <div className="col-1 m-2">
-                    <div className="input-group btn-group-sm flex-nowrap" role="group">
-                        <Button 
-                            className='btn btn-outline-primary'
-                            isDisabled={playable}
-                            text={<ZoomInIcon/>}
-                            handleClick={() => handleZoom(true)}/>
-                        <Button 
-                            className='btn btn-outline-primary'
-                            isDisabled={playable}
-                            text={<ZoomOutIcon/>}
-                            handleClick={() => handleZoom(false)}/>
-                    </div>
-                </div>
-                <div className="col-2 m-2">
-                    <Slider
-                        value={updateSpeed}
-                        min={0}
-                        max={maxSpeed}
-                        text="speed"
-                        setTick={setTick}
-                        disabled={playable}/>
-                </div>
-                <div className="col-1 m-2">
-                    <ToggleSwitch
-                        label={"Circles"}
-                        handleClick={() => setCirclesActive(!circlesActive)}
-                        isDisabled={playable}
-                        checked={circlesActive}/>
-                </div>
-                <div className="col-1 m-2">
-                    <ToggleSwitch
-                        label="Radii"
-                        handleClick={() => setRadiiActive(!radiiActive)}
-                        isDisabled={playable}
-                        checked={radiiActive}/>
-                </div>
-                <div className="col-1 m-2">
-                    <ToggleSwitch
-                        label="Outline"
-                        handleClick={() => setOutlineActive(!outlineActive)}
-                        isDisabled={playable}
-                        checked={outlineActive}/>
-                </div>
-            </div>
+                coeffLength={coeff.current.length}
+            />
+            <ChartBar
+                pausePlay={pausePlay}
+                isPlaying={isPlaying}
+                playable={playable}
+                stop={stop}
+                updateSpeed={updateSpeed}
+                maxSpeed={maxSpeed}
+                setTick={setTick}
+                circlesActive={circlesActive}
+                setCirclesActive={setCirclesActive}
+                radiiActive={radiiActive}
+                setRadiiActive={setRadiiActive}
+                outlineActive={outlineActive}
+                setOutlineActive={setOutlineActive}
+            />
         </div>)
 };
 
