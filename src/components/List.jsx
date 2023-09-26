@@ -53,14 +53,14 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
           <li
           key={item.id}
           id={item.id}
+          onClick={load}
           className={item.id === focus? "list-group-item text-bg-secondary" : "list-group-item text-bg-dark"}
           aria-current={focus === item.id? true : null}
           onBlur={e => { //cancel if unfocused
             (e.relatedTarget === null || ('id' in e.relatedTarget && (e.relatedTarget.id !== "setNewName"))) && saveRename()
           }}> 
             <div
-              className="d-flex justify-content-between"
-              onClick={load}>
+              className="d-flex justify-content-between">
               {item.id === renameId?
                 <TextInput
                   text={newName}

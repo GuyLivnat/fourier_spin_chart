@@ -12,7 +12,7 @@ const defaults = [mushu, cat, dog]
 const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
 
     const loadCoeff = (e) => {
-        const id = e.target.parentElement.id;
+        const id = e.target.id? e.target.id :e.target.parentElement.id;
         if (id) {
             const obj = JSON.parse(localStorage.getItem(id));
             coeff.current = obj.coeff;
