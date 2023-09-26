@@ -1,16 +1,13 @@
 import ZoomInIcon from '../assets/icons/ZoomInIcon';
 import ZoomOutIcon from '../assets/icons/ZoomOutIcon';
-import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import Button from '../components/Button';
 import Slider from '../components/Slider';
 import ToggleSwitch from '../components/ToggleSwitch';
 
-const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, maxSpeed, setTick, circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive}) => {
+const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, maxSpeed, setTick,
+    circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, handleZoom}) => {
 
-    const chart = document.getElementById("chart");
-    const handleZoom = (inOut) => {
-        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
-    };
+
 
     return (
         <div className="row align-items-center">

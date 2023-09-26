@@ -4,6 +4,7 @@ import timestep from './math/timestep';
 import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
 import zoomWheelSVG from '../behaviors/zoomWheelSVG';
+import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
 import ChartBar from './ChartBar';
 
@@ -59,8 +60,9 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         timeTick();
     };
 
-
-    
+    const handleZoom = (inOut) => {
+        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
+    };
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
     zoomWheelSVG(chart, panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
@@ -68,32 +70,37 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
 
     return(
-        <div className="col order-1 mt-5" id="chart_div">
-            <ChartInit
-                panX={panX}
-                panY={panY}
-                zoom={zoom}
-                circlesActive={circlesActive}
-                radiiActive={radiiActive}
-                outlineActive={outlineActive}
-                lineSegments={lineSegments}
-                coeffLength={coeff.current.length}
-            />
-            <ChartBar
-                pausePlay={pausePlay}
-                isPlaying={isPlaying}
-                playable={playable}
-                stop={stop}
-                updateSpeed={updateSpeed}
-                maxSpeed={maxSpeed}
-                setTick={setTick}
-                circlesActive={circlesActive}
-                setCirclesActive={setCirclesActive}
-                radiiActive={radiiActive}
-                setRadiiActive={setRadiiActive}
-                outlineActive={outlineActive}
-                setOutlineActive={setOutlineActive}
-            />
+        <div className="col order-1 mt-5 " id="chart_div">
+            <div className='position-relative'>
+                <ChartInit
+                    panX={panX}
+                    panY={panY}
+                    zoom={zoom}
+                    circlesActive={circlesActive}
+                    radiiActive={radiiActive}
+                    outlineActive={outlineActive}
+                    lineSegments={lineSegments}
+                    coeffLength={coeff.current.length}
+                />
+                <div className='position-absolute bottom-0'>
+                    <ChartBar
+                        pausePlay={pausePlay}
+                        isPlaying={isPlaying}
+                        playable={playable}
+                        stop={stop}
+                        updateSpeed={updateSpeed}
+                        maxSpeed={maxSpeed}
+                        setTick={setTick}
+                        circlesActive={circlesActive}
+                        setCirclesActive={setCirclesActive}
+                        radiiActive={radiiActive}
+                        setRadiiActive={setRadiiActive}
+                        outlineActive={outlineActive}
+                        setOutlineActive={setOutlineActive}
+                        handleZoom={handleZoom}
+                    />
+                </div>
+            </div>
         </div>)
 };
 
