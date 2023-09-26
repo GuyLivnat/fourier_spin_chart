@@ -34,7 +34,7 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
     className="col-lg-2 order-2 mt-5"
     style={{minWidth:"310px"}}>
         <CollapseTitle
-            title="Images"
+            title="Saved Paths"
             forBody="uploads"/>
         <div
             className='collapse' id='uploads'>
