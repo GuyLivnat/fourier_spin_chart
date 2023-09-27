@@ -1,14 +1,14 @@
 import CloseButton from "../../components/CloseButton";
 import AngleIcon from "../../assets/icons/AngleIcon";
 
-const CoeffTable = ({lst, del}) => {
+const CoeffTable = ({lst, del, toolTipIn, toolTipOut}) => {
   
     const tableItems = [];
 
     for (let i=2; i<lst.length;) {
         tableItems.push(<tr key={i} id={i}>
-            <td>{(lst[i++]).toFixed(1)}</td>
-            <td>{(lst[i++]).toFixed(2)}</td>
+            <td onMouseEnter={toolTipIn} onMouseOut={toolTipOut} data-tooltip={lst[i]}>{(lst[i++]).toFixed(1)}</td>
+            <td onMouseEnter={toolTipIn} onMouseOut={toolTipOut} data-tooltip={lst[i]}>{(lst[i++]).toFixed(2)}</td>
             <td><CloseButton handleClick={del}/></td>
         </tr>)
     }
