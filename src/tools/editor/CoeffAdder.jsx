@@ -1,5 +1,6 @@
 import NumberInput from "../../components/NumberInput";
 import Button from "../../components/Button";
+import AngleIcon from "../../assets/icons/AngleIcon";
 
 const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
     return (<>
@@ -20,7 +21,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
             id={"radius"}
             />
 
-            <span className="input-group-text text-bg-dark">{'\u2221'}</span>
+            <span className="input-group-text text-bg-dark"><AngleIcon/></span>
             <NumberInput
             number={angle}
             setNumber={setAngle}

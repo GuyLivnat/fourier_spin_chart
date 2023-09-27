@@ -1,4 +1,5 @@
 import CloseButton from "../../components/CloseButton";
+import AngleIcon from "../../assets/icons/AngleIcon";
 
 const CoeffTable = ({lst, del}) => {
   
@@ -17,7 +18,7 @@ const CoeffTable = ({lst, del}) => {
                 <thead >
                     <tr>
                         <th scope="col">Radius {'\u2300'}</th>
-                        <th scope="col">Angle {'\u2221'}</th>
+                        <th scope="col">Angle <AngleIcon/></th>
                         <th></th>
                     </tr>
                 </thead>
