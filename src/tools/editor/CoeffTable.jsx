@@ -1,6 +1,5 @@
 import CloseButton from "../../components/CloseButton";
 import AngleIcon from "../../assets/icons/AngleIcon";
-import {Tooltip} from 'bootstrap'
 
 const CoeffTable = ({lst, del}) => {
   
