@@ -20,7 +20,7 @@ return (
         value={text} 
         autoFocus={focus}
         onKeyDown={handleKeyDown}
-        style={{padding:0, paddingLeft:"1px",border:0}}
+        style={{padding:0, paddingLeft:"1px",border:0, }}
         id={id}
     />
 )

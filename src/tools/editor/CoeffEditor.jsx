@@ -6,7 +6,7 @@ import CoeffAdder from "./CoeffAdder";
 const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, stop}) => {
 
     const [radius, setRadius] = useState(20);
-    const [angle, setAngle] = useState(1.57079632679);
+    const [angle, setAngle] = useState(1.5707);
 
     const pushCoeff = () => {
         if(!coeff.current.length) coeff.current = [0, 0, parseFloat(radius), parseFloat(angle)];

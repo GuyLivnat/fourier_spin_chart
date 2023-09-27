@@ -16,8 +16,8 @@ const CoeffTable = ({lst, del}) => {
             <table className="table table-sm table-dark table-striped table-hover" >
                 <thead >
                     <tr>
-                        <th scope="col">Radius</th>
-                        <th scope="col">Angle</th>
+                        <th scope="col">Radius {'\u2300'}</th>
+                        <th scope="col">Angle {'\u2221'}</th>
                         <th></th>
                     </tr>
                 </thead>

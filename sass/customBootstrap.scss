@@ -25,6 +25,14 @@ $danger: rgb(172, 106, 106);
     background: #555;
 }
 
+input[type='number'] {
+    -moz-appearance: textfield;/*For FireFox*/
+  
+    &::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
 
 
 

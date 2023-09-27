@@ -15,6 +15,14 @@
   background: #555;
 }
 
+input[type=number] {
+  -moz-appearance: textfield; /*For FireFox*/
+}
+input[type=number]::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
