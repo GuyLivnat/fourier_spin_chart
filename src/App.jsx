@@ -8,8 +8,7 @@ function App() {
 
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
-  const [tooltipTarget, setTooltipTarget] = useState(null);
-  const [tooltipOutFlag, setTooltipOutFlag] = useState(false);
+
   const [tick, setTick] = useState(0);
   let playable = coeff.current.length < 3;
 
@@ -17,20 +16,9 @@ function App() {
     document.getElementById("stopButton").click()
   }
 
-  const tooltipIn = (e) => {
-    setTooltipTarget(e.target)
-  }
-
-  const tooltipOut = () => {
-    setTooltipOutFlag(!tooltipOutFlag);
-    setTooltipTarget(null)
-  }
-
   return (
   <section className="container-fluid text-bg-dark">
     <ToolTip
-      mouseTargetIn={tooltipTarget}
-      mouseFlagOut={tooltipOutFlag}
     />
     <div className="row">
       <ChartMain 
@@ -46,8 +34,6 @@ function App() {
         setTick={setTick}
         stop={stop}
         units={units}
-        tooltipIn={tooltipIn}
-        tooltipOut={tooltipOut}
       />
     </div>
   </section>)

@@ -5,7 +5,7 @@ import CoeffList from './CoeffList';
 import CollapseTitle from '../components/CollapseTitle';
 
 
-const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units, tooltipIn, tooltipOut}) => {
+const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
     const [activeId, setActiveId] = useState(null);
     const [coeffList, setCoeffList] = useState(() => {
         const keys = Object.keys(localStorage);
@@ -64,8 +64,7 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units, tooltipIn, t
                 saveCoeff={saveCoeff}
                 setActiveId={setActiveId}
                 stop={stop}
-                tooltipIn={tooltipIn}
-                tooltipOut={tooltipOut}/>
+            />
         </div>
     </div>
     )

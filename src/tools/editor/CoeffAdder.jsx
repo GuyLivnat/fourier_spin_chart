@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import AngleIcon from "../../assets/icons/AngleIcon";
 import RadiusIcon from "../../assets/icons/RadiusIcon";
 
-const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable, tooltipIn, tooltipOut}) => {
+const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
     return (<>
         <div className=" input-group mb-1">
             <Button
@@ -12,10 +12,8 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
                 className="btn btn-outline-primary "
             />
             <span
-                onMouseEnter={tooltipIn}
-                onMouseLeave={tooltipOut}
                 data-tooltip="radius"
-                className="input-group-text text-bg-dark"
+                className="input-group-text text-bg-dark tooltip"
             >
                 <RadiusIcon/>
             </span>
@@ -28,8 +26,6 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
             />
             <span
                 className="input-group-text text-bg-dark"
-                onMouseEnter={tooltipIn}
-                onMouseLeave={tooltipOut}
                 data-tooltip="angle"
             >
                 <AngleIcon/>
