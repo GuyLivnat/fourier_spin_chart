@@ -44,6 +44,8 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
                     pushCoeff={pushCoeff}
                     save={saveWorkingCoeff}
                     playable={playable}
+                    tooltipIn={tooltipIn}
+                    tooltipOut={tooltipOut}
                 />
             </div>
             <div style={{
@@ -58,7 +60,8 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
                     lst={coeff.current}
                     del={deleteCoeff}
                     tooltipIn={tooltipIn}
-                    tooltipOut={tooltipOut}/>
+                    tooltipOut={tooltipOut}
+                />
             </div>
     </>)
 }

@@ -1,10 +1,4 @@
-/* Hide the popper when the reference is hidden */
-/* #tooltip[data-popper-reference-hidden] {
-    visibility: hidden;
-    pointer-events: none;
-  } */
-
-    #arrow,
+#arrow,
 #arrow::before {
 position: absolute;
 width: 6px;
@@ -40,7 +34,7 @@ left: -4px;
 }
 
 #tooltip {
-transition: opacity 250ms linear 1s;
--webkit-transition: opacity 250ms linear 1s;  
--moz-transition: opacity 250ms linear 1s; 
+    opacity: 0;
+    z-index: 50000000;
 }
+

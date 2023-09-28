@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react';
 import CoeffToolBar from './tools/CoeffToolBar';
 import ChartMain from './chart/ChartMain';
-
-import './App.css'
 import ToolTip from './components/ToolTip';
 
 
@@ -25,6 +23,7 @@ function App() {
 
   const tooltipOut = () => {
     setTooltipOutFlag(!tooltipOutFlag);
+    setTooltipTarget(null)
   }
 
   return (
