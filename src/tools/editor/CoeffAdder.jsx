@@ -1,6 +1,7 @@
 import NumberInput from "../../components/NumberInput";
 import Button from "../../components/Button";
 import AngleIcon from "../../assets/icons/AngleIcon";
+import RadiusIcon from "../../assets/icons/RadiusIcon";
 
 const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable, tooltipIn, tooltipOut}) => {
     return (<>
@@ -16,7 +17,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
                 data-tooltip="radius"
                 className="input-group-text text-bg-dark"
             >
-                {'\u2300'}
+                <RadiusIcon/>
             </span>
             <NumberInput
                 number={radius}
