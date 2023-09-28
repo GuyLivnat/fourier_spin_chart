@@ -19,6 +19,7 @@ function App() {
   return (
   <section className="container-fluid text-bg-dark">
     <ToolTip
+      setTick={setTick}
     />
     <div className="row">
       <ChartMain 
