@@ -3,7 +3,7 @@ import CoeffTable from "./CoeffTable";
 import CoeffAdder from "./CoeffAdder";
 
 
-const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, stop, toolTipIn, toolTipOut}) => {
+const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, stop, tooltipIn, tooltipOut}) => {
 
     const [radius, setRadius] = useState(20);
     const [angle, setAngle] = useState(1.5707);
@@ -57,8 +57,8 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
                 <CoeffTable
                     lst={coeff.current}
                     del={deleteCoeff}
-                    toolTipIn={toolTipIn}
-                    toolTipOut={toolTipOut}/>
+                    tooltipIn={tooltipIn}
+                    tooltipOut={tooltipOut}/>
             </div>
     </>)
 }
