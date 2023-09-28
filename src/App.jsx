@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import CoeffToolBar from './tools/CoeffToolBar';
 import ChartMain from './chart/ChartMain';
 import { usePopper } from 'react-popper';
+import './App.css'
 
 
 function App() {
@@ -11,8 +12,10 @@ function App() {
   const [tick, setTick] = useState(0);
   const [referenceElement,setReferenceElement] = useState(null);
   const [tooltipElement, setTooltipElement] = useState(null);
+  const [arrowElement, setArrowElement] = useState(null); // for the tooltip
+  const [tooltipText, setTooltipText] = useState(null)
   const { styles, attributes } = usePopper(referenceElement, tooltipElement, {
-    modifiers: [],
+    modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
   });
   let playable = coeff.current.length < 3;
 
@@ -22,18 +25,21 @@ function App() {
 
   const toolTipIn = (e) => {
     setReferenceElement(e.target);
-    tooltipElement.innerHTML = e.target.dataset.tooltip
-    tooltipElement.removeAttribute("hidden")
+    setTooltipText(e.target.dataset.tooltip);
+    tooltipElement.removeAttribute("hidden");
   }
 
   const toolTipOut = () => {
-    tooltipElement.setAttribute("hidden", "")
+    setReferenceElement(null);
+    setTooltipText(null);
+    tooltipElement.setAttribute("hidden", "");
   }
 
   return (
   <section className="container-fluid text-bg-dark">
-    {/* <ToolTip/> */}
-    <div ref={setTooltipElement} style={styles.popper} {...attributes.popper} id="tooltipbox"></div>
+    <div ref={setTooltipElement} style={styles.popper} {...attributes.popper} id="tooltip"  hidden className='text-bg-secondary border rounded px-2 py-1'>{tooltipText}
+      <div ref={setArrowElement} style={styles.arrow} id='arrow'/>
+    </div>
     <div className="row">
       <ChartMain 
         coeff={coeff}
