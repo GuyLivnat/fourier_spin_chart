@@ -26,13 +26,17 @@ function App() {
   const toolTipIn = (e) => {
     setReferenceElement(e.target);
     setTooltipText(e.target.dataset.tooltip);
-    tooltipElement.removeAttribute("hidden");
+    tooltipElement.hidden = false;
+    tooltipElement.style.transition = "opacity 150ms ease-out 750ms"
+    tooltipElement.style.opacity  = 1;
   }
 
   const toolTipOut = () => {
     setReferenceElement(null);
     setTooltipText(null);
-    tooltipElement.setAttribute("hidden", "");
+    // tooltipElement.hidden = true;
+    tooltipElement.style.transition = "opacity 0ms linear 0s"
+    tooltipElement.style.opacity  = 0;
   }
 
   return (
