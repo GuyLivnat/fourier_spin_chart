@@ -13,7 +13,7 @@ function App() {
   let playable = coeff.current.length < 3;
 
   const stop = () => {
-    document.getElementById("stopButton").click()
+    document.getElementById("stopButton").click() // function found in ./chart/ChartMain
   }
 
   return (

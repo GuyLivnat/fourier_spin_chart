@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import Slider from '../components/Slider';
 import ToggleSwitch from '../components/ToggleSwitch';
 
-const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, maxSpeed, setTick,
+const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, maxSpeed,
     circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, handleZoom}) => {
 
 
@@ -46,7 +46,6 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, maxSpeed, 
                     min={0}
                     max={maxSpeed}
                     text="speed"
-                    setTick={setTick}
                     disabled={playable}/>
             </div>
             <div className="col-1 m-2">

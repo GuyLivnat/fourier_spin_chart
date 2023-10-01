@@ -25,8 +25,8 @@ const ToolTip = ({setTick}) => {
         return () => {
             elements
             .forEach((element) => {
-                element.removeEventListener('mouseenter', toolTipIn)
-                element.removeEventListener('mouseleave', toolTipOut)
+                element.removeEventListener('mouseenter', toolTipIn);
+                element.removeEventListener('mouseleave', toolTipOut);
             })
         };
     }, [totalTooltips]);

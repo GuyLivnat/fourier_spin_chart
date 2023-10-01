@@ -1,5 +1,5 @@
 
-const zoomCenterSVG = (element, panY, setPanY, zoom, setZoom, setTick, inOut) => {
+const zoomCenterSVG = (element, panY, setPanY, zoom, setZoom, inOut) => {
 
     if (zoom > 50 && inOut) {
 
@@ -11,7 +11,6 @@ const zoomCenterSVG = (element, panY, setPanY, zoom, setZoom, setTick, inOut) =>
 
         setPanY(y);
         setZoom(zoom*scale);
-        setTick(Math.random());
 
     } else if(!inOut){
         const scale = 1.2;
@@ -22,7 +21,6 @@ const zoomCenterSVG = (element, panY, setPanY, zoom, setZoom, setTick, inOut) =>
 
         setPanY(y);
         setZoom(zoom*scale);
-        setTick(Math.random());
     }
 }
 

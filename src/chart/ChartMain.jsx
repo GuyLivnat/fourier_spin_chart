@@ -8,7 +8,7 @@ import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
 import ChartBar from './ChartBar';
 
-const ChartMain = ({units, coeff, playable, setTick}) => {
+const ChartMain = ({units, coeff, playable}) => {
 
 
     const lineSegments = 40; // used for the gradient effect on the outline
@@ -16,7 +16,6 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
     const chart = document.getElementById("chart");
 
     const updateSpeed = useRef(20);  //in miliseconds. 33 is 30 fps
-    const frame = useRef(timestep(coeff, 0));
     const edge = useRef([]);
     const time = useRef(0);
 
@@ -41,35 +40,31 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
         } else {
             time.current += step
         }
-        frame.current = timestep(coeff.current, time.current);
-        edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
+        const frame = timestep(coeff.current, time.current);
+        edge.current.unshift({ x: frame.edge.x, y: frame.edge.y });
         if (edge.current.length > units) edge.current.pop();
-        timeTick();
-    };
 
-    const timeTick = () => {
-        setTick(time.current);
+        runChart(frame, edge.current, lineSegments, units, zoom, coeff.current.length);
+
     };
 
     const stop = () => {
         if (isPlaying) {
             setIsPlaying(false)
         }
-        frame.current = timestep([], 0);
+        runChart(timestep([], 0), [], lineSegments, units, zoom, 0)
         time.current = 0;
         edge.current = [];
-        timeTick();
     };
 
     const handleZoom = (inOut) => {
-        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, setTick, inOut)
+        zoomCenterSVG(chart, panY, setPanY, zoom, setZoom, inOut)
     };
 
 
-    useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null) //plays the chart
-    zoomWheelSVG(chart, panX, panY, setPanX, setPanY, zoom, setZoom, setTick)
-    panSVG(chart, panX, panY, setPanX, setPanY, zoom, setTick)
-    runChart(frame.current, edge.current, lineSegments, units, zoom, coeff.current.length)
+    useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null); //plays the chart
+    zoomWheelSVG(chart, panX, panY, setPanX, setPanY, zoom, setZoom);
+    panSVG(chart, panX, panY, setPanX, setPanY, zoom);
 
     return(<div className="col order-1 mt-5">
         <div
@@ -88,7 +83,6 @@ const ChartMain = ({units, coeff, playable, setTick}) => {
                 stop={stop}
                 updateSpeed={updateSpeed}
                 maxSpeed={maxSpeed}
-                setTick={setTick}
                 circlesActive={circlesActive}
                 setCirclesActive={setCirclesActive}
                 radiiActive={radiiActive}

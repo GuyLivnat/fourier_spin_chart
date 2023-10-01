@@ -1,20 +1,20 @@
 import * as d3 from "d3";
 
 
-const runChart = (data, edge, lineSegments, units, zoom, coeffLength) => {
+const runChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
     
     const segment = units/lineSegments;
     const chart = document.getElementById("chart");
     const scalingMin = chart ? zoom/chart.clientWidth*15 : 2;
     const minircle = (zoom/150 > scalingMin)? zoom/150 : scalingMin; 
-    const filteredData = data.circles.filter((circle, i) => {if(circle.r > minircle || (i === (coeffLength/2-1) && coeffLength > 2)) return circle})
+    const filteredFrame = frame.circles.filter((circle, i) => {if(circle.r > minircle || (i === (coeffLength/2-1) && coeffLength > 2)) return circle})
 
     const line = d3.line()
         .x(d => d.x)
         .y(d => d.y);
     
     for (let i = 0; i < units; i++) {
-        let thisCircle = filteredData[i];
+        let thisCircle = filteredFrame[i];
         if (thisCircle) {
             d3.select(`#circle_${i}`)
                 .attr("cx", thisCircle.x)
@@ -28,7 +28,7 @@ const runChart = (data, edge, lineSegments, units, zoom, coeffLength) => {
 
 
     d3.select("#radii")
-        .attr("d", line(filteredData));
+        .attr("d", line(filteredFrame));
 
     for (let i=0; i<lineSegments; i++) {
         let start = ((i === 0 || (i === 1))) ? 0 : (segment*(i-1))-1;

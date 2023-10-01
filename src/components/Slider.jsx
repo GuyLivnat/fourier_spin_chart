@@ -1,9 +1,7 @@
-const Slider = ({value, setValue, min, max, text, setTick, disabled, className}) => {
+const Slider = ({value, setValue, min, max, text, disabled}) => {
     const handleChange = (e) => {
         if (setValue)setValue(parseFloat(e.target.value));
         else value.current = parseFloat(e.target.value);
-
-        setTick(Math.random());
         
     }
     return (<>

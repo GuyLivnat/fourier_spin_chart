@@ -1,5 +1,5 @@
 
-const zoomWheelSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setTick) => {
+const zoomWheelSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom) => {
 
     if (element && (zoom > 50)) {
         element.onwheel = (e) => {
@@ -23,7 +23,6 @@ const zoomWheelSVG = (element, panX, panY, setPanX, setPanY, zoom, setZoom, setT
             setPanX(x);
             setPanY(y);
             setZoom(zoom*scale);
-            setTick(Math.random());
         }
     }
 
