@@ -1,5 +1,5 @@
 
-const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, panX, panY, coeffLength}) => {
+const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, coeffLength}) => {
     const starSize = 1.5;
     const translateCenter = `translate(${zoom/2}, ${zoom/2})`;
 
@@ -23,17 +23,13 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
             markerStart={(i===0) || (i===1)? "url(#star)": null}
             key={i}
             id={"edge_" + i}
-            stroke="rgb(172, 106, 106)"
-            style={{fill: "none", strokeWidth: minStroke*2.5}}
-            transform={translateCenter}
-            display={outlineActive? "true" : "none"}
             opacity={strength}>
         </path> )
     }
 
     return (<svg
         id="chart"
-        viewBox={`${panX} ${panY} ${zoom} ${zoom* 0.5625}`} //0.5625 is for 16:9 aspect ratio 
+        viewBox={"0, 230, 1000, 562.5"} //0.5625 is for 16:9 aspect ratio 
         style={{backgroundColor : 'black'}}
         >
 
@@ -49,30 +45,34 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
                 <circle r={starSize} cx={starSize} cy={starSize} fill="white"></circle>
             </marker>
         </defs>
-
-        <g
-            id="circles"
-            transform={translateCenter}
-            stroke="white"
-            display={circlesActive? "true" : "none"}
-            style={{fill: "none", strokeWidth: minStroke}}
-            opacity="40%"
+        <g id="chart-shapes" transform={translateCenter}>
+            <g
+                id="circles"
+                stroke="white"
+                display={circlesActive? "true" : "none"}
+                style={{fill: "none", strokeWidth: minStroke}}
+                opacity="40%"
             >
-                            {circles}
+                {circles}
+            </g>
+            <path
+                id="radii"
+                stroke="rgb(191, 194, 240)"
+                display={radiiActive? "true" : "none"}
+                markerStart={"url(#star)"}
+                style={{ fill:"none", strokeWidth: minStroke*2}}
+                opacity="50%"
+                >
+            </path>
+            <g
+                id="edge"
+                style={{fill: "none", strokeWidth: minStroke*2.5}}
+                stroke="rgb(172, 106, 106)"
+                display={outlineActive? "true" : "none"}
+            >
+            {edgeSegments} 
+            </g>
         </g>
-
-        <path
-            id="radii"
-            stroke="rgb(191, 194, 240)"
-            transform={translateCenter}
-            display={radiiActive? "true" : "none"}
-            markerStart={"url(#star)"}
-            style={{ fill:"none", strokeWidth: minStroke*2}}
-            opacity="50%"
-            >
-        </path>
-
-        {edgeSegments} 
     </svg>)
 }
 

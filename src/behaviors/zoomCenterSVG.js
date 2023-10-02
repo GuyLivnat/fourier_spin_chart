@@ -1,27 +1,20 @@
+import moveChartSVG from './moveChartSVG';
 
-const zoomCenterSVG = (element, panY, setPanY, zoom, setZoom, inOut) => {
 
-    if (zoom > 50 && inOut) {
-
-        const scale = 1/ (1.2);
-        const height = element.clientHeight;
-        const heightScale = zoom / height 
-        const centeredY = ((height/2 * 0.5625) - height/2);  // 0.5625 is for 16:9 aspect ratio
-        const y = panY - ((centeredY * scale) - centeredY) * heightScale;
-
-        setPanY(y);
-        setZoom(zoom*scale);
-
-    } else if(!inOut){
-        const scale = 1.2;
-        const height = element.clientHeight;
-        const heightScale = zoom / height 
-        const centeredY = ((height/2 * 0.5625) - height/2);  // 0.5625 is for 16:9 aspect ratio
-        const y = panY - ((centeredY * scale) - centeredY) * heightScale;
-
-        setPanY(y);
-        setZoom(zoom*scale);
-    }
+const zoomCenterSVG = (id, panX, panY, zoom, inOut) => {
+    const element = document.getElementById(id);
+    let scale = 1
+    if (zoom.current > 50 && inOut) {
+        scale = 1/ (1.2);
+    } else if (!inOut) {
+        scale = 1.2;}
+    const height = element.clientHeight;
+    const heightScale = zoom.current / height 
+    const centeredY = ((height/2 * 0.5625) - height/2);  // 0.5625 is for 16:9 aspect ratio
+    panY.current = panY.current - ((centeredY * scale) - centeredY) * heightScale;
+    zoom.current = zoom.current * scale;
+    
+    moveChartSVG(panX, panY, zoom); // chart specific!
 }
 
 export default zoomCenterSVG;
