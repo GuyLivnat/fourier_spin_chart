@@ -1,5 +1,5 @@
 
-const zoomCenterSVG = (id, panX, panY, zoom, moveFunc, inOut) => {
+const zoomCenterSVG = (id, panY, zoom, moveFunc, inOut) => {
     const element = document.getElementById(id);
     let scale = 1
     if (zoom.current > 50 && inOut) {

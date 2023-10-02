@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import CoeffToolBar from './components/toolbar/CoeffToolBar';
 import Chart from './components/chart/Chart';
-import ToolTip from './components/general_components/ToolTip';
+import { TooltipProvider } from './components/general_components/TooltipWithContext';
 
 
 function App() {
@@ -12,15 +12,9 @@ function App() {
   const [tick, setTick] = useState(0);
   let playable = coeff.current.length < 3;
 
-  const stop = () => {
-    document.getElementById("stopButton").click() // function found in ./chart/ChartMain
-  }
-
   return (
   <section className="container-fluid text-bg-dark">
-    <ToolTip
-      setTick={setTick}
-    />
+    <TooltipProvider>
     <div className="row">
       <Chart
         coeff={coeff}
@@ -33,10 +27,10 @@ function App() {
         coeff={coeff}
         tick={tick}
         setTick={setTick}
-        stop={stop}
         units={units}
       />
     </div>
+    </TooltipProvider>
   </section>)
 };
 

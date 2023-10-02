@@ -34,12 +34,12 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
 
         <defs>
             <marker
-            id="star" 
-            orient={"auto"} 
-            markerHeight={starSize*2} 
-            markerWidth={starSize*2} 
-            refX={starSize} 
-            refY={starSize}
+                id="star" 
+                orient={"auto"} 
+                markerHeight={starSize*2} 
+                markerWidth={starSize*2} 
+                refX={starSize} 
+                refY={starSize}
             >
                 <circle r={starSize} cx={starSize} cy={starSize} fill="white"></circle>
             </marker>

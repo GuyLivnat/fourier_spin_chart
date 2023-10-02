@@ -1,7 +1,7 @@
 import { createRef } from 'react';
 import Button from './Button';
 
-const UploadButton = ({handleFile, text, className, img, imgAlt}) => {
+const UploadButton = ({handleFile, text, className, img, imgAlt, dataTooltip, onMouseEnter, onMouseLeave}) => {
     const inputRef = createRef();
     const uploadClick = () => {inputRef.current?.click()}
 
@@ -11,7 +11,10 @@ const UploadButton = ({handleFile, text, className, img, imgAlt}) => {
             text={text}
             className={className}
             img={img}
-            imgAlt={imgAlt}/>
+            imgAlt={imgAlt}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            dataTooltip={dataTooltip}/>
         <input
             type="file"
             onChange={handleFile}

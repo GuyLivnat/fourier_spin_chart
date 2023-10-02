@@ -1,11 +1,10 @@
 import {useState} from 'react'
-
 import CoeffEditor from './editor/CoeffEditor';
 import CoeffList from './CoeffList';
 import CollapseTitle from '../general_components/CollapseTitle';
 
 
-const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
+const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
     const [activeId, setActiveId] = useState(null);
     const [coeffList, setCoeffList] = useState(() => {
         const keys = Object.keys(localStorage);
@@ -17,6 +16,10 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {
         }
         return localCoeff;
       })
+
+    const stop = () => {
+        document.getElementById("stopButton").click() // function found in ../chart/Chart.jsx
+    }
 
     const saveCoeff = (coeffs, name) => {
         const obj = JSON.stringify({name: name, coeff: coeffs});

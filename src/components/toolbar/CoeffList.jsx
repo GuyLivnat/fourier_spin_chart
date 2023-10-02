@@ -107,7 +107,8 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             resetDefaults={resetDefaultCoeff}
             rename={renameCoeff}
             focus={activeId}
-            upload={uploadSVG}/>
+            upload={uploadSVG}
+            uploadTooltip="upload an SVG file with a single path"/>
     )
 };
 

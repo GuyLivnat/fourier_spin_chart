@@ -2,18 +2,26 @@ import NumberInput from "../../general_components/NumberInput";
 import Button from "../../general_components/Button";
 import AngleIcon from "../../../assets/icons/AngleIcon";
 import RadiusIcon from "../../../assets/icons/RadiusIcon";
+import { useContext } from "react";
+import { TooltipContext } from "../../general_components/TooltipWithContext";
 
 const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
+    const {tooltipIn, tooltipOut} = useContext(TooltipContext);
     return (<>
         <div className=" input-group mb-1">
             <Button
                 handleClick={pushCoeff}
                 text="add"
-                className="btn btn-outline-primary "
+                className="btn btn-outline-primary"
+                dataTooltip="adds a circle to the end of the chain"
+                onMouseEnter={tooltipIn}
+                onMouseLeave={tooltipOut}
             />
             <span
-                data-tooltip="radius"
                 className="input-group-text text-bg-dark tooltip"
+                data-tooltip="radius"
+                onMouseEnter={tooltipIn}
+                onMouseLeave={tooltipOut}
             >
                 <RadiusIcon/>
             </span>
@@ -27,6 +35,8 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
             <span
                 className="input-group-text text-bg-dark"
                 data-tooltip="angle"
+                onMouseEnter={tooltipIn}
+                onMouseLeave={tooltipOut}
             >
                 <AngleIcon/>
             </span>
@@ -45,11 +55,17 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
                 text="save"
                 className="btn btn-outline-primary"
                 isDisabled={playable}
+                dataTooltip="saves the circle chain with the current time as its name"
+                onMouseEnter={tooltipIn}
+                onMouseLeave={tooltipOut}
             />
             <Button
                 handleClick={resetCoeff}
                 text="reset"
                 className="btn btn-outline-danger float-end"
+                dataTooltip="removes all the circles"
+                onMouseEnter={tooltipIn}
+                onMouseLeave={tooltipOut}
             />
         </div>
     </>)

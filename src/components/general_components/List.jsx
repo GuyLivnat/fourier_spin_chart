@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button from "./Button";
 import TextInput from "./TextInput";
 import UploadButton from "./UploadButton";
 import CloseButton from "./CloseButton";
+import { TooltipContext } from "./TooltipWithContext";
 
 
-const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) => {
+const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults, uploadTooltip}) => {
+  const {tooltipIn, tooltipOut} = useContext(TooltipContext);
   const [renameId, setRenameId] = useState(null)
   const [newName, setNewName] = useState("")
 
@@ -31,15 +33,24 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults}) =>
           <UploadButton
             handleFile={upload}
             text={"upload"}
-            className='btn btn-outline-primary m-1 col'/>
+            className='btn btn-outline-primary m-1 col'
+            dataTooltip={uploadTooltip}
+            onMouseEnter={tooltipIn}
+            onMouseLeave={tooltipOut}/>
           <Button
             text="defaults"
             handleClick={resetDefaults}
-            className="btn btn-outline-primary m-1 col"/>
+            className="btn btn-outline-primary m-1 col"
+            dataTooltip="reapplies the missing defaults"
+            onMouseEnter={tooltipIn}
+            onMouseLeave={tooltipOut}/>
           <Button
             text="del all"
             handleClick={delAll}
-            className="btn btn-outline-danger m-1 col"/>
+            className="btn btn-outline-danger m-1 col"
+            dataTooltip="removes all saved paths from local storage"
+            onMouseEnter={tooltipIn}
+            onMouseLeave={tooltipOut}/>
       </div>
       <div
         style={{

@@ -65,7 +65,7 @@ const Chart = ({units, coeff, playable}) => {
     }
     
     const handleZoom = (inOut) => {
-        zoomCenterSVG('chart', panX, panY, zoom, handleZoomandPan, inOut)
+        zoomCenterSVG('chart', panY, zoom, handleZoomandPan, inOut)
     };
 
 
