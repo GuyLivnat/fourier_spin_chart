@@ -1,10 +1,9 @@
 
-const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegments, coeffLength}) => {
+const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coeffLength}) => {
     const starSize = 1.5;
-    const translateCenter = `translate(${zoom/2}, ${zoom/2})`;
 
     const chart = document.getElementById("chart");
-    const minStroke = chart ? zoom/chart.clientWidth : 0.1;
+    const minStroke = chart ? 1000/chart.clientWidth : 0.1;
 
     const circles = []
     for (let i=0; i < coeffLength; i++) {
@@ -45,7 +44,7 @@ const ChartInit = ({zoom, circlesActive, radiiActive, outlineActive, lineSegment
                 <circle r={starSize} cx={starSize} cy={starSize} fill="white"></circle>
             </marker>
         </defs>
-        <g id="chart-shapes" transform={translateCenter}>
+        <g id="chart-shapes" transform="translate(500, 500)">
             <g
                 id="circles"
                 stroke="white"

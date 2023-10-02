@@ -1,13 +1,12 @@
 import ChartInit from './ChartInit';
 import runChart from './runChart'
 import timestep from './math/timestep';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
 import zoomWheelSVG from '../behaviors/zoomWheelSVG';
 import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
 import ChartBar from './ChartBar';
-import useBool from '../utilities/useBool';
 
 const ChartMain = ({units, coeff, playable}) => {
 
@@ -63,6 +62,7 @@ const ChartMain = ({units, coeff, playable}) => {
     zoomWheelSVG('chart', panX, panY, zoom);
     panSVG('chart', panX, panY, zoom);
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null); //plays the chart
+    console.log("chart rerender")
 
 
     return(<div className="col order-1 mt-5">
@@ -92,7 +92,6 @@ const ChartMain = ({units, coeff, playable}) => {
                 />
             </div>
             <ChartInit
-            zoom={zoom.current}
             circlesActive={circlesActive}
             radiiActive={radiiActive}
             outlineActive={outlineActive}
