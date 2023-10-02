@@ -2,7 +2,7 @@ import {useState} from 'react'
 
 import CoeffEditor from './editor/CoeffEditor';
 import CoeffList from './CoeffList';
-import CollapseTitle from '../components/CollapseTitle';
+import CollapseTitle from '../general_components/CollapseTitle';
 
 
 const CoeffToolBar = ({coeff, playable, tick, setTick, stop, units}) => {

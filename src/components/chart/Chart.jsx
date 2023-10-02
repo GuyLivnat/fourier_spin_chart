@@ -2,10 +2,10 @@ import ChartInit from './ChartInit';
 import renderChart from './renderChart'
 import timestep from './math/timestep';
 import { useRef, useState } from 'react';
-import useInterval from '../utilities/useInterval';
-import zoomWheelSVG from '../behaviors/zoomWheelSVG';
-import zoomCenterSVG from '../behaviors/zoomCenterSVG';
-import panSVG from '../behaviors/panSVG';
+import useInterval from '../../utilities/useInterval';
+import zoomWheelSVG from '../../behaviors/zoomWheelSVG';
+import zoomCenterSVG from '../../behaviors/zoomCenterSVG';
+import panSVG from '../../behaviors/panSVG';
 import ChartBar from './ChartBar';
 import moveChart from './moveChart';
 

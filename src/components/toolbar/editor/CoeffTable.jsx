@@ -1,9 +1,9 @@
-import CloseButton from "../../components/CloseButton";
-import AngleIcon from "../../assets/icons/AngleIcon";
-import RadiusIcon from "../../assets/icons/RadiusIcon";
+import CloseButton from "../../general_components/CloseButton";
+import AngleIcon from "../../../assets/icons/AngleIcon";
+import RadiusIcon from "../../../assets/icons/RadiusIcon";
+
 
 const CoeffTable = ({lst, del}) => {
-  
     const tableItems = [];
 
     for (let i=2; i<lst.length;) {

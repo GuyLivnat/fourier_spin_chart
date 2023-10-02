@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import CoeffToolBar from './tools/CoeffToolBar';
-import Chart from './chart/Chart';
-import ToolTip from './components/ToolTip';
+import CoeffToolBar from './components/toolbar/CoeffToolBar';
+import Chart from './components/chart/Chart';
+import ToolTip from './components/general_components/ToolTip';
 
 
 function App() {

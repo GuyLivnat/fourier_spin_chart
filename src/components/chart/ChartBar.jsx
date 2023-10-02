@@ -1,13 +1,11 @@
-import ZoomInIcon from '../assets/icons/ZoomInIcon';
-import ZoomOutIcon from '../assets/icons/ZoomOutIcon';
-import Button from '../components/Button';
-import Slider from '../components/Slider';
-import ToggleSwitch from '../components/ToggleSwitch';
+import ZoomInIcon from '../../assets/icons/ZoomInIcon';
+import ZoomOutIcon from '../../assets/icons/ZoomOutIcon';
+import Button from '../general_components/Button';
+import Slider from '../general_components/Slider';
+import ToggleSwitch from '../general_components/ToggleSwitch';
 
 const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateSpeed, maxSpeed,
     circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, handleZoom}) => {
-
-
 
     return (
         <div className="row align-items-center">

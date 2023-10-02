@@ -1,7 +1,7 @@
-import NumberInput from "../../components/NumberInput";
-import Button from "../../components/Button";
-import AngleIcon from "../../assets/icons/AngleIcon";
-import RadiusIcon from "../../assets/icons/RadiusIcon";
+import NumberInput from "../../general_components/NumberInput";
+import Button from "../../general_components/Button";
+import AngleIcon from "../../../assets/icons/AngleIcon";
+import RadiusIcon from "../../../assets/icons/RadiusIcon";
 
 const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, save, playable}) => {
     return (<>
