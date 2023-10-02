@@ -7,6 +7,7 @@ import zoomWheelSVG from '../behaviors/zoomWheelSVG';
 import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
 import ChartBar from './ChartBar';
+import moveChartSVG from './moveChartSVG';
 
 const ChartMain = ({units, coeff, playable}) => {
 
@@ -56,14 +57,12 @@ const ChartMain = ({units, coeff, playable}) => {
     };
     
     const handleZoom = (inOut) => {
-        zoomCenterSVG('chart', panX, panY, zoom, inOut)
+        zoomCenterSVG('chart', panX, panY, zoom, moveChartSVG, inOut)
     };
 
-    zoomWheelSVG('chart', panX, panY, zoom);
-    panSVG('chart', panX, panY, zoom);
+    zoomWheelSVG('chart', panX, panY, zoom, moveChartSVG);
+    panSVG('chart', panX, panY, zoom, moveChartSVG);
     useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null); //plays the chart
-    console.log("chart rerender")
-
 
     return(<div className="col order-1 mt-5">
         <div

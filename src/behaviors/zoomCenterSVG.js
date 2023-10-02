@@ -1,7 +1,5 @@
-import moveChartSVG from './moveChartSVG';
 
-
-const zoomCenterSVG = (id, panX, panY, zoom, inOut) => {
+const zoomCenterSVG = (id, panX, panY, zoom, moveFunc, inOut) => {
     const element = document.getElementById(id);
     let scale = 1
     if (zoom.current > 50 && inOut) {
@@ -14,7 +12,7 @@ const zoomCenterSVG = (id, panX, panY, zoom, inOut) => {
     panY.current = panY.current - ((centeredY * scale) - centeredY) * heightScale;
     zoom.current = zoom.current * scale;
     
-    moveChartSVG(panX, panY, zoom); // chart specific!
+    moveFunc(panX, panY, zoom);
 }
 
 export default zoomCenterSVG;

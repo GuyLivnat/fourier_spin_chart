@@ -1,8 +1,6 @@
 import {useRef} from 'react'
-import moveChartSVG from './moveChartSVG';
 
-
-const panSVG = (id, panX, panY, zoom) => {
+const panSVG = (id, panX, panY, zoom, moveFunc) => {
     const isMoving = useRef(false);
     const start = useRef({x:0, y:0, viewX:0, viewY: 0});
     const element = document.getElementById(id);    
@@ -36,7 +34,7 @@ if (element) {
             panX.current = (start.current.viewX + ((start.current.x - e.offsetX) * widthScale));
             panY.current = (start.current.viewY + ((start.current.y - e.offsetY) * heightScale));
             
-            moveChartSVG(panX, panY, zoom); // chart specific!
+            moveFunc(panX, panY, zoom);
         }
     }
 }

@@ -1,6 +1,6 @@
-import moveChartSVG from './moveChartSVG';
 
-const zoomWheelSVG = (id, panX, panY, zoom) => {
+
+const zoomWheelSVG = (id, panX, panY, zoom, moveFunc) => {
     const element = document.getElementById(id)
 
     if (element && (zoom.current > 50)) {
@@ -21,7 +21,7 @@ const zoomWheelSVG = (id, panX, panY, zoom) => {
             panY.current = panY.current - ((centeredY * scale) - centeredY) * heightScale;
             zoom.current  = zoom.current * scale;
 
-            moveChartSVG(panX, panY, zoom); // chart specific!
+            moveFunc(panX, panY, zoom);
         }
     }
 
