@@ -53,7 +53,6 @@ const ChartMain = ({units, coeff, playable}) => {
         if (edge.current.length > units) edge.current.pop();
 
         runChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
-
     };
     
     const handleZoom = (inOut) => {
