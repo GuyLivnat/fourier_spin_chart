@@ -1,5 +1,5 @@
 import ChartInit from './ChartInit';
-import runChart from './runChart'
+import renderChart from './renderChart'
 import timestep from './math/timestep';
 import { useRef, useState } from 'react';
 import useInterval from '../utilities/useInterval';
@@ -7,21 +7,22 @@ import zoomWheelSVG from '../behaviors/zoomWheelSVG';
 import zoomCenterSVG from '../behaviors/zoomCenterSVG';
 import panSVG from '../behaviors/panSVG';
 import ChartBar from './ChartBar';
-import moveChartSVG from './moveChartSVG';
+import moveChart from './moveChart';
 
-const ChartMain = ({units, coeff, playable}) => {
+const Chart = ({units, coeff, playable}) => {
 
 
     const lineSegments = 40; // used for the gradient effect on the outline
-    const maxSpeed = 66;
+    const maxSpeed = 128;
 
-    const updateSpeed = useRef(20);  //in miliseconds. 33 is 30 fps
     const edge = useRef([]);
     const time = useRef(0);
 
     const zoom = useRef(1000);
     const panX = useRef(0);
     const panY = useRef(230);
+
+    const [updateSpeed, setUpdateSpeed] = useState(85);  //in miliseconds. calculated as maxspeed-updatespeed
     const [radiiActive, setRadiiActive] = useState(true);
     const [circlesActive, setCirclesActive] = useState(true);
     const [outlineActive, setOutlineActive] = useState(true);
@@ -39,7 +40,7 @@ const ChartMain = ({units, coeff, playable}) => {
         }
         time.current = 0;
         edge.current = [];
-        runChart(timestep([], 0), [], lineSegments, units, zoom.current, 0);
+        renderChart(timestep([], 0), [], lineSegments, units, zoom.current, 0);
     };
    
     const update = () => {  // computes the next frame 
@@ -52,16 +53,27 @@ const ChartMain = ({units, coeff, playable}) => {
         edge.current.unshift({ x: frame.edge.x, y: frame.edge.y });
         if (edge.current.length > units) edge.current.pop();
 
-        runChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
-    };
-    
-    const handleZoom = (inOut) => {
-        zoomCenterSVG('chart', panX, panY, zoom, moveChartSVG, inOut)
+        renderChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
     };
 
-    zoomWheelSVG('chart', panX, panY, zoom, moveChartSVG);
-    panSVG('chart', panX, panY, zoom, moveChartSVG);
-    useInterval(update, isPlaying? (maxSpeed - updateSpeed.current) : null); //plays the chart
+    const handleZoomandPan = () => {
+        moveChart(panX, panY, zoom);
+        if (!isPlaying) {
+            const frame = timestep(coeff.current, time.current);
+            renderChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
+        }
+    }
+    
+    const handleZoom = (inOut) => {
+        zoomCenterSVG('chart', panX, panY, zoom, handleZoomandPan, inOut)
+    };
+
+
+    zoomWheelSVG('chart', panX, panY, zoom, handleZoomandPan);  // attaches zoom functionality to the chart
+    panSVG('chart', panX, panY, zoom, handleZoomandPan);  // attaches pan functionality to the chart
+
+
+    useInterval(update, isPlaying? (maxSpeed - updateSpeed) : null); //plays the chart
 
     return(<div className="col order-1 mt-5">
         <div
@@ -79,6 +91,7 @@ const ChartMain = ({units, coeff, playable}) => {
                 playable={playable}
                 stop={stop}
                 updateSpeed={updateSpeed}
+                setUpdateSpeed={setUpdateSpeed}
                 maxSpeed={maxSpeed}
                 circlesActive={circlesActive}
                 setCirclesActive={setCirclesActive}
@@ -101,4 +114,4 @@ const ChartMain = ({units, coeff, playable}) => {
         </div>)
 };
 
-export default ChartMain;
+export default Chart;

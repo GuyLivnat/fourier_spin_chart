@@ -1,7 +1,8 @@
 const Slider = ({value, setValue, min, max, text, disabled}) => {
     const handleChange = (e) => {
-        if (setValue)setValue(parseFloat(e.target.value));
-        else value.current = parseFloat(e.target.value);
+        const inputValue = parseFloat(e.target.value)
+        if (setValue) setValue(inputValue);
+        else value.current = inputValue;
         
     }
     return (<>

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import CoeffToolBar from './tools/CoeffToolBar';
-import ChartMain from './chart/ChartMain';
+import Chart from './chart/Chart';
 import ToolTip from './components/ToolTip';
 
 
@@ -22,7 +22,7 @@ function App() {
       setTick={setTick}
     />
     <div className="row">
-      <ChartMain 
+      <Chart
         coeff={coeff}
         playable={playable}
         setTick={setTick}

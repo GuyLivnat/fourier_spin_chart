@@ -21,7 +21,7 @@ const zoomWheelSVG = (id, panX, panY, zoom, moveFunc) => {
             panY.current = panY.current - ((centeredY * scale) - centeredY) * heightScale;
             zoom.current  = zoom.current * scale;
 
-            moveFunc(panX, panY, zoom);
+            moveFunc();
         }
     }
 

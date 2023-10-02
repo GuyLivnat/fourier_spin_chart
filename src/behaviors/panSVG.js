@@ -34,7 +34,7 @@ if (element) {
             panX.current = (start.current.viewX + ((start.current.x - e.offsetX) * widthScale));
             panY.current = (start.current.viewY + ((start.current.y - e.offsetY) * heightScale));
             
-            moveFunc(panX, panY, zoom);
+            moveFunc();
         }
     }
 }

@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const moveChartSVG = (panX, panY, zoom) => {
+const moveChart = (panX, panY, zoom) => {
     const minStroke = zoom.current/chart.clientWidth;
 
 
@@ -16,4 +16,4 @@ const moveChartSVG = (panX, panY, zoom) => {
 }
 
 
-export default moveChartSVG;
+export default moveChart;

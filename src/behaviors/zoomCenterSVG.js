@@ -12,7 +12,7 @@ const zoomCenterSVG = (id, panX, panY, zoom, moveFunc, inOut) => {
     panY.current = panY.current - ((centeredY * scale) - centeredY) * heightScale;
     zoom.current = zoom.current * scale;
     
-    moveFunc(panX, panY, zoom);
+    moveFunc();
 }
 
 export default zoomCenterSVG;

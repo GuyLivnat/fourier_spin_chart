@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 
-const runChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
+const renderChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
     
     const segment = units/lineSegments;
     const chart = document.getElementById("chart");
@@ -38,4 +38,4 @@ const runChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
     }
 };
 
-export default runChart;
+export default renderChart;
