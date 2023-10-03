@@ -75,43 +75,46 @@ const Chart = ({units, coeff, playable}) => {
 
     useInterval(update, isPlaying? (maxSpeed - updateSpeed) : null); //plays the chart
 
-    return(<div className="col order-1 mt-5">
-        <div
-        className="position-relative"
-        id="chart_div"
-        onMouseEnter={() => setHideBar(false)}
-        onMouseLeave={() => isPlaying && setHideBar(true)}>
+    return(
+        <div className="col order-1 mt-5">
             <div
-            className='position-absolute'
-            hidden={hideBar}
-            style={{bottom:"0px"}}>
-                <ChartBar
-                pausePlay={pausePlay}
-                isPlaying={isPlaying}
-                playable={playable}
-                stop={stop}
-                updateSpeed={updateSpeed}
-                setUpdateSpeed={setUpdateSpeed}
-                maxSpeed={maxSpeed}
-                circlesActive={circlesActive}
-                setCirclesActive={setCirclesActive}
-                radiiActive={radiiActive}
-                setRadiiActive={setRadiiActive}
-                outlineActive={outlineActive}
-                setOutlineActive={setOutlineActive}
-                handleZoom={handleZoom}
+                className="position-relative"
+                id="chart_div"
+                onMouseEnter={() => setHideBar(false)}
+                onMouseLeave={() => isPlaying && setHideBar(true)}
+            >
+                <div
+                    className='position-absolute'
+                    hidden={hideBar}
+                    style={{bottom:0, right:0, left:0, background:"blue"}}
+                >
+                    <ChartBar
+                        pausePlay={pausePlay}
+                        isPlaying={isPlaying}
+                        playable={playable}
+                        stop={stop}
+                        updateSpeed={updateSpeed}
+                        setUpdateSpeed={setUpdateSpeed}
+                        maxSpeed={maxSpeed}
+                        circlesActive={circlesActive}
+                        setCirclesActive={setCirclesActive}
+                        radiiActive={radiiActive}
+                        setRadiiActive={setRadiiActive}
+                        outlineActive={outlineActive}
+                        setOutlineActive={setOutlineActive}
+                        handleZoom={handleZoom}
+                    />
+                </div>
+                <ChartInit
+                    circlesActive={circlesActive}
+                    radiiActive={radiiActive}
+                    outlineActive={outlineActive}
+                    lineSegments={lineSegments}
+                    coeffLength={coeff.current.length}
                 />
             </div>
-            <ChartInit
-            circlesActive={circlesActive}
-            radiiActive={radiiActive}
-            outlineActive={outlineActive}
-            lineSegments={lineSegments}
-            coeffLength={coeff.current.length}
-            />
-    </div>
-
-        </div>)
+        </div>
+    )
 };
 
 export default Chart;
