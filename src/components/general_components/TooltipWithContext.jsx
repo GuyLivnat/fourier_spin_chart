@@ -1,6 +1,5 @@
-import { createContext } from "react";
 import { usePopper } from 'react-popper';
-import { useState, usEffect, useEffect, useRef } from 'react';
+import { useState, createContext} from 'react';
 import './Tooltip.css'
 
 const TooltipContext = createContext();

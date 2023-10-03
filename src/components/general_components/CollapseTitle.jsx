@@ -10,7 +10,9 @@ const CollapseTitle = ({title, forBody}) => {
                 data-bs-target={`#${forBody}`}
                 aria-expanded='false'
                 aria-controls={`$${forBody}`}
-                onClick={() => setCollapse(!collapse)}>
+                onClick={() => setCollapse(!collapse)}
+                style={{cursor:"pointer"}}    
+            >
                 {title}
                 <button
                     className='btn btn-sm'

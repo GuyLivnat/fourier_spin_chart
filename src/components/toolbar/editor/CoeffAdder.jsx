@@ -34,7 +34,7 @@ const CoeffAdder = ({setRadius, setAngle, angle, radius, pushCoeff, resetCoeff, 
             />
             <span
                 className="input-group-text text-bg-dark"
-                data-tooltip="angle"
+                data-tooltip="angle (in radians)"
                 onMouseEnter={tooltipIn}
                 onMouseLeave={tooltipOut}
             >

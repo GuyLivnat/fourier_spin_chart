@@ -6,7 +6,7 @@ const ToggleSwitch = ({label, handleClick, isDisabled=false, checked=false}) => 
             className="form-check-input"
             type="checkbox" role="switch"
             id={"toggle-"+label}
-            onClick={()=> handleClick()}
+            onChange={handleClick}
             disabled={isDisabled}
             checked={checked}/>
         <label
