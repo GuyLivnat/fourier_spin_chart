@@ -27,7 +27,7 @@ const Chart = ({units, coeff, playable}) => {
     const [circlesActive, setCirclesActive] = useState(true);
     const [outlineActive, setOutlineActive] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [hideBar, setHideBar] = useState(false);
+    const [hideBar, setHideBar] = useState(100);
     
 
     const pausePlay = () => {
@@ -80,13 +80,13 @@ const Chart = ({units, coeff, playable}) => {
             <div
                 className="position-relative"
                 id="chart_div"
-                onMouseEnter={() => setHideBar(false)}
-                onMouseLeave={() => isPlaying && setHideBar(true)}
+                onMouseEnter={() => setHideBar(100)}
+                onMouseLeave={() => isPlaying && setHideBar(0)}
             >
                 <div
                     className='position-absolute'
-                    hidden={hideBar}
-                    style={{bottom:0, right:0, left:0, background:"blue"}}
+                    
+                    style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}
                 >
                     <ChartBar
                         pausePlay={pausePlay}
