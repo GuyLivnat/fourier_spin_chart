@@ -18,7 +18,9 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
       })
 
     const stop = () => {
-        document.getElementById("stopButton").click() // function found in ../chart/Chart.jsx
+        if (playable) {
+            document.getElementById("stopButton").click() // function found in ../chart/Chart.jsx
+        }
     }
 
     const saveCoeff = (coeffs, name) => {

@@ -47,7 +47,7 @@ const Chart = ({units, coeff, playable}) => {
         time.current = 0;
         edge.current = [];
         frame.current = computeFrame([], 0)
-        renderChart(frame.current, [], lineSegments, units, zoom.current, 0);
+        renderFrame();
     };
 
     const renderFrame = () => {
@@ -90,12 +90,10 @@ const Chart = ({units, coeff, playable}) => {
                 className="position-relative"
                 id="chart_div"
                 onMouseEnter={() => setHideBar(100)}
-                onMouseLeave={() => isPlaying && setHideBar(0)}
-            >
+                onMouseLeave={() => isPlaying && setHideBar(0)}>
                 <div
                     className='position-absolute'
-                    style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}
-                >
+                    style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}>
                     <ChartBar
                         pausePlay={pausePlay}
                         isPlaying={isPlaying}
@@ -113,6 +111,12 @@ const Chart = ({units, coeff, playable}) => {
                         zoomCenter={zoomCenter}
                     />
                 </div>
+                {/* <div className={(edge.current.length || playable)? 'position-absolute justify-content-center align-items-center d-none' : 'position-absolute justify-content-center align-items-center d-flex'}
+                    id='chart-overlay'
+                    onClick={pausePlay}
+                    style={{bottom:0, right:0, left:0, top:0, background:"blue"}}>
+                        {playable? 'load a path, or make your own using the editor, to start' : '\u23F5' }
+                </div> */}
                 <ChartInit
                     circlesActive={circlesActive}
                     radiiActive={radiiActive}

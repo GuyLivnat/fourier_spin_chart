@@ -1,5 +1,5 @@
 
-const Button = ({handleClick, text, isDisabled=false, className, id, img, imgAlt, dataTooltip, onMouseEnter, onMouseLeave}) => {
+const Button = ({handleClick, text, isDisabled=false, className, id, img, imgAlt, dataTooltip, onMouseEnter, onMouseLeave, style}) => {
     return (
         <button
             className={className}
@@ -9,6 +9,7 @@ const Button = ({handleClick, text, isDisabled=false, className, id, img, imgAlt
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             data-tooltip={dataTooltip}
+            style={style}
             type="button">
             {img && <img src={img} alt={imgAlt}/>}
             {text}

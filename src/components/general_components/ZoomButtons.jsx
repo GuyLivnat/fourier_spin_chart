@@ -14,12 +14,14 @@ const ZoomButtons = ({className, handleZoomIn, handleZoomOut, isDisabled}) => {
             isDisabled={isDisabled}
             text={<ZoomInIcon/>}
             handleClick={handleZoomIn}
+            style={{zIndex:'auto'}}
         />
         <Button 
             className={className}
             isDisabled={isDisabled}
             text={<ZoomOutIcon/>}
             handleClick={handleZoomOut}
+            style={{zIndex:'auto'}}
         />
     </div>)
 
