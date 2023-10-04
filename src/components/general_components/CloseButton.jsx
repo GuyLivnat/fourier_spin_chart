@@ -5,8 +5,8 @@ const CloseButton = ({handleClick, isDisabled=false}) => {
             className="btn btn-sm"
             onClick={handleClick}
             disabled={isDisabled}
-            style={{color:"grey"}}
-            >{"\u00d7"}
+            style={{color:"grey"}}>
+            {"\u00d7"}
         </button>
     )
 }

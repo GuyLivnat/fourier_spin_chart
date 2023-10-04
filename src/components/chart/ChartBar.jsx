@@ -28,8 +28,7 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
                     className='btn btn-outline-primary'
                     handleZoomIn={() => zoomCenter(true)}
                     handleZoomOut={() => zoomCenter(false)}
-                    isDisabled={playable}
-                />
+                    isDisabled={playable}/>
             </div>
             <div className="col px-2">
                 <Slider
