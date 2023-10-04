@@ -14,7 +14,6 @@ import moveChart from './moveChart';
 
 const Chart = ({units, coeff, playable}) => {
 
-
     const lineSegments = 40; // used for the gradient effect on the outline
     const maxSpeed = 128;
 
