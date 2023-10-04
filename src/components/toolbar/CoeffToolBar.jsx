@@ -4,7 +4,7 @@ import CoeffList from './CoeffList';
 import CollapseTitle from '../general_components/CollapseTitle';
 
 
-const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
+const CoeffToolBar = ({coeff, playable, refresh, units}) => {
     const [activeId, setActiveId] = useState(null);
     const [coeffList, setCoeffList] = useState(() => {
         const keys = Object.keys(localStorage);
@@ -18,9 +18,7 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
       })
 
     const stop = () => {
-        if (playable) {
-            document.getElementById("stopButton").click() // function found in ../chart/Chart.jsx
-        }
+        document.getElementById("stop-button").click() // function found in ../chart/Chart.jsx
     }
 
     const saveCoeff = (coeffs, name) => {
@@ -31,7 +29,7 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
         if (!coeff.current.length) { // will auto select if nothing is loaded
             setActiveId(id);
             coeff.current = coeffs;
-            setTick(tick+1)
+            refresh();
         }
       }
     return (
@@ -50,10 +48,9 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
                 setCoeffList={setCoeffList}
                 saveCoeff={saveCoeff}
                 units={units}
-                tick={tick}
-                setTick={setTick}
                 coeff={coeff}
-                stop={stop}/>
+                stop={stop}
+                refresh={refresh}/>
         </div>
             <CollapseTitle
                 title="Editor"
@@ -64,8 +61,7 @@ const CoeffToolBar = ({coeff, playable, tick, setTick, units}) => {
             <CoeffEditor
                 playable={playable}
                 coeff={coeff}
-                tick={tick}
-                setTick={setTick}
+                refresh={refresh}
                 saveCoeff={saveCoeff}
                 setActiveId={setActiveId}
                 stop={stop}

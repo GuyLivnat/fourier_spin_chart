@@ -31,6 +31,7 @@ const Chart = ({units, coeff, playable}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [hideBar, setHideBar] = useState(100);
     const [listeners, setListeners] = useState([{evnt:null, func:null}])
+    const [showOverlay, setShowOverlay] = useState(true)
 
     useEffect(() => {    //runs once after render. without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
         const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, renderFrame);
@@ -39,15 +40,16 @@ const Chart = ({units, coeff, playable}) => {
     }, []);
 
     const pausePlay = () => {
-        setIsPlaying(!isPlaying)
+        setIsPlaying(!isPlaying);
     };
 
     const stop = () => {
-        if (isPlaying) setIsPlaying(false);
+        setIsPlaying(false);
         time.current = 0;
         edge.current = [];
-        frame.current = computeFrame([], 0)
+        frame.current = computeFrame([], 0);
         renderFrame();
+        setHideBar(100);
     };
 
     const renderFrame = () => {
@@ -97,7 +99,6 @@ const Chart = ({units, coeff, playable}) => {
                     <ChartBar
                         pausePlay={pausePlay}
                         isPlaying={isPlaying}
-                        playable={playable}
                         stop={stop}
                         updateSpeed={updateSpeed}
                         setUpdateSpeed={setUpdateSpeed}
@@ -111,12 +112,11 @@ const Chart = ({units, coeff, playable}) => {
                         zoomCenter={zoomCenter}
                     />
                 </div>
-                {/* <div className={(edge.current.length || playable)? 'position-absolute justify-content-center align-items-center d-none' : 'position-absolute justify-content-center align-items-center d-flex'}
+                <div className={'position-absolute justify-content-center align-items-center' + ((!playable)? ' d-flex' : ' d-none')}
                     id='chart-overlay'
-                    onClick={pausePlay}
                     style={{bottom:0, right:0, left:0, top:0, background:"blue"}}>
-                        {playable? 'load a path, or make your own using the editor, to start' : '\u23F5' }
-                </div> */}
+                        {'load a path or make your own using the editor' }
+                </div>
                 <ChartInit
                     circlesActive={circlesActive}
                     radiiActive={radiiActive}

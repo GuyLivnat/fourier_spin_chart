@@ -12,23 +12,20 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
                 <Button
                     handleClick={pausePlay}
                     text={isPlaying? '\u23F8' : '\u23F5'}
-                    isDisabled={playable}
-                    className={isPlaying? "btn btn-outline-primary" : "btn btn-primary"}/>
+                    className="btn btn-outline-primary"/>
             </div>
             <div className="col d-flex justify-content-center px-1">
                 <Button
                     handleClick={stop}
                     text={'\u23F9'}
-                    isDisabled={playable}
                     className="btn btn-outline-primary"
-                    id="stopButton"/>
+                    id="stop-button"/>
             </div>
             <div className="col px-1">
                 <ZoomButtons
                     className='btn btn-outline-primary'
                     handleZoomIn={() => zoomCenter(true)}
-                    handleZoomOut={() => zoomCenter(false)}
-                    isDisabled={playable}/>
+                    handleZoomOut={() => zoomCenter(false)}/>
             </div>
             <div className="col px-2">
                 <Slider
@@ -36,28 +33,24 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
                     setValue={setUpdateSpeed}
                     min={0}
                     max={maxSpeed}
-                    text="Speed"
-                    disabled={playable}/>
+                    text="Speed"/>
             </div>
             <div className="col px-1">
                 <ToggleSwitch
                     label={"Circles"}
                     handleClick={() => setCirclesActive(!circlesActive)}
-                    isDisabled={playable}
                     checked={circlesActive}/>
             </div>
             <div className="col px-1">
                 <ToggleSwitch
                     label="Radii"
                     handleClick={() => setRadiiActive(!radiiActive)}
-                    isDisabled={playable}
                     checked={radiiActive}/>
             </div>
             <div className="col px-1">
                 <ToggleSwitch
                     label="Outline"
                     handleClick={() => setOutlineActive(!outlineActive)}
-                    isDisabled={playable}
                     checked={outlineActive}/>
             </div>
         </div>)

@@ -9,19 +9,19 @@ const defaults = [mushu, cat, dog]
 
 
 
-const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, tick, setTick, stop}) => {
+const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, stop, refresh}) => {
 
     const loadCoeff = (e) => {
         let id = null
         if (e.target.id) id = e.target.id
         else if (e.target.parentElement.id) id = e.target.parentElement.id;
-        else if (e.target.parentElement.parentElement.id) id =e.target.parentElement.parentElement.id;
+        else if (e.target.parentElement.parentElement.id) id = e.target.parentElement.parentElement.id;
         if (id) {
             const obj = JSON.parse(localStorage.getItem(id));
             coeff.current = obj.coeff;
             stop();
             setActiveId(id);
-            setTick(tick+1);
+            refresh();
         }
     }
 

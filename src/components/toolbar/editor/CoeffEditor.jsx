@@ -3,7 +3,7 @@ import CoeffTable from "./CoeffTable";
 import CoeffAdder from "./CoeffAdder";
 
 
-const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, stop}) => {
+const CoeffEditor = ({coeff, refresh, saveCoeff, setActiveId, playable, stop}) => {
 
     const [radius, setRadius] = useState(20);
     const [angle, setAngle] = useState(1.5707);
@@ -11,14 +11,14 @@ const CoeffEditor = ({coeff, setTick, tick, saveCoeff, setActiveId, playable, st
     const pushCoeff = () => {
         if(!coeff.current.length) coeff.current = [0, 0, parseFloat(radius), parseFloat(angle)];
         else coeff.current.push(parseFloat(radius), parseFloat(angle));
-        setTick(tick+1);
+        refresh();
         setActiveId(null);
     }
 
     const deleteCoeff = (e) => {
         const id = parseInt(e.target.parentElement.parentElement.id);
         coeff.current = [...coeff.current.slice(0, id), ...coeff.current.slice(id+2)];
-        setTick(tick+1);
+        refresh();
         setActiveId(null);
     }
 
