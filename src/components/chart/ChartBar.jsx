@@ -5,7 +5,7 @@ import Slider from '../general_components/Slider';
 import ToggleSwitch from '../general_components/ToggleSwitch';
 
 const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateSpeed, maxSpeed,
-    circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, handleZoom}) => {
+    circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, zoomCenter}) => {
 
     return (
         <div className="row align-items-center my-1 mx-0">
@@ -30,12 +30,12 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
                         className='btn btn-outline-primary'
                         isDisabled={playable}
                         text={<ZoomInIcon/>}
-                        handleClick={() => handleZoom(true)}/>
+                        handleClick={() => zoomCenter(true)}/>
                     <Button 
                         className='btn btn-outline-primary'
                         isDisabled={playable}
                         text={<ZoomOutIcon/>}
-                        handleClick={() => handleZoom(false)}/>
+                        handleClick={() => zoomCenter(false)}/>
                 </div>
             </div>
             <div className="col px-2">

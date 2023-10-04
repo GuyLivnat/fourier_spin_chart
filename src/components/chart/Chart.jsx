@@ -1,13 +1,16 @@
 import ChartInit from './ChartInit';
 import renderChart from './renderChart'
 import timestep from './math/timestep';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import useInterval from '../../utilities/useInterval';
-import zoomWheelSVG from '../../behaviors/zoomWheelSVG';
+import useListeners from '../../utilities/useListeners';
+import zoomWheelSVGListeners from '../../behaviors/zoomWheelSVGListeners';
+import clickToPlayListeners from '../../behaviors/clickToPlayListeners';
 import zoomCenterSVG from '../../behaviors/zoomCenterSVG';
-import panSVG from '../../behaviors/panSVG';
+import panSVGListeners from '../../behaviors/panSVGListeners';
 import ChartBar from './ChartBar';
 import moveChart from './moveChart';
+
 
 const Chart = ({units, coeff, playable}) => {
 
@@ -28,6 +31,7 @@ const Chart = ({units, coeff, playable}) => {
     const [outlineActive, setOutlineActive] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
     const [hideBar, setHideBar] = useState(100);
+    const [listeners, setListeners] = useState([{evnt:null, func:null}])
     
 
     const pausePlay = () => {
@@ -64,15 +68,19 @@ const Chart = ({units, coeff, playable}) => {
         }
     }
     
-    const handleZoom = (inOut) => {
+    const zoomCenter = (inOut) => {
         zoomCenterSVG('chart', panY, zoom, handleZoomandPan, inOut)
     };
 
+  
+    useEffect(() => {    //runs once, without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
+        const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
+        const panListeners = panSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
+        setListeners([...zoomListeners, ...panListeners])
+    }, [])
 
-    zoomWheelSVG('chart', panX, panY, zoom, handleZoomandPan);  // attaches zoom functionality to the chart
-    panSVG('chart', panX, panY, zoom, handleZoomandPan);  // attaches pan functionality to the chart
-
-
+    useListeners('chart', listeners, [listeners]) // adds stateless listeners (zoom and pan)
+    useListeners('chart', clickToPlayListeners(pausePlay), [isPlaying]) //adds click to pause/play
     useInterval(update, isPlaying? (maxSpeed - updateSpeed) : null); //plays the chart
 
     return(
@@ -85,7 +93,6 @@ const Chart = ({units, coeff, playable}) => {
             >
                 <div
                     className='position-absolute'
-                    
                     style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}
                 >
                     <ChartBar
@@ -102,7 +109,7 @@ const Chart = ({units, coeff, playable}) => {
                         setRadiiActive={setRadiiActive}
                         outlineActive={outlineActive}
                         setOutlineActive={setOutlineActive}
-                        handleZoom={handleZoom}
+                        zoomCenter={zoomCenter}
                     />
                 </div>
                 <ChartInit
