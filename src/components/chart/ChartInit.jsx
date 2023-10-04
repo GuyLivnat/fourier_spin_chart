@@ -1,9 +1,6 @@
 
 const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coeffLength}) => {
-    const starSize = 1.5;
-
-    const chart = document.getElementById("chart");
-    const minStroke = chart ? 1000/chart.clientWidth : 0.1;
+    const circleSize = 1.5;
 
     const circles = []
     for (let i=0; i < coeffLength; i++) {
@@ -19,7 +16,7 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
     for (let i=0; i<lineSegments; i++) {
         let strength = ((lineSegments-i)/lineSegments)
         edgeSegments.push(<path
-            markerStart={(i===0) || (i===1)? "url(#star)": null}
+            markerStart={(i===0) || (i===1)? "url(#circle-marker)": null}
             key={i}
             id={"edge_" + i}
             opacity={strength}>
@@ -34,14 +31,14 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
 
         <defs>
             <marker
-                id="star" 
+                id="circle-marker" 
                 orient={"auto"} 
-                markerHeight={starSize*2} 
-                markerWidth={starSize*2} 
-                refX={starSize} 
-                refY={starSize}
+                markerHeight={circleSize*2} 
+                markerWidth={circleSize*2} 
+                refX={circleSize} 
+                refY={circleSize}
             >
-                <circle r={starSize} cx={starSize} cy={starSize} fill="white"></circle>
+                <circle r={circleSize} cx={circleSize} cy={circleSize} fill="white"></circle>
             </marker>
         </defs>
         <g id="chart-shapes" transform="translate(500, 500)">
@@ -49,7 +46,7 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
                 id="circles"
                 stroke="white"
                 display={circlesActive? "true" : "none"}
-                style={{fill: "none", strokeWidth: minStroke}}
+                style={{fill: "none"}}
                 opacity="40%"
             >
                 {circles}
@@ -58,14 +55,14 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
                 id="radii"
                 stroke="rgb(191, 194, 240)"
                 display={radiiActive? "true" : "none"}
-                markerStart={"url(#star)"}
-                style={{ fill:"none", strokeWidth: minStroke*2}}
+                markerStart={"url(#circle-marker)"}
+                style={{ fill:"none"}}
                 opacity="50%"
                 >
             </path>
             <g
                 id="edge"
-                style={{fill: "none", strokeWidth: minStroke*2.5}}
+                style={{fill: "none"}}
                 stroke="rgb(172, 106, 106)"
                 display={outlineActive? "true" : "none"}
             >

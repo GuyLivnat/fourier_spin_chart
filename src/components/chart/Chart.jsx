@@ -1,6 +1,6 @@
 import ChartInit from './ChartInit';
 import renderChart from './renderChart'
-import timestep from './math/timestep';
+import computeFrame from './math/computeFrame';
 import { useRef, useState, useEffect } from 'react';
 import useInterval from '../../utilities/useInterval';
 import useListeners from '../../utilities/useListeners';
@@ -9,7 +9,6 @@ import clickToPlayListeners from '../../behaviors/clickToPlayListeners';
 import zoomCenterSVG from '../../behaviors/zoomCenterSVG';
 import panSVGListeners from '../../behaviors/panSVGListeners';
 import ChartBar from './ChartBar';
-import moveChart from './moveChart';
 
 
 const Chart = ({units, coeff, playable}) => {
@@ -19,6 +18,7 @@ const Chart = ({units, coeff, playable}) => {
 
     const edge = useRef([]);
     const time = useRef(0);
+    const frame = useRef(computeFrame([], 0));
 
     const zoom = useRef(1000);
     const panX = useRef(0);
@@ -33,8 +33,8 @@ const Chart = ({units, coeff, playable}) => {
     const [listeners, setListeners] = useState([{evnt:null, func:null}])
 
     useEffect(() => {    //runs once after render. without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
-        const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
-        const panListeners = panSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
+        const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, renderFrame);
+        const panListeners = panSVGListeners('chart', panX, panY, zoom, renderFrame);
         setListeners([...zoomListeners, ...panListeners])
     }, []);
 
@@ -46,36 +46,43 @@ const Chart = ({units, coeff, playable}) => {
         if (isPlaying) setIsPlaying(false);
         time.current = 0;
         edge.current = [];
-        renderChart(timestep([], 0), [], lineSegments, units, zoom.current, 0);
+        frame.current = computeFrame([], 0)
+        renderChart(frame.current, [], lineSegments, units, zoom.current, 0);
     };
-   
-    const update = () => {  // computes the next frame 
+
+    const renderFrame = () => {
+        renderChart(
+            frame.current,
+            edge.current,
+            lineSegments,
+            units,
+            zoom.current,
+            panX.current,
+            panY.current, coeff.current.length);
+    }
+
+    const timestep = () => {
         const step = 1/(units*2);
         if (time.current === 1) time.current = 0
         else time.current += step
-
-        const frame = timestep(coeff.current, time.current);
-
-        edge.current.unshift({ x: frame.edge.x, y: frame.edge.y });
+    }
+   
+    const renderNextFrame = () => {  // computes the next frame 
+        timestep();
+        frame.current = computeFrame(coeff.current, time.current);
+        edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
         if (edge.current.length > units) edge.current.pop();
-
-        renderChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
+        renderFrame();
     };
 
-    const handleZoomandPan = () => {
-        moveChart(panX, panY, zoom);
-        if (!isPlaying) {
-            const frame = timestep(coeff.current, time.current);
-            renderChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
-    }};
     
     const zoomCenter = (inOut) => {
-        zoomCenterSVG('chart', panY, zoom, handleZoomandPan, inOut)
+        zoomCenterSVG('chart', panY, zoom, renderFrame, inOut)
     };
 
     useListeners('chart', listeners, [listeners]) // adds stateless listeners (zoom and pan)
     useListeners('chart', clickToPlayListeners(pausePlay), [isPlaying]) //adds click to pause/play
-    useInterval(update, isPlaying? (maxSpeed - updateSpeed) : null); //plays the chart
+    useInterval(renderNextFrame, isPlaying? (maxSpeed - updateSpeed) : null); //plays the chart
 
     return(
         <div className="col order-1 mt-5">

@@ -1,6 +1,6 @@
 
 
-export default function timestep(coeff, time) {
+const computeFrame = (coeff, time) => {
     const frame = {circles : []}
     const omega = 2 * Math.PI * time;
     
@@ -32,3 +32,5 @@ export default function timestep(coeff, time) {
     return frame
 
   }
+
+  export default computeFrame;

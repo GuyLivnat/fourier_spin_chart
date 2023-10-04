@@ -1,10 +1,13 @@
 import * as d3 from "d3";
 
 
-const renderChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
+const renderChart = (frame, edge, lineSegments, units, zoom, panX, panY, coeffLength) => {
     
     const segment = units/lineSegments;
     const chart = document.getElementById("chart");
+
+    const minStroke = zoom/chart.clientWidth;
+
     const scalingMin = zoom/chart.clientWidth*15;
     const minircle = (zoom/150 > scalingMin)? zoom/150 : scalingMin; 
     const filteredFrame = frame.circles.filter((circle, i) => {if(circle.r > minircle || (i === (coeffLength/2-1) && coeffLength > 2)) return circle})
@@ -25,10 +28,18 @@ const renderChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
             .attr("r", 0)
         }
     };
+    d3.select("#circles").style("stroke-width", () => minStroke);
 
+    d3.select("#chart")
+        .attr("viewBox", `${panX} ${panY} ${zoom} ${zoom * 0.5625}`)
+        .select("#chart-shapes")
+            .attr("transform", `translate(${zoom/2}, ${zoom/2})`)
 
     d3.select("#radii")
-        .attr("d", line(filteredFrame));
+        .attr("d", line(filteredFrame))
+        .style("stroke-width", () => minStroke*2);
+
+    d3.select("#edge").style("stroke-width", () => minStroke*2.5);
 
     for (let i=0; i<lineSegments; i++) {
         let start = ((i === 0 || i === 1)) ? 0 : (segment*(i-1))-1;
@@ -39,3 +50,4 @@ const renderChart = (frame, edge, lineSegments, units, zoom, coeffLength) => {
 };
 
 export default renderChart;
+
