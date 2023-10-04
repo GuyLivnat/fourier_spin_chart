@@ -4,7 +4,11 @@ import ZoomOutIcon from '../../assets/icons/ZoomOutIcon';
 
 const ZoomButtons = ({className, handleZoomIn, handleZoomOut, isDisabled}) => {
 
-    return (<>
+    return (
+    <div
+        className="input-group btn-group-sm flex-nowrap" 
+        role="group"
+    >
         <Button 
             className={className}
             isDisabled={isDisabled}
@@ -17,7 +21,7 @@ const ZoomButtons = ({className, handleZoomIn, handleZoomOut, isDisabled}) => {
             text={<ZoomOutIcon/>}
             handleClick={handleZoomOut}
         />
-    </>)
+    </div>)
 
 }
 

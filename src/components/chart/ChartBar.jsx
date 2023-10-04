@@ -24,14 +24,12 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
                     id="stopButton"/>
             </div>
             <div className="col px-1">
-                <div className="input-group btn-group-sm flex-nowrap" role="group">
-                    <ZoomButtons
-                        className='btn btn-outline-primary'
-                        handleZoomIn={() => zoomCenter(true)}
-                        handleZoomOut={() => zoomCenter(false)}
-                        isDisabled={playable}
-                    />
-                </div>
+                <ZoomButtons
+                    className='btn btn-outline-primary'
+                    handleZoomIn={() => zoomCenter(true)}
+                    handleZoomOut={() => zoomCenter(false)}
+                    isDisabled={playable}
+                />
             </div>
             <div className="col px-2">
                 <Slider
