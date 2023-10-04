@@ -1,8 +1,7 @@
-import ZoomInIcon from '../../assets/icons/ZoomInIcon';
-import ZoomOutIcon from '../../assets/icons/ZoomOutIcon';
 import Button from '../general_components/Button';
 import Slider from '../general_components/Slider';
 import ToggleSwitch from '../general_components/ToggleSwitch';
+import ZoomButtons from '../general_components/ZoomButtons';
 
 const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateSpeed, maxSpeed,
     circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, zoomCenter}) => {
@@ -26,16 +25,12 @@ const ChartBar = ({pausePlay, isPlaying, playable, stop, updateSpeed, setUpdateS
             </div>
             <div className="col px-1">
                 <div className="input-group btn-group-sm flex-nowrap" role="group">
-                    <Button 
+                    <ZoomButtons
                         className='btn btn-outline-primary'
+                        handleZoomIn={() => zoomCenter(true)}
+                        handleZoomOut={() => zoomCenter(false)}
                         isDisabled={playable}
-                        text={<ZoomInIcon/>}
-                        handleClick={() => zoomCenter(true)}/>
-                    <Button 
-                        className='btn btn-outline-primary'
-                        isDisabled={playable}
-                        text={<ZoomOutIcon/>}
-                        handleClick={() => zoomCenter(false)}/>
+                    />
                 </div>
             </div>
             <div className="col px-2">
