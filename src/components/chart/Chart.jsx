@@ -58,14 +58,15 @@ const Chart = ({units, coeff, playable}) => {
             units,
             zoom.current,
             panX.current,
-            panY.current, coeff.current.length);
-    }
+            panY.current,
+            coeff.current.length);
+    };
 
     const timestep = () => {
         const step = 1/(units*2);
         if (time.current === 1) time.current = 0
         else time.current += step
-    }
+    };
    
     const renderNextFrame = () => {  // computes the next frame 
         timestep();
@@ -74,7 +75,6 @@ const Chart = ({units, coeff, playable}) => {
         if (edge.current.length > units) edge.current.pop();
         renderFrame();
     };
-
     
     const zoomCenter = (inOut) => {
         zoomCenterSVG('chart', panY, zoom, renderFrame, inOut)
