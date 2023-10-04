@@ -32,16 +32,19 @@ const Chart = ({units, coeff, playable}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [hideBar, setHideBar] = useState(100);
     const [listeners, setListeners] = useState([{evnt:null, func:null}])
-    
+
+    useEffect(() => {    //runs once after render. without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
+        const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
+        const panListeners = panSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
+        setListeners([...zoomListeners, ...panListeners])
+    }, []);
 
     const pausePlay = () => {
         setIsPlaying(!isPlaying)
     };
 
     const stop = () => {
-        if (isPlaying) {
-            setIsPlaying(false)
-        }
+        if (isPlaying) setIsPlaying(false);
         time.current = 0;
         edge.current = [];
         renderChart(timestep([], 0), [], lineSegments, units, zoom.current, 0);
@@ -65,19 +68,11 @@ const Chart = ({units, coeff, playable}) => {
         if (!isPlaying) {
             const frame = timestep(coeff.current, time.current);
             renderChart(frame, edge.current, lineSegments, units, zoom.current, coeff.current.length);
-        }
-    }
+    }};
     
     const zoomCenter = (inOut) => {
         zoomCenterSVG('chart', panY, zoom, handleZoomandPan, inOut)
     };
-
-  
-    useEffect(() => {    //runs once, without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
-        const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
-        const panListeners = panSVGListeners('chart', panX, panY, zoom, handleZoomandPan);
-        setListeners([...zoomListeners, ...panListeners])
-    }, [])
 
     useListeners('chart', listeners, [listeners]) // adds stateless listeners (zoom and pan)
     useListeners('chart', clickToPlayListeners(pausePlay), [isPlaying]) //adds click to pause/play
