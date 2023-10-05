@@ -31,9 +31,11 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
         if (activeId === id) {
             stop();
             coeff.current = [];
+            setPathName('');
         };
         localStorage.removeItem(id)
         setCoeffList(coeffList.filter(item => item.id != id))
+
     }
 
     const deleteAllCoeff = () => {
@@ -41,6 +43,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
         coeff.current = [];
         setCoeffList([]);
         localStorage.clear();
+        setPathName('');
     }
 
     const saveDefault = (coeffs, name, id) => {
