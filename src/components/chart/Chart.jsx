@@ -1,5 +1,6 @@
 import ChartInit from './ChartInit';
 import renderChart from './renderChart'
+import renderTimeSlider from './renderTimeSlider';
 import computeFrame from './math/computeFrame';
 import { useRef, useState, useEffect } from 'react';
 import useInterval from '../../utilities/useInterval';
@@ -9,6 +10,7 @@ import clickToPlayListeners from '../../behaviors/clickToPlayListeners';
 import zoomCenterSVG from '../../behaviors/zoomCenterSVG';
 import panSVGListeners from '../../behaviors/panSVGListeners';
 import ChartBar from './ChartBar';
+import ChartOverlay from './ChartOverlay';
 
 
 const Chart = ({units, coeff, playable}) => {
@@ -31,7 +33,6 @@ const Chart = ({units, coeff, playable}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [hideBar, setHideBar] = useState(100);
     const [listeners, setListeners] = useState([{evnt:null, func:null}])
-    const [showOverlay, setShowOverlay] = useState(true)
 
     useEffect(() => {    //runs once after render. without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
         const zoomListeners = zoomWheelSVGListeners('chart', panX, panY, zoom, renderFrame);
@@ -62,6 +63,7 @@ const Chart = ({units, coeff, playable}) => {
             panX.current,
             panY.current,
             coeff.current.length);
+        renderTimeSlider(time.current);
     };
 
     const timestep = () => {
@@ -77,6 +79,18 @@ const Chart = ({units, coeff, playable}) => {
         if (edge.current.length > units) edge.current.pop();
         renderFrame();
     };
+
+    const renderSkipToFrame = (skipToTime) => {
+        const step = 1/(units*2);
+        const distance = (skipToTime > time.current)?skipToTime - time.current : 1 - time.current + skipToTime;
+        for(let _ = 0; _ < distance; _ += step) {
+            timestep();
+            let missingFrame = computeFrame(coeff.current, time.current);
+            edge.current.unshift({ x: missingFrame.edge.x, y: missingFrame.edge.y });
+            if (edge.current.length > units) edge.current.pop();
+        }
+        renderNextFrame();
+    }
     
     const zoomCenter = (inOut) => {
         zoomCenterSVG('chart', panY, zoom, renderFrame, inOut)
@@ -93,35 +107,33 @@ const Chart = ({units, coeff, playable}) => {
                 id="chart_div"
                 onMouseEnter={() => setHideBar(100)}
                 onMouseLeave={() => isPlaying && setHideBar(0)}>
-                <div
-                    className='position-absolute'
-                    style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}>
                     <ChartBar
-                        pausePlay={pausePlay}
-                        isPlaying={isPlaying}
-                        stop={stop}
-                        updateSpeed={updateSpeed}
-                        setUpdateSpeed={setUpdateSpeed}
-                        maxSpeed={maxSpeed}
-                        circlesActive={circlesActive}
-                        setCirclesActive={setCirclesActive}
-                        radiiActive={radiiActive}
-                        setRadiiActive={setRadiiActive}
-                        outlineActive={outlineActive}
-                        setOutlineActive={setOutlineActive}
-                        zoomCenter={zoomCenter}
+                        {...{hideBar,
+                        pausePlay,
+                        isPlaying,
+                        stop,
+                        updateSpeed,
+                        setUpdateSpeed,
+                        maxSpeed,
+                        circlesActive,
+                        setCirclesActive,
+                        radiiActive,
+                        setRadiiActive,
+                        outlineActive,
+                        setOutlineActive,
+                        zoomCenter,
+                        time,
+                        units,
+                        renderSkipToFrame}}
                     />
-                </div>
-                <div className={'position-absolute justify-content-center align-items-center' + ((!playable)? ' d-flex' : ' d-none')}
-                    id='chart-overlay'
-                    style={{bottom:0, right:0, left:0, top:0, background:"blue"}}>
-                        {'load a path or make your own using the editor' }
-                </div>
+                <ChartOverlay
+                    playable={playable}
+                />
                 <ChartInit
-                    circlesActive={circlesActive}
-                    radiiActive={radiiActive}
-                    outlineActive={outlineActive}
-                    lineSegments={lineSegments}
+                    {...{circlesActive,
+                    radiiActive,
+                    outlineActive,
+                    lineSegments}}
                     coeffLength={coeff.current.length}
                 />
             </div>

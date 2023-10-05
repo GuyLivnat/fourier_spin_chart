@@ -16,7 +16,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
         if (e.target.id) id = e.target.id
         else if (e.target.parentElement.id) id = e.target.parentElement.id;
         else if (e.target.parentElement.parentElement.id) id = e.target.parentElement.parentElement.id;
-        if (id) {
+        if (id && (id !== activeId) && (id !== 'setNewName')) {
             const obj = JSON.parse(localStorage.getItem(id));
             coeff.current = obj.coeff;
             stop();

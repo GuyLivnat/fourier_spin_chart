@@ -6,8 +6,8 @@ const TextInput = ({placeholder="", setText, text, focus, accept, cancel, id}) =
     }
     
     const handleKeyDown = (e) => {
-        if (e.keyCode === 13) accept();
-        else if (e.keyCode === 27) cancel();
+        if (e.keyCode === 13) accept(); // enter/return
+        else if (e.keyCode === 27) cancel();  // esc
     }
 
 return (

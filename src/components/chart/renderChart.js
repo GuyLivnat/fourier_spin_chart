@@ -28,7 +28,7 @@ const renderChart = (frame, edge, lineSegments, units, zoom, panX, panY, coeffLe
             .attr("r", 0)
         }
     };
-    d3.select("#circles").style("stroke-width", () => minStroke);
+    d3.select("#circles").style("stroke-width", minStroke);
 
     d3.select("#chart")
         .attr("viewBox", `${panX} ${panY} ${zoom} ${zoom * 0.5625}`)
@@ -37,9 +37,9 @@ const renderChart = (frame, edge, lineSegments, units, zoom, panX, panY, coeffLe
 
     d3.select("#radii")
         .attr("d", line(filteredFrame))
-        .style("stroke-width", () => minStroke*2);
+        .style("stroke-width", minStroke*2);
 
-    d3.select("#edge").style("stroke-width", () => minStroke*2.5);
+    d3.select("#edge").style("stroke-width", minStroke*2.5);
 
     for (let i=0; i<lineSegments; i++) {
         let start = ((i === 0 || i === 1)) ? 0 : (segment*(i-1))-1;
