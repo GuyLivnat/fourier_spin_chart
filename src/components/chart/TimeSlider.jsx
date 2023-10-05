@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Slider from "../general_components/Slider";
+import './TimeSlider.css'
 
 const TimeSlider = ({units, renderSkipToFrame}) => {
     const step = 1/(units*2)
@@ -10,15 +9,19 @@ const TimeSlider = ({units, renderSkipToFrame}) => {
     }
 
     return ( 
-        <input
-            type="range"
-            id={"time-slider"}
-            min={0}
-            max={1}
-            step={step}
-            onChange={handleChange}
-            className="form-range"
-        />
+        <div id = 'time-slider-wrapper'>
+            <div id='time-slider-fillbar'></div>
+            <input
+                type='range'
+                id='time-slider-input'
+                min={0}
+                max={1}
+                step={step}
+                onChange={handleChange}
+                // className="form-range"
+                // style={}
+            />
+        </div>
     )
 }
 

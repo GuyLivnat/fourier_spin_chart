@@ -12,11 +12,11 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
         <div
             className='position-absolute'
             style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}>
-                <div>
+
                     <TimeSlider
                     {...{units, time, renderSkipToFrame} }
                     />
-                </div>
+
             <div className="row align-items-center my-1 mx-0">
                 <div className="col d-flex justify-content-center px-1" id="pausePlay">
                     <Button

@@ -1,0 +1,21 @@
+#time-slider-input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 0.4rem;
+}
+
+#time-slider-fillbar {
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 100%;
+    pointer-events: none;
+    height: 0.4rem;
+}
+
+#time-slider-wrapper {
+    height: 0.4rem;
+}
