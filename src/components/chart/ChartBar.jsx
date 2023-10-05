@@ -31,10 +31,9 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
                         className="btn btn-outline-primary"
                         id="stop-button"/>
                 </div>
-                <div 
-                    className='col px-1 text-center'>
+                <div className='col-3 px-1 text-center'
+                    style={{overflow:'hidden', whiteSpace:'nowrap', textOverflow:'ellipsis'}}>
                     {pathName}
-
                 </div>
                 <div className="col px-1">
                     <ZoomButtons

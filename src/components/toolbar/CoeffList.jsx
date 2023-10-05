@@ -57,7 +57,6 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             for (const item of coeffList) {
                 if (item.id === object.id) flag = true;
             }
-
             if (!flag) { // object not found
                 missingDefaults.push({name: object.name, id: object.id, default:true})
                 saveDefault(object.coeff, object.name, object.id);
