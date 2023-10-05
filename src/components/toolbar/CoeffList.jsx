@@ -32,6 +32,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             stop();
             coeff.current = [];
             setPathName('');
+            setActiveId(null)
         };
         localStorage.removeItem(id)
         setCoeffList(coeffList.filter(item => item.id != id))
@@ -53,10 +54,8 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
 
     const resetDefaultCoeff = () => {
         const missingDefaults = [];
-
         for (const object of defaults) {
             let flag = false;
-
             for (const item of coeffList) {
                 if (item.id === object.id) flag = true;
             }
