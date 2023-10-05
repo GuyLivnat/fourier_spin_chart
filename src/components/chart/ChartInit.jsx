@@ -1,6 +1,10 @@
+import gradientSampler from "../../utilities/gradientSampler";
+
 
 const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coeffLength}) => {
     const circleSize = 1.5;
+    const edgeColor = {r:172, g:106, b:106};
+    const backgroundColor = {r:0, g:0, b:0};
 
     const circles = []
     for (let i=0; i < coeffLength; i++) {
@@ -14,19 +18,21 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
 
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
-        let strength = ((lineSegments-i)/lineSegments)
-        edgeSegments.push(<path
+        let strength = ((lineSegments-i)/lineSegments);
+        edgeSegments.push(
+        <path
             markerStart={(i===0) || (i===1)? "url(#circle-marker)": null}
             key={i}
             id={"edge_" + i}
-            opacity={strength}>
+            stroke={gradientSampler(edgeColor, backgroundColor, strength)}
+        >
         </path> )
     }
 
     return (<svg
         id="chart"
         viewBox={"0, 230, 1000, 562.5"} //0.5625 is for 16:9 aspect ratio 
-        style={{backgroundColor : 'black'}}
+        style={{backgroundColor : `rgb(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b})`}}
         >
 
         <defs>
@@ -42,6 +48,13 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
             </marker>
         </defs>
         <g id="chart-shapes" transform="translate(500, 500)">
+            <g
+                id="edge"
+                style={{fill: "none"}}
+                display={outlineActive? "true" : "none"}
+            >
+            {edgeSegments} 
+            </g>
             <g
                 id="circles"
                 stroke="white"
@@ -60,14 +73,6 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
                 opacity="50%"
                 >
             </path>
-            <g
-                id="edge"
-                style={{fill: "none"}}
-                stroke="rgb(172, 106, 106)"
-                display={outlineActive? "true" : "none"}
-            >
-            {edgeSegments} 
-            </g>
         </g>
     </svg>)
 }
