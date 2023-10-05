@@ -25,6 +25,7 @@ const CoeffEditor = ({coeff, setPathName, saveCoeff, setActiveId, playable, stop
     const resetCoeff = () => {
         coeff.current = [0,0];
         stop();
+        setPathName('Reset at ' + new Date().toLocaleString());
         setActiveId(null);
     }
 
