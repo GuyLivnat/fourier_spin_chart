@@ -2,7 +2,7 @@
 
 const computeFrame = (coeff, time) => {
     const frame = {circles : []}
-    const omega = 2 * Math.PI * time;
+    const omega = Math.PI * time;
     
     let x = 0;
     let y = 0;
@@ -13,7 +13,7 @@ const computeFrame = (coeff, time) => {
       frame.circles.push ({
         x: x,
         y: y,
-        angle: theta/2,
+        // angle: theta,
         r: r,
       })
       x += r * Math.cos(theta);
@@ -22,7 +22,7 @@ const computeFrame = (coeff, time) => {
     frame.circles.push ({
         x: x,
         y: y,
-        angle: 0,
+        // angle: 0,
         r: 0,
     })
     frame.edge = {

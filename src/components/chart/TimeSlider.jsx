@@ -1,7 +1,7 @@
 import './TimeSlider.css'
 
 const TimeSlider = ({units, renderSkipToFrame}) => {
-    const step = 1/(units*2)
+    const step = 1/(units)
 
     const handleChange = (e) => {
         const time = parseFloat(e.target.value);

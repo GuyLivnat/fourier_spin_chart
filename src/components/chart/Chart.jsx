@@ -67,7 +67,7 @@ const Chart = ({units, coeff, playable, pathName}) => {
     };
 
     const timestep = () => {
-        const step = 1/(units*2);
+        const step = 1/(units);
         if (time.current === 1) time.current = 0
         else time.current += step
     };
@@ -81,7 +81,7 @@ const Chart = ({units, coeff, playable, pathName}) => {
     };
 
     const renderSkipToFrame = (skipToTime) => {
-        const step = 1/(units*2);
+        const step = 1/(units);
         if (edge.current.length < units ) {
             time.current = 0;
             edge.current =[];
