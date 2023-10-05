@@ -19,7 +19,7 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
     const edgeSegments = []
     for (let i=0; i<lineSegments; i++) {
         let strength = ((lineSegments-i)/lineSegments);
-        edgeSegments.push(
+        edgeSegments.unshift(
         <path
             markerStart={(i===0) || (i===1)? "url(#circle-marker)": null}
             key={i}
@@ -53,7 +53,7 @@ const ChartInit = ({circlesActive, radiiActive, outlineActive, lineSegments, coe
                 style={{fill: "none"}}
                 display={outlineActive? "true" : "none"}
             >
-            {edgeSegments} 
+                {edgeSegments} 
             </g>
             <g
                 id="circles"
