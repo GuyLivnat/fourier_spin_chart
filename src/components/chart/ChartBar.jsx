@@ -5,7 +5,7 @@ import ZoomButtons from '../general_components/ZoomButtons';
 import TimeSlider from './TimeSlider';
 
 const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSpeed, maxSpeed, time, units, renderSkipToFrame,
-    circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, zoomCenter}) => {
+    circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, zoomCenter, pathName}) => {
         
 
     return (
@@ -30,6 +30,11 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
                         text={'\u23F9'}
                         className="btn btn-outline-primary"
                         id="stop-button"/>
+                </div>
+                <div 
+                    className='col px-1 text-center'>
+                    {pathName}
+
                 </div>
                 <div className="col px-1">
                     <ZoomButtons

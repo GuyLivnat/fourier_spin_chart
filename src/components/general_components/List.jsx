@@ -12,6 +12,7 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults, upl
   const [newName, setNewName] = useState("")
 
   const handleRename = (e) => {
+    e.stopPropagation();
     const element = e.target.parentElement.parentElement;
     const text =  element.childNodes[0].childNodes[0].childNodes[0].wholeText;
     setRenameId(element.id);

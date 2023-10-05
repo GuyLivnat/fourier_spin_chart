@@ -13,7 +13,7 @@ const computeFrame = (coeff, time) => {
       frame.circles.push ({
         x: x,
         y: y,
-        angle: theta,
+        angle: theta/2,
         r: r,
       })
       x += r * Math.cos(theta);
@@ -29,7 +29,7 @@ const computeFrame = (coeff, time) => {
       x: x,
       y: y,
     }
-    return frame
+    return frame;
 
   }
 

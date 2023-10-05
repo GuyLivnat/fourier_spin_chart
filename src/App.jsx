@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import CoeffToolBar from './components/toolbar/CoeffToolBar';
 import Chart from './components/chart/Chart';
 import { TooltipProvider } from './components/general_components/TooltipWithContext';
-import useBool from './utilities/useBool';
 
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
   const units = 256;  // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
 
-  const [_, refresh] = useBool();
+  const [pathName, setPathName] = useState('');
   let playable = coeff.current.length > 3;
 
   return (
@@ -18,15 +17,16 @@ function App() {
     <TooltipProvider>
     <div className="row">
       <Chart
-        playable={playable}
-        coeff={coeff}
-        units={units}
+        {...{playable,
+        pathName,
+        coeff,
+        units}}
       />
       <CoeffToolBar
-        playable={playable}
-        coeff={coeff}
-        refresh={refresh}
-        units={units}
+        {...{playable,
+        coeff,
+        setPathName,
+        units}}
       />
     </div>
     </TooltipProvider>

@@ -4,7 +4,7 @@ import CoeffList from './CoeffList';
 import CollapseTitle from '../general_components/CollapseTitle';
 
 
-const CoeffToolBar = ({coeff, playable, refresh, units}) => {
+const CoeffToolBar = ({coeff, playable, setPathName, units}) => {
     const [activeId, setActiveId] = useState(null);
     const [coeffList, setCoeffList] = useState(() => {
         const keys = Object.keys(localStorage);
@@ -29,7 +29,7 @@ const CoeffToolBar = ({coeff, playable, refresh, units}) => {
         if (!coeff.current.length) { // will auto select if nothing is loaded
             setActiveId(id);
             coeff.current = coeffs;
-            refresh();
+            setPathName(name);
         }
       }
     return (
@@ -50,7 +50,7 @@ const CoeffToolBar = ({coeff, playable, refresh, units}) => {
                 units={units}
                 coeff={coeff}
                 stop={stop}
-                refresh={refresh}/>
+                setPathName={setPathName}/>
         </div>
             <CollapseTitle
                 title="Editor"
@@ -61,7 +61,7 @@ const CoeffToolBar = ({coeff, playable, refresh, units}) => {
             <CoeffEditor
                 playable={playable}
                 coeff={coeff}
-                refresh={refresh}
+                setPathName={setPathName}
                 saveCoeff={saveCoeff}
                 setActiveId={setActiveId}
                 stop={stop}

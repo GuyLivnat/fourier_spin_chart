@@ -5,7 +5,7 @@ import transformRadix2 from './fft';
 const createCoeff = (path, units) => {
   const points =  generatePoints(path, units);
   const coeff = calculateCoeff(points, units);
-  return coeff
+  return coeff;
 }
 
 const generatePoints = (path, units) => {
@@ -17,7 +17,7 @@ const generatePoints = (path, units) => {
     points.push(point.y);
     setTimeout(() => {return}, 0)
     }
-  return points
+  return points;
   }
   
 const calculateCoeff = (points, units) => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Slider from "../general_components/Slider";
 
 const TimeSlider = ({units, renderSkipToFrame}) => {
-    const step = 1/units
+    const step = 1/(units*2)
 
     const handleChange = (e) => {
         const time = parseFloat(e.target.value);

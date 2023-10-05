@@ -13,7 +13,7 @@ import ChartBar from './ChartBar';
 import ChartOverlay from './ChartOverlay';
 
 
-const Chart = ({units, coeff, playable}) => {
+const Chart = ({units, coeff, playable, pathName}) => {
 
     const lineSegments = 40; // used for the gradient effect on the outline
     const maxSpeed = 128;
@@ -82,7 +82,11 @@ const Chart = ({units, coeff, playable}) => {
 
     const renderSkipToFrame = (skipToTime) => {
         const step = 1/(units*2);
-        const distance = (skipToTime > time.current)?skipToTime - time.current : 1 - time.current + skipToTime;
+        if (edge.current.length < units ) {
+            time.current = 0;
+            edge.current =[];
+        }
+        const distance = (skipToTime > time.current) ? skipToTime - time.current : 1 - time.current + skipToTime;
         for(let _ = 0; _ < distance; _ += step) {
             timestep();
             let missingFrame = computeFrame(coeff.current, time.current);
@@ -124,7 +128,8 @@ const Chart = ({units, coeff, playable}) => {
                         zoomCenter,
                         time,
                         units,
-                        renderSkipToFrame}}
+                        renderSkipToFrame,
+                        pathName}}
                     />
                 <ChartOverlay
                     playable={playable}

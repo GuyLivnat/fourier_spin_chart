@@ -3,7 +3,7 @@ import CoeffTable from "./CoeffTable";
 import CoeffAdder from "./CoeffAdder";
 
 
-const CoeffEditor = ({coeff, refresh, saveCoeff, setActiveId, playable, stop}) => {
+const CoeffEditor = ({coeff, setPathName, saveCoeff, setActiveId, playable, stop}) => {
 
     const [radius, setRadius] = useState(20);
     const [angle, setAngle] = useState(1.5707);
@@ -11,14 +11,14 @@ const CoeffEditor = ({coeff, refresh, saveCoeff, setActiveId, playable, stop}) =
     const pushCoeff = () => {
         if(!coeff.current.length) coeff.current = [0, 0, parseFloat(radius), parseFloat(angle)];
         else coeff.current.push(parseFloat(radius), parseFloat(angle));
-        refresh();
+        setPathName('Edited at ' + new Date().toLocaleString());
         setActiveId(null);
     }
 
     const deleteCoeff = (e) => {
         const id = parseInt(e.target.parentElement.parentElement.id);
         coeff.current = [...coeff.current.slice(0, id), ...coeff.current.slice(id+2)];
-        refresh();
+        setPathName('Edited at ' + new Date().toLocaleString());
         setActiveId(null);
     }
 
@@ -31,6 +31,7 @@ const CoeffEditor = ({coeff, refresh, saveCoeff, setActiveId, playable, stop}) =
     const saveWorkingCoeff = () => {
         let date = new Date;
         saveCoeff(coeff.current, date.toLocaleString())
+        setPathName('Saved as ' + new Date().toLocaleString());
     }
 
     return (<>

@@ -9,7 +9,7 @@ const defaults = [mushu, cat, dog]
 
 
 
-const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, stop, refresh}) => {
+const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveCoeff, units, stop, setPathName}) => {
 
     const loadCoeff = (e) => {
         let id = null
@@ -21,11 +21,12 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             coeff.current = obj.coeff;
             stop();
             setActiveId(id);
-            refresh();
+            setPathName('Now running ' + obj.name);
         }
     }
 
     const deleteCoeff = (e) => {
+        e.stopPropagation();
         const id = e.target.parentElement.parentElement.id;
         if (activeId === id) {
             stop();
@@ -74,7 +75,8 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             if (item.id === id) return {name:newName, id:id}
             else return item;
         });
-        setCoeffList(newList)
+        setCoeffList(newList);
+        setPathName('Now running ' + newName);
     }
 
     const uploadSVG = (event) => {   // converts an uploaded SVG to something readable 
