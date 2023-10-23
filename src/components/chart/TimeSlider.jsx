@@ -10,7 +10,8 @@ const TimeSlider = ({units, renderSkipToFrame}) => {
 
     return ( 
         <div id = 'time-slider-wrapper'>
-            <div id='time-slider-fillbar'></div>
+            <div id='time-slider-fillbar'
+                className='rounded mx-2'/>
             <input
                 type='range'
                 id='time-slider-input'

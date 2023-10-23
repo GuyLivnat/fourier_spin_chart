@@ -3,6 +3,7 @@ import Slider from '../general_components/Slider';
 import ToggleSwitch from '../general_components/ToggleSwitch';
 import ZoomButtons from '../general_components/ZoomButtons';
 import TimeSlider from './TimeSlider';
+import './ChartBar.css'
 
 const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSpeed, maxSpeed, time, units, renderSkipToFrame,
     circlesActive, setCirclesActive, radiiActive, setRadiiActive, outlineActive, setOutlineActive, zoomCenter, pathName}) => {
@@ -11,11 +12,11 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
     return (
         <div
             className='position-absolute'
-            style={{opacity:hideBar, transition: "opacity .25s cubic-bezier(0,0,.2,1)", bottom:0, right:0, left:0, background:"blue"}}>
-
-                    <TimeSlider
-                    {...{units, time, renderSkipToFrame} }
-                    />
+            id='chart-bar'
+            style={{opacity:hideBar}}>
+                <TimeSlider
+                {...{units, time, renderSkipToFrame} }
+                />
 
             <div className="row align-items-center my-1 mx-0">
                 <div className="col d-flex justify-content-center px-1" id="pausePlay">
