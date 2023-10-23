@@ -3,6 +3,9 @@ import Slider from '../general_components/Slider';
 import ToggleSwitch from '../general_components/ToggleSwitch';
 import ZoomButtons from '../general_components/ZoomButtons';
 import TimeSlider from './TimeSlider';
+import PlayIcon from '../../assets/icons/PlayIcon'
+import PauseIcon from '../../assets/icons/PauseIcon'
+import StopIcon from '../../assets/icons/StopIcon'
 import './ChartBar.css'
 
 const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSpeed, maxSpeed, time, units, renderSkipToFrame,
@@ -19,16 +22,17 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
                 />
 
             <div className="row align-items-center my-1 mx-0">
-                <div className="col d-flex justify-content-center px-1" id="pausePlay">
+                <div className="col d-flex justify-content-center px-1">
                     <Button
                         handleClick={pausePlay}
-                        text={isPlaying? '\u23F8' : '\u23F5'}
-                        className="btn btn-outline-primary"/>
+                        text={isPlaying? <PlayIcon/> : <PauseIcon/>}
+                        className="btn btn-outline-primary"
+                        id="pause-play-button"/>
                 </div>
                 <div className="col d-flex justify-content-center px-1">
                     <Button
                         handleClick={stop}
-                        text={'\u23F9'}
+                        text={<StopIcon/>}
                         className="btn btn-outline-primary"
                         id="stop-button"/>
                 </div>
