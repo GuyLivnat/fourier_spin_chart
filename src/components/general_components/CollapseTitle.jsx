@@ -1,7 +1,9 @@
 import {useState} from 'react'
+import CaretLeftIcon from '../../assets/icons/CaretLeftIcon'
+import CaretDownIcon from '../../assets/icons/CaretDownIcon'
 
 const CollapseTitle = ({title, forBody}) => {
-    const [collapse, setCollapse] = useState(false)
+    const [collapse, setCollapse] = useState(true)
 
     return (
         <div>
@@ -18,7 +20,7 @@ const CollapseTitle = ({title, forBody}) => {
                     className='btn btn-sm'
                     style={{color:"grey"}}
                     type='button'>
-                    {collapse? "\u25bc" : "\u25c0"}
+                    {collapse? <CaretLeftIcon/> : <CaretDownIcon/>}
                 </button>
             </h2>
         </div>

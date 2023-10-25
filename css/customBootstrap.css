@@ -888,7 +888,7 @@ textarea.form-control-lg {
   height: 0.5rem;
   color: transparent;
   cursor: pointer;
-  background-color: var(--bs-tertiary-bg);
+  background-color: rgba(191, 194, 240, 0.5);
   border-color: transparent;
   border-radius: 1rem;
 }
@@ -917,7 +917,7 @@ textarea.form-control-lg {
   height: 0.5rem;
   color: transparent;
   cursor: pointer;
-  background-color: var(--bs-tertiary-bg);
+  background-color: rgba(191, 194, 240, 0.5);
   border-color: transparent;
   border-radius: 1rem;
 }

@@ -21,7 +21,7 @@ const CoeffList = ({coeff, activeId, setActiveId, coeffList, setCoeffList, saveC
             coeff.current = obj.coeff;
             stop();
             setActiveId(id);
-            setPathName('Now running ' + obj.name);
+            setPathName('Now running: ' + obj.name);
         }
     }
 
