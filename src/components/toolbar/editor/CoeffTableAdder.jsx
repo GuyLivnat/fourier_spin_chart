@@ -12,7 +12,7 @@ const CoeffTableAdder = ({setRadius, setAngle, angle, radius, pushCoeff}) => {
                     number={radius}
                     setNumber={setRadius}
                     min={0}
-                    className={"text-bg-secondary text-center"}
+                    className={"text-bg-secondary text-center p-1"}
                     id={"radius"}
                 />
             </td>
@@ -21,19 +21,19 @@ const CoeffTableAdder = ({setRadius, setAngle, angle, radius, pushCoeff}) => {
                     number={angle}
                     setNumber={setAngle}
                     step={0.1}
-                    className={"text-bg-secondary text-center"}
+                    className={"text-bg-secondary text-center p-1"}
                     id={"angle"}
                 />
             </td>
-            <td className="pe-3">
+            <td className="">
                 <Button
                     handleClick={pushCoeff}
                     text="+"
-                    className="btn btn-outline-primary btn-sm"
+                    style={{padding: '0.05rem 0.35rem'}}
+                    className="btn btn-outline-primary btn-sm me-2 "
                     dataTooltip="adds a circle to the end of the chain"
                     onMouseEnter={tooltipIn}
                     onMouseLeave={tooltipOut}
-                    // style={{border:'none'}}
                 />
             </td>
         </tr>

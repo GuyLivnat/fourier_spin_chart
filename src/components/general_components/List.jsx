@@ -29,7 +29,7 @@ const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults, upl
   }
 
   return (<>
-    <div className="rounded border overdflow-hidden">
+    <div className="rounded border overflow-hidden">
       <div className=" row text-bg-info border-bottom justify-content-between mx-0">
           <UploadButton
             handleFile={upload}

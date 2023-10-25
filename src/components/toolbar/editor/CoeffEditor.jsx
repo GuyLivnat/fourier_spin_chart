@@ -39,7 +39,7 @@ const CoeffEditor = ({coeff, setPathName, saveCoeff, setActiveId, playable, stop
         setPathName('Saved as ' + new Date().toLocaleString());
     }
 
-    return (<div className="border rounded">
+    return (<div className="rounded border overflow-hidden">
                 <div className="row justify-content-between mx-0">
                     <Button
                         handleClick={saveWorkingCoeff}

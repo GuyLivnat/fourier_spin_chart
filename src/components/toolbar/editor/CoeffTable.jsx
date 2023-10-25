@@ -27,17 +27,21 @@ const CoeffTable = ({lst, del, angle, setAngle, radius, setRadius, pushCoeff}) =
                 >
                     {(lst[i++]).toFixed(2)}
                 </td>
-                <td><CloseButton handleClick={del}/></td>
+                <td>
+                    <CloseButton handleClick={del}
+                        className='me-2'/>
+                </td>
             </tr>)
     }
 
     return (<>
-            <table className="table table-sm table-dark table-striped table-hover" >
+            <table className="table table-sm table-dark table-striped table-hover mb-1" 
+                onWheel={tooltipOut}>
                 <thead style={{position:'sticky', insetBlockStart:0}}>
                     <tr>
                         <th scope="col">Radius <RadiusIcon/></th>
                         <th scope="col">Angle <AngleIcon/></th>
-                        <th></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
