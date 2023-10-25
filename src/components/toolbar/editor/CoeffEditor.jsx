@@ -1,9 +1,13 @@
 import { useState } from "react"
 import CoeffTable from "./CoeffTable";
-import CoeffAdder from "./CoeffAdder";
+import { useContext } from "react";
+import { TooltipContext } from "../../general_components/TooltipWithContext";
+import Button from "../../general_components/Button";
 
 
 const CoeffEditor = ({coeff, setPathName, saveCoeff, setActiveId, playable, stop}) => {
+
+    const {tooltipIn, tooltipOut} = useContext(TooltipContext);
 
     const [radius, setRadius] = useState(20);
     const [angle, setAngle] = useState(1.5707);
@@ -35,33 +39,42 @@ const CoeffEditor = ({coeff, setPathName, saveCoeff, setActiveId, playable, stop
         setPathName('Saved as ' + new Date().toLocaleString());
     }
 
-    return (<>
-            <div >
-                <CoeffAdder
-                    setAngle={setAngle}
-                    setRadius={setRadius}
-                    radius={radius}
-                    angle={angle}
-                    resetCoeff={resetCoeff}
-                    pushCoeff={pushCoeff}
-                    save={saveWorkingCoeff}
-                    playable={playable}
-                />
-            </div>
-            <div style={{
-                    boxSizing:"content-box",
-                    minWidth:"200px",
-                    maxHeight:"200px",
-                    overflowY:"auto",
-                    overflowX:"clip",
-                    textAlign:"center"}}
-                className="border rounded">
-                <CoeffTable
-                    lst={coeff.current}
-                    del={deleteCoeff}
-                />
-            </div>
-    </>)
+    return (<div className="border rounded">
+                <div className="row justify-content-between mx-0">
+                    <Button
+                        handleClick={saveWorkingCoeff}
+                        text="save"
+                        className="btn btn-outline-primary m-1 col"
+                        isDisabled={!playable}
+                        dataTooltip="saves the circle chain with the current time as its name"
+                        onMouseEnter={tooltipIn}
+                        onMouseLeave={tooltipOut}
+                    />
+                    <Button
+                        handleClick={resetCoeff}
+                        text="reset"
+                        className="btn btn-outline-danger m-1 col"
+                        dataTooltip="removes all the circles"
+                        onMouseEnter={tooltipIn}
+                        onMouseLeave={tooltipOut}
+                    />
+                </div>
+                <div style={{
+                        boxSizing:"content-box",
+                        minWidth:"200px",
+                        maxHeight:"250px",
+                        overflowY:"auto",
+                        overflowX:"clip",
+                        textAlign:"center"}}
+                    className="border-top"
+                    >
+                    <CoeffTable
+                        lst={coeff.current}
+                        del={deleteCoeff}
+                        {...{angle, setAngle, radius, setRadius, pushCoeff}}
+                    />
+                </div>
+    </div>)
 }
 
 export default CoeffEditor;
