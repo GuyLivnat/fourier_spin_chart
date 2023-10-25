@@ -3,6 +3,7 @@ const zoomWheelSVGListener = (id, panX, panY, zoom, moveFunc) => {
     const element = document.getElementById(id)
 
     const zoomWheelSVG = (e) => {
+        e.preventDefault()
         const delta = Math.sign(e.deltaY)  // different browsers use e.deltaY (mouse scroll) with different values, so here is it normalized to 1 or -1
         if (zoom.current > 50 || delta > 0) {
             const scale = (delta < 0) ? 1 / 1.2 : 1 * 1.2;
