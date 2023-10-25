@@ -13,24 +13,27 @@ function App() {
   let playable = coeff.current.length > 3;
 
   return (
-  <section className="container-fluid text-bg-dark">
-    <TooltipProvider>
-    <div className="row">
-      <Chart
-        {...{playable,
-        pathName,
-        coeff,
-        units}}
-      />
-      <CoeffToolBar
-        {...{playable,
-        coeff,
-        setPathName,
-        units}}
-      />
-    </div>
-    </TooltipProvider>
-  </section>)
+    <main className='text-bg-dark' style={{height:'100%', minHeight:'100vh'}}>
+      <section className="container-fluid">
+        <TooltipProvider>
+        <div className="row">
+          <Chart
+            {...{playable,
+            pathName,
+            coeff,
+            units}}
+          />
+          <CoeffToolBar
+            {...{playable,
+            coeff,
+            setPathName,
+            units}}
+          />
+        </div>
+        </TooltipProvider>
+      </section>
+    </main>
+)
 };
 
 export default App
