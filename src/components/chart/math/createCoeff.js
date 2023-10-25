@@ -35,7 +35,6 @@ const calculateCoeff = (points, units) => {
     coeff.push(Math.sqrt((real[i] * real[i]) + (img[i] * img[i])));
     coeff.push(Math.atan2(img[i], real[i]));
     }
-    console.log(coeff)
   return coeff;
   }
 

@@ -25,7 +25,7 @@ const ChartBar = ({pausePlay, isPlaying, hideBar, stop, updateSpeed, setUpdateSp
                 <div className="col d-flex justify-content-center px-1">
                     <Button
                         handleClick={pausePlay}
-                        text={isPlaying? <PlayIcon/> : <PauseIcon/>}
+                        text={isPlaying? <PauseIcon/> : <PlayIcon/>}
                         className="btn btn-outline-primary"
                         id="pause-play-button"/>
                 </div>

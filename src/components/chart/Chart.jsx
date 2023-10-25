@@ -21,6 +21,7 @@ const Chart = ({units, coeff, playable, pathName}) => {
     const edge = useRef([]);
     const time = useRef(0);
     const frame = useRef(computeFrame([], 0));
+    const step = 1/(units);
 
     const zoom = useRef(1000);
     const panX = useRef(0);
@@ -67,7 +68,6 @@ const Chart = ({units, coeff, playable, pathName}) => {
     };
 
     const timestep = () => {
-        const step = 1/(units);
         if (time.current === 1) time.current = 0
         else time.current += step
     };
@@ -81,17 +81,17 @@ const Chart = ({units, coeff, playable, pathName}) => {
     };
 
     const renderSkipToFrame = (skipToTime) => {
-        const step = 1/(units);
         if (edge.current.length < units ) {
             time.current = 0;
             edge.current =[];
         }
-        const distance = (skipToTime > time.current) ? skipToTime - time.current : 1 - time.current + skipToTime;
-        for(let _ = 0; _ < distance; _ += step) {
+        let distance = (skipToTime >= time.current) ? skipToTime - time.current : 1 - time.current + skipToTime;
+        while (distance !== 0) {
             timestep();
             let missingFrame = computeFrame(coeff.current, time.current);
             edge.current.unshift({ x: missingFrame.edge.x, y: missingFrame.edge.y });
             if (edge.current.length > units) edge.current.pop();
+            distance -= step;
         }
         renderNextFrame();
     }
