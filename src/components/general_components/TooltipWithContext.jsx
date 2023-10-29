@@ -6,7 +6,7 @@ const TooltipContext = createContext();
 
 const TooltipProvider = (props) => {
 
-    const clearTooltipId = useRef(null)
+    const timeoutId = useRef(null)
     const tooltip = document.getElementById('tooltip');
 
     const [referenceElement,setReferenceElement] = useState(null);
@@ -19,23 +19,25 @@ const TooltipProvider = (props) => {
 
 
     const tooltipIn = (e) => {
-        clearTooltipId.current = setTimeout(() => {
+        timeoutId.current = setTimeout(() => {
             setReferenceElement(e.target);
             setTooltipText(e.target.dataset.tooltip);
-            tooltip.style.transition = "opacity 150ms ease-out ";
+            tooltip.style.transition = "opacity 150ms ease-out";
             tooltip.style.opacity  = 1;
             tooltip.style.visibility  = 'visible';
         }, 1000)
     }
     
     const tooltipOut = () => {
-        clearTimeout(clearTooltipId.current);
-
-        setReferenceElement(null);
-        setTooltipText(null);
-        tooltip.style.transition = "opacity 0ms linear ";
-        tooltip.style.opacity  = 0;
-        tooltip.style.visibility  = 'hidden';
+        if (timeoutId.current) {
+            clearTimeout(timeoutId.current);
+            setReferenceElement(null);
+            setTooltipText(null);
+            tooltip.style.transition = "opacity 0ms linear";
+            tooltip.style.opacity  = 0;
+            tooltip.style.visibility  = 'hidden';
+            timeoutId.current = null;
+        }
     }
     
     return (<TooltipContext.Provider value={{tooltipIn, tooltipOut}}>
