@@ -12,4 +12,3 @@ const renderTimeSlider = (time) => {
 
 export default renderTimeSlider;
 
-// background: linear-gradient(90deg, rgb(172, 106, 106) 50%, rgba(172, 106, 106, 0.5) 50%);
