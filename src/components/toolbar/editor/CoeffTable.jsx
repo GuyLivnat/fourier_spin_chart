@@ -40,7 +40,12 @@ const CoeffTable = ({lst, del, angle, setAngle, radius, setRadius, pushCoeff}) =
                 <thead style={{position:'sticky', insetBlockStart:0}}>
                     <tr>
                         <th scope="col">Radius <RadiusIcon/></th>
-                        <th scope="col">Angle <AngleIcon/></th>
+                        <th scope="col"
+                            data-tooltip="angle in radians"
+                            onMouseEnter={tooltipIn}
+                            onMouseLeave={tooltipOut}>
+                                Angle <AngleIcon/>
+                        </th>
                         <th scope="col"></th>
                     </tr>
                 </thead>

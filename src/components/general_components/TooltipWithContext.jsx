@@ -1,10 +1,13 @@
 import { usePopper } from 'react-popper';
-import { useState, createContext} from 'react';
+import { useState, createContext, useRef} from 'react';
 import './Tooltip.css'
 
 const TooltipContext = createContext();
 
 const TooltipProvider = (props) => {
+
+    const clearTooltipId = useRef(null)
+    const tooltip = document.getElementById('tooltip');
 
     const [referenceElement,setReferenceElement] = useState(null);
     const [tooltipElement, setTooltipElement] = useState(null);
@@ -16,20 +19,23 @@ const TooltipProvider = (props) => {
 
 
     const tooltipIn = (e) => {
-        setReferenceElement(e.target);
-        setTooltipText(e.target.dataset.tooltip);
-        const tooltip = document.getElementById('tooltip');
-        tooltip.style.transition = "opacity 150ms ease-out 1s";
-        tooltip.style.opacity  = 1;
-        tooltip.style.visibility  = 'visible';
+        clearTooltipId.current = setTimeout(() => {
+            setReferenceElement(e.target);
+            setTooltipText(e.target.dataset.tooltip);
+            tooltip.style.transition = "opacity 100ms ease-out 1s";
+            tooltip.style.opacity  = 1;
+            tooltip.style.visibility  = 'visible';
+        }, 300)
     }
     
     const tooltipOut = () => {
+        clearTimeout(clearTooltipId.current);
+
         setReferenceElement(null);
         setTooltipText(null);
-        const tooltip = document.getElementById('tooltip')
-        tooltip.style.transition = "opacity 0ms linear 0s"
+        tooltip.style.transition = "opacity 0ms linear 0s";
         tooltip.style.opacity  = 0;
+        tooltip.style.visibility  = 'hidden';
     }
     
     return (<TooltipContext.Provider value={{tooltipIn, tooltipOut}}>
