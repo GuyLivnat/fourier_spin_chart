@@ -5,16 +5,12 @@ const useListeners = (id, listeners, dependencies=[]) => {
         const element = document.getElementById(id);
 
         for (let listener of listeners) {
-            let evnt = listener.evnt;
-            let func = listener.func;
-            element.addEventListener(evnt, func)
+            element.addEventListener(listener.evnt, listener.func)
         }
 
         return () => {
             for (let listener of listeners) {
-                let evnt = listener.evnt;
-                let func = listener.func
-                element.removeEventListener(evnt, func);
+                element.removeEventListener(listener.evnt, listener.func);
             }
         }
     }, dependencies)
