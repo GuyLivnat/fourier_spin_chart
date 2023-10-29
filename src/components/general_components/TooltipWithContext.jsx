@@ -22,10 +22,10 @@ const TooltipProvider = (props) => {
         clearTooltipId.current = setTimeout(() => {
             setReferenceElement(e.target);
             setTooltipText(e.target.dataset.tooltip);
-            tooltip.style.transition = "opacity 100ms ease-out 1s";
+            tooltip.style.transition = "opacity 150ms ease-out ";
             tooltip.style.opacity  = 1;
             tooltip.style.visibility  = 'visible';
-        }, 300)
+        }, 1000)
     }
     
     const tooltipOut = () => {
@@ -33,7 +33,7 @@ const TooltipProvider = (props) => {
 
         setReferenceElement(null);
         setTooltipText(null);
-        tooltip.style.transition = "opacity 0ms linear 0s";
+        tooltip.style.transition = "opacity 0ms linear ";
         tooltip.style.opacity  = 0;
         tooltip.style.visibility  = 'hidden';
     }
