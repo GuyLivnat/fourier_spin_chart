@@ -1,7 +1,7 @@
 import { useState } from "react"
 import CoeffTable from "./CoeffTable";
 import { useContext } from "react";
-import { TooltipContext } from "../../general_components/TooltipWithContext";
+import { TooltipContext } from "../../../utilities/TooltipContext";
 import Button from "../../general_components/Button";
 
 

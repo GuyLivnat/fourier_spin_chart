@@ -3,7 +3,7 @@ import Button from "./Button";
 import TextInput from "./TextInput";
 import UploadButton from "./UploadButton";
 import CloseButton from "./CloseButton";
-import { TooltipContext } from "./TooltipWithContext";
+import { TooltipContext } from "../../utilities/TooltipContext";
 
 
 const List = ({lst, load, del, delAll, focus, rename, upload, resetDefaults, uploadTooltip}) => {

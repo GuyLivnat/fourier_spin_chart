@@ -1,6 +1,6 @@
 import ChartPage from './components/chart/ChartPage';
 import {Route} from 'react-router-dom';
-import { TooltipProvider } from './components/general_components/TooltipWithContext';
+import { TooltipProvider } from './utilities/TooltipContext';
 
 
 function App() {

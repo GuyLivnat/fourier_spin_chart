@@ -1,6 +1,6 @@
 import { usePopper } from 'react-popper';
 import { useState, createContext, useRef} from 'react';
-import './Tooltip.css'
+import Tooltip from '../components/general_components/Tooltip';
 
 const TooltipContext = createContext();
 
@@ -40,22 +40,17 @@ const TooltipProvider = (props) => {
         }
     }
     
-    return (<TooltipContext.Provider value={{tooltipIn, tooltipOut}}>
-        <div
-            ref={setTooltipElement}
-            style={styles.popper}
-            {...attributes.popper}
-            id="tooltip"
-            className='text-bg-secondary border rounded px-2 py-1'
-        >
-            {tooltipText}
-            <div
-                ref={setArrowElement}
-                style={styles.arrow} 
-                id='arrow'
+    return (
+        <TooltipContext.Provider value={{tooltipIn, tooltipOut}}>
+            <Tooltip
+                tooltipElement={setTooltipElement}
+                tooltipStyles={styles.popper}
+                tooltipAttributes={attributes.popper}
+                arrowElement={setArrowElement}
+                arrowStyles={styles.arrow}
+                tooltipText={tooltipText}
             />
-        </div>
-        {props.children}
+            {props.children}
         </TooltipContext.Provider>)
 }
 

@@ -1,7 +1,7 @@
 import NumberInput from "../../general_components/NumberInput";
 import Button from "../../general_components/Button";
 import { useContext } from "react";
-import { TooltipContext } from "../../general_components/TooltipWithContext";
+import { TooltipContext } from "../../../utilities/TooltipContext";
 
 const CoeffTableAdder = ({setRadius, setAngle, angle, radius, pushCoeff}) => {
     const {tooltipIn, tooltipOut} = useContext(TooltipContext);
