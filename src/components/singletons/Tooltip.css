@@ -1,40 +1,39 @@
 #arrow,
 #arrow::before {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgb(66, 66, 66);
-    border-top: 1px solid white;
-    border-left: 1px solid white;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgb(66, 66, 66);
+  border-top: 1px solid white;
+  border-left: 1px solid white;
 }
 
 #arrow {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 #arrow::before {
-    visibility: visible;
-    content: '';
-    transform: rotate(45deg);
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
 }
-#tooltip[data-popper-placement^='top'] > #arrow {
-    bottom: -4px;
-}
-
-#tooltip[data-popper-placement^='bottom'] > #arrow {
-    top: -5px;
+#tooltip[data-popper-placement^="top"] > #arrow {
+  bottom: -4px;
 }
 
-#tooltip[data-popper-placement^='left'] > #arrow {
-    right: -4px;
+#tooltip[data-popper-placement^="bottom"] > #arrow {
+  top: -5px;
 }
 
-#tooltip[data-popper-placement^='right'] > #arrow {
-    left: -4px;
+#tooltip[data-popper-placement^="left"] > #arrow {
+  right: -4px;
+}
+
+#tooltip[data-popper-placement^="right"] > #arrow {
+  left: -4px;
 }
 
 #tooltip {
-    opacity: 0;
-    z-index: 50000000;
+  opacity: 0;
+  z-index: 50000000;
 }
-
