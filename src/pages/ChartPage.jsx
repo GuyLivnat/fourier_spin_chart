@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import CoeffToolBar from '../toolbar/CoeffToolBar';
-import Chart from './Chart';
+import CoeffToolBar from '../components/toolbar/CoeffToolBar';
+import Chart from '../components/chart/Chart';
 
 
 function ChartPage() {
@@ -12,6 +12,8 @@ function ChartPage() {
   let playable = coeff.current.length > 3;
 
   return (
+    <main className='text-bg-dark' style={{height:'100%', minHeight:'100vh'}}>
+      <section className="container-fluid">
         <div className="row">
           <Chart
             {...{playable,
@@ -26,7 +28,9 @@ function ChartPage() {
             units}}
           />
         </div>
-    )
+      </section>
+    </main>
+)
 };
 
 export default ChartPage

@@ -1,6 +1,6 @@
 import { usePopper } from 'react-popper';
 import { useState, createContext, useRef} from 'react';
-import Tooltip from '../components/general_components/Tooltip';
+import Tooltip from '../components/singletons/Tooltip';
 
 const TooltipContext = createContext();
 
