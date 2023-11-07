@@ -33,7 +33,7 @@ const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
     }
   };
   return (
-    <div className="col-lg-2 order-2 mt-5" style={{ minWidth: "310px" }}>
+    <div className="col-lg-2 order-2 mt-3" style={{ minWidth: "310px" }}>
       <CollapseTitle title="Saved Paths" forBody="uploads" />
       <div className="collapse" id="uploads">
         <CoeffList

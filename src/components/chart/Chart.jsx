@@ -34,7 +34,8 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   const [listeners, setListeners] = useState([{ evnt: null, func: null }]);
 
   useEffect(() => {
-    //runs once after render. without this, the zoom and pan listener functions fail to load right, as they load before the svg is made
+    // runs once after render. without this, the zoom and pan listener functions fail to load right,
+    // as they load before the svg is made
     const zoomListeners = zoomWheelSVGListeners(
       "chart",
       panX,
@@ -121,7 +122,7 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   useInterval(renderNextFrame, isPlaying ? maxSpeed - updateSpeed : null); //plays the chart
 
   return (
-    <div className="col order-1 mt-5">
+    <div className="col mt-3">
       <div
         className="position-relative"
         id="chart_div"

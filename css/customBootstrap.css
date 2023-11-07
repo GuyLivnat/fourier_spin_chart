@@ -1,4 +1,13 @@
 @charset "UTF-8";
+:root {
+  --primary: rgb(191, 194, 240);
+  --half-primary: rgba(191, 194, 240, 0.5);
+  --secondary: rgb(66, 66, 66);
+  --success: rgb(104, 250, 104);
+  --info: #2c2631;
+  --danger: rgb(172, 106, 106);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -18,7 +27,8 @@
 input[type=number] {
   -moz-appearance: textfield; /*For FireFox*/
 }
-input[type=number]::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
+input[type=number]::-webkit-inner-spin-button {
+  /*For Webkits like Chrome and Safari*/
   -webkit-appearance: none;
   margin: 0;
 }

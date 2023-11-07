@@ -8,12 +8,22 @@ import Navbar from "./components/singletons/NavBar";
 function App() {
   return (
     <TooltipProvider>
-      <Navbar />
-      <Routes>
-        <Route exact path="/" Component={LandingPage} />
-        <Route exact path="/about" Component={AboutPage} />
-        <Route exact path="/chart" Component={ChartPage} />
-      </Routes>
+      <main
+        className="text-bg-dark"
+        style={{
+          height: "100%",
+          minHeight: "100vh",
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        <Navbar />
+        <Routes>
+          <Route exact path="/" Component={LandingPage} />
+          <Route exact path="/about" Component={AboutPage} />
+          <Route exact path="/chart" Component={ChartPage} />
+        </Routes>
+      </main>
     </TooltipProvider>
   );
 }

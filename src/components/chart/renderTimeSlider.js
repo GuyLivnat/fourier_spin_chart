@@ -5,10 +5,10 @@ const renderTimeSlider = (time) => {
   d3.select("#time-slider-fillbar").style(
     "background",
     `linear-gradient(90deg, 
-            rgba(191, 194, 240, 0.5) ${percentTime - 100}%, 
-            rgb(191, 194, 240) ${percentTime}%, 
-            rgba(191, 194, 240, 0.5) ${percentTime}%,
-            rgb(191, 194, 240) ${percentTime + 100}%)`
+            var(--half-primary) ${percentTime - 100}%, 
+            var(--primary) ${percentTime}%, 
+            var(--half-primary) ${percentTime}%,
+            var(--primary) ${percentTime + 100}%)`
   );
 };
 

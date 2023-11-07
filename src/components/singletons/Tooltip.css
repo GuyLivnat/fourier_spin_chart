@@ -3,7 +3,7 @@
   position: absolute;
   width: 6px;
   height: 6px;
-  background: rgb(66, 66, 66);
+  background: var(--secondary);
   border-top: 1px solid white;
   border-left: 1px solid white;
 }

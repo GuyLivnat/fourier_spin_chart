@@ -10,17 +10,12 @@ function ChartPage() {
   let playable = coeff.current.length > 3;
 
   return (
-    <main
-      className="text-bg-dark"
-      style={{ height: "100%", minHeight: "100vh" }}
-    >
-      <section className="container-fluid">
-        <div className="row">
-          <Chart {...{ playable, pathName, coeff, units }} />
-          <CoeffToolBar {...{ playable, coeff, setPathName, units }} />
-        </div>
-      </section>
-    </main>
+    <section className="container-fluid">
+      <div className="row">
+        <Chart {...{ playable, pathName, coeff, units }} />
+        <CoeffToolBar {...{ playable, coeff, setPathName, units }} />
+      </div>
+    </section>
   );
 }
 
