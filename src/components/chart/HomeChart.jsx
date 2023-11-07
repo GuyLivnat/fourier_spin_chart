@@ -10,6 +10,8 @@ const HomeChart = ({ units, coeff }) => {
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
   const step = 1 / units;
+  const edgeColor = { r: 172, g: 106, b: 106 };
+  const backgroundColor = { r: 0, g: 0, b: 0 };
 
   const renderFrame = () => {
     renderChart(
@@ -47,6 +49,8 @@ const HomeChart = ({ units, coeff }) => {
         radiiActive={true}
         coeffLength={coeff.length}
         lineSegments={lineSegments}
+        edgeColor={edgeColor}
+        backgroundColor={backgroundColor}
       />
     </div>
   );

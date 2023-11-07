@@ -21,6 +21,9 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   const frame = useRef(computeFrame([], 0));
   const step = 1 / units;
 
+  const edgeColor = { r: 172, g: 106, b: 106 };
+  const backgroundColor = { r: 0, g: 0, b: 0 };
+
   const zoom = useRef(1000);
   const panX = useRef(0);
   const panY = useRef(230);
@@ -152,7 +155,14 @@ const Chart = ({ units, coeff, playable, pathName }) => {
         />
         <ChartOverlay playable={playable} />
         <ChartInit
-          {...{ circlesActive, radiiActive, outlineActive, lineSegments }}
+          {...{
+            circlesActive,
+            radiiActive,
+            outlineActive,
+            lineSegments,
+            edgeColor,
+            backgroundColor,
+          }}
           coeffLength={coeff.current.length}
         />
       </div>
