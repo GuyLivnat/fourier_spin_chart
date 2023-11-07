@@ -10,7 +10,9 @@ const NumberInput = ({
   id,
 }) => {
   const handleChange = (e) => {
-    setNumber(e.target.value);
+    const regexNumber = /(\d+)/;
+    const value = e.target.value.match(regexNumber);
+    if (value) setNumber(value[0]);
   };
 
   return (
