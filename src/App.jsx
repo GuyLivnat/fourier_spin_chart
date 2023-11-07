@@ -1,6 +1,6 @@
 import ChartPage from "./pages/ChartPage";
 import AboutPage from "./pages/AboutPage";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "./utilities/TooltipContext";
 import Navbar from "./components/singletons/NavBar";

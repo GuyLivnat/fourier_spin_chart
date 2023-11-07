@@ -2,7 +2,7 @@ const ChartOverlay = ({ playable }) => {
   return (
     <h4
       className={
-        "position-absolute justify-content-center align-items-center text-center m-0" +
+        "position-absolute justify-content-center align-items-center text-center m-0 p-5" +
         (!playable ? " d-flex" : " d-none")
       }
       id="chart-overlay"

@@ -13,7 +13,7 @@ import ChartBar from "./ChartBar";
 import ChartOverlay from "./ChartOverlay";
 
 const Chart = ({ units, coeff, playable, pathName }) => {
-  const lineSegments = 40; // used for the gradient effect on the outline
+  const lineSegments = 32; // used for the gradient effect on the outline
   const maxSpeed = 128;
 
   const edge = useRef([]);
@@ -86,7 +86,6 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   };
 
   const renderNextFrame = () => {
-    // computes the next frame
     timestep();
     frame.current = computeFrame(coeff.current, time.current);
     edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
