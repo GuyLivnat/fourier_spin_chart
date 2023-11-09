@@ -11,7 +11,7 @@ const HomeChart = ({ units, coeff }) => {
   const frame = useRef(computeFrame([], 0));
   const step = 1 / units;
   const edgeColor = { r: 172, g: 106, b: 106 };
-  const backgroundColor = { r: 0, g: 0, b: 0 };
+  const backgroundColor = { r: 33, g: 37, b: 41 };
 
   const renderFrame = () => {
     renderChart(
