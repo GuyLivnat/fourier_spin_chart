@@ -7,8 +7,6 @@ const AngleIcon = () => {
       fill="none"
       viewBox="0 0 16 16"
       stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     >
       <polyline points="9.5,2.6 2.5,11.8 14.2,11.9 " />
       <path d="M3.7,5.3c0,0,4.8,1.9,4.2,9.1" />

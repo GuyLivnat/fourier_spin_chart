@@ -1,16 +1,18 @@
-const CaretLeftIcon = ({ size = 25 }) => {
+const PauseIcon = ({ size = 25 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      fill="currentColor"
-      className="bi bi-pause"
+      stroke="currentColor"
+      strokeLinecap="round"
       viewBox="0 0 16 16"
+      stroke-width="2"
     >
-      <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" />
+      <line x1="5" y1="5" x2="5" y2="12" />
+      <line x1="10" y1="5" x2="10" y2="12" />
     </svg>
   );
 };
 
-export default CaretLeftIcon;
+export default PauseIcon;

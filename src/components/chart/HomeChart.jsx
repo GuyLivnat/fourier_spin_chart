@@ -19,9 +19,9 @@ const HomeChart = ({ units, coeff }) => {
       edge.current,
       lineSegments,
       units,
-      1000,
+      300000,
       0,
-      230,
+      60000,
       coeff.length
     );
   };

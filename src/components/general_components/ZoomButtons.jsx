@@ -1,12 +1,14 @@
 import Button from "./Button";
 import ZoomInIcon from "../../assets/icons/ZoomInIcon";
 import ZoomOutIcon from "../../assets/icons/ZoomOutIcon";
+import RecenterIcon from "../../assets/icons/RecenterIcon";
 
 const ZoomButtons = ({
   className,
   handleZoomIn,
   handleZoomOut,
   isDisabled,
+  recenter,
 }) => {
   return (
     <div
@@ -25,6 +27,13 @@ const ZoomButtons = ({
         isDisabled={isDisabled}
         text={<ZoomOutIcon />}
         handleClick={handleZoomOut}
+        style={{ zIndex: "auto" }}
+      />
+      <Button
+        className={className}
+        isDisabled={isDisabled}
+        handleClick={recenter}
+        text={<RecenterIcon />}
         style={{ zIndex: "auto" }}
       />
     </div>

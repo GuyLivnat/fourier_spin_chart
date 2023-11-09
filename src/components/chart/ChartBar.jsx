@@ -9,6 +9,7 @@ import StopIcon from "../../assets/icons/StopIcon";
 import "./ChartBar.css";
 
 const ChartBar = ({
+  recenter,
   pausePlay,
   isPlaying,
   hideBar,
@@ -68,6 +69,7 @@ const ChartBar = ({
             className="btn btn-outline-primary"
             handleZoomIn={() => zoomCenter(true)}
             handleZoomOut={() => zoomCenter(false)}
+            recenter={recenter}
           />
         </div>
         <div className="col px-2">

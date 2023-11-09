@@ -8,6 +8,7 @@ import useListeners from "../../utilities/useListeners";
 import zoomWheelSVGListeners from "../../behaviors/zoomWheelSVGListeners";
 import clickToPlayListeners from "../../behaviors/clickToPlayListeners";
 import zoomCenterSVG from "../../behaviors/zoomCenterSVG";
+import zoomToSVG from "../../behaviors/zoomToSVG";
 import panSVGListeners from "../../behaviors/panSVGListeners";
 import ChartBar from "./ChartBar";
 import ChartOverlay from "./ChartOverlay";
@@ -119,6 +120,10 @@ const Chart = ({ units, coeff, playable, pathName }) => {
     zoomCenterSVG("chart", panY, zoom, renderFrame, inOut);
   };
 
+  const recenter = () => {
+    zoomToSVG("chart", panX, panY, zoom, 0, 230, 1000, renderFrame);
+  };
+
   useListeners("chart", listeners, [listeners]); // adds stateless listeners (zoom and pan)
   useListeners("chart", clickToPlayListeners(pausePlay), [isPlaying]); //adds click to pause/play
   useInterval(renderNextFrame, isPlaying ? maxSpeed - updateSpeed : null); //plays the chart
@@ -151,6 +156,7 @@ const Chart = ({ units, coeff, playable, pathName }) => {
             units,
             renderSkipToFrame,
             pathName,
+            recenter,
           }}
         />
         <ChartOverlay playable={playable} />
