@@ -23,7 +23,7 @@ const ChartInit = ({
     let strength = (lineSegments - i) / lineSegments;
     edgeSegments.unshift(
       <path
-        markerStart={i === 0 || i === 1 ? "url(#circle-marker)" : null}
+        markerStart={i === 0 ? "url(#circle-marker)" : null}
         key={i}
         id={"edge_" + i}
         stroke={gradientSampler(edgeColor, backgroundColor, strength)}
