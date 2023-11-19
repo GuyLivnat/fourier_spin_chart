@@ -1,28 +1,41 @@
-const LogoIcon = () => {
+const LogoIcon = ({ size = 16 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      fill="currentColor"
+      width={size}
+      height={size}
       viewBox="-100 200 400 400"
     >
-      {/* .st2{fill:none;stroke:#000000;stroke-width:18;stroke-miterlimit:10;} */}
-
-      <text
-        transform="matrix(1 0 0 1 -66.5 485.5)"
-        fontFamily="MyriadPro-Regular"
-        fontSize="300px"
-      >
-        FC
-      </text>
-      <path
-        fill="none"
+      <circle
         stroke="currentColor"
-        strokeWidth={18}
-        d="M262,568H-65.5c-6.6,0-12-5.4-12-12V228.5c0-6.6,5.4-12,12-12H262c6.6,0,12,5.4,12,12V556
-                C274,562.6,268.6,568,262,568z"
+        fill="none"
+        strokeWidth="8"
+        cx="97.4"
+        cy="427.6"
+        r="156.4"
       />
+      <circle
+        stroke="currentColor"
+        fill="none"
+        strokeWidth="8"
+        cx="168"
+        cy="286"
+        r="50.7"
+      />
+      <polyline
+        stroke="currentColor"
+        fill="none"
+        strokeWidth="8"
+        points="97.4,427.6 164.5,287.5 209.3,256.7 "
+      />
+      <path
+        stroke="currentColor"
+        fill="none"
+        strokeWidth="12"
+        d="M209.3,256.7c-86.7-104.6-310.5-39.9-261.9,215.7"
+      />
+      <circle fill="currentColor" cx="97.4" cy="427.6" r="10.1" />
+      <circle fill="currentColor" cx="209.3" cy="256.7" r="10.1" />
     </svg>
   );
 };

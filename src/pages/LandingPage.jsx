@@ -7,7 +7,7 @@ const LandingPage = () => {
 
   return (
     <section className="container-fluid text-center col-md-8 px-auto py-5">
-      <LogoIcon />
+      <LogoIcon size={60} />
       <h1
         className="mb-3"
         onMouseEnter={tooltipIn}

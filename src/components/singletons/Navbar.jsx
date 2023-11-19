@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className=" p-2 d-flex justify-content-center text-center">
       <div className="px-3 float-start">
         <NavLink className="" to="/">
-          <LogoIcon />
+          <LogoIcon size={25} />
         </NavLink>
       </div>
       <div className="px-3">
