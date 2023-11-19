@@ -14,7 +14,7 @@ function App() {
       <header className="text-bg-dark fixed-top" style={{ width: "100vw" }}>
         <Navbar />
       </header>
-      <main className="text-bg-dark pt-5">
+      <main className="pt-5">
         <TooltipProvider>
           <Routes>
             <Route exact path="/" Component={LandingPage} />

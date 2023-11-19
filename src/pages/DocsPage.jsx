@@ -1,10 +1,10 @@
 const DocsPage = () => {
   return (
-    <section>
-      <div>
-        <h2>The Chart</h2>
-        <p>
-          The chart takes a series of circles and chains them together.
+    <section className="row justify-content-center gx-0">
+      <div className="col-lg-8 col-10">
+        <div>
+          <h1>The Chart</h1>
+          <p>The chart takes a series of circles and chains them together.</p>
           <ul>
             <li>
               Each circle’s center revolves around the previous circle’s center.
@@ -16,17 +16,17 @@ const DocsPage = () => {
             </li>
             <li>
               Each circle has an angle which refers to where along its edge the
-              next circle’s center is.{" "}
+              next circle’s center is.
             </li>
             <li> The last circle in the chain draws a fading path.</li>
           </ul>
-        </p>
-      </div>
-      <div>
-        <h2>The Editor</h2>
-        <p>
-          The Editor lets you remove any circle or add one to the end of the
-          chain.
+        </div>
+        <div>
+          <h1>The Editor</h1>
+          <p>
+            The Editor lets you remove any circle or add one to the end of the
+            chain.
+          </p>
           <ul>
             <li>
               Remove a circle by clicking the ‘x’ button to the right of the
@@ -46,13 +46,13 @@ const DocsPage = () => {
               chain.
             </li>
           </ul>
-        </p>
-      </div>
-      <div>
-        <h2>The Saved Paths</h2>
-        <p>
-          You can load any of your saved chains made in the Editor, one of the
-          default paths, or upload an SVG image.
+        </div>
+        <div>
+          <h1>The Saved Paths</h1>
+          <p>
+            You can load any of your saved chains made in the Editor, one of the
+            default paths, or upload an SVG image.
+          </p>
           <ul>
             <li>To load a path, click it.</li>
             <li>To rename a path, double click the name.</li>
@@ -68,7 +68,7 @@ const DocsPage = () => {
           </ul>
           Note: Any chain can be edited with the Editor, but the changes won’t
           be saved unless you press the save button.
-        </p>
+        </div>
       </div>
     </section>
   );
