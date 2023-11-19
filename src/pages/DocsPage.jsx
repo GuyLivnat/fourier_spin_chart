@@ -1,9 +1,14 @@
+import RecenterIcon from "../assets/icons/RecenterIcon";
+import ZoomInIcon from "../assets/icons/ZoomInIcon";
+import ZoomOutIcon from "../assets/icons/ZoomOutIcon";
+
 const DocsPage = () => {
   return (
     <section className="row justify-content-center gx-0">
-      <div className="col-lg-8 col-10">
+      <div className="col-lg-8 col-10 ">
+        <h1 className="mb-5 mt-3">Components and their options</h1>
         <div>
-          <h1>The Chart</h1>
+          <h2>The Chart</h2>
           <p>The chart takes a series of circles and chains them together.</p>
           <ul>
             <li>
@@ -19,10 +24,18 @@ const DocsPage = () => {
               next circle’s center is.
             </li>
             <li> The last circle in the chain draws a fading path.</li>
+            <li>
+              The chart can be zoomed in or out via the zoom <ZoomInIcon />{" "}
+              <ZoomOutIcon /> buttons or with the mouse wheel.
+            </li>
+            <li>The chart can be panned by clicking and dragging.</li>
+            <li>
+              The recenter <RecenterIcon /> button will reset the zoom and pan.
+            </li>
           </ul>
         </div>
         <div>
-          <h1>The Editor</h1>
+          <h2>The Editor</h2>
           <p>
             The Editor lets you remove any circle or add one to the end of the
             chain.
@@ -48,7 +61,7 @@ const DocsPage = () => {
           </ul>
         </div>
         <div>
-          <h1>The Saved Paths</h1>
+          <h2>The Saved Paths</h2>
           <p>
             You can load any of your saved chains made in the Editor, one of the
             default paths, or upload an SVG image.

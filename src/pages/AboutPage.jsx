@@ -2,7 +2,7 @@ const AboutPage = () => {
   return (
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10">
-        <h1>The Why, What, How and Who</h1>
+        <h1 className="mb-5 mt-3">Why, What, How and Who</h1>
         <div>
           <h2>Why</h2>
           <p>
@@ -40,7 +40,7 @@ const AboutPage = () => {
               described as a series of points and curvatures. More info on paths
               can be found{" "}
               <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">
-                here.
+                at MDN's website.
               </a>
             </li>
             <li>
@@ -112,7 +112,7 @@ const AboutPage = () => {
             things tick.
           </p>
         </div>
-        <h1>Technical and legal info</h1>
+        <h1 className="mt-5">Technical and legal info</h1>
         <div>
           The app is written in JavaScript. <br /> The libraries used (and their
           licenses) are:
