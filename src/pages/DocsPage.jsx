@@ -52,11 +52,11 @@ const DocsPage = () => {
             </li>
             <li>
               The save button will save your current chain in the Saved Paths.
-              The new save will be named as the current time.
+              The new save's name will be the current time.
             </li>
             <li>
-              The reset button will remove the circles, resulting in an empty
-              chain.
+              The reset button will remove all the circles, resulting in an
+              empty chain.
             </li>
           </ul>
         </div>
@@ -72,8 +72,8 @@ const DocsPage = () => {
             <li>
               To remove a path, click the ‘x’ button to the right of the name.
             </li>
-            <li>The del all button removes all the currently saved paths.</li>
-            <li>The defaults button will restore any deleted defaults.</li>
+            <li>The 'del all' button removes all the currently saved paths.</li>
+            <li>The 'defaults' button will restore any deleted defaults.</li>
             <li>
               To upload an SVG press the upload button and select an SVG with a
               single {"<path>"}.

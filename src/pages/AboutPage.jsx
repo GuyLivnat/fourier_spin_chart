@@ -140,8 +140,10 @@ const AboutPage = () => {
             </li>
             <li>D3 (ISC license, Copyright 2010-2023 Mike Bostock).</li>
             <li>
-              The FFT is from the website
-              https://www.nayuki.io/page/free-small-fft-in-multiple-languages
+              The Fast Fourier Transform's code is from{" "}
+              <a href="https://www.nayuki.io/page/free-small-fft-in-multiple-languages">
+                this website
+              </a>{" "}
               (MIT license, Copyright (c) 2022 Project Nayuki).
             </li>
           </ul>
