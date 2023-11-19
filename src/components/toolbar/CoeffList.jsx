@@ -61,11 +61,11 @@ const CoeffList = ({
   const resetDefaultCoeff = () => {
     const missingDefaults = [];
     for (const object of defaults) {
-      let flag = false;
+      let found = false;
       for (const item of coeffList) {
-        if (item.id === object.id) flag = true;
+        if (item.id === object.id) found = true;
       }
-      if (!flag) {
+      if (!found) {
         // object not found
         missingDefaults.push({
           name: object.name,
@@ -110,7 +110,7 @@ const CoeffList = ({
   };
 
   const nameParser = (name) => {
-    return name.replace(".svg", "") + ` with ${units} points`;
+    return name.replace(".svg", "");
   };
 
   return (

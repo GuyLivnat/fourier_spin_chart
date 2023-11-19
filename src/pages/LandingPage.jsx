@@ -1,16 +1,12 @@
-import HomeChart from "../components/chart/HomeChart";
-import welcome from "../assets/defaults/welcome";
 import { TooltipContext } from "../utilities/TooltipContext";
 import { useContext } from "react";
 import LogoIcon from "../assets/icons/LogoIcon";
 
-const HomePage = () => {
-  const units = 512; // must be a power of 2! 256 suggested, 512 smoothes the edges
-  const coeff = welcome;
+const LandingPage = () => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
 
   return (
-    <section className="container-fluid text-center col-md-8 mx-auto my-5">
+    <section className="container-fluid text-center col-md-8 px-auto py-5">
       <LogoIcon />
       <h1
         className="mb-3"
@@ -29,4 +25,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default LandingPage;

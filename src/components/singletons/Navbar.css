@@ -23,11 +23,11 @@
 }
 
 .nav-link.active {
-  color: var(--success);
+  color: var(--success) !important;
   transition: color 0.3s ease-out;
 }
 
-.nav-link.nav-link.active::after {
+.nav-link.active::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -38,4 +38,8 @@
   background-color: var(--success);
   transform-origin: bottom middle;
   transition: transform 0.25s ease-out;
+}
+
+.navbar-brand {
+  color: var(--primary) !important;
 }

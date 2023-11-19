@@ -1,32 +1,33 @@
 import ChartPage from "./pages/ChartPage";
 import AboutPage from "./pages/AboutPage";
-import LandingPage from "./pages/HomePage";
-import TutorialPage from "./pages/TutorialPage";
+import LandingPage from "./pages/LandingPage";
+import DocsPage from "./pages/DocsPage";
 import { Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "./utilities/TooltipContext";
 import Navbar from "./components/singletons/NavBar";
+import Footer from "./components/singletons/Footer";
+import "./App.css";
 
 function App() {
   return (
-    <TooltipProvider>
-      <main
-        className="text-bg-dark"
-        style={{
-          height: "100%",
-          minHeight: "100vh",
-          width: "100%",
-          minWidth: "100vw",
-        }}
-      >
+    <>
+      <header className="text-bg-dark fixed-top" style={{ width: "100vw" }}>
         <Navbar />
-        <Routes>
-          <Route exact path="/" Component={LandingPage} />
-          <Route exact path="/tutorial" Component={TutorialPage} />
-          <Route exact path="/about" Component={AboutPage} />
-          <Route exact path="/chart" Component={ChartPage} />
-        </Routes>
+      </header>
+      <main className="text-bg-dark pt-5">
+        <TooltipProvider>
+          <Routes>
+            <Route exact path="/" Component={LandingPage} />
+            <Route exact path="/docs" Component={DocsPage} />
+            <Route exact path="/about" Component={AboutPage} />
+            <Route exact path="/chart" Component={ChartPage} />
+          </Routes>
+        </TooltipProvider>
       </main>
-    </TooltipProvider>
+      <footer className="text-bg-dark">
+        <Footer />
+      </footer>
+    </>
   );
 }
 
