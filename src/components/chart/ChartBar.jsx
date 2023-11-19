@@ -7,6 +7,8 @@ import PlayIcon from "../../assets/icons/PlayIcon";
 import PauseIcon from "../../assets/icons/PauseIcon";
 import StopIcon from "../../assets/icons/StopIcon";
 import "./ChartBar.css";
+import { useContext } from "react";
+import { TooltipContext } from "../../utilities/TooltipContext";
 
 const ChartBar = ({
   recenter,
@@ -29,6 +31,7 @@ const ChartBar = ({
   zoomCenter,
   pathName,
 }) => {
+  const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   return (
     <div
       className="position-absolute"
@@ -61,6 +64,9 @@ const ChartBar = ({
             whiteSpace: "nowrap",
             textOverflow: "ellipsis",
           }}
+          data-tooltip={pathName}
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
         >
           {pathName}
         </div>
