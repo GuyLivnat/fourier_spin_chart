@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CoeffEditor from "./editor/CoeffEditor";
-import CoeffList from "./CoeffList";
+import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
 
 const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
@@ -36,7 +36,7 @@ const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
     <>
       <CollapseTitle title="Saved Paths" forBody="uploads" />
       <div className="collapse" id="uploads">
-        <CoeffList
+        <SavedPaths
           activeId={activeId}
           setActiveId={setActiveId}
           coeffList={coeffList}

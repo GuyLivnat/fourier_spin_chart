@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const defaults = [mushu, cat, dog];
 
-const CoeffList = ({
+const SavedPaths = ({
   coeff,
   activeId,
   setActiveId,
@@ -147,4 +147,4 @@ const CoeffList = ({
   );
 };
 
-export default CoeffList;
+export default SavedPaths;
