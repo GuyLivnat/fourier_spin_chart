@@ -12,8 +12,12 @@ function ChartPage() {
   return (
     <section className="container-fluid">
       <div className="row">
-        <Chart {...{ playable, pathName, coeff, units }} />
-        <CoeffToolBar {...{ playable, coeff, setPathName, units }} />
+        <div className="col mt-3 ms-lg-2 ms-xl-3 ms-xxl-4">
+          <Chart {...{ playable, pathName, coeff, units }} />
+        </div>
+        <div className="col-lg-2 order-2 mt-3" style={{ minWidth: "310px" }}>
+          <CoeffToolBar {...{ playable, coeff, setPathName, units }} />
+        </div>
       </div>
     </section>
   );

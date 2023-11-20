@@ -9,7 +9,7 @@ const LogoIcon = ({ size = 16 }) => {
       <circle
         stroke="currentColor"
         fill="none"
-        strokeWidth="8"
+        strokeWidth="12"
         cx="97.4"
         cy="427.6"
         r="156.4"
@@ -17,7 +17,7 @@ const LogoIcon = ({ size = 16 }) => {
       <circle
         stroke="currentColor"
         fill="none"
-        strokeWidth="8"
+        strokeWidth="12"
         cx="168"
         cy="286"
         r="50.7"
@@ -25,13 +25,13 @@ const LogoIcon = ({ size = 16 }) => {
       <polyline
         stroke="currentColor"
         fill="none"
-        strokeWidth="8"
+        strokeWidth="12"
         points="97.4,427.6 164.5,287.5 209.3,256.7 "
       />
       <path
         stroke="currentColor"
         fill="none"
-        strokeWidth="12"
+        strokeWidth="18"
         d="M209.3,256.7c-86.7-104.6-310.5-39.9-261.9,215.7"
       />
       <circle fill="currentColor" cx="97.4" cy="427.6" r="10.1" />

@@ -129,49 +129,46 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   useInterval(renderNextFrame, isPlaying ? maxSpeed - updateSpeed : null); //plays the chart
 
   return (
-    <div className="col mt-3">
-      <div
-        className="position-relative"
-        id="chart_div"
-        onMouseEnter={() => setHideBar(100)}
-        onMouseLeave={() => isPlaying && setHideBar(0)}
-      >
-        <ChartBar
-          {...{
-            hideBar,
-            pausePlay,
-            isPlaying,
-            stop,
-            updateSpeed,
-            setUpdateSpeed,
-            maxSpeed,
-            circlesActive,
-            setCirclesActive,
-            radiiActive,
-            setRadiiActive,
-            outlineActive,
-            setOutlineActive,
-            zoomCenter,
-            time,
-            units,
-            renderSkipToFrame,
-            pathName,
-            recenter,
-          }}
-        />
-        <ChartOverlay playable={playable} />
-        <ChartInit
-          {...{
-            circlesActive,
-            radiiActive,
-            outlineActive,
-            lineSegments,
-            edgeColor,
-            backgroundColor,
-          }}
-          coeffLength={coeff.current.length}
-        />
-      </div>
+    <div
+      className="position-relative"
+      onMouseEnter={() => setHideBar(100)}
+      onMouseLeave={() => isPlaying && setHideBar(0)}
+    >
+      <ChartBar
+        {...{
+          hideBar,
+          pausePlay,
+          isPlaying,
+          stop,
+          updateSpeed,
+          setUpdateSpeed,
+          maxSpeed,
+          circlesActive,
+          setCirclesActive,
+          radiiActive,
+          setRadiiActive,
+          outlineActive,
+          setOutlineActive,
+          zoomCenter,
+          time,
+          units,
+          renderSkipToFrame,
+          pathName,
+          recenter,
+        }}
+      />
+      <ChartOverlay playable={playable} />
+      <ChartInit
+        {...{
+          circlesActive,
+          radiiActive,
+          outlineActive,
+          lineSegments,
+          edgeColor,
+          backgroundColor,
+        }}
+        coeffLength={coeff.current.length}
+      />
     </div>
   );
 };

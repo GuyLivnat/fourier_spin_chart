@@ -11,10 +11,10 @@ import "./App.css";
 function App() {
   return (
     <>
-      <header className="text-bg-dark fixed-top" style={{ width: "100vw" }}>
+      <header className="fixed-top" style={{ width: "100vw" }}>
         <Navbar />
       </header>
-      <main className="pt-5">
+      <main className="mt-5">
         <TooltipProvider>
           <Routes>
             <Route exact path="/" Component={LandingPage} />
@@ -24,7 +24,7 @@ function App() {
           </Routes>
         </TooltipProvider>
       </main>
-      <footer className="text-bg-dark">
+      <footer>
         <Footer />
       </footer>
     </>

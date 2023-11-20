@@ -40,7 +40,7 @@ const List = ({
   return (
     <>
       <div className="rounded border overflow-hidden">
-        <div className=" row text-bg-info border-bottom justify-content-between mx-0">
+        <div className=" row border-bottom justify-content-between mx-0">
           <UploadButton
             handleFile={upload}
             text={"upload"}

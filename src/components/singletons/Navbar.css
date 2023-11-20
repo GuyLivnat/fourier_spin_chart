@@ -23,7 +23,7 @@
 }
 
 .nav-link.active {
-  color: var(--success) !important;
+  color: white !important;
   transition: color 0.3s ease-out;
 }
 
@@ -35,11 +35,16 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: var(--success);
+  background-color: white;
   transform-origin: bottom middle;
   transition: transform 0.25s ease-out;
 }
 
 .navbar-brand {
   color: var(--primary) !important;
+  transition: color 0.25s ease-out;
+}
+
+.navbar-brand:hover {
+  color: white !important;
 }

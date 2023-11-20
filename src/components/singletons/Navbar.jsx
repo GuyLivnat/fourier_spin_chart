@@ -4,9 +4,9 @@ import LogoIcon from "../../assets/icons/LogoIcon";
 
 const Navbar = () => {
   return (
-    <nav className=" p-2 d-flex justify-content-center text-center">
-      <div className="px-3 float-start">
-        <NavLink className="" to="/">
+    <nav className=" p-2 d-flex justify-content-center text-center bg-secondary">
+      <div className="px-3">
+        <NavLink className="navbar-brand" to="/">
           <LogoIcon size={25} />
         </NavLink>
       </div>
