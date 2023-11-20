@@ -1,9 +1,9 @@
 import { useState } from "react";
-import CoeffEditor from "./editor/CoeffEditor";
+import Editor from "./Editor";
 import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
 
-const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
+const ToolBar = ({ coeff, playable, setPathName, units }) => {
   const [activeId, setActiveId] = useState(null);
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
@@ -50,7 +50,7 @@ const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
       </div>
       <CollapseTitle title="Editor" forBody="editor" />
       <div className="collapse" id="editor">
-        <CoeffEditor
+        <Editor
           playable={playable}
           coeff={coeff}
           setPathName={setPathName}
@@ -63,4 +63,4 @@ const CoeffToolBar = ({ coeff, playable, setPathName, units }) => {
   );
 };
 
-export default CoeffToolBar;
+export default ToolBar;

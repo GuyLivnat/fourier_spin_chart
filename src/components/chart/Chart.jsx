@@ -13,7 +13,7 @@ import panSVGListeners from "../../behaviors/panSVGListeners";
 import ChartBar from "./ChartBar";
 import ChartOverlay from "./ChartOverlay";
 
-const Chart = ({ units, coeff, playable, pathName }) => {
+const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const lineSegments = 32; // used for the gradient effect on the outline
   const maxSpeed = 128;
 
@@ -21,9 +21,6 @@ const Chart = ({ units, coeff, playable, pathName }) => {
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
   const step = 1 / units;
-
-  const edgeColor = { r: 172, g: 106, b: 106 };
-  const backgroundColor = { r: 0, g: 0, b: 0 };
 
   const zoom = useRef(1000);
   const panX = useRef(0);
@@ -164,8 +161,7 @@ const Chart = ({ units, coeff, playable, pathName }) => {
           radiiActive,
           outlineActive,
           lineSegments,
-          edgeColor,
-          backgroundColor,
+          chartColors,
         }}
         coeffLength={coeff.current.length}
       />

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import CoeffTable from "./CoeffTable";
+import CoeffTable from "./editor/CoeffTable";
 import { useContext } from "react";
-import { TooltipContext } from "../../../utilities/TooltipContext";
-import Button from "../../general_components/Button";
+import { TooltipContext } from "../../utilities/TooltipContext";
+import Button from "../general_components/Button";
 
-const CoeffEditor = ({
+const Editor = ({
   coeff,
   setPathName,
   saveCoeff,
@@ -90,4 +90,4 @@ const CoeffEditor = ({
   );
 };
 
-export default CoeffEditor;
+export default Editor;

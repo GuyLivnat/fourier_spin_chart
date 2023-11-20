@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import CoeffToolBar from "../components/toolbar/CoeffToolBar";
+import ToolBar from "../components/toolbar/ToolBar";
 import Chart from "../components/chart/Chart";
 
 function ChartPage() {
@@ -8,15 +8,19 @@ function ChartPage() {
 
   const [pathName, setPathName] = useState("");
   let playable = coeff.current.length > 3;
+  const [chartColors, setChartColors] = useState({
+    edgeColor: { r: 172, g: 106, b: 106 },
+    backgroundColor: { r: 0, g: 0, b: 0 },
+  });
 
   return (
     <section className="container-fluid">
       <div className="row">
         <div className="col mt-3 ms-lg-2 ms-xl-3 ms-xxl-4">
-          <Chart {...{ playable, pathName, coeff, units }} />
+          <Chart {...{ playable, pathName, coeff, units, chartColors }} />
         </div>
         <div className="col-lg-2 order-2 mt-3" style={{ minWidth: "310px" }}>
-          <CoeffToolBar {...{ playable, coeff, setPathName, units }} />
+          <ToolBar {...{ playable, coeff, setPathName, units }} />
         </div>
       </div>
     </section>

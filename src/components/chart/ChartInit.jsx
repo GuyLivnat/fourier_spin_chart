@@ -6,10 +6,10 @@ const ChartInit = ({
   outlineActive,
   lineSegments,
   coeffLength,
-  edgeColor,
-  backgroundColor,
+  chartColors,
 }) => {
   const circleSize = 1.5;
+  const { backgroundColor, edgeColor } = chartColors;
 
   const circles = [];
   for (let i = 0; i < coeffLength; i++) {
