@@ -3,6 +3,8 @@ import List from "../general_components/List";
 import cat from "../../assets/defaults/cat.json";
 import dog from "../../assets/defaults/dog.json";
 import mushu from "../../assets/defaults/mushu.json";
+import ErrorModal from "../general_components/ErrorModal";
+import { useState } from "react";
 
 const defaults = [mushu, cat, dog];
 
@@ -17,6 +19,8 @@ const CoeffList = ({
   stop,
   setPathName,
 }) => {
+  const [modalText, setModalText] = useState(null);
+
   const loadCoeff = (e) => {
     let id = null;
     if (e.target.id) id = e.target.id;
@@ -95,14 +99,23 @@ const CoeffList = ({
     // converts an uploaded SVG to something readable
     const file = event.target.files[0];
     if (file) {
+      if (file.type !== "image/svg+xml")
+        //validate and throw if wrong file type
+        return setModalText(
+          "wrong file type, please upload an SVG with one path"
+        );
       const name = nameParser(file.name);
       const reader = new FileReader();
       reader.onload = (e) => {
         const string = e.target.result;
         const parser = new DOMParser();
         const parsedFile = parser.parseFromString(string, "image/svg+xml");
-        const path = parsedFile.querySelector("path");
-        const coeff = createCoeff(path, units);
+        const paths = parsedFile.querySelectorAll("path");
+        if (paths.length < 1)
+          return setModalText("No paths found in uploaded SVG"); // bad upload
+        if (paths.length > 1)
+          return setModalText("Too many paths found in uploaded SVG"); // bad upload
+        const coeff = createCoeff(paths[0], units);
         saveCoeff(coeff, name); // this function ends here and chains to a new function!
       };
       reader.readAsText(file);
@@ -114,18 +127,23 @@ const CoeffList = ({
   };
 
   return (
-    <List
-      lst={coeffList}
-      load={loadCoeff}
-      del={deleteCoeff}
-      delAll={deleteAllCoeff}
-      resetDefaults={resetDefaultCoeff}
-      rename={renameCoeff}
-      focus={activeId}
-      upload={uploadSVG}
-      uploadTooltip="upload an SVG file with a single path"
-      uploadType=".svg"
-    />
+    <>
+      <List
+        lst={coeffList}
+        load={loadCoeff}
+        del={deleteCoeff}
+        delAll={deleteAllCoeff}
+        resetDefaults={resetDefaultCoeff}
+        rename={renameCoeff}
+        focus={activeId}
+        upload={uploadSVG}
+        uploadTooltip="upload an SVG file with a single path"
+        uploadType=".svg"
+      />
+      {modalText && (
+        <ErrorModal text={modalText} closeFunc={() => setModalText(null)} />
+      )}
+    </>
   );
 };
 
