@@ -13,6 +13,7 @@ const NumberInput = ({
     const regexNumber = /(\d+)/;
     const value = e.target.value.match(regexNumber);
     if (value) setNumber(value[0]);
+    else setNumber(0);
   };
 
   return (

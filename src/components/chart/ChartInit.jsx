@@ -1,4 +1,5 @@
 import gradientSampler from "../../utilities/gradientSampler";
+import rgbObjToString from "../../utilities/RGBObjToString";
 
 const ChartInit = ({
   circlesActive,
@@ -9,7 +10,7 @@ const ChartInit = ({
   chartColors,
 }) => {
   const circleSize = 1.5;
-  const { backgroundColor, edgeColor } = chartColors;
+  const { backgroundColor, edgeColor, radiiColor, circleColor } = chartColors;
 
   const circles = [];
   for (let i = 0; i < coeffLength; i++) {
@@ -36,7 +37,7 @@ const ChartInit = ({
       id="chart"
       viewBox={"0, 230, 1000, 562.5"} //0.5625 is for 16:9 aspect ratio
       style={{
-        backgroundColor: `rgb(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b})`,
+        backgroundColor: rgbObjToString(backgroundColor),
       }}
     >
       <defs>
@@ -66,7 +67,7 @@ const ChartInit = ({
         </g>
         <g
           id="circles"
-          stroke="white"
+          stroke={rgbObjToString(circleColor)}
           display={circlesActive ? "true" : "none"}
           style={{ fill: "none" }}
           opacity="40%"
@@ -75,7 +76,7 @@ const ChartInit = ({
         </g>
         <path
           id="radii"
-          stroke="rgb(191, 194, 240)"
+          stroke={rgbObjToString(radiiColor)}
           display={radiiActive ? "true" : "none"}
           markerStart={"url(#circle-marker)"}
           style={{ fill: "none" }}

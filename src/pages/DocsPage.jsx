@@ -35,7 +35,7 @@ const DocsPage = () => {
           </ul>
         </div>
         <div>
-          <h2>The Editor</h2>
+          <h2>The Chain Editor</h2>
           <p>
             The Editor lets you remove any circle or add one to the end of the
             chain.
