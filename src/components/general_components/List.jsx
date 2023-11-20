@@ -15,6 +15,7 @@ const List = ({
   upload,
   resetDefaults,
   uploadTooltip,
+  uploadType,
 }) => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   const [renameId, setRenameId] = useState(null);
@@ -48,6 +49,7 @@ const List = ({
             dataTooltip={uploadTooltip}
             onMouseEnter={tooltipIn}
             onMouseLeave={tooltipOut}
+            inputType={uploadType}
           />
           <Button
             text="defaults"

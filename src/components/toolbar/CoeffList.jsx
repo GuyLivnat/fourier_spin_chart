@@ -124,6 +124,7 @@ const CoeffList = ({
       focus={activeId}
       upload={uploadSVG}
       uploadTooltip="upload an SVG file with a single path"
+      uploadType=".svg"
     />
   );
 };

@@ -10,6 +10,7 @@ const UploadButton = ({
   dataTooltip,
   onMouseEnter,
   onMouseLeave,
+  inputType,
 }) => {
   const inputRef = createRef();
   const uploadClick = () => {
@@ -33,6 +34,7 @@ const UploadButton = ({
         onChange={handleFile}
         style={{ display: "none" }}
         ref={inputRef}
+        accept={inputType}
       />
     </>
   );
