@@ -1,4 +1,5 @@
 import RecenterIcon from "../assets/icons/RecenterIcon";
+import UndoIcon from "../assets/icons/UndoIcon";
 import ZoomInIcon from "../assets/icons/ZoomInIcon";
 import ZoomOutIcon from "../assets/icons/ZoomOutIcon";
 
@@ -79,8 +80,20 @@ const DocsPage = () => {
               single {"<path>"}.
             </li>
           </ul>
-          Note: Any chain can be edited with the Editor, but the changes won’t
-          be saved unless you press the save button.
+        </div>
+        <div>
+          <h2>The Colorizer</h2>
+          <p>You can change the colors of the Chart</p>
+          <ul>
+            <li>
+              The color picker tool is browser spesific. Try it out on a
+              different one for a new experience!
+            </li>
+            <li>
+              The reset <UndoIcon size={16} /> button resets the color to its
+              original setting.
+            </li>
+          </ul>
         </div>
       </div>
     </section>
