@@ -14,7 +14,6 @@ const renderChart = (
   const chart = document.getElementById("chart");
 
   const minStroke = zoom / chart.clientWidth;
-
   const scalingMin = (zoom / chart.clientWidth) * 15;
   const minircle = zoom / 150 > scalingMin ? zoom / 150 : scalingMin;
   const filteredFrame = frame.circles.filter((circle, i) => {
@@ -52,7 +51,7 @@ const renderChart = (
 
   d3.select("#edge").style("stroke-width", minStroke * 2.5);
 
-  for (let i = 0; i < lineSegments; i++) {
+  for (let i = 0; i < lineSegments + 1; i++) {
     let start = i === 0 || i === 1 ? 0 : segment * (i - 1) - 1;
     let end = segment * (i + 1);
     d3.select(`#edge_${i}`).attr("d", line(edge.slice(start, end)));

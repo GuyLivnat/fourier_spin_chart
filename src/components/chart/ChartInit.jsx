@@ -20,7 +20,7 @@ const ChartInit = ({
   }
 
   const edgeSegments = [];
-  for (let i = 0; i < lineSegments; i++) {
+  for (let i = 0; i < lineSegments + 1; i++) {
     let strength = (lineSegments - i) / lineSegments + edgeColor.gamma;
     if (strength > 1) strength = 1;
     edgeSegments.unshift(
