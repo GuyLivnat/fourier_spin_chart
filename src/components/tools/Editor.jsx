@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CoeffTable from "./coefftable/CoeffTable";
+import CoeffTable from "./CoeffTable";
 import { useContext } from "react";
 import { TooltipContext } from "../../utilities/TooltipContext";
 import Button from "../general_components/Button";

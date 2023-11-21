@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import ToolBar from "../components/toolbar/ToolBar";
+import ToolBar from "../components/tools/ToolBar";
 import Chart from "../components/chart/Chart";
 
 function ChartPage() {

@@ -1,8 +1,8 @@
-import CloseButton from "../../general_components/CloseButton";
-import AngleIcon from "../../../assets/icons/AngleIcon";
-import RadiusIcon from "../../../assets/icons/RadiusIcon";
+import CloseButton from "../general_components/CloseButton";
+import AngleIcon from "../../assets/icons/AngleIcon";
+import RadiusIcon from "../../assets/icons/RadiusIcon";
 import { useContext } from "react";
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../utilities/TooltipContext";
 import CoeffTableAdder from "./CoeffTableAdder";
 
 const CoeffTable = ({
