@@ -9,7 +9,7 @@ function ChartPage() {
   const [pathName, setPathName] = useState("");
   let playable = coeff.current.length > 3;
   const chartColorDefaults = {
-    edgeColor: { r: 172, g: 106, b: 106, gamma: 0 },
+    edgeColor: { r: 172, g: 106, b: 106, gamma: 0.3 },
     backgroundColor: { r: 0, g: 0, b: 0 },
     radiiColor: { r: 191, g: 194, b: 240 },
     circlesColor: { r: 255, g: 255, b: 255 },

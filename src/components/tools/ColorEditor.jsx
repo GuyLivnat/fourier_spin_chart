@@ -13,13 +13,8 @@ const ColorEditor = ({
   const newColors = chartColors;
 
   const changeColor = (hexValue) => {
-    if (shape === "edgeColor") {
-      const newColor = hexToRgb(hexValue);
-      newColor.gamma = chartColors[shape].gamma;
-      newColors[shape] = newColor;
-    } else {
-      newColors[shape] = hexToRgb(hexValue);
-    }
+    newColors[shape] = { ...chartColors[shape], ...hexToRgb(hexValue) };
+    // only changes .r.g.b values on the color object, leaving other values intact
     setChartColors({ ...newColors });
   };
 
@@ -30,8 +25,10 @@ const ColorEditor = ({
 
   const resetColor = () => {
     const newColors = chartColors;
-    const defaultColor = chartColorDefaults[shape];
-    newColors[shape] = defaultColor;
+    const { r, g, b } = chartColorDefaults[shape];
+    newColors[shape].r = r;
+    newColors[shape].g = g;
+    newColors[shape].b = b;
     setChartColors({ ...newColors });
   };
 
