@@ -10,13 +10,19 @@ const ColorEditor = ({
   setChartColors,
   chartColorDefaults,
 }) => {
-  const changeColor = () => {
-    const newColors = chartColors;
-    return (hexValue) => {
+  const newColors = chartColors;
+
+  const changeColor = (hexValue) => {
+    if (shape === "edgeColor") {
+      const newColor = hexToRgb(hexValue);
+      newColor.gamma = chartColors[shape].gamma;
+      newColors[shape] = newColor;
+    } else {
       newColors[shape] = hexToRgb(hexValue);
-      setChartColors({ ...newColors });
-    };
+    }
+    setChartColors({ ...newColors });
   };
+
   const startColor = () => {
     const rgb = chartColors[shape];
     return rgbToHex(rgb);
@@ -34,12 +40,12 @@ const ColorEditor = ({
       <td key={shape}>
         {shape.slice(0, 1).toUpperCase() + shape.slice(1).replace("Color", "")}
       </td>
-      <td>
-        <ColorInput color={startColor(shape)} setColor={changeColor(shape)} />
+      <td className="d-flex justify-content-center">
+        <ColorInput color={startColor()} setColor={changeColor} />
       </td>
       <td>
         <Button
-          className="btn btn-sm btn-outline-primary px-1 py-0"
+          className="btn btn-sm btn-outline-danger px-1 py-0"
           text={<UndoIcon size={16} />}
           handleClick={resetColor}
         />

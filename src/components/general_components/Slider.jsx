@@ -1,4 +1,4 @@
-const Slider = ({ value, setValue, min, max, text, disabled }) => {
+const Slider = ({ value, setValue, min, max, text, disabled, step }) => {
   const handleChange = (e) => {
     const inputValue = parseFloat(e.target.value);
     if (setValue) setValue(inputValue);
@@ -15,6 +15,7 @@ const Slider = ({ value, setValue, min, max, text, disabled }) => {
         value={setValue ? value : value.current}
         disabled={disabled}
         className="form-range"
+        step={step}
       />
       <label
         htmlFor={text + "-slider"}
