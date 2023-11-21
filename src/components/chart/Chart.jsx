@@ -154,7 +154,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
           recenter,
         }}
       />
-      <ChartOverlay playable={playable} />
+      <ChartOverlay {...{ playable, chartColors }} />
       <ChartInit
         {...{
           circlesActive,

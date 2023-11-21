@@ -2,6 +2,7 @@ import ColorInput from "../general_components/ColorInput";
 import hexToRgb from "../../utilities/hexToRgb";
 import rgbToHex from "../../utilities/rgbToHex";
 import Button from "../general_components/Button";
+import UndoIcon from "../../assets/icons/UndoIcon";
 
 const ColorEditor = ({
   shape,
@@ -38,8 +39,8 @@ const ColorEditor = ({
       </td>
       <td>
         <Button
-          className="btn btn-sm btn-outline-primary"
-          text="reset"
+          className="btn btn-sm btn-outline-primary px-1 py-0"
+          text={<UndoIcon size={16} />}
           handleClick={resetColor}
         />
       </td>
