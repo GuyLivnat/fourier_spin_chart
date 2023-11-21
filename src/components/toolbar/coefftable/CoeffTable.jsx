@@ -42,35 +42,33 @@ const CoeffTable = ({
   }
 
   return (
-    <>
-      <table
-        className="table table-sm table-dark table-striped table-hover mb-1"
-        onWheel={tooltipOut}
-      >
-        <thead style={{ position: "sticky", insetBlockStart: 0 }}>
-          <tr>
-            <th scope="col">
-              Radius <RadiusIcon />
-            </th>
-            <th
-              scope="col"
-              data-tooltip="angle in radians"
-              onMouseEnter={tooltipIn}
-              onMouseLeave={tooltipOut}
-            >
-              Angle <AngleIcon />
-            </th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>{tableItems}</tbody>
-        <tfoot style={{ position: "sticky", insetBlockEnd: 0 }}>
-          <CoeffTableAdder
-            {...{ radius, setRadius, angle, setAngle, pushCoeff }}
-          />
-        </tfoot>
-      </table>
-    </>
+    <table
+      className="table table-sm table-dark table-striped table-hover mb-1"
+      onWheel={tooltipOut}
+    >
+      <thead style={{ position: "sticky", insetBlockStart: 0 }}>
+        <tr>
+          <th scope="col">
+            Radius <RadiusIcon />
+          </th>
+          <th
+            scope="col"
+            data-tooltip="angle in radians"
+            onMouseEnter={tooltipIn}
+            onMouseLeave={tooltipOut}
+          >
+            Angle <AngleIcon />
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>{tableItems}</tbody>
+      <tfoot style={{ position: "sticky", insetBlockEnd: 0 }}>
+        <CoeffTableAdder
+          {...{ radius, setRadius, angle, setAngle, pushCoeff }}
+        />
+      </tfoot>
+    </table>
   );
 };
 

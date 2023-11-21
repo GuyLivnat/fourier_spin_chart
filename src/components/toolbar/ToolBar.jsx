@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ChainEditor from "./ChainEditor";
+import Editor from "./Editor";
 import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
-import ColorEditor from "./ColorEditor";
+import Colorizer from "./Colorizer";
 
 const ToolBar = ({
   coeff,
@@ -11,6 +11,7 @@ const ToolBar = ({
   units,
   chartColors,
   setChartColors,
+  chartColorDefaults,
 }) => {
   const [activeId, setActiveId] = useState(null);
   const [coeffList, setCoeffList] = useState(() => {
@@ -56,9 +57,9 @@ const ToolBar = ({
           setPathName={setPathName}
         />
       </div>
-      <CollapseTitle title="Chain Editor" forBody="editor" />
+      <CollapseTitle title="Editor" forBody="editor" />
       <div className="collapse" id="editor">
-        <ChainEditor
+        <Editor
           playable={playable}
           coeff={coeff}
           setPathName={setPathName}
@@ -67,9 +68,9 @@ const ToolBar = ({
           stop={stop}
         />
       </div>
-      <CollapseTitle title="Color Editor" forBody="color-changer" />
-      <div className="collapse" id="color-changer">
-        <ColorEditor {...{ chartColors, setChartColors }} />
+      <CollapseTitle title="Colorizer" forBody="colorizer" />
+      <div className="collapse" id="colorizer">
+        <Colorizer {...{ chartColors, setChartColors, chartColorDefaults }} />
       </div>
     </>
   );

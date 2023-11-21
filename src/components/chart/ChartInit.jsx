@@ -10,7 +10,7 @@ const ChartInit = ({
   chartColors,
 }) => {
   const circleSize = 1.5;
-  const { backgroundColor, edgeColor, radiiColor, circleColor } = chartColors;
+  const { backgroundColor, edgeColor, radiiColor, circlesColor } = chartColors;
 
   const circles = [];
   for (let i = 0; i < coeffLength; i++) {
@@ -67,7 +67,7 @@ const ChartInit = ({
         </g>
         <g
           id="circles"
-          stroke={rgbObjToString(circleColor)}
+          stroke={rgbObjToString(circlesColor)}
           display={circlesActive ? "true" : "none"}
           style={{ fill: "none" }}
           opacity="40%"

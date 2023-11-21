@@ -8,12 +8,13 @@ function ChartPage() {
 
   const [pathName, setPathName] = useState("");
   let playable = coeff.current.length > 3;
-  const [chartColors, setChartColors] = useState({
+  const chartColorDefaults = {
     edgeColor: { r: 172, g: 106, b: 106 },
     backgroundColor: { r: 0, g: 0, b: 0 },
     radiiColor: { r: 191, g: 194, b: 240 },
-    circleColor: { r: 255, g: 255, b: 255 },
-  });
+    circlesColor: { r: 255, g: 255, b: 255 },
+  };
+  const [chartColors, setChartColors] = useState(chartColorDefaults);
 
   return (
     <section className="container-fluid">
@@ -30,6 +31,7 @@ function ChartPage() {
               units,
               chartColors,
               setChartColors,
+              chartColorDefaults,
             }}
           />
         </div>
