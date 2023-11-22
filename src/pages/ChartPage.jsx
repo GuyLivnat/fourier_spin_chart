@@ -5,9 +5,10 @@ import Chart from "../components/chart/Chart";
 function ChartPage() {
   const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
+  let playable = coeff.current.length > 3;
 
   const [pathName, setPathName] = useState("");
-  let playable = coeff.current.length > 3;
+
   const chartColorDefaults = {
     edgeColor: { r: 172, g: 106, b: 106, gamma: 0.3 },
     backgroundColor: { r: 0, g: 0, b: 0 },
