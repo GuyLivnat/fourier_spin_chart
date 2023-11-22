@@ -3,6 +3,8 @@ import hexToRgb from "../../utilities/hexToRgb";
 import rgbToHex from "../../utilities/rgbToHex";
 import Button from "../general_components/Button";
 import UndoIcon from "../../assets/icons/UndoIcon";
+import { useContext } from "react";
+import { TooltipContext } from "../../utilities/TooltipContext";
 
 const ColorEditor = ({
   shape,
@@ -10,6 +12,7 @@ const ColorEditor = ({
   setChartColors,
   chartColorDefaults,
 }) => {
+  const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   const newColors = chartColors;
 
   const changeColor = (hexValue) => {
@@ -45,6 +48,9 @@ const ColorEditor = ({
           className="btn btn-sm btn-outline-danger px-1 py-0"
           text={<UndoIcon size={16} />}
           handleClick={resetColor}
+          dataTooltip="reset color"
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
         />
       </td>
     </>
