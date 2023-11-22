@@ -34,7 +34,7 @@ const EdgeFadeEditor = ({
           text={<UndoIcon size={16} />}
           className="btn btn-sm btn-outline-danger px-1 py-0"
           handleClick={() => setGamma(chartColorDefaults.edgeColor.gamma)}
-          dataTooltip="reset Fade"
+          dataTooltip="reset"
           onMouseEnter={tooltipIn}
           onMouseLeave={tooltipOut}
         />

@@ -5,6 +5,8 @@ import Button from "../general_components/Button";
 import UndoIcon from "../../assets/icons/UndoIcon";
 import { useContext } from "react";
 import { TooltipContext } from "../../utilities/TooltipContext";
+import ShownIcon from "../../assets/icons/ShownIcon";
+import HideIcon from "../../assets/icons/HideIcon";
 
 const ColorEditor = ({
   shape,
@@ -35,6 +37,15 @@ const ColorEditor = ({
     setChartColors({ ...newColors });
   };
 
+  const toggleHideShape = () => {
+    if (chartColors[shape].hidden)
+      newColors[shape] = { ...chartColors[shape], hidden: false };
+    else newColors[shape] = { ...chartColors[shape], hidden: true };
+    setChartColors({ ...newColors });
+    // tooltipOut();
+    // tooltipIn();
+  };
+
   return (
     <>
       <td key={shape}>
@@ -48,11 +59,32 @@ const ColorEditor = ({
           className="btn btn-sm btn-outline-danger px-1 py-0"
           text={<UndoIcon size={16} />}
           handleClick={resetColor}
-          dataTooltip="reset color"
+          dataTooltip="reset"
           onMouseEnter={tooltipIn}
           onMouseLeave={tooltipOut}
         />
       </td>
+      {chartColors[shape].hidden !== undefined ? (
+        <td
+          data-tooltip={"toggle visibility"}
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
+        >
+          <Button
+            className="btn btn-sm btn-outline-primary px-1 py-0"
+            text={
+              chartColors[shape].hidden ? (
+                <HideIcon size={20} />
+              ) : (
+                <ShownIcon size={20} />
+              )
+            }
+            handleClick={toggleHideShape}
+          />
+        </td>
+      ) : (
+        <td></td>
+      )}
     </>
   );
 };

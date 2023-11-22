@@ -27,9 +27,6 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const panY = useRef(230);
 
   const [updateSpeed, setUpdateSpeed] = useState(85); //in miliseconds. calculated as maxspeed-updatespeed
-  const [radiiActive, setRadiiActive] = useState(true);
-  const [circlesActive, setCirclesActive] = useState(true);
-  const [outlineActive, setOutlineActive] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hideBar, setHideBar] = useState(100);
   const [listeners, setListeners] = useState([{ evnt: null, func: null }]);
@@ -140,12 +137,6 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
           updateSpeed,
           setUpdateSpeed,
           maxSpeed,
-          circlesActive,
-          setCirclesActive,
-          radiiActive,
-          setRadiiActive,
-          outlineActive,
-          setOutlineActive,
           zoomCenter,
           time,
           units,
@@ -157,9 +148,6 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
       <ChartOverlay {...{ playable, chartColors }} />
       <ChartInit
         {...{
-          circlesActive,
-          radiiActive,
-          outlineActive,
           lineSegments,
           chartColors,
         }}

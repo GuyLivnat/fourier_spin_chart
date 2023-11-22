@@ -22,12 +22,6 @@ const ChartBar = ({
   time,
   units,
   renderSkipToFrame,
-  circlesActive,
-  setCirclesActive,
-  radiiActive,
-  setRadiiActive,
-  outlineActive,
-  setOutlineActive,
   zoomCenter,
   pathName,
 }) => {
@@ -85,27 +79,6 @@ const ChartBar = ({
             min={0}
             max={maxSpeed}
             text="Speed"
-          />
-        </div>
-        <div className="col px-1">
-          <ToggleSwitch
-            label={"Circles"}
-            handleClick={() => setCirclesActive(!circlesActive)}
-            checked={circlesActive}
-          />
-        </div>
-        <div className="col px-1">
-          <ToggleSwitch
-            label="Radii"
-            handleClick={() => setRadiiActive(!radiiActive)}
-            checked={radiiActive}
-          />
-        </div>
-        <div className="col px-1">
-          <ToggleSwitch
-            label="Outline"
-            handleClick={() => setOutlineActive(!outlineActive)}
-            checked={outlineActive}
           />
         </div>
       </div>

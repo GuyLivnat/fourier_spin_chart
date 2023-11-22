@@ -10,10 +10,10 @@ function ChartPage() {
   const [pathName, setPathName] = useState("");
 
   const chartColorDefaults = {
-    edgeColor: { r: 172, g: 106, b: 106, gamma: 0.3 },
+    edgeColor: { r: 172, g: 106, b: 106, hidden: false, gamma: 0.3 },
     backgroundColor: { r: 0, g: 0, b: 0 },
-    radiiColor: { r: 191, g: 194, b: 240 },
-    circlesColor: { r: 255, g: 255, b: 255 },
+    radiiColor: { r: 191, g: 194, b: 240, hidden: false },
+    circlesColor: { r: 255, g: 255, b: 255, hidden: false },
   };
   const [chartColors, setChartColors] = useState(chartColorDefaults);
 

@@ -1,14 +1,7 @@
 import gradientSampler from "../../utilities/gradientSampler";
 import rgbObjToString from "../../utilities/RGBObjToString";
 
-const ChartInit = ({
-  circlesActive,
-  radiiActive,
-  outlineActive,
-  lineSegments,
-  coeffLength,
-  chartColors,
-}) => {
+const ChartInit = ({ lineSegments, coeffLength, chartColors }) => {
   const circleSize = 1.5;
   const { backgroundColor, edgeColor, radiiColor, circlesColor } = chartColors;
 
@@ -62,14 +55,14 @@ const ChartInit = ({
         <g
           id="edge"
           style={{ fill: "none" }}
-          display={outlineActive ? "true" : "none"}
+          display={edgeColor.hidden ? "none" : "true"}
         >
           {edgeSegments}
         </g>
         <g
           id="circles"
           stroke={rgbObjToString(circlesColor)}
-          display={circlesActive ? "true" : "none"}
+          display={circlesColor.hidden ? "none" : "true"}
           style={{ fill: "none" }}
           opacity="40%"
         >
@@ -78,7 +71,7 @@ const ChartInit = ({
         <path
           id="radii"
           stroke={rgbObjToString(radiiColor)}
-          display={radiiActive ? "true" : "none"}
+          display={radiiColor.hidden ? "none" : "true"}
           markerStart={"url(#circle-marker)"}
           style={{ fill: "none" }}
           opacity="50%"
