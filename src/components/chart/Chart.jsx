@@ -87,7 +87,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
     timestep();
     frame.current = computeFrame(coeff.current, time.current);
     edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
-    if (edge.current.length > units) edge.current.pop();
+    if (edge.current.length > 1.1 * units) edge.current.pop();
     renderFrame();
   };
 
@@ -104,7 +104,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
       timestep();
       let missingFrame = computeFrame(coeff.current, time.current);
       edge.current.unshift({ x: missingFrame.edge.x, y: missingFrame.edge.y });
-      if (edge.current.length > units) edge.current.pop();
+      if (edge.current.length > 1.1 * units) edge.current.pop();
       distance -= step;
     }
     renderNextFrame();
