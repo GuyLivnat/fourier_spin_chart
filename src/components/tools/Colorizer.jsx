@@ -1,5 +1,5 @@
 import ColorEditor from "./ColorEditor";
-import EdgeFadeEditor from "./EdgeFadeEditor";
+import OutlineFadeEditor from "./OutlineFadeEditor";
 
 const Colorizer = ({ chartColors, setChartColors, chartColorDefaults }) => {
   const colorableShapes = [];
@@ -11,10 +11,10 @@ const Colorizer = ({ chartColors, setChartColors, chartColorDefaults }) => {
         />
       </tr>
     );
-    if (shape === "edgeColor")
+    if (shape === "outlineColor")
       colorableShapes.push(
-        <tr key="edge-gamma">
-          <EdgeFadeEditor
+        <tr key="outline-gamma">
+          <OutlineFadeEditor
             {...{ chartColors, setChartColors, chartColorDefaults }}
           />
         </tr>

@@ -42,8 +42,6 @@ const ColorEditor = ({
       newColors[shape] = { ...chartColors[shape], hidden: false };
     else newColors[shape] = { ...chartColors[shape], hidden: true };
     setChartColors({ ...newColors });
-    // tooltipOut();
-    // tooltipIn();
   };
 
   return (

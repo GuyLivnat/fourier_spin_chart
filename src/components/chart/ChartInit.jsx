@@ -3,7 +3,8 @@ import rgbObjToString from "../../utilities/RGBObjToString";
 
 const ChartInit = ({ lineSegments, coeffLength, chartColors }) => {
   const circleSize = 1.5;
-  const { backgroundColor, edgeColor, radiiColor, circlesColor } = chartColors;
+  const { backgroundColor, outlineColor, radiiColor, circlesColor } =
+    chartColors;
 
   const circles = [];
   for (let i = 0; i < coeffLength; i++) {
@@ -12,16 +13,16 @@ const ChartInit = ({ lineSegments, coeffLength, chartColors }) => {
     );
   }
 
-  const edgeSegments = [];
+  const outlineSegments = [];
   for (let i = 0; i < lineSegments + 1; i++) {
-    let strength = (lineSegments - i) / lineSegments + edgeColor.gamma;
+    let strength = (lineSegments - i) / lineSegments + outlineColor.gamma;
     if (strength > 1) strength = 1;
-    edgeSegments.unshift(
+    outlineSegments.unshift(
       <path
         markerStart={i === 0 ? "url(#circle-marker)" : null}
         key={i}
-        id={"edge_" + i}
-        stroke={gradientSampler(edgeColor, backgroundColor, strength)}
+        id={"outline-" + i}
+        stroke={gradientSampler(outlineColor, backgroundColor, strength)}
       ></path>
     );
   }
@@ -53,11 +54,11 @@ const ChartInit = ({ lineSegments, coeffLength, chartColors }) => {
       </defs>
       <g id="chart-shapes" transform="translate(500, 500)">
         <g
-          id="edge"
+          id="outline"
           style={{ fill: "none" }}
-          display={edgeColor.hidden ? "none" : "true"}
+          display={outlineColor.hidden ? "none" : "true"}
         >
-          {edgeSegments}
+          {outlineSegments}
         </g>
         <g
           id="circles"
