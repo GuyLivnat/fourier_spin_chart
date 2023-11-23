@@ -15,9 +15,8 @@ import ChartOverlay from "./ChartOverlay";
 
 const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const lineSegments = 32; // used for the gradient effect on the outline
-  const maxSpeed = 128;
 
-  const edge = useRef([]);
+  const outline = useRef([]);
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
   const step = 1 / units;
@@ -26,6 +25,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const panX = useRef(0);
   const panY = useRef(230);
 
+  const maxSpeed = 128;
   const [updateSpeed, setUpdateSpeed] = useState(85); //in miliseconds. calculated as maxspeed-updatespeed
   const [isPlaying, setIsPlaying] = useState(false);
   const [hideBar, setHideBar] = useState(100);
@@ -58,7 +58,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const stop = () => {
     setIsPlaying(false);
     time.current = 0;
-    edge.current = [];
+    outline.current = [];
     frame.current = computeFrame([], 0);
     renderFrame();
     setHideBar(100);
@@ -67,7 +67,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const renderFrame = () => {
     renderChart(
       frame.current,
-      edge.current,
+      outline.current,
       lineSegments,
       units,
       zoom.current,
@@ -86,15 +86,18 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const renderNextFrame = () => {
     timestep();
     frame.current = computeFrame(coeff.current, time.current);
-    edge.current.unshift({ x: frame.current.edge.x, y: frame.current.edge.y });
-    if (edge.current.length > 1.1 * units) edge.current.pop();
+    outline.current.unshift({
+      x: frame.current.outline.x,
+      y: frame.current.outline.y,
+    });
+    if (outline.current.length > 1.1 * units) outline.current.pop();
     renderFrame();
   };
 
   const renderSkipToFrame = (skipToTime) => {
-    if (edge.current.length < units) {
+    if (outline.current.length < units) {
       time.current = 0;
-      edge.current = [];
+      outline.current = [];
     }
     let distance =
       skipToTime >= time.current
@@ -103,8 +106,11 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
     while (distance !== 0) {
       timestep();
       let missingFrame = computeFrame(coeff.current, time.current);
-      edge.current.unshift({ x: missingFrame.edge.x, y: missingFrame.edge.y });
-      if (edge.current.length > 1.1 * units) edge.current.pop();
+      outline.current.unshift({
+        x: missingFrame.edge.x,
+        y: missingFrame.outline.y,
+      });
+      if (outline.current.length > 1.1 * units) outline.current.pop();
       distance -= step;
     }
     renderNextFrame();

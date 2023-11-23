@@ -23,7 +23,7 @@ const computeFrame = (coeff, time) => {
     // angle: 0,
     r: 0,
   });
-  frame.edge = {
+  frame.outline = {
     x: x,
     y: y,
   };
