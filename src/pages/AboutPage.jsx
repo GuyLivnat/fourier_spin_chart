@@ -58,9 +58,9 @@ const AboutPage = () => {
               breaks apart into a discrete (non-infinite) number of sine waves
               (for more info on how the FFT does that, I highly recommend the
               3Blue1Brown clip in the Why section). These sine waves are
-              described by two coefficients: a real number and an imagined one
-              (this is the real magic!). The result looks something like this{" "}
-              {"[{real:20, imagined: 1}, {real:4, imagined: -1}, …]"}
+              described by two coefficients: a real number and an imagined one.
+              The result looks something like this
+              {" [{real:20, imagined: 1}, {real:4, imagined: -1}, …]"}
             </li>
             <li>
               The coefficients are then saved to the user’s local storage.
