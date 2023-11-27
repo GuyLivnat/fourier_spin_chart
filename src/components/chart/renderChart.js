@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 const renderChart = (
   frame,
-  edge,
+  outline,
   lineSegments,
   units,
   zoom,
@@ -49,12 +49,12 @@ const renderChart = (
     .attr("d", line(filteredFrame))
     .style("stroke-width", minStroke * 2);
 
-  d3.select("#edge").style("stroke-width", minStroke * 2.5);
+  d3.select("#outline").style("stroke-width", minStroke * 2.5);
 
   for (let i = 0; i < lineSegments + 1; i++) {
     let start = i === 0 || i === 1 ? 0 : segment * (i - 1) - 1;
     let end = segment * (i + 1);
-    d3.select(`#edge_${i}`).attr("d", line(edge.slice(start, end)));
+    d3.select(`#outline-${i}`).attr("d", line(outline.slice(start, end)));
   }
 };
 

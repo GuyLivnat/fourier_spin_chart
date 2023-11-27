@@ -1,6 +1,5 @@
 import Button from "../general_components/Button";
 import Slider from "../general_components/Slider";
-import ToggleSwitch from "../general_components/ToggleSwitch";
 import ZoomButtons from "../general_components/ZoomButtons";
 import TimeSlider from "./TimeSlider";
 import PlayIcon from "../../assets/icons/PlayIcon";
