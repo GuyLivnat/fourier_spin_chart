@@ -1,78 +1,34 @@
-import StarChart from './starchart/StarChart'
-import './App.css'
-import Button from './Button';
-import timestep from './starchart/timestep';
-import { useState } from 'react';
-import StarChartInit from './starchart/StarChartInit';
-import UploadButton from './UploadButton';
-import createCoeff from './starchart/createCoeff';
-
+import ChartPage from "./pages/ChartPage";
+import AboutPage from "./pages/AboutPage";
+import LandingPage from "./pages/LandingPage";
+import DocsPage from "./pages/DocsPage";
+import { Route, Routes } from "react-router-dom";
+import { TooltipProvider } from "./utilities/TooltipContext";
+import Navbar from "./components/singletons/NavBar";
+import Footer from "./components/singletons/Footer";
+import "./App.css";
 
 function App() {
-  const units = 256;  // must be a power of 2! 256 suggested, 512 smothes the edges
-  const updateSpeed = 33;  //in miliseconds. 33 is 30 fps
-  let [coeff, setCoeff] = useState([]);
-  let [frame, setFrame] = useState(timestep(coeff, 0));
-  let [edge, setEdge] = useState([]);
-  let [time, setTime] = useState(0);
-  let [intervalId, setIntervalId] = useState(null);
-  let [image, setImage] = useState(null);
+  return (
+    <>
+      <header className="fixed-top" style={{ width: "100vw" }}>
+        <Navbar />
+      </header>
+      <main className="mt-5">
+        <TooltipProvider>
+          <Routes>
+            <Route exact path="/" Component={LandingPage} />
+            <Route exact path="/docs" Component={DocsPage} />
+            <Route exact path="/about" Component={AboutPage} />
+            <Route exact path="/chart" Component={ChartPage} />
+          </Routes>
+        </TooltipProvider>
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </>
+  );
+}
 
-  const handleFile = (event) => {   // converts an uploaded SVG to something readable
-      let file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-          let string = e.target.result;
-          const parser = new DOMParser();
-          let parsedFile = parser.parseFromString(string, "image/svg+xml");
-          let path = parsedFile.querySelector("path")
-          console.log("file uploaded")
-          setImage(path)
-      }
-      reader.readAsText(file)
-    }
-    
-  const handleCoeff = async() => {  // converts the uploaded file to an array of circles
-    let coef = await createCoeff(image, units)
-    setCoeff(coef)
-    setImage(null)
-  }
-
-  const pausePlay = () => { // yes
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId (null)
-    } else {
-      setIntervalId(setInterval(() => update(time), updateSpeed));
-    }};
-
-  const update = () => {  // computes the next frame 
-    const step = 1/(units*2);
-    if (time === 1) {
-      time = 0
-    } else {
-      time += step
-    }
-    frame = timestep(coeff, time);
-    edge = [...edge, { x: frame.edge.x, y: frame.edge.y }];
-    if (edge.length > 0.95 * units) edge.shift();
-    setFrame(frame);
-    setTime(time);
-    setEdge(edge);
-  };
-
-
-  return (<>
-    <div>
-      <StarChartInit/>
-      <StarChart data = {frame} edge = {edge}/>
-    </div>
-    <div>
-      <Button handleClick={pausePlay} text={intervalId? "pause" : "play"} isDisabled={!coeff.length}/>
-      <Button handleClick={handleCoeff} text="generate" isDisabled={!image}/>
-      <UploadButton handleFile={handleFile}/>
-    </div>
-  </>)
-};
-
-export default App
+export default App;
