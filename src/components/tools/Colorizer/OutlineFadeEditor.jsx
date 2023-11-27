@@ -1,8 +1,8 @@
-import Button from "../general_components/Button";
-import UndoIcon from "../../assets/icons/UndoIcon";
-import Slider from "../general_components/Slider";
+import Button from "../../general_components/Button";
+import UndoIcon from "../../../assets/icons/UndoIcon";
+import Slider from "../../general_components/Slider";
 import { useContext } from "react";
-import { TooltipContext } from "../../utilities/TooltipContext";
+import { TooltipContext } from "../../../utilities/TooltipContext";
 
 const OutlineFadeEditor = ({
   chartColors,

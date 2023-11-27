@@ -1,8 +1,9 @@
 import { useState } from "react";
 import CoeffTable from "./CoeffTable";
 import { useContext } from "react";
-import { TooltipContext } from "../../utilities/TooltipContext";
-import Button from "../general_components/Button";
+import { TooltipContext } from "../../../utilities/TooltipContext";
+import Button from "../../general_components/Button";
+import NumberInput from "../../general_components/NumberInput";
 
 const Editor = ({
   coeff,
@@ -14,8 +15,26 @@ const Editor = ({
 }) => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
 
+  const nullNode = { value: null, index: null };
+  const [editNode, setEditNode] = useState(nullNode);
   const [radius, setRadius] = useState(20);
   const [angle, setAngle] = useState(1.5707);
+
+  const editCoeff = (e) => {
+    tooltipOut();
+    const value = parseFloat(e.target.dataset.tooltip);
+    const index = parseFloat(e.target.dataset.index);
+    setEditNode({ ...{ value, index } });
+  };
+
+  const cancelEdit = () => {
+    setEditNode(nullNode);
+  };
+
+  const acceptEdit = () => {
+    coeff.current[editNode.index] = parseFloat(editNode.value);
+    setEditNode(nullNode);
+  };
 
   const pushCoeff = () => {
     if (!coeff.current.length)
@@ -81,9 +100,20 @@ const Editor = ({
         className="border-top"
       >
         <CoeffTable
-          lst={coeff.current}
-          del={deleteCoeff}
-          {...{ angle, setAngle, radius, setRadius, pushCoeff }}
+          {...{
+            angle,
+            setAngle,
+            radius,
+            setRadius,
+            pushCoeff,
+            deleteCoeff,
+            coeff,
+            editCoeff,
+            cancelEdit,
+            acceptEdit,
+            editNode,
+            setEditNode,
+          }}
         />
       </div>
     </div>

@@ -1,33 +1,35 @@
 const NumberInput = ({
-  placeholder,
   setNumber,
   number,
-  focus,
-  min,
-  max,
+  autoFocus,
   step,
   className,
   id,
+  accept,
+  cancel,
 }) => {
   const handleChange = (e) => {
-    const regexNumber = /(\d+)/;
+    const regexNumber = /-?(\d+).?(\d*)/;
     const value = e.target.value.match(regexNumber);
     if (value) setNumber(value[0]);
-    else setNumber(0);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13 && accept) accept(); // enter/return
+    else if (e.keyCode === 27 && cancel) cancel(); // esc
   };
 
   return (
     <input
+      onKeyDown={handleKeyDown}
       type="number"
       className={"form-control " + className}
-      placeholder={placeholder}
       onChange={handleChange}
       value={number}
-      autoFocus={focus}
-      min={min}
-      max={max}
+      autoFocus={autoFocus}
       step={step}
       id={id}
+      onBlur={accept}
     />
   );
 };

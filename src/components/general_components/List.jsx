@@ -112,7 +112,6 @@ const List = ({
                         paddingLeft: "1px",
                         fontStyle: item.default ? "italic" : "normal",
                         overflow: "clip",
-                        marginTop: "3px",
                       }}
                       onDoubleClick={handleRename}
                     >

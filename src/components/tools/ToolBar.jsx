@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Editor from "./Editor";
+import Editor from "./Editor/Editor";
 import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
-import Colorizer from "./Colorizer";
+import Colorizer from "./Colorizer/Colorizer";
 
 const ToolBar = ({
   coeff,
@@ -46,26 +46,23 @@ const ToolBar = ({
       <CollapseTitle title="Saved Paths" forBody="uploads" />
       <div className="collapse" id="uploads">
         <SavedPaths
-          activeId={activeId}
-          setActiveId={setActiveId}
-          coeffList={coeffList}
-          setCoeffList={setCoeffList}
-          saveCoeff={saveCoeff}
-          units={units}
-          coeff={coeff}
-          stop={stop}
-          setPathName={setPathName}
+          {...{
+            activeId,
+            setActiveId,
+            coeffList,
+            setCoeffList,
+            saveCoeff,
+            units,
+            coeff,
+            stop,
+            setPathName,
+          }}
         />
       </div>
       <CollapseTitle title="Editor" forBody="editor" />
       <div className="collapse" id="editor">
         <Editor
-          playable={playable}
-          coeff={coeff}
-          setPathName={setPathName}
-          saveCoeff={saveCoeff}
-          setActiveId={setActiveId}
-          stop={stop}
+          {...{ playable, coeff, setPathName, saveCoeff, setActiveId, stop }}
         />
       </div>
       <CollapseTitle title="Colorizer" forBody="colorizer" />

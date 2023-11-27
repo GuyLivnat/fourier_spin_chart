@@ -3,7 +3,6 @@ const panSVGListeners = (id, panX, panY, zoom, moveFunc) => {
   const start = { offsetX: 0, offsetY: 0, x: 0, y: 0 };
 
   const startPan = (e) => {
-    e.preventDefault();
     start.offsetX = e.offsetX;
     start.x = panX.current;
     start.offsetY = e.offsetY;
@@ -13,13 +12,11 @@ const panSVGListeners = (id, panX, panY, zoom, moveFunc) => {
   };
 
   const endPan = (e) => {
-    e.preventDefault();
     element.style.cursor = "grab";
     element.removeEventListener("mousemove", panSVG);
   };
 
   const panSVG = (e) => {
-    e.preventDefault();
     const widthScale = zoom.current / element.clientWidth;
     const heightScale = (zoom.current / element.clientHeight) * 0.5625; // 0.5625 is for 16:9 aspect ratio
     panX.current = start.x + (start.offsetX - e.offsetX) * widthScale;
