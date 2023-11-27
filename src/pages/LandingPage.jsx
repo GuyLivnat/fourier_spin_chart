@@ -27,16 +27,14 @@ const LandingPage = () => {
           <br /> or just watch the pretty circles spin.
         </p>
       </div>
-      <div className="mt-5 col align-items-stretch gap-3">
-        <Button
-          text="Lets go!"
-          className="btn btn-outline-primary  d-inline-block"
-        />
-        <p className=" d-inline-block mx-3">or</p>
-        <Button
-          text="How does this work?"
-          className="btn btn-outline-primary d-inline-block"
-        />
+      <div className="mt-5 gap-3">
+        <NavLink className="btn btn-outline-primary" to="/chart">
+          Let's go!
+        </NavLink>
+        <p className="d-inline-block mx-3">or</p>
+        <NavLink className="btn btn-outline-primary" to="/docs">
+          How does this work?
+        </NavLink>
       </div>
     </section>
   );
