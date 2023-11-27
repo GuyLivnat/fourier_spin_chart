@@ -4,7 +4,7 @@ import Slider from "../general_components/Slider";
 import { useContext } from "react";
 import { TooltipContext } from "../../utilities/TooltipContext";
 
-const EdgeFadeEditor = ({
+const OutlineFadeEditor = ({
   chartColors,
   setChartColors,
   chartColorDefaults,
@@ -12,17 +12,17 @@ const EdgeFadeEditor = ({
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
 
   const setGamma = (value) => {
-    const { edgeColor } = chartColors;
-    edgeColor["gamma"] = value;
-    setChartColors({ ...chartColors, edgeColor });
+    const { outlineColor } = chartColors;
+    outlineColor["gamma"] = value;
+    setChartColors({ ...chartColors, outlineColor });
   };
 
   return (
     <>
-      <td>Edge Fade</td>
+      <td>Fade</td>
       <td>
         <Slider
-          value={chartColors.edgeColor.gamma}
+          value={chartColors.outlineColor.gamma}
           setValue={setGamma}
           min={-1}
           max={1}
@@ -33,7 +33,7 @@ const EdgeFadeEditor = ({
         <Button
           text={<UndoIcon size={16} />}
           className="btn btn-sm btn-outline-danger px-1 py-0"
-          handleClick={() => setGamma(chartColorDefaults.edgeColor.gamma)}
+          handleClick={() => setGamma(chartColorDefaults.outlineColor.gamma)}
           dataTooltip="reset"
           onMouseEnter={tooltipIn}
           onMouseLeave={tooltipOut}
@@ -43,4 +43,4 @@ const EdgeFadeEditor = ({
   );
 };
 
-export default EdgeFadeEditor;
+export default OutlineFadeEditor;

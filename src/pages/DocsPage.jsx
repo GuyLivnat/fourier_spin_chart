@@ -1,4 +1,6 @@
+import HideIcon from "../assets/icons/HideIcon";
 import RecenterIcon from "../assets/icons/RecenterIcon";
+import ShownIcon from "../assets/icons/ShownIcon";
 import UndoIcon from "../assets/icons/UndoIcon";
 import ZoomInIcon from "../assets/icons/ZoomInIcon";
 import ZoomOutIcon from "../assets/icons/ZoomOutIcon";
@@ -13,7 +15,7 @@ const DocsPage = () => {
           <p>The chart takes a series of circles and chains them together.</p>
           <ul>
             <li>
-              Each circle’s center revolves around the previous circle’s center.
+              Each circle's center revolves around the previous circle's center.
             </li>
             <li>
               The speed at which each circle revolves is constant, and
@@ -22,7 +24,7 @@ const DocsPage = () => {
             </li>
             <li>
               Each circle has an angle which refers to where along its edge the
-              next circle’s center is.
+              next circle's center is.
             </li>
             <li> The last circle in the chain draws a fading path.</li>
             <li>
@@ -43,12 +45,12 @@ const DocsPage = () => {
           </p>
           <ul>
             <li>
-              Remove a circle by clicking the ‘x’ button to the right of the
+              Remove a circle by clicking the 'x' button to the right of the
               listed circle.
             </li>
             <li>
               Add a circle by inputting a radius and a starting angle (in
-              radians) at the bottom of the list of circles and pressing the ‘+’
+              radians) at the bottom of the list of circles and pressing the '+'
               button on the right of the inputs.
             </li>
             <li>
@@ -71,7 +73,7 @@ const DocsPage = () => {
             <li>To load a path, click it.</li>
             <li>To rename a path, double click the name.</li>
             <li>
-              To remove a path, click the ‘x’ button to the right of the name.
+              To remove a path, click the 'x' button to the right of the name.
             </li>
             <li>The 'del all' button removes all the currently saved paths.</li>
             <li>The 'defaults' button will restore any deleted defaults.</li>
@@ -92,6 +94,13 @@ const DocsPage = () => {
             <li>
               The reset <UndoIcon size={16} /> button resets the color to its
               original setting.
+            </li>
+            <li>
+              The <ShownIcon size={16} />/<HideIcon size={16} /> button toggles
+              visibility.
+            </li>
+            <li>
+              The Fade slider alters how much the of the outline fades out.
             </li>
           </ul>
         </div>
