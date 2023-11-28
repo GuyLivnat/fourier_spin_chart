@@ -1,23 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import FiltersInit from "./FiltersInit";
 import renderFilters from "./renderFilters";
 import Button from "../../general_components/Button";
 
 const Filters = ({ coeff }) => {
-  const width = 286;
-  const circles = coeff.current.filter((_, i) => i % 2 === 0);
+  const height = 100;
+  const filters = document.getElementById("filters");
+  const width = filters ? filters.clientWidth : 0;
+  const circles = coeff.current.filter((_, i) => i % 2 === 0 && i !== 0);
+  const [flag, updateFilters] = useState(true);
 
-  useEffect(() => {
-    renderFilters(circles, width);
-  }, []);
+  const rerender = () => {
+    renderFilters(circles, height, width);
+    updateFilters(!flag);
+  };
+
+  //   useEffect(() => {
+  //     renderFilters(circles, height);
+  //   }, []);
   return (
     <div>
-      <Button
-        handleClick={() => renderFilters(circles, width)}
-        text={"update"}
-      />
-      this is a filters wip
-      <FiltersInit {...{ coeff }} />
+      <Button handleClick={rerender} text={"update"} />
+      the Filters are a wip
+      <FiltersInit {...{ circles, height, width }} />
     </div>
   );
 };
