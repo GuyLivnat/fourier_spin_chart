@@ -61,6 +61,9 @@ const DocsPage = () => {
               The reset button will remove all the circles, resulting in an
               empty chain.
             </li>
+            <li>
+              Double click a radius or angle from the list to directly edit it.
+            </li>
           </ul>
         </div>
         <div>
