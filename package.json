@@ -1,8 +1,10 @@
 {
   "name": "fourier_chart",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "a small app that uses fourier transforms to produce and render a chain of circles that reproduce a given svg path.",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
