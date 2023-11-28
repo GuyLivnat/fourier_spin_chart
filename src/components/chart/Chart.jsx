@@ -107,7 +107,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
       timestep();
       let missingFrame = computeFrame(coeff.current, time.current);
       outline.current.unshift({
-        x: missingFrame.edge.x,
+        x: missingFrame.outline.x,
         y: missingFrame.outline.y,
       });
       if (outline.current.length > 1.1 * units) outline.current.pop();
