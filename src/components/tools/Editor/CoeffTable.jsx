@@ -10,13 +10,13 @@ import CoeffTableCellEditor from "./CoeffTableCellEditor";
 
 const CoeffTable = ({
   coeff,
-  del,
   angle,
   setAngle,
   radius,
   setRadius,
   pushCoeff,
   editCoeff,
+  deleteCoeff,
   acceptEdit,
   cancelEdit,
   editNode,
@@ -65,7 +65,7 @@ const CoeffTable = ({
           />
         )}
         <td>
-          <CloseButton handleClick={del} className="me-2" />
+          <CloseButton handleClick={deleteCoeff} className="me-2" />
         </td>
       </tr>
     );
