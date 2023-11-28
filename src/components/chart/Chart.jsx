@@ -156,8 +156,8 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
         {...{
           lineSegments,
           chartColors,
+          coeff,
         }}
-        coeffLength={coeff.current.length}
       />
     </div>
   );

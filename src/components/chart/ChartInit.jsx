@@ -1,13 +1,13 @@
 import gradientSampler from "../../utilities/gradientSampler";
 import rgbObjToString from "../../utilities/RGBObjToString";
 
-const ChartInit = ({ lineSegments, coeffLength, chartColors }) => {
+const ChartInit = ({ lineSegments, coeff, chartColors }) => {
   const circleSize = 1.5;
   const { backgroundColor, outlineColor, radiiColor, circlesColor } =
     chartColors;
 
   const circles = [];
-  for (let i = 0; i < coeffLength; i++) {
+  for (let i = 0; i < coeff.current.length; i++) {
     circles.push(
       <circle key={i} id={"circle_" + i} cx={0} cy={0} r={0}></circle>
     );
