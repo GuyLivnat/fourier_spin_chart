@@ -3,7 +3,6 @@ import CoeffTable from "./CoeffTable";
 import { useContext } from "react";
 import { TooltipContext } from "../../../utilities/TooltipContext";
 import Button from "../../general_components/Button";
-import NumberInput from "../../general_components/NumberInput";
 
 const Editor = ({
   coeff,

@@ -3,6 +3,7 @@ import Editor from "./Editor/Editor";
 import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
+import Filters from "./Filters/Filters";
 
 const ToolBar = ({
   coeff,
@@ -68,6 +69,10 @@ const ToolBar = ({
       <CollapseTitle title="Colorizer" forBody="colorizer" />
       <div className="collapse" id="colorizer">
         <Colorizer {...{ chartColors, setChartColors, chartColorDefaults }} />
+      </div>
+      <CollapseTitle title="Filters" forBody="filters" />
+      <div className="collapse" id="filters">
+        <Filters {...{ coeff }} />
       </div>
     </>
   );
