@@ -45,16 +45,13 @@ const renderSpreadGraph = (data, height, width) => {
 
   d3.select("#spread-graph-x-lable")
     .attr("transform", `translate(0, ${height - marginBottom})`)
-    .call(d3.axisBottom(empty))
+    // .call(d3.axisBottom(empty))
     .select("text")
     .attr("fill", "currentColor")
-    .attr("y", marginBottom / 4)
+    .attr("y", marginBottom / 1.5)
     .attr("x", marginLeft)
     .attr("text-anchor", "start")
-    .text("Place in chain →")
-    .select("line")
-    .remove();
-
-  d3.select("#spread-graph-x-lable").select("path").remove();
+    .attr("font-size", 10)
+    .text("Place in chain →");
 };
 export default renderSpreadGraph;
