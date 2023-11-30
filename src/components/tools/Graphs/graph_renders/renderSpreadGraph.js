@@ -38,7 +38,7 @@ const renderSpreadGraph = (data, height, width) => {
     .call((g) => g.select(".domain").remove())
     .select("text")
     .attr("x", 10)
-    .attr("y", 20 - height)
+    .attr("y", 23 - height)
     .attr("fill", "currentColor")
     .attr("text-anchor", "middle")
     .text("↑ Radius size");

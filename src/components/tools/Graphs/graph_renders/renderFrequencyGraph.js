@@ -11,7 +11,7 @@ const renderFrequencyGraph = (data, height, width) => {
     .scaleBand()
     .domain(data.map((d) => d.radius))
     .range([marginLeft, width - marginRight])
-    .paddingInner(barWidth / 100);
+    .paddingInner(0.2);
 
   const y = d3
     .scaleLinear()
