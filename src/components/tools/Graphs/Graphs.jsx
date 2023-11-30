@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import renderSpreadGraph from "./graph_renders/renderSpreadGraph";
-import Button from "../../general_components/Button";
-import BarGraphInit from "./graph_inits/BarGraphInit";
-import renderFrequencyGraph from "./graph_renders/renderFrequencyGraph";
+import renderSpreadGraph from "./renderSpreadGraph";
+import BarGraphInit from "./BarGraphInit";
+import renderFrequencyGraph from "./renderFrequencyGraph";
+import CollapseTitle from "../../general_components/CollapseTitle";
 
-const Graphs = ({ coeff }) => {
+const Graphs = ({ coeff, activeId }) => {
   const height = 200;
   const graphs = document.getElementById("graphs");
   const width = graphs ? graphs.clientWidth : 0;
@@ -27,27 +27,33 @@ const Graphs = ({ coeff }) => {
     frequencys.push({ radius: parseInt(radius), frequency: frequency });
   }
 
-  const rerender = () => {
+  const renderGraphs = () => {
     renderSpreadGraph(radii, height, width);
     renderFrequencyGraph(frequencys, height, width);
     updateFilters(!flag);
   };
 
-  // useEffect(() => {
-  //   rerender();
-  // }, []);
+  useEffect(() => {
+    renderGraphs();
+  }, [activeId]);
   return (
-    <div>
-      <div>
-        <Button handleClick={rerender} text={"update"} />
-      </div>
-      <div>
+    <div className="rounded border overflow-hidden">
+      <CollapseTitle
+        forBody="spread-graph"
+        title="Spread Graph"
+        titleType="h4"
+        className="ms-2"
+      />
+      <div id="spread-graph" className="collapse">
         <BarGraphInit data={radii} id="spread" />
       </div>
-      <div>
-        <br />
-      </div>
-      <div>
+      <CollapseTitle
+        forBody="frequency-graph"
+        title="Frequency Graph"
+        titleType="h4"
+        className="ms-2"
+      />
+      <div id="frequency-graph" className="collapse">
         <BarGraphInit data={frequencys} id="frequency" />
       </div>
     </div>

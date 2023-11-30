@@ -72,7 +72,7 @@ const ToolBar = ({
       </div>
       <CollapseTitle title="Graphs" forBody="graphs" />
       <div className="collapse" id="graphs">
-        <Filters {...{ coeff }} />
+        <Filters {...{ coeff, activeId }} />
       </div>
     </>
   );

@@ -1,24 +1,23 @@
 import * as d3 from "d3";
 
-const renderFrequencyGraph = (data, height, width) => {
+const renderSpreadGraph = (data, height, width) => {
   const marginLeft = 40;
   const marginRight = 10;
-  const marginBottom = 30;
+  const marginBottom = 16;
   const marginTop = 20;
   const barWidth = width / data.length;
 
   const x = d3
     .scaleBand()
-    .domain(data.map((d) => d.radius))
-    .range([marginLeft, width - marginRight])
-    .paddingInner(0.2);
+    .domain(d3.range(data.length))
+    .range([marginLeft, width - marginRight]);
 
   const y = d3
     .scaleLinear()
-    .domain([0, d3.max(data, (d) => d.frequency)])
+    .domain([0, d3.max(data)])
     .range([height - marginBottom, marginTop]);
 
-  d3.select("#frequency-graph-svg")
+  d3.select("#spread-graph-svg")
     .attr("height", height)
     .attr("width", width)
 
@@ -27,29 +26,33 @@ const renderFrequencyGraph = (data, height, width) => {
     .join("rect")
     .attr("fill", "var(--primary")
     .attr("width", x.bandwidth())
-    .attr("height", (d) => y(0) - y(d.frequency))
-    .attr("y", (d) => y(d.frequency))
-    .attr("x", (d) => x(d.radius));
+    .attr("height", (d) => y(0) - y(d))
+    .attr("y", (d) => y(d))
+    .attr("x", (d, i) => x(i))
+    .attr(
+      "data-tooltip",
+      (d, i) => `Radius: ${d.toFixed(2)}, Place in chain: ${i}`
+    );
 
-  d3.select("#frequency-graph-y-lable")
+  d3.select("#spread-graph-y-lable")
     .attr("transform", `translate(${marginLeft},0)`)
     .call(d3.axisLeft(y).ticks(height / 20))
     .call((g) => g.select(".domain").remove())
     .select("text")
     .attr("x", 10)
-    .attr("y", 40 - height)
+    .attr("y", 23 - height)
     .attr("fill", "currentColor")
     .attr("text-anchor", "middle")
-    .text("↑ Number of radii");
+    .text("↑ Radius size");
 
-  d3.select("#frequency-graph-x-lable")
+  d3.select("#spread-graph-x-lable")
     .attr("transform", `translate(0, ${height - marginBottom})`)
-    .call(d3.axisBottom(x))
-    .call((g) => g.select(".domain").remove())
     .select("text")
-    .attr("y", 20)
-    .attr("x", 0)
+    .attr("fill", "currentColor")
+    .attr("y", marginBottom / 1.5)
+    .attr("x", marginLeft)
     .attr("text-anchor", "start")
-    .text("Radius size →");
+    .attr("font-size", 10)
+    .text("Place in chain →");
 };
-export default renderFrequencyGraph;
+export default renderSpreadGraph;
