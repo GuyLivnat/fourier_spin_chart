@@ -40,7 +40,7 @@ const Graphs = ({ coeff, activeId }) => {
     <div className="rounded border overflow-hidden">
       <CollapseTitle
         forBody="spread-graph"
-        title="Spread Graph"
+        title="Spread"
         titleType="h4"
         className="ms-2"
       />
@@ -49,7 +49,7 @@ const Graphs = ({ coeff, activeId }) => {
       </div>
       <CollapseTitle
         forBody="frequency-graph"
-        title="Frequency Graph"
+        title="Frequency"
         titleType="h4"
         className="ms-2"
       />

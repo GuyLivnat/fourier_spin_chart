@@ -7,11 +7,6 @@ const renderFrequencyGraph = (data, height, width) => {
     bottom: 40,
     top: 20,
   };
-  const marginLeft = 40;
-  const marginRight = 10;
-  const marginBottom = 30;
-  const marginTop = 20;
-  const barWidth = width / data.length;
 
   const x = d3
     .scaleBand()

@@ -1,21 +1,22 @@
 import * as d3 from "d3";
 
 const renderSpreadGraph = (data, height, width) => {
-  const marginLeft = 40;
-  const marginRight = 10;
-  const marginBottom = 16;
-  const marginTop = 20;
-  const barWidth = width / data.length;
+  const margin = {
+    left: 40,
+    right: 10,
+    bottom: 16,
+    top: 20,
+  };
 
   const x = d3
     .scaleBand()
     .domain(d3.range(data.length))
-    .range([marginLeft, width - marginRight]);
+    .range([margin.left, width - margin.right]);
 
   const y = d3
     .scaleLinear()
     .domain([0, d3.max(data)])
-    .range([height - marginBottom, marginTop]);
+    .range([height - margin.bottom, margin.top]);
 
   d3.select("#spread-graph-svg")
     .attr("height", height)
@@ -35,7 +36,7 @@ const renderSpreadGraph = (data, height, width) => {
     );
 
   d3.select("#spread-graph-y-lable")
-    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y).ticks(height / 20))
     .call((g) => g.select(".domain").remove())
     .select("text")
@@ -46,11 +47,11 @@ const renderSpreadGraph = (data, height, width) => {
     .text("↑ Radius size");
 
   d3.select("#spread-graph-x-lable")
-    .attr("transform", `translate(0, ${height - marginBottom})`)
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
     .select("text")
     .attr("fill", "currentColor")
-    .attr("y", marginBottom / 1.5)
-    .attr("x", marginLeft)
+    .attr("y", margin.bottom / 1.5)
+    .attr("x", margin.left)
     .attr("text-anchor", "start")
     .attr("font-size", 10)
     .text("Place in chain →");
