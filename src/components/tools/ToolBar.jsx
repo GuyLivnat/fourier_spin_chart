@@ -3,7 +3,7 @@ import Editor from "./Editor/Editor";
 import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
-import Filters from "./Filters/Filters";
+import Filters from "./Graphs/Graphs";
 
 const ToolBar = ({
   coeff,
@@ -70,8 +70,8 @@ const ToolBar = ({
       <div className="collapse" id="colorizer">
         <Colorizer {...{ chartColors, setChartColors, chartColorDefaults }} />
       </div>
-      <CollapseTitle title="Filters" forBody="filters" />
-      <div className="collapse" id="filters">
+      <CollapseTitle title="Graphs" forBody="graphs" />
+      <div className="collapse" id="graphs">
         <Filters {...{ coeff }} />
       </div>
     </>
