@@ -16,17 +16,20 @@ import ChartOverlay from "./ChartOverlay";
 const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const lineSegments = 32; // used for the gradient effect on the outline
 
+  const length = coeff.current.length > 256 ? coeff.current.length / 2 : 128;
+
+  // const length = 2048;
+
   const outline = useRef([]);
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
-  const step = 1 / units;
+  const step = 1 / length;
 
   const zoom = useRef(1000);
   const panX = useRef(0);
   const panY = useRef(230);
 
-  const maxSpeed = 128;
-  const [updateSpeed, setUpdateSpeed] = useState(85); //in miliseconds. calculated as maxspeed-updatespeed
+  const [updateSpeed, setUpdateSpeed] = useState(0); //calculated as 1-updatespeed to flip the slider to left to right
   const [isPlaying, setIsPlaying] = useState(false);
   const [hideBar, setHideBar] = useState(100);
   const [listeners, setListeners] = useState([{ evnt: null, func: null }]);
@@ -69,33 +72,37 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
       frame.current,
       outline.current,
       lineSegments,
-      units,
       zoom.current,
       panX.current,
       panY.current,
-      coeff.current.length
+      coeff.current
     );
     renderTimeSlider(time.current);
   };
 
   const timestep = () => {
-    if (time.current === 1) time.current = 0;
+    if (time.current >= 1 - step) time.current = 0;
     else time.current += step;
   };
 
-  const renderNextFrame = () => {
+  const nextFrame = () => {
     timestep();
     frame.current = computeFrame(coeff.current, time.current);
     outline.current.unshift({
       x: frame.current.outline.x,
       y: frame.current.outline.y,
     });
-    if (outline.current.length > 1.1 * units) outline.current.pop();
+    if (outline.current.length > 1.1 * length) outline.current.pop();
+  };
+
+  const renderNextFrame = () => {
+    nextFrame();
     renderFrame();
   };
 
   const renderSkipToFrame = (skipToTime) => {
-    if (outline.current.length < units) {
+    if (outline.current.length < length) {
+      // checks if this is the first round
       time.current = 0;
       outline.current = [];
     }
@@ -104,13 +111,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
         ? skipToTime - time.current
         : 1 - time.current + skipToTime;
     while (distance !== 0) {
-      timestep();
-      let missingFrame = computeFrame(coeff.current, time.current);
-      outline.current.unshift({
-        x: missingFrame.outline.x,
-        y: missingFrame.outline.y,
-      });
-      if (outline.current.length > 1.1 * units) outline.current.pop();
+      nextFrame();
       distance -= step;
     }
     renderNextFrame();
@@ -126,7 +127,9 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
 
   useListeners("chart", listeners, [listeners]); // adds stateless listeners (zoom and pan)
   useListeners("chart", clickToPlayListeners(pausePlay), [isPlaying]); //adds click to pause/play
-  useInterval(renderNextFrame, isPlaying ? maxSpeed - updateSpeed : null); //plays the chart
+  useInterval(renderNextFrame, isPlaying ? (1 - updateSpeed) * 200 : null); //plays the chart\
+
+  // console.log(frame.current);
 
   return (
     <div
@@ -142,7 +145,6 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
           stop,
           updateSpeed,
           setUpdateSpeed,
-          maxSpeed,
           zoomCenter,
           time,
           units,

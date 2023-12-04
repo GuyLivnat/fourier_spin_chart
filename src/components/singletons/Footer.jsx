@@ -3,11 +3,9 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="ms-3" id="footer">
-      <p>
-        <LogoIcon /> Fourier Chart
-      </p>
-    </div>
+    <footer className="ps-3" id="footer">
+      <LogoIcon /> Fourier Chart
+    </footer>
   );
 };
 

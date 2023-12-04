@@ -17,7 +17,6 @@ const ChartBar = ({
   stop,
   updateSpeed,
   setUpdateSpeed,
-  maxSpeed,
   time,
   units,
   renderSkipToFrame,
@@ -76,8 +75,9 @@ const ChartBar = ({
             value={updateSpeed}
             setValue={setUpdateSpeed}
             min={0}
-            max={maxSpeed}
+            max={1}
             text="Speed"
+            step={0.01}
           />
         </div>
       </div>

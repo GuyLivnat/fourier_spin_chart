@@ -24,9 +24,7 @@ function App() {
           </Routes>
         </TooltipProvider>
       </main>
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </>
   );
 }

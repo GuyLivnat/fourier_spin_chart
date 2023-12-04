@@ -3,7 +3,7 @@ import ToolBar from "../components/tools/ToolBar";
 import Chart from "../components/chart/Chart";
 
 function ChartPage() {
-  const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges
+  const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges\
   const coeff = useRef([]);
   let playable = coeff.current.length > 3;
 
@@ -23,7 +23,11 @@ function ChartPage() {
         <div className="col mt-3 ms-lg-2 ms-xl-3 ms-xxl-4">
           <Chart {...{ playable, pathName, coeff, units, chartColors }} />
         </div>
-        <div className="col-lg-2 order-2 mt-3" style={{ minWidth: "310px" }}>
+        <div
+          className="col-lg-2 mt-3 overflow-y-scroll"
+          style={{ minWidth: "310px", maxHeight: "92vh", zIndex: "1" }}
+          id="toolbar"
+        >
           <ToolBar
             {...{
               playable,
