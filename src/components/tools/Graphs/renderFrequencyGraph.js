@@ -49,13 +49,13 @@ const renderFrequencyGraph = (data, height, width) => {
 
   d3.select("#frequency-graph-x-lable")
     .attr("transform", `translate(0, ${height - margin.bottom})`)
-    .call(d3.axisBottom(x))
-    .call((g) => g.select(".domain").remove())
+    // .call(d3.axisBottom(x))
+    // .call((g) => g.select(".domain").remove())
     .select("text")
     .attr("y", margin.bottom - 10)
     .attr("x", margin.left)
     .attr("text-anchor", "start")
-    .text("Radius size →")
+    .text("Radius size")
     .attr("font-size", 10)
     .attr("fill", "currentColor");
 };

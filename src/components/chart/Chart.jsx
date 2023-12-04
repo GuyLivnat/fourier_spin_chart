@@ -30,9 +30,9 @@ const Chart = () => {
   const frame = useRef(computeFrame([], 0));
   const step = 1 / 256;
 
-  const zoom = useRef(1000);
+  const zoom = useRef(200000);
   const panX = useRef(0);
-  const panY = useRef(230);
+  const panY = useRef(45000);
 
   const [updateSpeed, setUpdateSpeed] = useState(0.7); //calculated as 1-updatespeed to flip the slider to left to right
   const [isPlaying, setIsPlaying] = useState(false);

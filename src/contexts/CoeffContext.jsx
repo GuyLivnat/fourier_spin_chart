@@ -39,9 +39,10 @@ const CoeffProvider = (props) => {
       coeff.current = coeffs;
       setPathName(name);
     }
-    const stop = () => {
-      document.getElementById("stop-button").click(); // function found in ../chart/Chart.jsx
-    };
+  };
+
+  const stop = () => {
+    document.getElementById("stop-button").click(); // function found in ../chart/Chart.jsx
   };
 
   return (
