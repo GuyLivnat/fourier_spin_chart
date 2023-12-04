@@ -2,7 +2,7 @@ import CloseButton from "../../general_components/CloseButton";
 import AngleIcon from "../../../assets/icons/AngleIcon";
 import RadiusIcon from "../../../assets/icons/RadiusIcon";
 import { useContext, useState } from "react";
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../../contexts/TooltipContext";
 import CoeffTableAdder from "./CoeffTableAdder";
 import CoeffTableCell from "./CoeffTableCell";
 import NumberInput from "../../general_components/NumberInput";
@@ -25,19 +25,28 @@ const CoeffTable = ({
   const tableItems = [];
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
 
-  for (let i = 2; i < coeff.current.length; ) {
+  for (let i = 0; i < coeff.current.length; i++) {
     tableItems.push(
-      <tr key={i} id={i}>
-        {editNode.index !== i ? (
+      <tr key={i} id={`${i}-table-cell`}>
+        {editNode.index === i && editNode.type === "r" ? (
+          <CoeffTableCellEditor
+            {...{
+              editNode,
+              setEditNode,
+              acceptEdit,
+              cancelEdit,
+            }}
+          />
+        ) : (
           <CoeffTableCell
-            index={i}
-            data={coeff.current[i++]}
+            type={"r"}
+            data={coeff.current[i].r}
             shownLength={1}
             onDoubleClick={editCoeff}
           />
-        ) : (
+        )}
+        {editNode.index === i && editNode.type === "angle" ? (
           <CoeffTableCellEditor
-            null={i++}
             {...{
               editNode,
               setEditNode,
@@ -45,23 +54,12 @@ const CoeffTable = ({
               cancelEdit,
             }}
           />
-        )}
-        {editNode.index !== i ? (
+        ) : (
           <CoeffTableCell
-            index={i}
-            data={coeff.current[i++]}
+            type={"angle"}
+            data={coeff.current[i].angle}
             shownLength={2}
             onDoubleClick={editCoeff}
-          />
-        ) : (
-          <CoeffTableCellEditor
-            null={i++}
-            {...{
-              editNode,
-              setEditNode,
-              acceptEdit,
-              cancelEdit,
-            }}
           />
         )}
         <td>

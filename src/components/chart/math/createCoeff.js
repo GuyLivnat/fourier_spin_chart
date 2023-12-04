@@ -31,7 +31,7 @@ const calculateCoeff = (points) => {
   transformRadix2(real, img);
 
   const coeff = [];
-  for (let i = 0; i < real.length; i++) {
+  for (let i = 1; i < real.length; i++) {
     coeff.push({
       r: Math.sqrt(real[i] * real[i] + img[i] * img[i]),
       angle: Math.atan2(img[i], real[i]),

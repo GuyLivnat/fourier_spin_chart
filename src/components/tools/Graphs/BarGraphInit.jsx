@@ -1,4 +1,4 @@
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../../contexts/TooltipContext";
 import { useContext } from "react";
 
 const BarGraphInit = ({ data, id }) => {

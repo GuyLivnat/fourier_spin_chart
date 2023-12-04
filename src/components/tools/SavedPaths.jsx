@@ -4,21 +4,24 @@ import cat from "../../assets/defaults/cat.json";
 import dog from "../../assets/defaults/dog.json";
 import mushu from "../../assets/defaults/mushu.json";
 import ErrorModal from "../general_components/ErrorModal";
-import { useState } from "react";
+import { CoeffContext } from "../../contexts/CoeffContext";
+import { useState, useContext } from "react";
 
 const defaults = [mushu, cat, dog];
 
-const SavedPaths = ({
-  coeff,
-  activeId,
-  setActiveId,
-  coeffList,
-  setCoeffList,
-  saveCoeff,
-  units,
-  stop,
-  setPathName,
-}) => {
+const SavedPaths = ({}) => {
+  const {
+    activeId,
+    setActiveId,
+    coeffList,
+    setCoeffList,
+    stop,
+    coeff,
+    saveCoeff,
+    units,
+    setPathName,
+  } = useContext(CoeffContext);
+
   const [modalText, setModalText] = useState(null);
 
   const loadCoeff = (e) => {

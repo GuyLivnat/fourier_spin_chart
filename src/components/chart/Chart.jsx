@@ -2,7 +2,7 @@ import ChartInit from "./ChartInit";
 import renderChart from "./renderChart";
 import renderTimeSlider from "./renderTimeSlider";
 import computeFrame from "./math/computeFrame";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import useInterval from "../../utilities/useInterval";
 import useListeners from "../../utilities/useListeners";
 import zoomWheelSVGListeners from "../../behaviors/zoomWheelSVGListeners";
@@ -12,10 +12,15 @@ import zoomToSVG from "../../behaviors/zoomToSVG";
 import panSVGListeners from "../../behaviors/panSVGListeners";
 import ChartBar from "./ChartBar";
 import ChartOverlay from "./ChartOverlay";
+import { CoeffContext } from "../../contexts/CoeffContext";
 
-const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
+const Chart = () => {
+  const { units, coeff, playable, pathName, chartColors } =
+    useContext(CoeffContext);
+
   const lineSegments = 32; // used for the gradient effect on the outline
 
+  const test = [];
   // const length = coeff.current.length > 256 ? coeff.current.length / 2 : 128;
 
   const length = 256;
@@ -23,7 +28,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const outline = useRef([]);
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
-  const step = 1 / length;
+  const step = 1 / 256;
 
   const zoom = useRef(1000);
   const panX = useRef(0);

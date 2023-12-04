@@ -4,7 +4,7 @@ import rgbToHex from "../../../utilities/rgbToHex";
 import Button from "../../general_components/Button";
 import UndoIcon from "../../../assets/icons/UndoIcon";
 import { useContext } from "react";
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../../contexts/TooltipContext";
 import ShownIcon from "../../../assets/icons/ShownIcon";
 import HideIcon from "../../../assets/icons/HideIcon";
 

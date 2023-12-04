@@ -1,7 +1,6 @@
-import { TooltipContext } from "../utilities/TooltipContext";
+import { TooltipContext } from "../contexts/TooltipContext";
 import { useContext } from "react";
 import LogoIcon from "../assets/icons/LogoIcon";
-import Button from "../components/general_components/Button";
 import { NavLink } from "react-router-dom";
 
 const LandingPage = () => {

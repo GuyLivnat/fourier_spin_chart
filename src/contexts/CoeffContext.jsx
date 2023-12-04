@@ -1,6 +1,4 @@
-import { usePopper } from "react-popper";
 import { useState, createContext, useRef } from "react";
-import Tooltip from "../components/singletons/Tooltip";
 
 const CoeffContext = createContext();
 
@@ -8,6 +6,17 @@ const CoeffProvider = (props) => {
   const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
   let playable = coeff.current.length > 3;
+  const [activeId, setActiveId] = useState(null);
+  const [coeffList, setCoeffList] = useState(() => {
+    const keys = Object.keys(localStorage);
+    let localCoeff = [];
+    for (let i = 0; i < keys.length; i++) {
+      let key = keys[i];
+      let obj = JSON.parse(localStorage.getItem(key));
+      localCoeff.push({ id: key, name: obj.name });
+    }
+    return localCoeff;
+  });
 
   const [pathName, setPathName] = useState("");
 
@@ -30,10 +39,30 @@ const CoeffProvider = (props) => {
       coeff.current = coeffs;
       setPathName(name);
     }
+    const stop = () => {
+      document.getElementById("stop-button").click(); // function found in ../chart/Chart.jsx
+    };
   };
 
   return (
-    <CoeffContext.Provider value={{ tooltipIn, tooltipOut }}>
+    <CoeffContext.Provider
+      value={{
+        pathName,
+        setPathName,
+        chartColorDefaults,
+        chartColors,
+        setChartColors,
+        saveCoeff,
+        coeff,
+        playable,
+        units,
+        coeffList,
+        setCoeffList,
+        stop,
+        activeId,
+        setActiveId,
+      }}
+    >
       {props.children}
     </CoeffContext.Provider>
   );

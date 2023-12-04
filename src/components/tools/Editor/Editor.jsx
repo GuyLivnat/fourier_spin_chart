@@ -1,20 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CoeffTable from "./CoeffTable";
-import { useContext } from "react";
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../../contexts/TooltipContext";
 import Button from "../../general_components/Button";
+import { CoeffContext } from "../../../contexts/CoeffContext";
 
-const Editor = ({
-  coeff,
-  setPathName,
-  saveCoeff,
-  setActiveId,
-  playable,
-  stop,
-}) => {
+const Editor = () => {
+  const { coeff, setPathName, saveCoeff, setActiveId, playable, stop } =
+    useContext(CoeffContext);
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
 
-  const nullNode = { value: null, index: null };
+  const nullNode = { value: null, index: null, type: null };
   const [editNode, setEditNode] = useState(nullNode);
   const [radius, setRadius] = useState(20);
   const [angle, setAngle] = useState(1.5707);
@@ -22,8 +17,9 @@ const Editor = ({
   const editCoeff = (e) => {
     tooltipOut();
     const value = parseFloat(e.target.dataset.tooltip);
-    const index = parseFloat(e.target.dataset.index);
-    setEditNode({ ...{ value, index } });
+    const index = parseInt(e.target.parentElement.id);
+    const type = e.target.dataset.type;
+    setEditNode({ ...{ value, index, type } });
   };
 
   const cancelEdit = () => {
@@ -31,14 +27,20 @@ const Editor = ({
   };
 
   const acceptEdit = () => {
-    coeff.current[editNode.index] = parseFloat(editNode.value);
+    coeff.current[editNode.index][editNode.type] = parseFloat(editNode.value);
     setEditNode(nullNode);
   };
 
   const pushCoeff = () => {
-    if (!coeff.current.length)
-      coeff.current = [0, 0, parseFloat(radius), parseFloat(angle)];
-    else coeff.current.push(parseFloat(radius), parseFloat(angle));
+    const frequency =
+      coeff.current.length > 0
+        ? coeff.current[coeff.current.length - 1].frequency + 1
+        : 1;
+    coeff.current.push({
+      r: parseFloat(radius),
+      angle: parseFloat(angle),
+      frequency: frequency,
+    });
     setPathName("Edited at " + new Date().toLocaleString());
     setActiveId(null);
   };
@@ -47,14 +49,14 @@ const Editor = ({
     const id = parseInt(e.target.parentElement.parentElement.id);
     coeff.current = [
       ...coeff.current.slice(0, id),
-      ...coeff.current.slice(id + 2),
+      ...coeff.current.slice(id + 1),
     ];
     setPathName("Edited at " + new Date().toLocaleString());
     setActiveId(null);
   };
 
   const resetCoeff = () => {
-    coeff.current = [0, 0];
+    coeff.current = [];
     stop();
     setPathName("Reset at " + new Date().toLocaleString());
     setActiveId(null);

@@ -4,7 +4,7 @@ const computeFrame = (coeff, time) => {
   let x = 0;
   let y = 0;
 
-  for (let i = 1; i < coeff.length; i++) {
+  for (let i = 0; i < coeff.length; i++) {
     let r = coeff[i].r;
     let theta = coeff[i].angle + omega * coeff[i].frequency;
     circles.push({

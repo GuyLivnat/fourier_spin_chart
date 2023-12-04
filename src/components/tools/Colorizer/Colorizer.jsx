@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import ColorEditor from "./ColorEditor";
 import OutlineFadeEditor from "./OutlineFadeEditor";
+import { CoeffContext } from "../../../contexts/CoeffContext";
 
-const Colorizer = ({ chartColors, setChartColors, chartColorDefaults }) => {
+const Colorizer = () => {
+  const { chartColors, setChartColors, chartColorDefaults } =
+    useContext(CoeffContext);
+
   const colorableShapes = [];
   for (const shape in chartColors) {
     colorableShapes.push(

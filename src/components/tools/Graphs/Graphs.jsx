@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import renderSpreadGraph from "./renderSpreadGraph";
 import BarGraphInit from "./BarGraphInit";
 import renderFrequencyGraph from "./renderFrequencyGraph";
 import CollapseTitle from "../../general_components/CollapseTitle";
+import { CoeffContext } from "../../../contexts/CoeffContext";
 
-const Graphs = ({ coeff, activeId }) => {
+const Graphs = () => {
+  const { coeff, activeId } = useContext(CoeffContext);
+
   const height = 200;
   const graphs = document.getElementById("graphs");
   const width = graphs ? graphs.clientWidth : 0;
 
   const [flag, updateFilters] = useState(true);
 
-  const radii = coeff.current.filter((_, i) => i % 2 === 0 && i !== 0);
+  const radii = coeff.current.map((circle) => circle.r);
 
   const histogram = {};
 

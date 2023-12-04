@@ -1,14 +1,14 @@
-import { TooltipContext } from "../../../utilities/TooltipContext";
+import { TooltipContext } from "../../../contexts/TooltipContext";
 import { useContext } from "react";
 
-const CoeffTableCell = ({ shownLength, index, data, onDoubleClick }) => {
+const CoeffTableCell = ({ shownLength, type, data, onDoubleClick }) => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   return (
     <td
       data-tooltip={data}
       onMouseEnter={tooltipIn}
       onMouseLeave={tooltipOut}
-      data-index={index}
+      data-type={type}
       onDoubleClick={onDoubleClick}
     >
       {data.toFixed(shownLength)}

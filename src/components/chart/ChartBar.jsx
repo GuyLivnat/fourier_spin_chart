@@ -7,7 +7,7 @@ import PauseIcon from "../../assets/icons/PauseIcon";
 import StopIcon from "../../assets/icons/StopIcon";
 import "./ChartBar.css";
 import { useContext } from "react";
-import { TooltipContext } from "../../utilities/TooltipContext";
+import { TooltipContext } from "../../contexts/TooltipContext";
 
 const ChartBar = ({
   recenter,
