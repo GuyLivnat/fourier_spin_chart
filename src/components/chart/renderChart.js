@@ -1,14 +1,14 @@
 import * as d3 from "d3";
 
 const renderChart = (frame, outline, lineSegments, zoom, panX, panY, coeff) => {
-  const segment = coeff.length / 2 / lineSegments;
+  const segment = coeff.length / lineSegments;
   const chart = document.getElementById("chart");
 
   const minStroke = zoom / chart.clientWidth;
   const scalingMin = (zoom / chart.clientWidth) * 15;
   const minircle = zoom / 150 > scalingMin ? zoom / 150 : scalingMin;
   const filteredFrame = frame.circles.filter((circle, i) => {
-    if (circle.r > minircle || (i === coeff.length / 2 - 1 && coeff.length > 2))
+    if (circle.r > minircle || (i === coeff.length - 1 && coeff.length > 2))
       return circle;
   });
 
@@ -17,7 +17,7 @@ const renderChart = (frame, outline, lineSegments, zoom, panX, panY, coeff) => {
     .x((d) => d.x)
     .y((d) => d.y);
 
-  for (let i = 0; i < coeff.length / 2; i++) {
+  for (let i = 0; i < coeff.length; i++) {
     let thisCircle = filteredFrame[i];
     if (thisCircle) {
       d3.select(`#circle_${i}`)

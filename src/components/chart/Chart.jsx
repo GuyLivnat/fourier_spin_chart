@@ -16,9 +16,9 @@ import ChartOverlay from "./ChartOverlay";
 const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const lineSegments = 32; // used for the gradient effect on the outline
 
-  const length = coeff.current.length > 256 ? coeff.current.length / 2 : 128;
+  // const length = coeff.current.length > 256 ? coeff.current.length / 2 : 128;
 
-  // const length = 2048;
+  const length = 256;
 
   const outline = useRef([]);
   const time = useRef(0);
@@ -29,7 +29,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   const panX = useRef(0);
   const panY = useRef(230);
 
-  const [updateSpeed, setUpdateSpeed] = useState(0); //calculated as 1-updatespeed to flip the slider to left to right
+  const [updateSpeed, setUpdateSpeed] = useState(0.7); //calculated as 1-updatespeed to flip the slider to left to right
   const [isPlaying, setIsPlaying] = useState(false);
   const [hideBar, setHideBar] = useState(100);
   const [listeners, setListeners] = useState([{ evnt: null, func: null }]);
@@ -81,7 +81,7 @@ const Chart = ({ units, coeff, playable, pathName, chartColors }) => {
   };
 
   const timestep = () => {
-    if (time.current >= 1 - step) time.current = 0;
+    if (time.current === 1 - step) time.current = 0;
     else time.current += step;
   };
 

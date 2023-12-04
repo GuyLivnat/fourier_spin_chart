@@ -2,7 +2,7 @@ import transformRadix2 from "./fft";
 
 const createCoeff = (path, units) => {
   const points = generatePoints(path, units);
-  const coeff = calculateCoeff(points, units);
+  const coeff = calculateCoeff(points);
   return coeff;
 };
 
@@ -32,9 +32,13 @@ const calculateCoeff = (points) => {
 
   const coeff = [];
   for (let i = 0; i < real.length; i++) {
-    coeff.push(Math.sqrt(real[i] * real[i] + img[i] * img[i]));
-    coeff.push(Math.atan2(img[i], real[i]));
+    coeff.push({
+      r: Math.sqrt(real[i] * real[i] + img[i] * img[i]),
+      angle: Math.atan2(img[i], real[i]),
+      frequency: i,
+    });
   }
+
   return coeff;
 };
 

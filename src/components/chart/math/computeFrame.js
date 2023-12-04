@@ -1,13 +1,13 @@
 const computeFrame = (coeff, time) => {
-  const frame = { circles: [] };
-  const omega = Math.PI * time;
+  const circles = [];
+  const omega = Math.PI * 2 * time;
   let x = 0;
   let y = 0;
 
-  for (let i = 2; i < coeff.length; i += 2) {
-    let r = coeff[i];
-    let theta = coeff[i + 1] + omega * i;
-    frame.circles.push({
+  for (let i = 1; i < coeff.length; i++) {
+    let r = coeff[i].r;
+    let theta = coeff[i].angle + omega * coeff[i].frequency;
+    circles.push({
       x: x,
       y: y,
       // angle: theta,
@@ -16,18 +16,18 @@ const computeFrame = (coeff, time) => {
     x += r * Math.cos(theta);
     y += r * Math.sin(theta);
   }
-  frame.circles.push({
+  circles.push({
     x: x,
     y: y,
     // angle: 0,
     r: 0,
   });
-  frame.outline = {
+  const outline = {
     x: x,
     y: y,
   };
 
-  return frame;
+  return { circles, outline };
 };
 
 export default computeFrame;
