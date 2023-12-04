@@ -1,7 +1,6 @@
 const computeFrame = (coeff, time) => {
   const frame = { circles: [] };
   const omega = Math.PI * time;
-  console.log(omega);
   let x = 0;
   let y = 0;
 

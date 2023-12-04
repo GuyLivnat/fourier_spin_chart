@@ -60,7 +60,7 @@ const ToolBar = ({
           }}
         />
       </div>
-      <CollapseTitle title="Editor" forBody="editor" />
+      {/* <CollapseTitle title="Editor" forBody="editor" />
       <div className="collapse" id="editor">
         <Editor
           {...{ playable, coeff, setPathName, saveCoeff, setActiveId, stop }}
@@ -73,7 +73,7 @@ const ToolBar = ({
       <CollapseTitle title="Graphs" forBody="graphs" />
       <div className="collapse" id="graphs">
         <Filters {...{ coeff, activeId }} />
-      </div>
+      </div> */}
     </>
   );
 };

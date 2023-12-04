@@ -20,7 +20,7 @@ const generatePoints = (path, units) => {
   return points;
 };
 
-const calculateCoeff = (points, units) => {
+const calculateCoeff = (points) => {
   const real = [];
   const img = [];
   for (let i = 0; i < points.length; ) {
@@ -31,7 +31,7 @@ const calculateCoeff = (points, units) => {
   transformRadix2(real, img);
 
   const coeff = [];
-  for (let i = 0; i < units; i++) {
+  for (let i = 0; i < real.length; i++) {
     coeff.push(Math.sqrt(real[i] * real[i] + img[i] * img[i]));
     coeff.push(Math.atan2(img[i], real[i]));
   }
