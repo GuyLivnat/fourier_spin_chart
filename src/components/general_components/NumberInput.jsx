@@ -9,13 +9,15 @@ const NumberInput = ({
   cancel,
 }) => {
   const handleChange = (e) => {
-    const regexNumber = /-?(\d+).?(\d*)/;
-    const value = e.target.value.match(regexNumber);
-    if (value) setNumber(value[0]);
+    // const regexNumber = /-?(\d+).?(\d*)/;
+    // const value = e.target.value.match(regexNumber);
+    // if (value) setNumber(value[0]);
+    const value = e.target.value;
+    if (value) setNumber(value);
   };
 
   const handleKeyDown = (e) => {
-    if (e.keyCode === 13 && accept) accept(); // enter/return
+    if (e.keyCode === 13 && accept) accept(); // enter|return
     else if (e.keyCode === 27 && cancel) cancel(); // esc
   };
 
