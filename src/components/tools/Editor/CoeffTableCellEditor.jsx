@@ -14,7 +14,7 @@ const CoeffTableCellEditor = ({
         setNumber={(num) => setEditNode({ ...editNode, value: num })}
         accept={acceptEdit}
         cancel={cancelEdit}
-        className="text-bg-dark p-0"
+        className="text-bg-dark p-0 text-center"
       />
     </td>
   );

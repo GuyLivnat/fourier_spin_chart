@@ -33,11 +33,13 @@ const calculateCoeff = (points) => {
   const coeff = [];
   for (let i = 1; i < real.length; i++) {
     coeff.push({
-      r: Math.sqrt(real[i] * real[i] + img[i] * img[i]),
-      angle: Math.atan2(img[i], real[i]),
+      //toFixed for cleaner info, but it returns a string. thus parseFloat
+      r: parseFloat(Math.sqrt(real[i] * real[i] + img[i] * img[i]).toFixed(2)),
+      angle: parseFloat(Math.atan2(img[i], real[i]).toFixed(2)),
       frequency: i,
     });
   }
+  console.log(coeff);
 
   return coeff;
 };

@@ -20,7 +20,6 @@ const Chart = () => {
 
   const lineSegments = 32; // used for the gradient effect on the outline
 
-  const test = [];
   // const length = coeff.current.length > 256 ? coeff.current.length / 2 : 128;
 
   const length = 256;
@@ -28,13 +27,18 @@ const Chart = () => {
   const outline = useRef([]);
   const time = useRef(0);
   const frame = useRef(computeFrame([], 0));
-  const step = 1 / 256;
+  const step = 1 / length;
 
-  const zoom = useRef(200000);
-  const panX = useRef(0);
-  const panY = useRef(45000);
+  const positionDefalts = {
+    zoom: 200000,
+    panX: 0,
+    panY: 45000,
+  };
+  const zoom = useRef(positionDefalts.zoom);
+  const panX = useRef(positionDefalts.panX);
+  const panY = useRef(positionDefalts.panY);
 
-  const [updateSpeed, setUpdateSpeed] = useState(0.7); //calculated as 1-updatespeed to flip the slider to left to right
+  const [updateSpeed, setUpdateSpeed] = useState(0.5); //calculated as (0.7 - updateSpeed) * 200ms to flip the slider to left to right
   const [isPlaying, setIsPlaying] = useState(false);
   const [hideBar, setHideBar] = useState(100);
   const [listeners, setListeners] = useState([{ evnt: null, func: null }]);
@@ -80,7 +84,8 @@ const Chart = () => {
       zoom.current,
       panX.current,
       panY.current,
-      coeff.current
+      coeff.current,
+      length
     );
     renderTimeSlider(time.current);
   };
@@ -127,14 +132,21 @@ const Chart = () => {
   };
 
   const recenter = () => {
-    zoomToSVG("chart", panX, panY, zoom, 0, 230, 1000, renderFrame);
+    zoomToSVG(
+      "chart",
+      panX,
+      panY,
+      zoom,
+      positionDefalts.panX,
+      positionDefalts.panY,
+      positionDefalts.zoom,
+      renderFrame
+    );
   };
 
   useListeners("chart", listeners, [listeners]); // adds stateless listeners (zoom and pan)
   useListeners("chart", clickToPlayListeners(pausePlay), [isPlaying]); //adds click to pause/play
-  useInterval(renderNextFrame, isPlaying ? (1 - updateSpeed) * 200 : null); //plays the chart\
-
-  // console.log(frame.current);
+  useInterval(renderNextFrame, isPlaying ? (0.7 - updateSpeed) * 200 : null); //plays the chart\
 
   return (
     <div

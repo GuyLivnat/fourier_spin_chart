@@ -5,7 +5,7 @@ const CoeffContext = createContext();
 const CoeffProvider = (props) => {
   const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
-  let playable = coeff.current.length > 3;
+  let playable = coeff.current.length > 0;
   const [activeId, setActiveId] = useState(null);
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);

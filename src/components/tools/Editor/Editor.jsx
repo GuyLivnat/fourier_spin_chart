@@ -11,8 +11,8 @@ const Editor = () => {
 
   const nullNode = { value: null, index: null, type: null };
   const [editNode, setEditNode] = useState(nullNode);
-  const [radius, setRadius] = useState(20);
-  const [angle, setAngle] = useState(1.5707);
+  const [radius, setRadius] = useState(20000);
+  const [angle, setAngle] = useState(1.57);
 
   const editCoeff = (e) => {
     tooltipOut();

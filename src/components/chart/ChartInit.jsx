@@ -7,7 +7,7 @@ const ChartInit = ({ lineSegments, coeff, chartColors }) => {
     chartColors;
 
   const circles = [];
-  for (let i = 0; i < coeff.current.length / 2; i++) {
+  for (let i = 0; i < coeff.current.length; i++) {
     circles.push(
       <circle key={i} id={"circle_" + i} cx={0} cy={0} r={0}></circle>
     );

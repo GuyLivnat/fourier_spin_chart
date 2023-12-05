@@ -1,15 +1,23 @@
 import * as d3 from "d3";
 
-const renderChart = (frame, outline, lineSegments, zoom, panX, panY, coeff) => {
-  const segment = coeff.length / lineSegments;
+const renderChart = (
+  frame,
+  outline,
+  lineSegments,
+  zoom,
+  panX,
+  panY,
+  coeff,
+  length
+) => {
+  const segment = length / lineSegments;
   const chart = document.getElementById("chart");
 
   const minStroke = zoom / chart.clientWidth;
   const scalingMin = (zoom / chart.clientWidth) * 15;
   const minircle = zoom / 150 > scalingMin ? zoom / 150 : scalingMin;
   const filteredFrame = frame.circles.filter((circle, i) => {
-    if (circle.r > minircle || (i === coeff.length - 1 && coeff.length > 2))
-      return circle;
+    if (circle.r > minircle || i === coeff.length) return circle;
   });
 
   const line = d3
