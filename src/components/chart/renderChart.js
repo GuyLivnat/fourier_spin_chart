@@ -8,7 +8,8 @@ const renderChart = (
   panX,
   panY,
   coeff,
-  length
+  length,
+  amountOfCircles
 ) => {
   const segment = length / lineSegments;
   const chart = document.getElementById("chart");
@@ -25,7 +26,7 @@ const renderChart = (
     .x((d) => d.x)
     .y((d) => d.y);
 
-  for (let i = 0; i < coeff.length; i++) {
+  for (let i = 0; i < amountOfCircles; i++) {
     let thisCircle = filteredFrame[i];
     if (thisCircle) {
       d3.select(`#circle_${i}`)

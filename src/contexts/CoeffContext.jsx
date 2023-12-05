@@ -1,4 +1,4 @@
-import { useState, createContext, useRef } from "react";
+import { useState, createContext, useRef, useEffect } from "react";
 
 const CoeffContext = createContext();
 
@@ -6,6 +6,8 @@ const CoeffProvider = (props) => {
   const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges
   const coeff = useRef([]);
   let playable = coeff.current.length > 0;
+  const filteredCoeff = useRef([]);
+  const [filters, setFilters] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
@@ -27,6 +29,14 @@ const CoeffProvider = (props) => {
     circlesColor: { r: 255, g: 255, b: 255, hidden: false },
   };
   const [chartColors, setChartColors] = useState(chartColorDefaults);
+
+  useEffect(() => {
+    let tempCoeff = coeff.current;
+    for (const filter of filters) {
+      tempCoeff = filter(tempCoeff);
+    }
+    filteredCoeff.current = tempCoeff;
+  }, [filters, activeId]);
 
   const saveCoeff = (coeffs, name) => {
     const obj = JSON.stringify({ name: name, coeff: coeffs });
@@ -62,6 +72,9 @@ const CoeffProvider = (props) => {
         stop,
         activeId,
         setActiveId,
+        filteredCoeff,
+        filters,
+        setFilters,
       }}
     >
       {props.children}

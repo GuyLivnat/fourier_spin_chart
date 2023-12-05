@@ -28,6 +28,8 @@ const Editor = () => {
 
   const acceptEdit = () => {
     coeff.current[editNode.index][editNode.type] = parseFloat(editNode.value);
+    setActiveId(crypto.randomUUID());
+    setPathName("Edited at " + new Date().toLocaleString());
     setEditNode(nullNode);
   };
 
@@ -42,7 +44,7 @@ const Editor = () => {
       frequency: frequency,
     });
     setPathName("Edited at " + new Date().toLocaleString());
-    setActiveId(null);
+    setActiveId(crypto.randomUUID());
   };
 
   const deleteCoeff = (e) => {
@@ -52,7 +54,7 @@ const Editor = () => {
       ...coeff.current.slice(id + 1),
     ];
     setPathName("Edited at " + new Date().toLocaleString());
-    setActiveId(null);
+    setActiveId(crypto.randomUUID());
   };
 
   const resetCoeff = () => {

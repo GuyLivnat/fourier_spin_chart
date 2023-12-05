@@ -4,6 +4,7 @@ import SavedPaths from "./SavedPaths";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
 import Graphs from "./Graphs/Graphs";
+import Filters from "./Filters/Filters";
 
 const ToolBar = () => {
   return (
@@ -23,6 +24,10 @@ const ToolBar = () => {
       <CollapseTitle title="Graphs" forBody="graphs" />
       <div className="collapse" id="graphs">
         <Graphs />
+      </div>
+      <CollapseTitle title="Filters" forBody="filters" />
+      <div className="collapse" id="filters">
+        <Filters />
       </div>
     </>
   );

@@ -15,7 +15,7 @@ import ChartOverlay from "./ChartOverlay";
 import { CoeffContext } from "../../contexts/CoeffContext";
 
 const Chart = () => {
-  const { units, coeff, playable, pathName, chartColors } =
+  const { coeff, units, playable, pathName, chartColors, filteredCoeff } =
     useContext(CoeffContext);
 
   const lineSegments = 32; // used for the gradient effect on the outline
@@ -84,8 +84,9 @@ const Chart = () => {
       zoom.current,
       panX.current,
       panY.current,
-      coeff.current,
-      length
+      filteredCoeff.current,
+      length,
+      coeff.current.length
     );
     renderTimeSlider(time.current);
   };
@@ -97,7 +98,7 @@ const Chart = () => {
 
   const nextFrame = () => {
     timestep();
-    frame.current = computeFrame(coeff.current, time.current);
+    frame.current = computeFrame(filteredCoeff.current, time.current);
     outline.current.unshift({
       x: frame.current.outline.x,
       y: frame.current.outline.y,
