@@ -19,10 +19,26 @@ function App() {
         <TooltipProvider>
           <CoeffProvider>
             <Routes>
-              <Route path="/docs" Component={DocsPage} />
-              <Route path="/about" Component={AboutPage} />
-              <Route path="/chart" Component={ChartPage} />
-              <Route path="/" Component={LandingPage} />
+              <Route
+                exact
+                path="/starchart_fourier_react_d3/"
+                Component={LandingPage}
+              />
+              <Route
+                exact
+                path="/starchart_fourier_react_d3/docs"
+                Component={DocsPage}
+              />
+              <Route
+                exact
+                path="/starchart_fourier_react_d3/about"
+                Component={AboutPage}
+              />
+              <Route
+                exact
+                path="/starchart_fourier_react_d3/chart"
+                Component={ChartPage}
+              />
             </Routes>
           </CoeffProvider>
         </TooltipProvider>
