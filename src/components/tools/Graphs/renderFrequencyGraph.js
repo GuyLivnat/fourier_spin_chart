@@ -8,6 +8,14 @@ const renderFrequencyGraph = (data, height, width) => {
     top: 20,
   };
 
+  const brush = d3
+    .brushX()
+    .extent([
+      [margin.left, 0.5],
+      [width - margin.right, height - margin.bottom + 0.5],
+    ])
+    .on("start brush end", () => console.log(12));
+
   const x = d3
     .scaleBand()
     .domain(data.map((d) => d.radius))
@@ -19,10 +27,11 @@ const renderFrequencyGraph = (data, height, width) => {
     .domain([0, d3.max(data, (d) => d.frequency)])
     .range([height - margin.bottom, margin.top]);
 
-  d3.select("#frequency-graph-svg")
+  const graph = d3
+    .select("#frequency-graph-svg")
     .attr("height", height)
     .attr("width", width)
-
+    // .call(brush)
     .selectAll("rect")
     .data(data)
     .join("rect")
@@ -49,8 +58,8 @@ const renderFrequencyGraph = (data, height, width) => {
 
   d3.select("#frequency-graph-x-lable")
     .attr("transform", `translate(0, ${height - margin.bottom})`)
-    // .call(d3.axisBottom(x))
-    // .call((g) => g.select(".domain").remove())
+    .call(d3.axisBottom(x))
+    .call((g) => g.select(".domain").remove())
     .select("text")
     .attr("y", margin.bottom - 10)
     .attr("x", margin.left)

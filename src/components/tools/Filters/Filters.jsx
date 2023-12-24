@@ -59,7 +59,7 @@ const Filters = () => {
       </div>
       <div>
         <Button text="apply filters" handleClick={applyFilters} />
-        <Button text="hide filters" handleClick={removeFilters} />
+        <Button text="remove filters" handleClick={removeFilters} />
       </div>
     </div>
   );
