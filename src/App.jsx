@@ -19,10 +19,10 @@ function App() {
         <TooltipProvider>
           <CoeffProvider>
             <Routes>
-              <Route exact path="/" Component={LandingPage} />
-              <Route exact path="/docs" Component={DocsPage} />
-              <Route exact path="/about" Component={AboutPage} />
-              <Route exact path="/chart" Component={ChartPage} />
+              <Route path="/docs" Component={DocsPage} />
+              <Route path="/about" Component={AboutPage} />
+              <Route path="/chart" Component={ChartPage} />
+              <Route path="/" Component={LandingPage} />
             </Routes>
           </CoeffProvider>
         </TooltipProvider>
