@@ -22,7 +22,9 @@ const ChartInit = ({ lineSegments, coeff, chartColors }) => {
         markerStart={i === 0 ? "url(#circle-marker)" : null}
         key={i}
         id={"outline-" + i}
-        stroke={gradientSampler(outlineColor, backgroundColor, strength)}
+        stroke={rgbObjToString(
+          gradientSampler(outlineColor, backgroundColor, strength)
+        )}
       ></path>
     );
   }
