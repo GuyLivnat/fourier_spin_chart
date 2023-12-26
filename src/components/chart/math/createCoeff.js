@@ -39,8 +39,6 @@ const calculateCoeff = (points) => {
       frequency: i,
     });
   }
-  console.log(coeff);
-
   return coeff;
 };
 
