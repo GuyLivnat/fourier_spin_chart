@@ -16,28 +16,26 @@ const LandingPage = () => {
           className="mb-3"
           onMouseEnter={tooltipIn}
           onMouseLeave={tooltipOut}
-          data-tooltip="woo! long words!"
+          data-tooltip="tooltips included!"
         >
-          Progressivly rotating wave functions using fourier transforms on
-          geometric space
+          The Fourier Spin Chart
         </h1>
         <p className="lead">
-          Let math calculate which chain of circles recreates a given path...
+          Use a chain of circles to draw complex single line images...
           <br /> or just watch the pretty circles spin.
         </p>
       </div>
       <div className="mt-5 gap-3">
-        <NavLink className="btn btn-outline-primary" to="/chart">
+        <NavLink className="btn btn-outline-primary" to="/sandbox">
           Let's go!
         </NavLink>
         <p className="d-inline-block mx-3">or</p>
-        <NavLink className="btn btn-outline-primary" to="/docs">
+        <NavLink className="btn btn-outline-primary" to="/tutorial">
           How does this work?
         </NavLink>
       </div>
-      <div>
-        Discalmer: this app has only been tested on firefox and chrome (PC and
-        android)
+      <div className="mt-3" style={{ fontSize: 13 }}>
+        Discalmer: this app has only been tested on firefox and chrome
       </div>
     </section>
   );

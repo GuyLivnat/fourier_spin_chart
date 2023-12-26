@@ -73,7 +73,6 @@ const SavedPaths = ({}) => {
         if (item.id === object.id) found = true;
       }
       if (!found) {
-        // object not found
         missingDefaults.push({
           name: object.name,
           id: object.id,

@@ -13,11 +13,8 @@ const renderChart = (
   id
 ) => {
   const segment = length / lineSegments;
-  const chartSize = document.getElementById(id);
-
-  const minStroke = zoom / chartSize.clientWidth;
-  const scalingMin = (zoom / chartSize.clientWidth) * 15;
-  const minircle = zoom / 150 > scalingMin ? zoom / 150 : scalingMin;
+  const stroke = zoom / document.getElementById(id).clientWidth;
+  const minircle = zoom / 100;
   const filteredFrame = frame.circles.filter((circle, i) => {
     if (circle.r > minircle || i === coeff.length) return circle;
   });
@@ -42,7 +39,7 @@ const renderChart = (
       chart.select(`#circle_${i}`).attr("r", 0);
     }
   }
-  chart.select("#circles").style("stroke-width", minStroke);
+  chart.select("#circles").style("stroke-width", stroke);
 
   chart
     .attr("viewBox", `${panX} ${panY} ${zoom} ${zoom * 0.5625}`)
@@ -52,9 +49,9 @@ const renderChart = (
   chart
     .select("#radii")
     .attr("d", line(filteredFrame))
-    .style("stroke-width", minStroke * 2);
+    .style("stroke-width", stroke * 2);
 
-  chart.select("#outline").style("stroke-width", minStroke * 2.5);
+  chart.select("#outline").style("stroke-width", stroke * 2.5);
 
   for (let i = 0; i < lineSegments + 1; i++) {
     let start = i === 0 || i === 1 ? 0 : segment * (i - 1) - 1;

@@ -31,7 +31,6 @@ const ChartInit = ({ lineSegments, coeff, chartColors, id }) => {
 
   return (
     <svg
-      overflow="visible"
       id={id}
       viewBox={"0, 230, 1000, 562.5"} //0.5625 is for 16:9 aspect ratio
       style={{

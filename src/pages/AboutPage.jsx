@@ -2,12 +2,12 @@ const AboutPage = () => {
   return (
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10">
-        <h1 className="mb-5 mt-3">Why, What, How and Who</h1>
+        <h1 className="mb-5 mt-3">Why, What, and Who</h1>
         <div>
           <h2>Why</h2>
           <p>
-            This app was made both as a final project in my personal quest to
-            learn how to code, and as a tribute to 3Blue1Brown (a YouTube
+            This app was made both as a final project in my personal studies in
+            learning how to code, and as a tribute to 3Blue1Brown (a YouTube
             channel). While studying different mathematical models as part of my
             coding studies, I was shown their{" "}
             <a href="https://www.youtube.com/watch?v=r6sGWTCMz2k">
@@ -29,74 +29,6 @@ const AboutPage = () => {
             even those who do not find the concept inspiring to share in the
             mesmerizing part.
           </p>
-        </div>
-        <div>
-          <h2>How</h2>
-          <p>How the upload works:</p>
-          <ol>
-            <li>
-              The user uploads an SVG (Scalable Vector Graphic) with a single{" "}
-              {"<path>"}. This means there is a single curved line that is
-              described as a series of points and curvatures. More info on paths
-              can be found{" "}
-              <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">
-                at MDN's website.
-              </a>
-            </li>
-            <li>
-              The app then samples the x and y coordinates (on a Euclidean
-              plane) of a series of 256 points along the length of the path. The
-              result looks something like this{" "}
-              {"[{x:10, y:3}, {x:12, y:13}, …]"}.
-            </li>
-            <li>
-              he list of x,y coordinates is then passed through a discrete FFT
-              (Fast Fourier Transform).
-            </li>
-            <li>
-              The FFT treats the coordinates as a single wavelength that it then
-              breaks apart into a discrete (non-infinite) number of sine waves
-              (for more info on how the FFT does that, I highly recommend the
-              3Blue1Brown clip in the Why section). These sine waves are
-              described by two coefficients: a real number and an imagined one
-              (this is the real magic!). The result looks something like this{" "}
-              {"[{real:20, imagined: 1}, {real:4, imagined: -1}, …]"}
-            </li>
-            <li>
-              The coefficients are then saved to the user’s local storage.
-            </li>
-          </ol>
-          <p>How the chart uses the coefficients:</p>
-          <ol>
-            <li>
-              Each coefficient is expressed as a circle with a single drawn
-              radius. The real number is expressed as the size of the circle,
-              and the imagined one as the angle (in radians) in which a single
-              radius is drawn.
-            </li>
-            <li>
-              Each consecutive circle rotates around the end of the previous
-              circle’s drawn radius. The result is a ‘chain’ of circles.
-            </li>
-            <li>
-              When drawn together the last drawn radius is a single point along
-              the original {"<path>"}.
-            </li>
-            <li>
-              Each imagined number (the angle) is multiplied in a progressive
-              manner (the distance from the start of the chain) by a given time
-              (a number between 0 and 1). The coefficients recreate another
-              point along the original {"<path>"}.
-            </li>
-            <li>
-              The playback of the chart slowly loops from 0 to 1 (resetting to 0
-              when it reaches 1), each time recalculating the angles.
-            </li>
-            <li>
-              The end point of each calculation is then used to redraw the image
-              from the original {"<path>"}.
-            </li>
-          </ol>
         </div>
         <div>
           <h2>Who</h2>

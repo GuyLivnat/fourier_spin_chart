@@ -21,8 +21,8 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="px-3">
-        <NavLink className="nav-link" to="/docs">
-          Docs
+        <NavLink className="nav-link" to="/tools">
+          Tools
         </NavLink>
       </div>
       <div className="px-3">

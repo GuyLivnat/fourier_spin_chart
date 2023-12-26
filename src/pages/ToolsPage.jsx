@@ -5,11 +5,11 @@ import UndoIcon from "../assets/icons/UndoIcon";
 import ZoomInIcon from "../assets/icons/ZoomInIcon";
 import ZoomOutIcon from "../assets/icons/ZoomOutIcon";
 
-const DocsPage = () => {
+const ToolsPage = () => {
   return (
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10 ">
-        <h1 className="mb-5 mt-3">Components and their options</h1>
+        <h1 className="mb-5 mt-3">The tools and their options</h1>
         <div>
           <h2>The Chart</h2>
           <p>The chart takes a series of circles and chains them together.</p>
@@ -112,4 +112,4 @@ const DocsPage = () => {
   );
 };
 
-export default DocsPage;
+export default ToolsPage;

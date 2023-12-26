@@ -1,4 +1,7 @@
+import infinityCoeff from "../assets/tutorial/infinityCoeff";
+import MushuSVG from "../assets/tutorial/mushuSVG";
 import TutorialChart from "../components/chart/TutorialChart";
+import mushu from "../assets/defaults/mushu";
 
 const TutorialPage = () => {
   return (
@@ -8,34 +11,36 @@ const TutorialPage = () => {
         <h3> The Visual </h3>
         <p>
           {" "}
-          To begin, let's take one circle, draw its radius, and have it spin.
+          To begin, let's take one circle, draw its radius, and have it spin at
+          a constant speed.
         </p>
         <TutorialChart
-          coeff={{ current: [{ r: 20000, angle: 1, frequency: 1 }] }}
+          coeff={{ current: [{ r: 17386.84, angle: -0.01, frequency: 1 }] }}
           hideOutline={true}
           chartId="tutorial-chart-1"
         />
         <p>
           {" "}
-          Now let’s add another spinning circle and have its center follow the
-          point where the previous circle's radius ends.
+          Now let’s add another circle, have its center follow the point where
+          the previous circle's radius ends, and have it spin at a slightly
+          faster constant speed.
         </p>
         <TutorialChart
           coeff={{
             current: [
-              { r: 20000, angle: 1, frequency: 1 },
-              { r: 15000, angle: 1, frequency: 2 },
+              { r: 17386.84, angle: -0.01, frequency: 1 },
+              { r: 10286.09, angle: 3.13, frequency: 2 },
             ],
           }}
           hideOutline={true}
           chartId="tutorial-chart-2"
         />
-        <p> Next we “draw” a fading line at the end of the last radius.</p>
+        <p> Next we draw a fading line at the end of the last radius.</p>
         <TutorialChart
           coeff={{
             current: [
-              { r: 20000, angle: 1, frequency: 1 },
-              { r: 15000, angle: 1, frequency: 2 },
+              { r: 17386.84, angle: -0.01, frequency: 1 },
+              { r: 10286.09, angle: 3.13, frequency: 2 },
             ],
           }}
           hideOutline={false}
@@ -43,19 +48,22 @@ const TutorialPage = () => {
         />
         <p>
           {" "}
-          Let’s add a few more circles to the ‘chain’ and draw the radii that
-          connect the dots in purple. Try using the Editor to add your own
-          circle. Give it a radius size and a starting angle for the drawn
-          radius (in radians)
+          By adding another four circles, we will can draw an infinity symbol
         </p>
-        {/* <chart with 5 circles and all things shown with the editor open> */}
+        <TutorialChart
+          coeff={{
+            current: infinityCoeff,
+          }}
+          hideOutline={false}
+          chartId="tutorial-chart-4"
+        />
         <h3> The Fourier part</h3>
         <p>
           {" "}
           As you saw in the visual section, by adding different circles you can
           draw different shapes. Though getting a specific image by guessing
-          which chain of circles, which is where Fourier transforms come in.{" "}
-          <br />
+          which chain of circles would draw it is incredibly difficult, which is
+          where Fourier transforms come in. <br />
           The short version of what a Fouirer transform does is take a complex
           wave function and separates it into a series of sine waves.
           <br />
@@ -70,13 +78,20 @@ const TutorialPage = () => {
           circles.
           <br />
           Can you see where this is going? <br />
-          Now we can take an image with a single line.
+          Now we can take an image with a single line such as this one of Mushu
+          from the film Mulan...
         </p>
-        {/* <svg image> */}
-        Then we apply that same Fourier Transform on it, and voilà! We have a
-        series of circles that, when chained together, recreate the image over
-        time. Simply select the image from the Saved Paths menu and press play.
-        {/* <show chart with saved paths and only one path used in the image beforehand> */}
+        <MushuSVG size={150} />
+        <br />
+        apply that same Fourier Transform on it, and voilà! We have a series of
+        circles that, when chained together, recreate the image over time.
+        <TutorialChart
+          coeff={{
+            current: mushu.coeff,
+          }}
+          hideOutline={false}
+          chartId="tutorial-chart-5"
+        />
         In Sandbox mode, you can use the upload button in the Saved Paths and
         give it any SVG image with a single {"<path>"} for it to generate the
         appropriate chain of circles that expresses it.

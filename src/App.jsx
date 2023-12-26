@@ -2,7 +2,7 @@ import SandboxPage from "./pages/SandboxPage";
 import AboutPage from "./pages/AboutPage";
 import LandingPage from "./pages/LandingPage";
 import TutorialPage from "./pages/TutorialPage";
-import DocsPage from "./pages/DocsPage";
+import ToolsPage from "./pages/ToolsPage";
 import { Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "./contexts/TooltipContext";
 import Navbar from "./components/singletons/NavBar";
@@ -20,7 +20,7 @@ function App() {
         <TooltipProvider>
           <CoeffProvider>
             <Routes>
-              <Route path="/docs" Component={DocsPage} />
+              <Route path="/tools" Component={ToolsPage} />
               <Route path="/about" Component={AboutPage} />
               <Route path="/sandbox" Component={SandboxPage} />
               <Route path="/tutorial" Component={TutorialPage} />
