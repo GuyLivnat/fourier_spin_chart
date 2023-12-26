@@ -16,7 +16,7 @@ function App() {
       <header className="fixed-top" style={{ width: "100vw" }}>
         <Navbar />
       </header>
-      <main className="mt-5">
+      <main className="mt-5 ">
         <TooltipProvider>
           <CoeffProvider>
             <Routes>
