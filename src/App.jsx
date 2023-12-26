@@ -1,6 +1,7 @@
-import ChartPage from "./pages/ChartPage";
+import SandboxPage from "./pages/SandboxPage";
 import AboutPage from "./pages/AboutPage";
 import LandingPage from "./pages/LandingPage";
+import TutorialPage from "./pages/TutorialPage";
 import DocsPage from "./pages/DocsPage";
 import { Route, Routes } from "react-router-dom";
 import { TooltipProvider } from "./contexts/TooltipContext";
@@ -21,7 +22,8 @@ function App() {
             <Routes>
               <Route path="/docs" Component={DocsPage} />
               <Route path="/about" Component={AboutPage} />
-              <Route path="/chart" Component={ChartPage} />
+              <Route path="/sandbox" Component={SandboxPage} />
+              <Route path="/tutorial" Component={TutorialPage} />
               <Route path="/" Component={LandingPage} />
             </Routes>
           </CoeffProvider>

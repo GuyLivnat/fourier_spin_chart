@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import ToolBar from "../components/tools/ToolBar";
 import Chart from "../components/chart/Chart";
 
-function ChartPage() {
+function SandboxPage() {
   const units = 256; // must be a power of 2! 256 suggested, 512 smoothes the edges\
   const coeff = useRef([]);
   let playable = coeff.current.length > 3;
@@ -45,4 +45,4 @@ function ChartPage() {
   );
 }
 
-export default ChartPage;
+export default SandboxPage;

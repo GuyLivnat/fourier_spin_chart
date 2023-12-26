@@ -11,8 +11,13 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="px-3">
-        <NavLink className="nav-link" to="/chart">
-          Chart
+        <NavLink className="nav-link" to="/sandbox">
+          Sandbox
+        </NavLink>
+      </div>
+      <div className="px-3">
+        <NavLink className="nav-link" to="/tutorial">
+          Tutorial
         </NavLink>
       </div>
       <div className="px-3">

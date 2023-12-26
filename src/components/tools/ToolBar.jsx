@@ -25,7 +25,7 @@ const ToolBar = () => {
       <div className="collapse" id="graphs">
         <Graphs />
       </div>
-      <CollapseTitle title="Filters" forBody="filters" />
+      <CollapseTitle title="Filters (WIP)" forBody="filters" />
       <div className="collapse" id="filters">
         <Filters />
       </div>

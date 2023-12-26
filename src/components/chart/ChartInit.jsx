@@ -1,7 +1,7 @@
 import gradientSampler from "../../utilities/gradientSampler";
 import rgbObjToString from "../../utilities/RGBObjToString";
 
-const ChartInit = ({ lineSegments, coeff, chartColors }) => {
+const ChartInit = ({ lineSegments, coeff, chartColors, id }) => {
   const circleSize = 1.5;
   const { backgroundColor, outlineColor, radiiColor, circlesColor } =
     chartColors;
@@ -31,7 +31,8 @@ const ChartInit = ({ lineSegments, coeff, chartColors }) => {
 
   return (
     <svg
-      id="chart"
+      overflow="visible"
+      id={id}
       viewBox={"0, 230, 1000, 562.5"} //0.5625 is for 16:9 aspect ratio
       style={{
         backgroundColor: rgbObjToString(backgroundColor),

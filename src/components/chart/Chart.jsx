@@ -86,7 +86,8 @@ const Chart = () => {
       panY.current,
       filteredCoeff.current,
       length,
-      coeff.current.length
+      coeff.current.length,
+      "chart"
     );
     renderTimeSlider(time.current);
   };
@@ -173,6 +174,7 @@ const Chart = () => {
       />
       <ChartOverlay {...{ playable, chartColors }} />
       <ChartInit
+        id={"chart"}
         {...{
           lineSegments,
           chartColors,
