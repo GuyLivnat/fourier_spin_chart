@@ -35,6 +35,10 @@ const LandingPage = () => {
           How does this work?
         </NavLink>
       </div>
+      <div>
+        Discalmer: this app has only been tested on firefox and chrome (PC and
+        android)
+      </div>
     </section>
   );
 };

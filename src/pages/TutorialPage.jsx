@@ -5,12 +5,10 @@ const TutorialPage = () => {
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10 ">
         <h1> Tutorial</h1>
-        <h2> The Basics </h2>
         <h3> The Visual </h3>
         <p>
           {" "}
-          To begin, let's take one circle, and mark one dot at a point along its
-          edge, then let's make that circle spin.
+          To begin, let's take one circle, draw its radius, and have it spin.
         </p>
         <TutorialChart
           coeff={{ current: [{ r: 20000, angle: 1, frequency: 1 }] }}
@@ -19,8 +17,8 @@ const TutorialPage = () => {
         />
         <p>
           {" "}
-          Now let’s take another circle and have its center follow the dot of
-          the previous circle.
+          Now let’s add another spinning circle and have its center follow the
+          point where the previous circle's radius ends.
         </p>
         <TutorialChart
           coeff={{
@@ -32,17 +30,12 @@ const TutorialPage = () => {
           hideOutline={true}
           chartId="tutorial-chart-2"
         />
-        <p>
-          {" "}
-          Then we place another rotating dot on that circle, and have it “draw”
-          a fading line behind it as it moves.
-        </p>
+        <p> Next we “draw” a fading line at the end of the last radius.</p>
         <TutorialChart
           coeff={{
             current: [
               { r: 20000, angle: 1, frequency: 1 },
               { r: 15000, angle: 1, frequency: 2 },
-              { r: 10000, angle: 1, frequency: 3 },
             ],
           }}
           hideOutline={false}
@@ -86,7 +79,7 @@ const TutorialPage = () => {
         {/* <show chart with saved paths and only one path used in the image beforehand> */}
         In Sandbox mode, you can use the upload button in the Saved Paths and
         give it any SVG image with a single {"<path>"} for it to generate the
-        appropriate chain of circles that express it.
+        appropriate chain of circles that expresses it.
       </div>
     </section>
   );
