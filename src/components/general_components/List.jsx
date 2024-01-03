@@ -39,93 +39,91 @@ const List = ({
   };
 
   return (
-    <>
-      <div className="rounded border overflow-hidden">
-        <div className=" row border-bottom justify-content-between mx-0">
-          <UploadButton
-            handleFile={upload}
-            text={"upload"}
-            className="btn btn-outline-primary m-1 col"
-            dataTooltip={uploadTooltip}
-            onMouseEnter={tooltipIn}
-            onMouseLeave={tooltipOut}
-            inputType={uploadType}
-          />
-          <Button
-            text="defaults"
-            handleClick={resetDefaults}
-            className="btn btn-outline-primary m-1 col"
-            dataTooltip="reapplies the missing defaults"
-            onMouseEnter={tooltipIn}
-            onMouseLeave={tooltipOut}
-          />
-          <Button
-            text="del all"
-            handleClick={delAll}
-            className="btn btn-outline-danger m-1 col"
-            dataTooltip="removes all saved paths from local storage"
-            onMouseEnter={tooltipIn}
-            onMouseLeave={tooltipOut}
-          />
-        </div>
-        <div
-          style={{
-            boxSizing: "content-box",
-            maxHeight: "20rem",
-            overflowY: "auto",
-            overflowX: "clip",
-          }}
-        >
-          <ul className="list-group list-group-flush">
-            {lst.toReversed().map((item, i) => (
-              <li
-                key={item.id}
-                id={item.id}
-                onClick={load}
-                className={
-                  item.id === focus
-                    ? "list-group-item text-bg-secondary"
-                    : "list-group-item text-bg-dark"
-                }
-                aria-current={focus === item.id ? true : null}
-                onBlur={(e) => {
-                  //cancel if unfocused
-                  (e.relatedTarget === null ||
-                    ("id" in e.relatedTarget &&
-                      e.relatedTarget.id !== "setNewName")) &&
-                    saveRename();
-                }}
-              >
-                <div className="d-flex justify-content-between">
-                  {item.id === renameId ? (
-                    <TextInput
-                      text={newName}
-                      setText={setNewName}
-                      id="setNewName"
-                      focus={true}
-                      accept={saveRename}
-                      cancel={cancelRename}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        paddingLeft: "1px",
-                        fontStyle: item.default ? "italic" : "normal",
-                        overflow: "clip",
-                      }}
-                      onDoubleClick={handleRename}
-                    >
-                      {item.name}
-                    </div>
-                  )}
-                  <CloseButton handleClick={del} />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="rounded border overflow-hidden" data-bs-theme="dark">
+      <div className=" row border-bottom justify-content-between mx-0">
+        <UploadButton
+          handleFile={upload}
+          text={"upload"}
+          className="btn btn-outline-primary m-1 col"
+          dataTooltip={uploadTooltip}
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
+          inputType={uploadType}
+        />
+        <Button
+          text="defaults"
+          handleClick={resetDefaults}
+          className="btn btn-outline-primary m-1 col"
+          dataTooltip="reapplies the missing defaults"
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
+        />
+        <Button
+          text="del all"
+          handleClick={delAll}
+          className="btn btn-outline-danger m-1 col"
+          dataTooltip="removes all saved paths from local storage"
+          onMouseEnter={tooltipIn}
+          onMouseLeave={tooltipOut}
+        />
       </div>
-    </>
+      <div
+        style={{
+          boxSizing: "content-box",
+          maxHeight: "20rem",
+          overflowY: "auto",
+          overflowX: "clip",
+        }}
+      >
+        <ul className="list-group list-group-flush">
+          {lst.toReversed().map((item, i) => (
+            <li
+              key={item.id}
+              id={item.id}
+              onClick={load}
+              className={
+                item.id === focus
+                  ? "list-group-item text-bg-secondary list-group-item-action"
+                  : "list-group-item list-group-item-action "
+              }
+              aria-current={focus === item.id ? true : null}
+              onBlur={(e) => {
+                //cancel if unfocused
+                (e.relatedTarget === null ||
+                  ("id" in e.relatedTarget &&
+                    e.relatedTarget.id !== "setNewName")) &&
+                  saveRename();
+              }}
+            >
+              <div className="d-flex justify-content-between">
+                {item.id === renameId ? (
+                  <TextInput
+                    text={newName}
+                    setText={setNewName}
+                    id="setNewName"
+                    focus={true}
+                    accept={saveRename}
+                    cancel={cancelRename}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      paddingLeft: "1px",
+                      fontStyle: item.default ? "italic" : "normal",
+                      overflow: "clip",
+                    }}
+                    onDoubleClick={handleRename}
+                  >
+                    {item.name}
+                  </div>
+                )}
+                <CloseButton handleClick={del} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
