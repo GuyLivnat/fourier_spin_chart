@@ -13,10 +13,10 @@ import { CoeffProvider } from "./contexts/CoeffContext";
 function App() {
   return (
     <>
-      <header className="fixed-top" style={{ width: "100vw" }}>
+      <header className="fixed-top">
         <Navbar />
       </header>
-      <main className="mt-5 ">
+      <main className="mt-5 " data-bs-theme="dark">
         <TooltipProvider>
           <CoeffProvider>
             <Routes>

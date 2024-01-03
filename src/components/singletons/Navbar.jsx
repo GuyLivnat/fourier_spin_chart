@@ -16,7 +16,7 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="px-3">
-        <NavLink className="nav-link" to="/tutorial">
+        <NavLink className="nav-link" to="/tutorial?page=1">
           Tutorial
         </NavLink>
       </div>

@@ -39,7 +39,7 @@ const List = ({
   };
 
   return (
-    <div className="rounded border overflow-hidden" data-bs-theme="dark">
+    <div className="rounded border overflow-hidden">
       <div className=" row border-bottom justify-content-between mx-0">
         <UploadButton
           handleFile={upload}
@@ -78,6 +78,7 @@ const List = ({
         <ul className="list-group list-group-flush">
           {lst.toReversed().map((item, i) => (
             <li
+              style={{ cursor: "pointer" }}
               key={item.id}
               id={item.id}
               onClick={load}
@@ -111,6 +112,7 @@ const List = ({
                       paddingLeft: "1px",
                       fontStyle: item.default ? "italic" : "normal",
                       overflow: "clip",
+                      cursor: "text",
                     }}
                     onDoubleClick={handleRename}
                   >

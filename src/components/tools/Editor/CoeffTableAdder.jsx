@@ -3,7 +3,15 @@ import Button from "../../general_components/Button";
 import { useContext } from "react";
 import { TooltipContext } from "../../../contexts/TooltipContext";
 
-const CoeffTableAdder = ({ setRadius, setAngle, angle, radius, pushCoeff }) => {
+const CoeffTableAdder = ({
+  setRadius,
+  setAngle,
+  setFrequency,
+  angle,
+  radius,
+  frequency,
+  pushCoeff,
+}) => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   return (
     <>
@@ -26,6 +34,7 @@ const CoeffTableAdder = ({ setRadius, setAngle, angle, radius, pushCoeff }) => {
             id={"angle"}
           />
         </td>
+        <td className="px-3"></td>
         <td className="">
           <Button
             handleClick={pushCoeff}

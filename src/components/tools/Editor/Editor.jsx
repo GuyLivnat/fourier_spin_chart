@@ -11,8 +11,9 @@ const Editor = () => {
 
   const nullNode = { value: null, index: null, type: null };
   const [editNode, setEditNode] = useState(nullNode);
-  const [radius, setRadius] = useState(20000);
-  const [angle, setAngle] = useState(1.57);
+  const [radius, setRadius] = useState(0);
+  const [angle, setAngle] = useState(0);
+  const [frequency, setFrequency] = useState(0);
 
   const editCoeff = (e) => {
     tooltipOut();
@@ -57,7 +58,7 @@ const Editor = () => {
     setActiveId(crypto.randomUUID());
   };
 
-  const resetCoeff = () => {
+  const clearCoeff = () => {
     coeff.current = [];
     stop();
     setPathName("Reset at " + new Date().toLocaleString());
@@ -83,8 +84,8 @@ const Editor = () => {
           onMouseLeave={tooltipOut}
         />
         <Button
-          handleClick={resetCoeff}
-          text="reset"
+          handleClick={clearCoeff}
+          text="clear"
           className="btn btn-outline-danger m-1 col"
           dataTooltip="removes all the circles"
           onMouseEnter={tooltipIn}
@@ -116,6 +117,8 @@ const Editor = () => {
             acceptEdit,
             editNode,
             setEditNode,
+            frequency,
+            setFrequency,
           }}
         />
       </div>

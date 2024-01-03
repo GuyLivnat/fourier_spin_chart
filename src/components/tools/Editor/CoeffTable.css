@@ -1,0 +1,8 @@
+#coeffTable thead {
+  position: sticky;
+  inset-block-start: 0;
+}
+#coeffTable th {
+  cursor: pointer;
+}
+/* {{ position: "sticky", insetBlockStart: 0 }} */
