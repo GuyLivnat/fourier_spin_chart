@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Editor from "./Editor/Editor";
-import SavedPaths from "./SavedPaths";
+import SavedChains from "./SavedChains";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
 import Graphs from "./Graphs/Graphs";
@@ -9,9 +9,9 @@ import Filters from "./Filters/Filters";
 const ToolBar = () => {
   return (
     <>
-      <CollapseTitle title="Saved Paths" forBody="uploads" />
+      <CollapseTitle title="Saved Chains" forBody="uploads" />
       <div className="collapse" id="uploads">
-        <SavedPaths />
+        <SavedChains />
       </div>
       <CollapseTitle title="Editor" forBody="editor" />
       <div className="collapse" id="editor">

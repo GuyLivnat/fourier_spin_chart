@@ -9,7 +9,7 @@ import { useState, useContext } from "react";
 
 const defaults = [mushu, cat, dog];
 
-const SavedPaths = ({}) => {
+const SavedChains = ({}) => {
   const {
     activeId,
     setActiveId,
@@ -149,4 +149,4 @@ const SavedPaths = ({}) => {
   );
 };
 
-export default SavedPaths;
+export default SavedChains;

@@ -5,7 +5,7 @@ import UndoIcon from "../assets/icons/UndoIcon";
 import ZoomInIcon from "../assets/icons/ZoomInIcon";
 import ZoomOutIcon from "../assets/icons/ZoomOutIcon";
 
-const ToolsPage = () => {
+const HelpPage = () => {
   return (
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10">
@@ -119,4 +119,4 @@ const ToolsPage = () => {
   );
 };
 
-export default ToolsPage;
+export default HelpPage;

@@ -6,11 +6,11 @@
   "description": "a small app that uses fourier transforms to produce and render a chain of circles that reproduce a given svg path.",
   "license": "MIT",
   "scripts": {
+    "page-update": "npm run deploy",
     "dev": "vite",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
-    "page-update": "npm run deploy",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "npm-install": "npm i"

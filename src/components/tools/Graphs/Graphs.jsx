@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import renderSpreadGraph from "./renderSpreadGraph";
-import BarGraphInit from "./BarGraphInit";
 import renderFrequencyGraph from "./renderFrequencyGraph";
+import BarGraphInit from "./BarGraphInit";
+import renderHistogram from "./renderHistogram";
 import CollapseTitle from "../../general_components/CollapseTitle";
 import { CoeffContext } from "../../../contexts/CoeffContext";
 
@@ -31,8 +31,8 @@ const Graphs = () => {
   }
 
   const renderGraphs = () => {
-    renderSpreadGraph(radii, height, width);
-    renderFrequencyGraph(frequencys, height, width);
+    renderFrequencyGraph(radii, height, width);
+    renderHistogram(frequencys, height, width);
     updateFilters(!flag);
   };
 
@@ -42,22 +42,24 @@ const Graphs = () => {
   return (
     <div className="rounded border overflow-hidden">
       <CollapseTitle
-        forBody="spread-graph"
-        title="Spread"
-        titleType="h4"
-        className="ms-2"
-      />
-      <div id="spread-graph" className="collapse">
-        <BarGraphInit data={radii} id="spread" />
-      </div>
-      <CollapseTitle
         forBody="frequency-graph"
         title="Frequency"
         titleType="h4"
         className="ms-2"
+        collapseFunc={renderGraphs}
       />
       <div id="frequency-graph" className="collapse">
-        <BarGraphInit data={frequencys} id="frequency" />
+        <BarGraphInit data={radii} id="frequency" />
+      </div>
+      <CollapseTitle
+        forBody="histogram"
+        title="Histogram"
+        titleType="h4"
+        className="ms-2"
+        collapseFunc={renderGraphs}
+      />
+      <div id="histogram" className="collapse">
+        <BarGraphInit data={frequencys} id="histogram" />
       </div>
     </div>
   );
