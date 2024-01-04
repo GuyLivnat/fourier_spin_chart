@@ -1,4 +1,4 @@
-import TutorialChart from "../chart/TutorialChart";
+import TutorialChart from "../../components/chart/TutorialChart";
 
 const TutorialPage_2 = () => {
   return (

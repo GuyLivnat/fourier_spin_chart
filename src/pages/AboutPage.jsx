@@ -2,9 +2,9 @@ const AboutPage = () => {
   return (
     <section className="row justify-content-center gx-0">
       <div className="col-lg-8 col-10">
-        <h1 className="mb-5 mt-3">Why, What, and Who</h1>
+        <h1 className="mb-5 mt-3">About the App</h1>
         <div>
-          <h2>Why</h2>
+          <h2>Where it started</h2>
           <p>
             This app was made both as a final project in my personal studies in
             learning how to code, and as a tribute to 3Blue1Brown (a YouTube
@@ -19,19 +19,19 @@ const AboutPage = () => {
           </p>
         </div>
         <div>
-          <h2>What</h2>
+          <h2>Where it led</h2>
           <p>
             The app was originally only intended to recreate the use of Fourier
             transforms I witnessed in the clip, but after getting the math to
             work, I found that there were so many different functions that could
             be added around it to make the playback a fun and interactive
-            experience. This was done to fulfill the original intent of allowing
-            even those who do not find the concept inspiring to share in the
-            mesmerizing part.
+            experience. This was done to to allow even those who do not find the
+            fourier part inspiring to share in the mesmerizing spin of the
+            circles.
           </p>
         </div>
         <div>
-          <h2>Who</h2>
+          <h2>Who made it</h2>
           <p>
             Hi there! If you’ve gotten this far, you probably enjoyed the pretty
             math and lights and are wondering who made this app. My name is Guy,
@@ -44,10 +44,13 @@ const AboutPage = () => {
             things tick.
           </p>
         </div>
-        <h1 className="mt-5">Technical and legal info</h1>
         <div>
-          The app is written in JavaScript. <br /> The libraries used (and their
-          licenses) are:
+          <h2>Technical and legal info</h2>
+          <p className="mb-1">
+            The app is written in JavaScript. <br /> The libraries used (and
+            their licenses) are:
+          </p>
+
           <ul>
             <li>
               React (MIT License, Copyright (c) Meta Platforms, Inc. and

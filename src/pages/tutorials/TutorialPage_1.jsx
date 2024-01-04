@@ -1,6 +1,6 @@
-import TutorialChart from "../chart/TutorialChart";
+import TutorialChart from "../../components/chart/TutorialChart";
 
-const TutorialPage_2 = () => {
+const TutorialPage_1 = () => {
   return (
     <div>
       <p>
@@ -16,4 +16,4 @@ const TutorialPage_2 = () => {
   );
 };
 
-export default TutorialPage_2;
+export default TutorialPage_1;

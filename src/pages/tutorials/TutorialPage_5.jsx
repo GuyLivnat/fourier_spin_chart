@@ -21,10 +21,12 @@ const TutorialPage_5 = () => {
         then express the series of sine waves as a chain of rotating circles.
         <br />
         Can you see where this is going? <br />
-        Good, so now we can take an image with a single line such as this one of
-        Mushu from the film Mulan...
-        <MushuSVG size={150} />
+        Good, so now we can take any image with a single line, such as this one
+        of Mushu from the film Mulan:
       </p>
+      <div className="d-flex justify-content-center">
+        <MushuSVG size={150} />
+      </div>
     </div>
   );
 };

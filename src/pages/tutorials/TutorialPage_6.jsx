@@ -1,12 +1,13 @@
 import mushu from "../../assets/defaults/mushu";
-import TutorialChart from "../chart/TutorialChart";
+import TutorialChart from "../../components/chart/TutorialChart";
 
 const TutorialPage_6 = () => {
   return (
     <div>
       <p>
-        Apply that same Fourier Transform on it, and voilà! We have a series of
-        circles that, when chained together, recreate the image over time.
+        Apply that same Fourier Transform on it, and voilà!
+        <br /> We have a chain of circles that recreate the image of Mushu over
+        time.
         <TutorialChart
           coeff={{
             current: mushu.coeff,

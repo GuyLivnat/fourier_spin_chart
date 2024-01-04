@@ -71,7 +71,7 @@ const HelpPage = () => {
             </ul>
           </div>
           <div>
-            <h2>The Saved Paths</h2>
+            <h2>The Saved Chains</h2>
             <p>
               You can load any of your saved chains made in the Editor, one of
               the default paths, or upload an SVG image.

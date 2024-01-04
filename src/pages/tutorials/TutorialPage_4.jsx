@@ -1,5 +1,5 @@
 import infinityCoeff from "../../assets/tutorial/infinityCoeff";
-import TutorialChart from "../chart/TutorialChart";
+import TutorialChart from "../../components/chart/TutorialChart";
 
 const TutorialPage_4 = () => {
   return (

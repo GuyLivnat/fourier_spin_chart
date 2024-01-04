@@ -7,7 +7,7 @@ const MushuSVG = ({ size }) => {
       fill="none"
       viewBox="0, 0, 400, 400"
       stroke="white"
-      style={{ backgroundColor: "black" }}
+      strokeWidth="3"
     >
       <path
         d="M165.8,97.1c2.5,4.2,4.7,7.7,6.8,11.3c-0.2,0.1-0.4,0.2-0.6,0.3c-2.5-2.8-4.9-5.5-8-9c-1.4,2.4-2.5,3.9-3.3,5.7
