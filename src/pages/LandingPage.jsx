@@ -30,7 +30,7 @@ const LandingPage = () => {
           Let's go!
         </NavLink>
         <p className="d-inline-block mx-3">or</p>
-        <NavLink className="btn btn-outline-primary" to="/tutorial">
+        <NavLink className="btn btn-outline-primary" to="/tutorial?page=1">
           How does this work?
         </NavLink>
       </div>
