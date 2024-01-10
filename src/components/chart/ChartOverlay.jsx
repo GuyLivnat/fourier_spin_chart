@@ -17,7 +17,7 @@ const ChartOverlay = ({ playable, chartColors }) => {
         color: rgbObjToString(chartColors.circlesColor),
       }}
     >
-      Load a saved path or make your own path by using the editor to get
+      Load a saved chain or make your own path by using the editor to get
       started.
     </h4>
   );
