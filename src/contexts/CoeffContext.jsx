@@ -35,6 +35,7 @@ const CoeffProvider = (props) => {
     for (const filter of filters) {
       tempCoeff = filter(tempCoeff);
     }
+
     filteredCoeff.current = tempCoeff;
   }, [filters, activeId]);
 

@@ -17,7 +17,8 @@ const BarGraphInit = ({ data, id }) => {
 
   return (
     <svg id={`${id}-graph-svg`} style={{ backgroundColor: "black" }}>
-      <g>{barsGroup}</g>
+      <g id={`${id}-graph-rect-group`}>{barsGroup}</g>
+      <rect id={`${id}-graph-opacity-rect`}></rect>
       <g id={`${id}-graph-y-lable`}></g>
       <g id={`${id}-graph-x-lable`}>
         <text></text>

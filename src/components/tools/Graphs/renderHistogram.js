@@ -4,17 +4,9 @@ const renderHistogram = (data, height, width) => {
   const margin = {
     left: 30,
     right: 10,
-    bottom: 40,
-    top: 20,
+    bottom: 35,
+    top: 25,
   };
-
-  // const brush = d3
-  //   .brushX()
-  //   .extent([
-  //     [margin.left, 0.5],
-  //     [width - margin.right, height - margin.bottom + 0.5],
-  //   ])
-  //   .on("start brush end", () => console.log(12)); //brush not working!
 
   const x = d3
     .scaleBand()
@@ -30,11 +22,11 @@ const renderHistogram = (data, height, width) => {
     .select("#histogram-graph-svg")
     .attr("height", height)
     .attr("width", width)
-    // .call(brush)
+    .select("#histogram-graph-rect-group")
     .selectAll("rect")
     .data(data)
     .join("rect")
-    .attr("fill", "var(--primary")
+    .attr("fill", "var(--primary)")
     .attr("width", x.bandwidth())
     .attr("height", (d) => y(0) - y(d.frequency))
     .attr("y", (d) => y(d.frequency))
@@ -47,17 +39,21 @@ const renderHistogram = (data, height, width) => {
     .call((g) => g.select(".domain").remove())
     .select("text")
     .attr("x", 10)
-    .attr("y", 23 - height)
+    .attr("y", 45 - height)
     .attr("fill", "currentColor")
     .attr("text-anchor", "middle")
     .text("↑ Number of radii");
 
   d3.select("#histogram-graph-x-lable")
     .attr("transform", `translate(0, ${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickValues(x.domain().filter((d, i) => !(i % 10))))
+    .call(
+      d3
+        .axisBottom(x)
+        .tickValues(x.domain().filter((d, i) => !(i % Math.floor(width / 15))))
+    )
     .call((g) => g.select(".domain").remove())
     .select("text")
-    .attr("y", margin.bottom - 10)
+    .attr("y", margin.bottom - 5)
     .attr("x", margin.left)
     .attr("text-anchor", "start")
     .text("Radius size →")

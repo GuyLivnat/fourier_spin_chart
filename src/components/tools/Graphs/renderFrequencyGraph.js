@@ -24,7 +24,7 @@ const renderFrequencyGraph = (data, height, width) => {
     .selectAll("rect")
     .data(data)
     .join("rect")
-    .attr("fill", "var(--primary")
+    .attr("fill", "var(--primary)")
     .attr("width", x.bandwidth())
     .attr("height", (d) => y(0) - y(d))
     .attr("y", (d) => y(d))

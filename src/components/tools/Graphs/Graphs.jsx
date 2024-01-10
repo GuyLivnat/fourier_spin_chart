@@ -4,6 +4,7 @@ import BarGraphInit from "./BarGraphInit";
 import renderHistogram from "./renderHistogram";
 import CollapseTitle from "../../general_components/CollapseTitle";
 import { CoeffContext } from "../../../contexts/CoeffContext";
+import Histogram from "./Histogram";
 
 const Graphs = () => {
   const { coeff, activeId } = useContext(CoeffContext);
@@ -12,7 +13,7 @@ const Graphs = () => {
   const graphs = document.getElementById("graphs");
   const width = graphs ? graphs.clientWidth : 0;
 
-  const [flag, updateFilters] = useState(true);
+  const [updateFilters, setUpdateFilters] = useState(true);
 
   const radii = coeff.current.map((circle) => circle.r);
 
@@ -24,21 +25,22 @@ const Graphs = () => {
     else histogram[radius] += 1;
   }
 
-  const frequencys = [];
+  const spreadHistogram = [];
 
   for (const [radius, frequency] of Object.entries(histogram)) {
-    frequencys.push({ radius: parseInt(radius), frequency: frequency });
+    spreadHistogram.push({ radius: parseInt(radius), frequency: frequency });
   }
 
   const renderGraphs = () => {
     renderFrequencyGraph(radii, height, width);
-    renderHistogram(frequencys, height, width);
-    updateFilters(!flag);
+    renderHistogram(spreadHistogram, height, width);
+    setUpdateFilters(!updateFilters);
   };
 
   useEffect(() => {
     renderGraphs();
   }, [activeId]);
+
   return (
     <div className="rounded border overflow-hidden">
       <CollapseTitle
@@ -59,7 +61,7 @@ const Graphs = () => {
         collapseFunc={renderGraphs}
       />
       <div id="histogram" className="collapse">
-        <BarGraphInit data={frequencys} id="histogram" />
+        <Histogram {...{ spreadHistogram, height }} />
       </div>
     </div>
   );

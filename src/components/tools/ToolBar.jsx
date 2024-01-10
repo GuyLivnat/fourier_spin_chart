@@ -1,10 +1,8 @@
-import { useState } from "react";
 import Editor from "./Editor/Editor";
 import SavedChains from "./SavedChains";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
 import Graphs from "./Graphs/Graphs";
-import Filters from "./Filters/Filters";
 
 const ToolBar = () => {
   return (
@@ -24,10 +22,6 @@ const ToolBar = () => {
       <CollapseTitle title="Graphs" forBody="graphs" />
       <div className="collapse" id="graphs">
         <Graphs />
-      </div>
-      <CollapseTitle title="Filters (WIP)" forBody="filters" />
-      <div className="collapse" id="filters">
-        <Filters />
       </div>
     </>
   );
