@@ -5,7 +5,7 @@ import dog from "../../assets/defaults/dog.json";
 import mushu from "../../assets/defaults/mushu.json";
 import ErrorModal from "../general_components/ErrorModal";
 import { CoeffContext } from "../../contexts/CoeffContext";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 const defaults = [mushu, cat, dog];
 
@@ -24,12 +24,13 @@ const SavedChains = ({}) => {
 
   const [modalText, setModalText] = useState(null);
 
-  const loadCoeff = (e) => {
-    let id = null;
-    if (e.target.id) id = e.target.id;
-    else if (e.target.parentElement.id) id = e.target.parentElement.id;
-    else if (e.target.parentElement.parentElement.id)
-      id = e.target.parentElement.parentElement.id;
+  const loadCoeff = (e, id = null) => {
+    if (e) {
+      if (e.target.id) id = e.target.id;
+      else if (e.target.parentElement.id) id = e.target.parentElement.id;
+      else if (e.target.parentElement.parentElement.id)
+        id = e.target.parentElement.parentElement.id;
+    }
     if (id && id !== activeId && id !== "setNewName") {
       const obj = JSON.parse(localStorage.getItem(id));
       coeff.current = obj.coeff;
@@ -127,6 +128,11 @@ const SavedChains = ({}) => {
   const nameParser = (name) => {
     return name.replace(".svg", "");
   };
+
+  useEffect(() => {
+    resetDefaultCoeff();
+    loadCoeff(null, "07bdb0d4-ab7a-4c75-8e8b-b6081e4186b7");
+  }, []);
 
   return (
     <>
