@@ -16,7 +16,11 @@ const BarGraphInit = ({ data, id, screenWidth = 0, screenX = 0 }) => {
   }
 
   return (
-    <svg id={`${id}-graph-svg`} style={{ backgroundColor: "black" }}>
+    <svg
+      id={`${id}-graph-svg`}
+      style={{ backgroundColor: "black" }}
+      className="border"
+    >
       <g id={`${id}-graph-rect-group`}>{barsGroup}</g>
       <rect
         id={`${id}-graph-screen-rect`}

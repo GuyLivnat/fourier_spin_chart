@@ -35,13 +35,21 @@ const FrequencyGraph = ({ radii, width, margin }) => {
         screenWidth={(1 - thumb) * (width - margin.left - margin.right)}
         screenX={margin.left + thumb * (width - margin.left - margin.right)}
       />
-      <div className="ms-4 me-2">
+      <div
+        style={{
+          paddingLeft: "2.1rem",
+          paddingRight: "0.4rem",
+
+          margin: "0.1rem",
+        }}
+        className="border rounded"
+      >
         <Slider
           value={thumb}
           setValue={moveThumb}
           min={0}
           max={1}
-          step={0.01}
+          step={1 / radii.length}
           text="Frequency Filter"
         />
       </div>

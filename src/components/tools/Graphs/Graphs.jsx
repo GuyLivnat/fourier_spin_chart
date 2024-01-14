@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import renderFrequencyGraph from "./renderFrequencyGraph";
-import BarGraphInit from "./BarGraphInit";
 import renderHistogram from "./renderHistogram";
 import CollapseTitle from "../../general_components/CollapseTitle";
 import { CoeffContext } from "../../../contexts/CoeffContext";
@@ -20,14 +19,14 @@ const Graphs = () => {
 
   const frequencyMargin = {
     left: 40,
-    right: 10,
+    right: 17,
     bottom: 16,
     top: 20,
   };
 
   const histogramMargin = {
     left: 30,
-    right: 10,
+    right: 17,
     bottom: 35,
     top: 25,
   };

@@ -37,13 +37,21 @@ const Histogram = ({ spreadHistogram, width, margin }) => {
         id="histogram"
         screenWidth={histogramThumb * (width - margin.left - margin.right)}
       />
-      <div className="ms-4 me-2">
+      <div
+        style={{
+          paddingLeft: "1.4rem",
+          paddingRight: "0.4rem",
+
+          margin: "0.1rem",
+        }}
+        className="border rounded"
+      >
         <Slider
           value={histogramThumb}
           setValue={moveThumb}
           min={0}
           max={1}
-          step={0.01}
+          step={1 / spreadHistogram.length}
           text="Radius Filter"
         />
       </div>
