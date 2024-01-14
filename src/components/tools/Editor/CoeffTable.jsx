@@ -82,23 +82,13 @@ const CoeffTable = ({
             onDoubleClick={editCoeff}
           />
         )}
-        {editNode.index === i && editNode.type === "frequency" ? (
-          <CoeffTableCellEditor
-            {...{
-              editNode,
-              setEditNode,
-              acceptEdit,
-              cancelEdit,
-            }}
-          />
-        ) : (
-          <CoeffTableCell
-            type={"frequency"}
-            data={orderedCeoff[i].frequency}
-            shownLength={0}
-            onDoubleClick={editCoeff}
-          />
-        )}
+        <CoeffTableCell
+          type={"frequency"}
+          data={orderedCeoff[i].frequency}
+          shownLength={0}
+          onDoubleClick={editCoeff}
+        />
+
         <td>
           <CloseButton handleClick={deleteCoeff} className="me-2" />
         </td>
