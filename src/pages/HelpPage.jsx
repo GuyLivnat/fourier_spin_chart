@@ -113,6 +113,11 @@ const HelpPage = () => {
               </li>
             </ul>
           </div>
+          <div>
+            <h2>The Graphs & Filters</h2>
+            <h3>The Frequency Graph</h3>
+            <p>The graph shows all of the circle chain, each circle</p>
+          </div>
         </div>
       </div>
     </section>

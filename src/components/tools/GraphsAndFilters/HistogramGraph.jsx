@@ -3,7 +3,7 @@ import { CoeffContext } from "../../../contexts/CoeffContext";
 import { useContext, useEffect, useState } from "react";
 import Slider from "../../general_components/Slider";
 
-const Histogram = ({ spreadHistogram, width, margin }) => {
+const HistogramGraph = ({ spreadHistogram, width, margin }) => {
   const { updateFilters, activeId } = useContext(CoeffContext);
 
   const [histogramThumb, setHistogramThumb] = useState(0);
@@ -59,4 +59,4 @@ const Histogram = ({ spreadHistogram, width, margin }) => {
   );
 };
 
-export default Histogram;
+export default HistogramGraph;

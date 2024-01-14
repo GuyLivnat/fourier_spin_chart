@@ -3,10 +3,10 @@ import renderFrequencyGraph from "./renderFrequencyGraph";
 import renderHistogram from "./renderHistogram";
 import CollapseTitle from "../../general_components/CollapseTitle";
 import { CoeffContext } from "../../../contexts/CoeffContext";
-import Histogram from "./Histogram";
+import HistogramGraph from "./HistogramGraph";
 import FrequencyGraph from "./FrequencyGraph";
 
-const Graphs = () => {
+const GraphsAndFilters = () => {
   const { coeff, activeId, clearFilters } = useContext(CoeffContext);
 
   const height = 200;
@@ -81,10 +81,13 @@ const Graphs = () => {
         collapseFunc={renderGraphs}
       />
       <div id="histogram" className="collapse">
-        <Histogram {...{ spreadHistogram, width }} margin={histogramMargin} />
+        <HistogramGraph
+          {...{ spreadHistogram, width }}
+          margin={histogramMargin}
+        />
       </div>
     </div>
   );
 };
 
-export default Graphs;
+export default GraphsAndFilters;

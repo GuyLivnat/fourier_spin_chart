@@ -2,7 +2,7 @@ import Editor from "./Editor/Editor";
 import SavedChains from "./SavedChains";
 import CollapseTitle from "../general_components/CollapseTitle";
 import Colorizer from "./Colorizer/Colorizer";
-import Graphs from "./Graphs/Graphs";
+import GraphsAndFilters from "./GraphsAndFilters/GraphsAndFilters";
 
 const ToolBar = () => {
   return (
@@ -19,9 +19,9 @@ const ToolBar = () => {
       <div className="collapse" id="colorizer">
         <Colorizer />
       </div>
-      <CollapseTitle title="Graphs" forBody="graphs" />
+      <CollapseTitle title="Graphs & Filters" forBody="graphs" />
       <div className="collapse" id="graphs">
-        <Graphs />
+        <GraphsAndFilters />
       </div>
     </>
   );
