@@ -5,6 +5,7 @@ import renderHistogram from "./renderHistogram";
 import CollapseTitle from "../../general_components/CollapseTitle";
 import { CoeffContext } from "../../../contexts/CoeffContext";
 import Histogram from "./Histogram";
+import FrequencyGraph from "./FrequencyGraph";
 
 const Graphs = () => {
   const { coeff, activeId, clearFilters } = useContext(CoeffContext);
@@ -54,7 +55,7 @@ const Graphs = () => {
   useEffect(() => {
     renderGraphs();
     clearFilters();
-  }, [activeId]); // (re)renders and resets the filters when a new coeff is given
+  }, [activeId]); // (re)renders the graphs and resets the filters when a new coeff is given
 
   useEffect(() => {
     window.addEventListener("resize", renderGraphs);
@@ -71,7 +72,7 @@ const Graphs = () => {
         collapseFunc={renderGraphs}
       />
       <div id="frequency-graph" className="collapse">
-        <BarGraphInit data={radii} id="frequency" />
+        <FrequencyGraph {...{ radii, width }} margin={frequencyMargin} />
       </div>
       <CollapseTitle
         forBody="histogram"
@@ -81,7 +82,7 @@ const Graphs = () => {
         collapseFunc={renderGraphs}
       />
       <div id="histogram" className="collapse">
-        <Histogram {...{ spreadHistogram, width, histogramMargin }} />
+        <Histogram {...{ spreadHistogram, width }} margin={histogramMargin} />
       </div>
     </div>
   );

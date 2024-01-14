@@ -3,7 +3,7 @@ import { CoeffContext } from "../../../contexts/CoeffContext";
 import { useContext, useEffect, useState } from "react";
 import Slider from "../../general_components/Slider";
 
-const Histogram = ({ spreadHistogram, width, histogramMargin }) => {
+const Histogram = ({ spreadHistogram, width, margin }) => {
   const { updateFilters, activeId } = useContext(CoeffContext);
 
   const [histogramThumb, setHistogramThumb] = useState(0);
@@ -35,10 +35,7 @@ const Histogram = ({ spreadHistogram, width, histogramMargin }) => {
       <BarGraphInit
         data={spreadHistogram}
         id="histogram"
-        screenWidth={
-          histogramThumb *
-          (width - histogramMargin.left - histogramMargin.right)
-        }
+        screenWidth={histogramThumb * (width - margin.left - margin.right)}
       />
       <div className="ms-4 me-2">
         <Slider

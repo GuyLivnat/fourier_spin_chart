@@ -11,9 +11,15 @@ const renderFrequencyGraph = (data, height, width, margin) => {
     .domain([0, d3.max(data)])
     .range([height - margin.bottom, margin.top]);
 
+  d3.select("#frequency-graph-screen-rect")
+    .attr("height", height - margin.top - margin.bottom)
+    .attr("y", margin.top)
+    .attr("fill", "var(--half-primary)");
+
   d3.select("#frequency-graph-svg")
     .attr("height", height)
     .attr("width", width)
+    .select("#frequency-graph-rect-group")
     .selectAll("rect")
     .data(data)
     .join("rect")
