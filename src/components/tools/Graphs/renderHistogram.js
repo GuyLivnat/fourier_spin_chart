@@ -1,13 +1,6 @@
 import * as d3 from "d3";
 
-const renderHistogram = (data, height, width) => {
-  const margin = {
-    left: 30,
-    right: 10,
-    bottom: 35,
-    top: 25,
-  };
-
+const renderHistogram = (data, height, width, margin) => {
   const x = d3
     .scaleBand()
     .domain(data.map((d) => d.radius))
@@ -17,6 +10,12 @@ const renderHistogram = (data, height, width) => {
     .scaleLinear()
     .domain([0, d3.max(data, (d) => d.frequency)])
     .range([height - margin.bottom, margin.top]);
+
+  d3.select("#histogram-graph-screen-rect")
+    .attr("height", height - margin.top - margin.bottom)
+    .attr("x", margin.left)
+    .attr("y", margin.top)
+    .attr("fill", "var(--half-primary)");
 
   const graph = d3
     .select("#histogram-graph-svg")

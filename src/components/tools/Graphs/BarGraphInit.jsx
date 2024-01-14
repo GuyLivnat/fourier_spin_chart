@@ -1,7 +1,7 @@
 import { TooltipContext } from "../../../contexts/TooltipContext";
 import { useContext } from "react";
 
-const BarGraphInit = ({ data, id }) => {
+const BarGraphInit = ({ data, id, screenWidth = 0 }) => {
   const { tooltipIn, tooltipOut } = useContext(TooltipContext);
   const barsGroup = [];
   for (let i = 0; i < data.length; i++) {
@@ -18,7 +18,7 @@ const BarGraphInit = ({ data, id }) => {
   return (
     <svg id={`${id}-graph-svg`} style={{ backgroundColor: "black" }}>
       <g id={`${id}-graph-rect-group`}>{barsGroup}</g>
-      <rect id={`${id}-graph-opacity-rect`}></rect>
+      <rect id={`${id}-graph-screen-rect`} width={screenWidth}></rect>
       <g id={`${id}-graph-y-lable`}></g>
       <g id={`${id}-graph-x-lable`}>
         <text></text>

@@ -3,46 +3,47 @@ import { CoeffContext } from "../../../contexts/CoeffContext";
 import { useContext, useEffect, useState } from "react";
 import Slider from "../../general_components/Slider";
 
-const Histogram = ({ spreadHistogram, height }) => {
-  const { setFilters, activeId } = useContext(CoeffContext);
+const Histogram = ({ spreadHistogram, width, histogramMargin }) => {
+  const { updateFilters, activeId } = useContext(CoeffContext);
 
-  const [thumbX, setThumbX] = useState(0);
+  const [histogramThumb, setHistogramThumb] = useState(0);
 
-  const histogramFilter = () => {
+  const histogramFilter = (value) => {
     const length = spreadHistogram.length;
     if (length) {
-      const i = Math.round(thumbX * length) - 1;
-      if (i) {
+      const i = Math.round(value * length) - 1;
+      if (i > 0) {
         const minRadius = spreadHistogram[i].radius;
         const histogramFilterInner = (coeff) =>
           coeff.filter((circle) => circle.r >= minRadius);
-        setFilters([histogramFilterInner]);
+        updateFilters("histogram", histogramFilterInner);
       }
     }
   };
 
+  const moveThumb = (value) => {
+    setHistogramThumb(value);
+    histogramFilter(value);
+  };
+
   useEffect(() => {
-    if (thumbX) {
-      histogramFilter();
-      const screen = document.getElementById("histogram-graph-opacity-rect");
-      const width = document
-        .getElementById("histogram-graph-svg")
-        .getAttribute("width");
-      screen.setAttribute("height", height - 60);
-      screen.setAttribute("width", thumbX * (width - 40));
-      screen.setAttribute("y", 25);
-      screen.setAttribute("fill", "var(--half-primary)");
-      screen.setAttribute("x", 30);
-    }
-  }, [thumbX]);
+    setHistogramThumb(0);
+  }, [activeId]); //reset thumb when coeff changes
 
   return (
     <>
-      <BarGraphInit data={spreadHistogram} id="histogram" />
+      <BarGraphInit
+        data={spreadHistogram}
+        id="histogram"
+        screenWidth={
+          histogramThumb *
+          (width - histogramMargin.left - histogramMargin.right)
+        }
+      />
       <div className="ms-4 me-2">
         <Slider
-          value={thumbX}
-          setValue={setThumbX}
+          value={histogramThumb}
+          setValue={moveThumb}
           min={0}
           max={1}
           step={0.01}

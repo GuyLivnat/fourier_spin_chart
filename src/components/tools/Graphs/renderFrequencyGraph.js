@@ -1,13 +1,6 @@
 import * as d3 from "d3";
 
-const renderFrequencyGraph = (data, height, width) => {
-  const margin = {
-    left: 40,
-    right: 10,
-    bottom: 16,
-    top: 20,
-  };
-
+const renderFrequencyGraph = (data, height, width, margin) => {
   const x = d3
     .scaleBand()
     .domain(d3.range(data.length))

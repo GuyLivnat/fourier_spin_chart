@@ -7,7 +7,7 @@ const CoeffProvider = (props) => {
   const coeff = useRef([]);
   let playable = coeff.current.length > 0;
   const filteredCoeff = useRef([]);
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState({});
   const [activeId, setActiveId] = useState(null);
   const [coeffList, setCoeffList] = useState(() => {
     const keys = Object.keys(localStorage);
@@ -32,12 +32,22 @@ const CoeffProvider = (props) => {
 
   useEffect(() => {
     let tempCoeff = coeff.current;
-    for (const filter of filters) {
+    for (const filter of Object.values(filters)) {
       tempCoeff = filter(tempCoeff);
     }
 
     filteredCoeff.current = tempCoeff;
   }, [filters, activeId]);
+
+  const updateFilters = (filterName, filterFunc) => {
+    const tempFilters = { ...filters };
+    tempFilters[filterName] = filterFunc;
+    setFilters(tempFilters);
+  };
+
+  const clearFilters = () => {
+    setFilters({});
+  };
 
   const saveCoeff = (coeffs, name) => {
     const obj = JSON.stringify({ name: name, coeff: coeffs });
@@ -74,8 +84,8 @@ const CoeffProvider = (props) => {
         activeId,
         setActiveId,
         filteredCoeff,
-        filters,
-        setFilters,
+        updateFilters,
+        clearFilters,
       }}
     >
       {props.children}

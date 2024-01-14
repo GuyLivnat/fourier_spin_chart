@@ -7,7 +7,7 @@ import { CoeffContext } from "../../../contexts/CoeffContext";
 import Histogram from "./Histogram";
 
 const Graphs = () => {
-  const { coeff, activeId } = useContext(CoeffContext);
+  const { coeff, activeId, clearFilters } = useContext(CoeffContext);
 
   const height = 200;
   const graphs = document.getElementById("graphs");
@@ -17,29 +17,49 @@ const Graphs = () => {
 
   const radii = coeff.current.map((circle) => circle.r);
 
-  const histogram = {};
+  const frequencyMargin = {
+    left: 40,
+    right: 10,
+    bottom: 16,
+    top: 20,
+  };
+
+  const histogramMargin = {
+    left: 30,
+    right: 10,
+    bottom: 35,
+    top: 25,
+  };
+
+  const histogramObj = {};
 
   for (let i = 0; i < radii.length; i++) {
     const radius = Math.round(radii[i]);
-    if (!histogram[radius]) histogram[radius] = 1;
-    else histogram[radius] += 1;
+    if (!histogramObj[radius]) histogramObj[radius] = 1;
+    else histogramObj[radius] += 1;
   }
 
   const spreadHistogram = [];
 
-  for (const [radius, frequency] of Object.entries(histogram)) {
+  for (const [radius, frequency] of Object.entries(histogramObj)) {
     spreadHistogram.push({ radius: parseInt(radius), frequency: frequency });
   }
 
   const renderGraphs = () => {
-    renderFrequencyGraph(radii, height, width);
-    renderHistogram(spreadHistogram, height, width);
+    renderFrequencyGraph(radii, height, width, frequencyMargin);
+    renderHistogram(spreadHistogram, height, width, histogramMargin);
     setUpdateFilters(!updateFilters);
   };
 
   useEffect(() => {
     renderGraphs();
-  }, [activeId]);
+    clearFilters();
+  }, [activeId]); // (re)renders and resets the filters when a new coeff is given
+
+  useEffect(() => {
+    window.addEventListener("resize", renderGraphs);
+    return () => window.removeEventListener("resize", renderGraphs);
+  });
 
   return (
     <div className="rounded border overflow-hidden">
@@ -61,7 +81,7 @@ const Graphs = () => {
         collapseFunc={renderGraphs}
       />
       <div id="histogram" className="collapse">
-        <Histogram {...{ spreadHistogram, height }} />
+        <Histogram {...{ spreadHistogram, width, histogramMargin }} />
       </div>
     </div>
   );
