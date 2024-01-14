@@ -116,7 +116,26 @@ const HelpPage = () => {
           <div>
             <h2>The Graphs & Filters</h2>
             <h3>The Frequency Graph</h3>
-            <p>The graph shows all of the circle chain, each circle</p>
+            <ul>
+              <li>
+                The graph shows the circle chain in acending order of frequency
+                from left to right
+              </li>
+              <li>Each circle's bar's height is dictated by its radius</li>
+              <li>
+                The filter can be dragged from right to left to remove the
+                circles from the end of the chain inwards
+              </li>
+            </ul>
+            <h3>The Histogram Graph</h3>
+            <ul>
+              <li>The graph shows the quantity of each radius in the chain </li>
+              <li>
+                The filter can be dragged from left to right to remove
+                progressivly larger circles from the chain. This leads to a neat
+                loss of detail effect.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
